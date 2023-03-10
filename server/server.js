@@ -12,16 +12,6 @@ const start = async () => {
   app.use(CORS());
   app.use(trimmer());
 
-  app.get(['/', '/:name'], (req, res) => {
-    greeting = '<h1>Hello From Node on Fly!</h1>';
-    currentName = req.params['name'];
-    if (currentName) {
-      res.send(greeting + '</br>and hello to ' + name);
-    } else {
-      res.send(greeting);
-    }
-  });
-
   await database();
   router(app);
 
