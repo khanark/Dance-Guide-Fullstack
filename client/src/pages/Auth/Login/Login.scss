@@ -1,0 +1,66 @@
+.site-login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  label,
+  input {
+    display: block;
+  }
+  input {
+    width: 500px;
+    font-size: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 28px;
+  }
+  label {
+    padding-bottom: 25px;
+    font-weight: 300;
+    font-size: 18px;
+  }
+  label:last-child {
+    padding-bottom: 30px;
+  }
+  .no-registration {
+    font-weight: 300;
+    font-size: 18px;
+    span a {
+      font-weight: 400;
+      color: #6f43b7;
+      font-size: 25px;
+      padding-left: 5px;
+    }
+    padding-bottom: 30px;
+  }
+  .forgotten-password {
+    padding-top: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: end;
+    width: 100%;
+    color: #6f43b7;
+  }
+  .forgotten-password:hover {
+    text-decoration: underline;
+  }
+  button {
+    display: flex;
+    padding: 10px 50px;
+    font-size: 20px;
+    background-color: #6f43b7;
+    border: 0;
+    color: white;
+    align-items: center;
+    transition: all 0.8s ease;
+    cursor: pointer;
+  }
+  button:hover {
+    padding-right: 20px;
+  }
+}
