@@ -8,7 +8,7 @@ const Header = () => {
     <header className="site-header">
       <div className="logo-container" id="header">
         <Link to="/">
-          <img src={logo} alt="indicates-error" />
+          <img src={logo} alt="nav-logo" />
         </Link>
       </div>
       <nav className="site-navigation">
@@ -23,7 +23,7 @@ const Header = () => {
             <Link to="/catalog">Каталог</Link>
           </li>
           <li>
-            <Link to="/authentication">Вход / Регистрация</Link>
+            <Link to="/authentication/login">Вход / Регистрация</Link>
           </li>
           <li>
             <Link to="/create">Създай</Link>
