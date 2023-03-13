@@ -6,7 +6,6 @@ const {
   getAllUsers,
   updateUser,
 } = require('../services/user_service.js');
-const userValidationUtility = require('../middlewares/user/user_validator');
 const { handleResponse, validateUtility } = require('../util/responseHandling');
 
 router.get('/', handleResponse(getAllUsers));
