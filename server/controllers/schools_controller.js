@@ -5,7 +5,7 @@ const {
   deleteSchool,
   updateSchool,
 } = require('../services/school_service');
-const { handleResponse, validateUtility } = require('../util/util');
+const { handleResponse, validateUtility } = require('../util/responseHandling');
 
 const router = require('express').Router();
 
@@ -17,31 +17,22 @@ router.get(
   handleResponse(getSingleSchool)
 );
 
-router.post('/', async (req, res, next) => {
-  try {
-    const school = await createSchool(req.body);
-    res.status(200).json(school);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post(
+  '/',
+  validateUtility('School', { tokenValidator: true }),
+  handleResponse(createSchool)
+);
 
-router.delete('/:id', async (req, res, next) => {
-  try {
-    await deleteSchool(req.params.id);
-    res.status(200).json({ message: 'School deleted successfully' });
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete(
+  '/:id',
+  validateUtility('School', { tokenValidator: true, idValidator: true }),
+  handleResponse(deleteSchool, 'School was deleted successfully')
+);
 
-router.put('/id', async (req, res, next) => {
-  try {
-    await updateSchool(id, req.body);
-    res.status(200).json({ message: 'School updated successfully' });
-  } catch (error) {
-    next(error);
-  }
-});
+router.put(
+  '/:id',
+  validateUtility('School', { tokenValidator: true, idValidator: true }),
+  handleResponse(updateSchool, 'School was updated successfully')
+);
 
 module.exports = router;

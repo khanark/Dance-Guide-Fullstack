@@ -2,12 +2,13 @@ import './About.scss';
 
 import CardInfo from './CardInfo/CardInfo';
 import Layout from '../../components/Layout/Layout';
+import PageContainer from '../../components/Layout/PageContainer/PageContainer';
 import banner from '../../assets/images/about-page-logo.png';
 
 const About = () => {
   return (
     <Layout>
-      <article className="about-page">
+      <PageContainer styles={{ padding: '0 15rem', gap: '12px' }}>
         <div className="about-page__info">
           <CardInfo
             title="Мисия"
@@ -22,7 +23,7 @@ const About = () => {
         <div className="about-page__logo">
           <img loading="lazy" src={banner} alt="about-logo" />
         </div>
-      </article>
+      </PageContainer>
     </Layout>
   );
 };

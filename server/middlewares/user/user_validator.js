@@ -1,6 +1,6 @@
 const { getSingleUser, verifyToken } = require('../../services/user_service');
 const { isValidObjectId } = require('mongoose');
-const { sendError } = require('../../util/util');
+const { sendError } = require('../../util/sendError');
 const userViewModel = require('../../view_models/user_view_model');
 
 module.exports = options => {

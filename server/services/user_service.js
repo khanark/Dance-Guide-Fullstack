@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 
 const User = require('../models/User');
-const { sendError } = require('../util/util');
+const { sendError } = require('../util/sendError');
 const userViewModel = require('../view_models/user_view_model');
 
 const jwt = {
@@ -13,7 +13,13 @@ const jwt = {
 
 const SECRET = 'dwad12ddas';
 
-const register = async ({ email, password, firstName, lastName, phoneNumber }) => {
+const register = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+  phoneNumber,
+}) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({
     email,
@@ -29,7 +35,6 @@ const register = async ({ email, password, firstName, lastName, phoneNumber }) =
 
 const login = async ({ email, password }) => {
   const user = await User.findOne({ email }).lean();
-  console.log(user);
   if (!Boolean(user)) {
     sendError('Wrong username or password', 401);
   }
@@ -41,7 +46,13 @@ const login = async ({ email, password }) => {
   return userViewModel(user, token);
 };
 
-const createToken = async ({ _id, email, firstName, lastName, phoneNumber }) => {
+const createToken = async ({
+  _id,
+  email,
+  firstName,
+  lastName,
+  phoneNumber,
+}) => {
   const payload = {
     _id,
     email,
@@ -75,7 +86,8 @@ const getAllUsers = async () => {
   return users.map(user => userViewModel(user));
 };
 
-const updateUser = (id, data) => User.findByIdAndUpdate(id, data, { runValidators: true });
+const updateUser = (id, data) =>
+  User.findByIdAndUpdate(id, data, { runValidators: true });
 
 module.exports = {
   register,

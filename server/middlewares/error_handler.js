@@ -3,7 +3,8 @@ const errorParser = err => {
     err.message = Object.values(err.errors)[0].message;
     err.cause = 400;
   } else if (err.code == '11000') {
-    err.message = 'User already exists';
+    console.log(err.keyPattern.name);
+    err.message = `${err.keyPattern.name ? 'School' : 'User'} already exists`;
     err.cause = 409;
   }
   return err;

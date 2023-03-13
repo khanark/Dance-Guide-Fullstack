@@ -1,26 +1,18 @@
-.about-page {
-  width: 100%;
-  flex: 1;
+.about-page__info {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 15rem;
-  .about-page__info {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    padding-left: 100px;
+  flex-direction: column;
+  gap: 5rem;
+  padding-left: 100px;
+}
+.about-page__logo {
+  width: 50%;
+  img {
+    max-width: 100%;
+    height: auto;
   }
-  .about-page__logo {
-    width: 50%;
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-  .inbetween-line {
-    background-color: black;
-    padding: 0.5px 0;
-    border-radius: 40%;
-  }
+}
+.inbetween-line {
+  background-color: black;
+  padding: 0.5px 0;
+  border-radius: 40%;
 }

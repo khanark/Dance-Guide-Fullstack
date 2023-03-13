@@ -1,25 +1,100 @@
 .site-header {
+  z-index: 2;
   width: 100%;
   display: flex;
   padding: 0 10%;
   align-self: center;
   justify-content: space-between;
   align-items: center;
+
   .site-navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+
     li {
       display: inline-block;
       padding-left: 10px;
       font-size: 18px;
     }
+
     a {
       color: black;
       padding: 10px;
       border-radius: 7px;
       transition: all 0.2s ease-in;
     }
+
     a:hover {
       color: white;
       background-color: black;
+    }
+
+    .sub-menu-wrap {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px;
+      max-height: 400px;
+      overflow: hidden;
+
+      .sub-menu {
+        background-color: white;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.75);
+        animation: fade-in 0.2s linear both;
+
+        .user-info {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .user-username {
+            font-weight: 400;
+            text-align: end;
+          }
+        }
+
+        hr {
+          border: 0;
+          height: 1px;
+          width: 100%;
+          background-color: #ccc;
+          margin: 15px 0 10px;
+        }
+
+        .sub-menu-links {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: #525252;
+          font-size: 12px;
+          margin: 12px 0;
+          text-align: center;
+        }
+
+        .sub-menu-links:hover {
+          color: white;
+          background-color: black;
+        }
+
+        .logout-btn {
+          justify-content: center;
+          gap: 10px;
+        }
+      }
+    }
+
+    img {
+      padding: 10px;
+      width: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-left: 10px;
     }
   }
   .logo-container {
@@ -30,5 +105,22 @@
       height: auto;
       object-fit: contain;
     }
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

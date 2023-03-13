@@ -56,4 +56,15 @@ const danceSchoolSchema = new Schema({
   owner: { type: ObjectId, ref: 'User' },
 });
 
+danceSchoolSchema.index(
+  { name: 1 },
+  {
+    unique: true,
+    collation: {
+      locale: 'en',
+      strength: 2,
+    },
+  }
+);
+
 module.exports = model('DanceSchool', danceSchoolSchema);

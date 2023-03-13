@@ -5,7 +5,7 @@ const database = require('./config/database.js');
 const trimmer = require('./middlewares/trimmer');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3030;
 
 const start = async () => {
   app.use(express.json());
