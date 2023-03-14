@@ -1,7 +1,6 @@
 const getUser = () => {
   const user = localStorage.getItem('userData');
-  console.log(user);
-  if (!user) {
+  if (user === undefined) {
     return false;
   } else {
     return JSON.parse(user);
