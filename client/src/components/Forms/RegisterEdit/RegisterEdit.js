@@ -9,12 +9,7 @@ const RegisterEdit = props => {
       <form action="">
         <label htmlFor="email">
           Имейл *
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="пр. ivan@danceguide.bg"
-          />
+          <input type="text" name="email" id="email" />
         </label>
         <label htmlFor="firstName">
           Име *
