@@ -9,13 +9,9 @@ const endpoints = {
 };
 
 const login = async (email, password) => {
-  try {
-    const user = await api.post(endpoints.login, { email, password });
-    console.log(user);
-    setUser(user);
-  } catch (error) {
-    console.log(error.message);
-  }
+  const user = await api.post(endpoints.login, { email, password });
+  setUser(user);
+  return user;
 };
 
 const register = async (email, firstName, lastName, phoneNumber, password) => {
