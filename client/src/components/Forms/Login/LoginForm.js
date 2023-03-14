@@ -1,15 +1,22 @@
 import './LoginForm.scss';
 
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import DatabaseError from '../Errors/Database/DatabaseError';
+import FieldsError from '../Errors/Fields/FieldsError';
 import { IoLogIn } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
 import { login } from '../../../services/users';
-import { useState } from 'react';
 
 const LoginForm = () => {
   const [formFields, setFormFields] = useState({
     email: '',
     password: '',
   });
+  const [errors, setErrors] = useState({});
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+
+  const navigate = useNavigate();
 
   const onChangeHandler = e => {
     const { name, value } = e.target;
@@ -17,18 +24,45 @@ const LoginForm = () => {
   };
 
   const onSubmitHandler = async e => {
-    // !FIX this the fetching is not working properly
-    console.log('button is clicked');
-    const { email, password } = formFields;
-    try {
-      await login(email, password);
-    } catch (error) {
-      console.log(error);
-    }
+    e.preventDefault();
+    setErrors(validateForm(formFields));
+    setIsSubmitClicked(true);
   };
+
+  const validateForm = fields => {
+    const errors = {};
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+
+    if (!fields.email) {
+      errors.email = 'Моля въведете имейл адрес';
+    } else if (!regex.test(fields.email)) {
+      errors.email = 'Невалиден формат на имейл адрес';
+    }
+    if (!fields.password) {
+      errors.password = 'Моля въведете парола';
+    }
+    return errors;
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitClicked) {
+      login(formFields.email, formFields.password)
+        .then(() => navigate('/catalog'))
+        .catch(err => {
+          setErrors(
+            oldValues =>
+              (oldValues = {
+                ...errors,
+                fetch: 'Невалидно потребителско име или парола.',
+              })
+          );
+        });
+    }
+  }, [errors]);
 
   return (
     <div className="login-form">
+      {errors.fetch && <DatabaseError msg={errors.fetch} />}
       <form>
         <label htmlFor="email">
           Имейл
@@ -36,10 +70,10 @@ const LoginForm = () => {
             type="text"
             name="email"
             id="email"
-            placeholder="ivan@danceguide.bg"
             value={formFields.email}
             onChange={onChangeHandler}
           />
+          <FieldsError msg={errors.email} />
         </label>
         <label htmlFor="password">
           Парола
@@ -50,6 +84,7 @@ const LoginForm = () => {
             value={formFields.password}
             onChange={onChangeHandler}
           />
+          <FieldsError msg={errors.password} />
           <Link to="/authentication/forgotten" className="forgotten-password">
             Забравена парола?
           </Link>
