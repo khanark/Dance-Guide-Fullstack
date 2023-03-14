@@ -15,8 +15,8 @@ const request = async (method, url, data) => {
   }
 
   if (data) {
-    options.headers['Content-Type'] = 'application/json';
-    options.headers.body = JSON.stringify(data);
+    options.headers['content-type'] = 'application/json';
+    options.body = JSON.stringify(data);
   }
 
   try {
@@ -27,7 +27,7 @@ const request = async (method, url, data) => {
     }
     return data;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
