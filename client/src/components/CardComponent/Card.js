@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { MdPinDrop } from 'react-icons/md';
 import { useState } from 'react';
 
-const Card = () => {
+const Card = ({ city, street, image, name, _id }) => {
   let [hover, setHover] = useState(false);
 
   return (
@@ -17,22 +17,19 @@ const Card = () => {
       onMouseLeave={() => setHover(false)}
     >
       <div className="card-header">
-        <img
-          src="https://www.phillymag.com/wp-content/uploads/sites/3/2022/03/powerhouse-dance2-900x600-1.jpg"
-          alt="example-image"
-        />
+        <img src={image} alt="example-image" />
         <div className="card-info">
-          <h2>Хип-Хоп Клуб</h2>
+          <h2>{name}</h2>
         </div>
       </div>
       {hover && (
         <div className="card-details">
           <div className="card-infomation">
             <MdPinDrop />
-            <p>София</p>
-            <p>Манастирски Ливади</p>
+            <p>{city}</p>
+            <p>{street}</p>
           </div>
-          <Link to="/details">Повече информация</Link>
+          <Link to={`/details/${_id}`}>Повече информация</Link>
         </div>
       )}
     </div>
