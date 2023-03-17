@@ -1,8 +1,8 @@
-const express = require('express');
-const CORS = require('cors');
-const router = require('./config/routes');
-const database = require('./config/database.js');
-const trimmer = require('./middlewares/trimmer');
+const express = require("express");
+const CORS = require("cors");
+const router = require("./config/routes");
+const database = require("./config/database.js");
+const trimmer = require("./middlewares/trimmer");
 
 const app = express();
 const port = process.env.PORT || 3030;

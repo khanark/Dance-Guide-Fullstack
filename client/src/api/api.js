@@ -3,32 +3,32 @@ import { getUser } from '../util/util';
 const host = 'http://localhost:3030';
 
 const request = async (method, url, data) => {
-  const options = {
-    method,
-    headers: {},
-  };
+    const options = {
+        method,
+        headers: {},
+    };
 
-  const userData = getUser();
+    const userData = getUser();
 
-  if (userData) {
-    options.headers['x-authorization'] = userData.token;
-  }
-
-  if (data) {
-    options.headers['content-type'] = 'application/json';
-    options.body = JSON.stringify(data);
-  }
-
-  try {
-    const res = await fetch(host + url, options);
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.message);
+    if (userData) {
+        options.headers['x-authorization'] = userData.token;
     }
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
+
+    if (data) {
+        options.headers['content-type'] = 'application/json';
+        options.body = JSON.stringify(data);
+    }
+
+    try {
+        const res = await fetch(host + url, options);
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
 
 const get = request.bind(null, 'GET');

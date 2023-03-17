@@ -91,8 +91,10 @@
 
     img {
       padding: 10px;
-      width: 40px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
+      object-fit: cover;
       cursor: pointer;
       margin-left: 10px;
     }

@@ -1,6 +1,6 @@
-import './DatabaseError.scss';
+import "./DatabaseError.scss";
 
-import { MdError } from 'react-icons/md';
+import { MdError } from "react-icons/md";
 
 const DatabaseError = ({ msg }) => {
   return (

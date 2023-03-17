@@ -1,31 +1,31 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   register,
   login,
   getSingleUser,
   getAllUsers,
   updateUser,
-} = require('../services/user_service.js');
-const { handleResponse, validateUtility } = require('../util/responseHandling');
+} = require("../services/user_service.js");
+const { handleResponse, validateUtility } = require("../util/responseHandling");
 
-router.get('/', handleResponse(getAllUsers));
-router.post('/register', handleResponse(register));
-router.post('/login', handleResponse(login));
+router.get("/", handleResponse(getAllUsers));
+router.post("/register", handleResponse(register));
+router.post("/login", handleResponse(login));
 router.get(
-  '/logout',
+  "/logout",
   validateUtility({ tokenValidator: true }),
   async (req, res) => {
     res.status(204).json({});
   }
 );
 router.get(
-  '/:id',
+  "/:id",
   validateUtility({ idValidator: true, tokenValidator: true }),
   handleResponse(getSingleUser)
 );
 
 router.put(
-  '/:id',
+  "/:id",
   validateUtility({ idValidator: true, tokenValidator: true }),
   handleResponse(updateUser)
 );

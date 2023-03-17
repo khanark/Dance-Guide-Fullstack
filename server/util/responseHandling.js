@@ -1,6 +1,6 @@
-const { verifyToken } = require('../services/user_service');
-const { isValidObjectId } = require('mongoose');
-const { sendError } = require('./sendError');
+const { verifyToken } = require("../services/user_service");
+const { isValidObjectId } = require("mongoose");
+const { sendError } = require("./sendError");
 
 const handleResponse = (cb, msg) => {
   // !fix put requests

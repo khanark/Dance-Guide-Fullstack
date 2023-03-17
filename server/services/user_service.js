@@ -1,17 +1,17 @@
-const util = require('util');
-const bcrypt = require('bcrypt');
-const jsonwebtoken = require('jsonwebtoken');
+const util = require("util");
+const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
 
-const User = require('../models/User');
-const { sendError } = require('../util/sendError');
-const userViewModel = require('../view_models/user_view_model');
+const User = require("../models/User");
+const { sendError } = require("../util/sendError");
+const userViewModel = require("../view_models/user_view_model");
 
 const jwt = {
   sign: util.promisify(jsonwebtoken.sign),
   verify: util.promisify(jsonwebtoken.verify),
 };
 
-const SECRET = 'dwad12ddas';
+const SECRET = "dwad12ddas";
 
 const register = async ({
   email,
@@ -36,11 +36,11 @@ const register = async ({
 const login = async ({ email, password }) => {
   const user = await User.findOne({ email }).lean();
   if (!Boolean(user)) {
-    sendError('Wrong username or password', 401);
+    sendError("Wrong username or password", 401);
   }
   const isValidPassword = await bcrypt.compare(password, user.password);
   if (!isValidPassword) {
-    sendError('Wrong username or password', 401);
+    sendError("Wrong username or password", 401);
   }
   const token = await createToken(user);
   return userViewModel(user, token);
@@ -60,30 +60,30 @@ const createToken = async ({
     lastName,
     phoneNumber,
   };
-  return jwt.sign(payload, SECRET, { expiresIn: '2h' });
+  return jwt.sign(payload, SECRET, { expiresIn: "2h" });
 };
 
-const verifyToken = async headers => {
-  const token = headers['x-authorization'];
+const verifyToken = async (headers) => {
+  const token = headers["x-authorization"];
   if (!token) {
-    sendError('No authorization', 401);
+    sendError("No authorization", 401);
   }
   const decodedUser = await jwt.verify(token, SECRET);
   const existingUser = await User.findById(decodedUser._id);
   if (!existingUser) {
-    sendError('No authorization', 401);
+    sendError("No authorization", 401);
   }
   return decodedUser;
 };
 
-const getSingleUser = async id => {
+const getSingleUser = async (id) => {
   const user = await User.findById(id).lean();
   return userViewModel(user);
 };
 
 const getAllUsers = async () => {
   const users = await User.find();
-  return users.map(user => userViewModel(user));
+  return users.map((user) => userViewModel(user));
 };
 
 const updateUser = (id, data) =>

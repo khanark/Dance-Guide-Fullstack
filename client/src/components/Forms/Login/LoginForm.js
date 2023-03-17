@@ -1,64 +1,34 @@
-import './LoginForm.scss';
+import "./LoginForm.scss";
 
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
-import DatabaseError from '../Errors/Database/DatabaseError';
-import FieldsError from '../Errors/Fields/FieldsError';
-import { IoLogIn } from 'react-icons/io5';
-import { login } from '../../../services/users';
+import DatabaseError from "../Errors/Database/DatabaseError";
+import FieldsError from "../Errors/Fields/FieldsError";
+import { IoLogIn } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { login } from "../../../services/users";
+import { useForm } from "../../../hooks/useForm";
 
 const LoginForm = () => {
-  const [formFields, setFormFields] = useState({
-    email: '',
-    password: '',
-  });
-  const [errors, setErrors] = useState({});
-  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const {
+    form: { fields, errors },
+    handlers: { onChangeHandler, onSubmitHandler },
+  } = useForm(
+    { email: "", password: "", redirect: "/catalog" },
+    login,
+    (fields) => {
+      const formErrors = {};
+      const regex = /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/;
 
-  const navigate = useNavigate();
-
-  const onChangeHandler = e => {
-    const { name, value } = e.target;
-    setFormFields(f => (f = { ...formFields, [name]: value }));
-  };
-
-  const onSubmitHandler = async e => {
-    e.preventDefault();
-    setErrors(validateForm(formFields));
-    setIsSubmitClicked(true);
-  };
-
-  const validateForm = fields => {
-    const errors = {};
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/;
-
-    if (!fields.email) {
-      errors.email = 'Моля въведете имейл адрес';
-    } else if (!regex.test(fields.email)) {
-      errors.email = 'Невалиден формат на имейл адрес';
+      if (!fields.email) {
+        formErrors.email = "Моля въведете имейл адрес";
+      } else if (!regex.test(fields.email)) {
+        formErrors.email = "Невалиден формат на имейл адрес";
+      }
+      if (!fields.password) {
+        formErrors.password = "Моля въведете парола";
+      }
+      return formErrors;
     }
-    if (!fields.password) {
-      errors.password = 'Моля въведете парола';
-    }
-    return errors;
-  };
-
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitClicked) {
-      login(formFields.email, formFields.password)
-        .then(() => navigate('/catalog'))
-        .catch(err => {
-          setErrors(
-            oldValues =>
-              (oldValues = {
-                ...errors,
-                fetch: 'Невалидно потребителско име или парола.',
-              })
-          );
-        });
-    }
-  }, [errors]);
+  );
 
   return (
     <div className="login-form">
@@ -70,7 +40,7 @@ const LoginForm = () => {
             type="text"
             name="email"
             id="email"
-            value={formFields.email}
+            value={fields.email}
             onChange={onChangeHandler}
           />
           <FieldsError msg={errors.email} />
@@ -81,7 +51,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             id="password"
-            value={formFields.password}
+            value={fields.password}
             onChange={onChangeHandler}
           />
           <FieldsError msg={errors.password} />
