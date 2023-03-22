@@ -1,12 +1,18 @@
-const { verifyToken } = require("../services/user_service");
-const { isValidObjectId } = require("mongoose");
-const { sendError } = require("./sendError");
+const { verifyToken } = require('../services/user_service');
+const { isValidObjectId } = require('mongoose');
+const { sendError } = require('./sendError');
 
 const handleResponse = (cb, msg) => {
-  // !fix put requests
   return async (req, res, next) => {
     try {
-      const data = await cb(req.params.id ? req.params.id : req.body);
+      let data;
+      if (req.params.id && req.body) {
+        data = await cb(req.params.id, req.body);
+      } else if (req.params.id && !req.body) {
+        data = await cb(req.params.id);
+      } else {
+        data = await cb(req.body);
+      }
       res.status(200).json(data ? data : { message: msg });
     } catch (error) {
       next(error);
@@ -14,7 +20,7 @@ const handleResponse = (cb, msg) => {
   };
 };
 
-const validateUtility = (ref, options) => {
+const validateUtility = (options, ref) => {
   return async (req, res, next) => {
     const id = req.params.id;
     try {
@@ -25,7 +31,8 @@ const validateUtility = (ref, options) => {
           }
         }
         if (options.tokenValidator) {
-          await verifyToken(req.headers);
+          const token = await verifyToken(req.headers);
+          console.log(token);
         }
         if (options.dataValidator) {
           const data = await options.dataValidator(id);

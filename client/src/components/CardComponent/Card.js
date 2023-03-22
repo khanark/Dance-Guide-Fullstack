@@ -3,37 +3,41 @@
 
 import './Card.scss';
 
+import { IoMdThumbsUp } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { MdPinDrop } from 'react-icons/md';
-import { useState } from 'react';
 
-const Card = ({ city, street, image, name, _id }) => {
-    let [hover, setHover] = useState(false);
-
-    return (
-        <div
-            className="card"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-        >
-            <div className="card-header">
-                <img src={image} alt="example-image" />
-                <div className="card-info">
-                    <h2>{name}</h2>
-                </div>
+const Card = () => {
+  return (
+    <div className="card-wrapper">
+      <div className="card">
+        <Link to={`/details/${'dwada'}`}>
+          <div className="overlay">
+            <div className="text">Детайли</div>
+          </div>
+        </Link>
+        <header className="card-header">
+          <img
+            src="https://www.phillymag.com/wp-content/uploads/sites/3/2022/03/powerhouse-dance2-900x600-1.jpg"
+            alt="school"
+          />
+        </header>
+        <div className="card-body">
+          <div className="main-heading">
+            <h3 className="school-name">Andrea dancing school</h3>
+            <div className="likes">
+              <IoMdThumbsUp />
+              <p>230</p>
             </div>
-            {hover && (
-                <div className="card-details">
-                    <div className="card-infomation">
-                        <MdPinDrop />
-                        <p>{city}</p>
-                        <p>{street}</p>
-                    </div>
-                    <Link to={`/details/${_id}`}>Повече информация</Link>
-                </div>
-            )}
+          </div>
+          <div className="adress-wrapper">
+            <MdPinDrop />
+            <p>София, Манастирски Ливади 2</p>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Card;

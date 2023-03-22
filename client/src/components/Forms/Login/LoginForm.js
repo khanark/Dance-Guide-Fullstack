@@ -1,61 +1,40 @@
-import "./LoginForm.scss";
+import './LoginForm.scss';
 
-import DatabaseError from "../Errors/Database/DatabaseError";
-import FieldsError from "../Errors/Fields/FieldsError";
-import { IoLogIn } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { login } from "../../../services/users";
-import { useForm } from "../../../hooks/useForm";
+import { Link, useOutletContext } from 'react-router-dom';
 
-const LoginForm = () => {
+import DatabaseError from '../Errors/Database/DatabaseError';
+import FieldsError from '../Errors/Fields/FieldsError';
+import { IoLogIn } from 'react-icons/io5';
+import { useForm } from 'react-hook-form';
+
+const Login = () => {
+  const { fetchError, onSubmitLogin } = useOutletContext();
+
   const {
-    form: { fields, errors },
-    handlers: { onChangeHandler, onSubmitHandler },
-  } = useForm(
-    { email: "", password: "", redirect: "/catalog" },
-    login,
-    (fields) => {
-      const formErrors = {};
-      const regex = /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/;
-
-      if (!fields.email) {
-        formErrors.email = "Моля въведете имейл адрес";
-      } else if (!regex.test(fields.email)) {
-        formErrors.email = "Невалиден формат на имейл адрес";
-      }
-      if (!fields.password) {
-        formErrors.password = "Моля въведете парола";
-      }
-      return formErrors;
-    }
-  );
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <div className="login-form">
-      {errors.fetch && <DatabaseError msg={errors.fetch} />}
+      {fetchError && <DatabaseError msg={'Невалидно потребителско име или парола'} />}
       <form>
         <label htmlFor="email">
           Имейл
           <input
-            type="text"
-            name="email"
-            id="email"
-            value={fields.email}
-            onChange={onChangeHandler}
+            {...register('email', {
+              required: 'Моля въведете имейл адрес',
+              pattern: { value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/, message: 'Невалиден имейл формат' },
+            })}
           />
-          <FieldsError msg={errors.email} />
+          <FieldsError msg={errors.email?.message} />
         </label>
         <label htmlFor="password">
           Парола
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={fields.password}
-            onChange={onChangeHandler}
-          />
-          <FieldsError msg={errors.password} />
-          <Link to="/authentication/forgotten" className="forgotten-password">
+          <input type="password" {...register('password', { required: 'Моля въведете парола' })} />
+          <FieldsError msg={errors.password?.message} />
+          <Link to="/user/forgotten" className="forgotten-password">
             Забравена парола?
           </Link>
         </label>
@@ -63,10 +42,10 @@ const LoginForm = () => {
       <p className="no-registration">
         Нямаш регистрация?
         <span>
-          <Link to="/authentication/register">Регистрай се!</Link>
+          <Link to="/user/register">Регистрай се!</Link>
         </span>
       </p>
-      <button className="form-button" type="button" onClick={onSubmitHandler}>
+      <button className="form-button" type="button" onClick={handleSubmit(onSubmitLogin)}>
         Вход
         <IoLogIn />
       </button>
@@ -74,4 +53,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

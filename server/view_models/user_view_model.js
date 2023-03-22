@@ -10,11 +10,11 @@ module.exports = (user, token) => {
     danceSchools,
   } = user;
   return {
-    id: _id,
+    _id,
     email,
     firstName,
     lastName,
-    phoneNumber: Number(phoneNumber),
+    phoneNumber,
     avatar,
     moreInfo,
     danceSchools,

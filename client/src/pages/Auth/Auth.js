@@ -1,24 +1,62 @@
-import ForgottenPassword from './Forgotten/ForgottenPassword';
-import Layout from '../../components/Layout/Layout';
-import LoginForm from '../../components/Forms/Login/LoginForm';
-import PageContainer from '../../components/Layout/PageContainer/PageContainer';
-import RegisterEdit from '../../components/Forms/RegisterEdit/RegisterEdit';
-import { useParams } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const Auth = () => {
-    const { type } = useParams();
+import Layout from "../../components/Layout/Layout";
+import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { UserContext } from "../../contexts/UserContext";
+import userServiceFactory from "../../services/users";
 
-    return (
-        <Layout>
-            <PageContainer styles={{ flexDirection: 'column', gap: '20px' }}>
-                {type === 'forgotten' && <ForgottenPassword />}
-                {type === 'login' && <LoginForm />}
-                {type === 'register' && (
-                    <RegisterEdit formType="register" action="Регистрирай се" />
-                )}
-            </PageContainer>
-        </Layout>
-    );
+const User = () => {
+  const { user, setUser } = useContext(UserContext);
+  const [fetchError, setFetchError] = useState(false);
+  const navigate = useNavigate();
+
+  const { login, register, edit, getSingle } = userServiceFactory(user);
+
+  const onSubmitLogin = async data => {
+    try {
+      const userData = await login(data);
+      setUser(userData);
+      navigate("/catalog");
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
+
+  const onSubmitRegister = async data => {
+    try {
+      await register(data);
+      navigate("/user/login");
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
+
+  const onSubmitEdit = async data => {
+    try {
+      const userData = await edit(data);
+      setUser(userData);
+      navigate("/catalog");
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
+
+  const context = {
+    fetchError,
+    onSubmitEdit,
+    onSubmitLogin,
+    onSubmitRegister,
+    getSingle,
+  };
+
+  return (
+    <Layout>
+      <PageContainer styles={{ flexDirection: "column", gap: "20px" }}>
+        <Outlet context={context} />
+      </PageContainer>
+    </Layout>
+  );
 };
 
-export default Auth;
+export default User;

@@ -1,11 +1,32 @@
-import * as api from '../api/api';
+import * as api from "../api/api";
 
 const endpoints = {
-    getAll: '/schools',
+  getAll: "/schools",
+  create: "/schools",
 };
 
 const getAllSchools = async () => {
-    return api.get(endpoints.getAll);
+  return api.get(endpoints.getAll);
 };
 
-export { getAllSchools };
+const createSchool = async ({
+  name,
+  image,
+  link,
+  settlementType,
+  settlement,
+  street,
+  ownerId,
+}) => {
+  return api.post(endpoints.create, {
+    name,
+    image,
+    link,
+    settlementType,
+    settlement,
+    street,
+    ownerId,
+  });
+};
+
+export { getAllSchools, createSchool };

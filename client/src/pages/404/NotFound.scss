@@ -1,0 +1,81 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: #d3cce3;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right,
+      #e9e4f0,
+      #d3cce3);
+
+  .error {
+    margin: 150px auto;
+    width: 600px;
+    // display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+
+    img {
+      width: 200px;
+      height: auto;
+    }
+
+    .transparent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      img {
+        width: 150px;
+        height: auto;
+      }
+
+      p {
+        color: #5555B2;
+        font-size: 25px;
+
+        span {
+          font-size: 50px;
+          font-weight: 700;
+          color: #D825C3;
+        }
+      }
+    }
+
+    .call-to-action {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      .redirect {
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 21px;
+      }
+
+      .redirect:hover {
+        text-decoration: underline;
+      }
+
+      .escape {
+        font-weight: 600;
+        color: #711CB3;
+      }
+
+      svg {
+        width: 40px;
+        height: auto;
+        color: #711CB3;
+      }
+    }
+  }
+}
