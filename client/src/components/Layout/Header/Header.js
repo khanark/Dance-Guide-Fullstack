@@ -1,24 +1,25 @@
-import './Header.scss';
+import "./Header.scss";
 
-import { useContext, useState } from 'react';
-
-import { HiLogout } from 'react-icons/hi';
-import { Link } from 'react-router-dom';
-import { UserContext } from '../../../contexts/UserContext';
-import defaultAvatar from '../../../assets/images/blank-avatar-image.png';
-import logo from '../../../assets/images/header-logo-no-woman-cropped.png';
+import { useState } from "react";
+import { HiLogout } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import defaultAvatar from "../../../assets/images/blank-avatar-image.png";
+import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
+import { useUserContext } from "../../../contexts/UserContext";
 
 const Header = () => {
   let [dropDown, setDropDown] = useState(false);
-  const { user, clearUser } = useContext(UserContext);
+  const { user, onLogout } = useUserContext();
 
   const onDropDownClick = e => {
     setDropDown(!dropDown);
   };
 
-  const onClickLogout = async () => {
-    clearUser();
-  };
+  console.log(user);
+
+  // const onClickLogout = async () => {
+  //   clearUser();
+  // };
 
   return (
     <header className="site-header">
@@ -40,7 +41,7 @@ const Header = () => {
           </li>
           {!user ? (
             <li>
-              <Link to="/user/login">Вход / Регистрация</Link>
+              <Link to="/login">Вход / Регистрация</Link>
             </li>
           ) : (
             <li>
@@ -50,7 +51,11 @@ const Header = () => {
         </ul>
         {user && (
           <>
-            <img src={!user.avatar ? defaultAvatar : user.avatar} alt="userImg" onClick={onDropDownClick} />
+            <img
+              src={!user.avatar ? defaultAvatar : user.avatar}
+              alt="userImg"
+              onClick={onDropDownClick}
+            />
             {dropDown && (
               <div className="sub-menu-wrap">
                 <div className="sub-menu">
@@ -60,13 +65,17 @@ const Header = () => {
                     </h3>
                   </div>
                   <hr />
-                  <Link className="sub-menu-links" to={`/user/edit`}>
+                  <Link className="sub-menu-links" to="/user/edit">
                     Редактиране на профила
                   </Link>
                   <Link className="sub-menu-links" to={`/catalog`}>
                     Моите Публикации
                   </Link>
-                  <Link to="/" className="sub-menu-links logout-btn" onClick={onClickLogout}>
+                  <Link
+                    to="/"
+                    className="sub-menu-links logout-btn"
+                    onClick={onLogout}
+                  >
                     <p>Изход</p>
                     <HiLogout />
                   </Link>
