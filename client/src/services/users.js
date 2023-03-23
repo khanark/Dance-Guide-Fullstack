@@ -45,7 +45,7 @@ const getSingle = userId => {
 };
 
 const logout = async () => {
-  localStorage.removeItem("userData");
+  return api.get(endpoints.logout);
 };
 
 const userServiceFactory = user => {
