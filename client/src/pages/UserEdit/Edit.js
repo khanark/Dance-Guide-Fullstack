@@ -11,7 +11,8 @@ import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { useUserContext } from "../../contexts/UserContext";
 
 const Edit = () => {
-  const { getSingle, onSubmitEdit, fetchError } = useUserContext();
+  const { getSingle, onSubmitEdit, fetchError, setFetchError } =
+    useUserContext();
 
   const {
     register,
@@ -23,6 +24,7 @@ const Edit = () => {
 
   useEffect(() => {
     getSingle().then(data => reset(data));
+    setFetchError(false);
   }, [reset]);
 
   const avatar = watch("avatar");
