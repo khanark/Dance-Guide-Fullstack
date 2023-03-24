@@ -3,6 +3,7 @@ const User = require("../models/User");
 
 const getAllSchools = async () => {
   return DanceSchool.find().lean();
+  // .sort({ _createdAt: "desc" })
 };
 
 const getSingleSchool = async id => {
@@ -38,7 +39,6 @@ const createSchool = async ({
     owner: ownerId,
   });
   const user = await User.findById(ownerId);
-  console.log(user);
   user.danceSchools.push(school);
   await user.save();
   await school.save();
