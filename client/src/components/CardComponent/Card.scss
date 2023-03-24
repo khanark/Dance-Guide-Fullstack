@@ -27,6 +27,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
+      overflow: hidden;
 
       .main-heading {
         display: flex;
@@ -40,10 +42,13 @@
         }
 
         .likes {
+          position: absolute;
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: 600;
+          right: 10px;
+          top: 18px;
           gap: 2px;
 
           p {
