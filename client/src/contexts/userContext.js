@@ -9,6 +9,7 @@ export const UserContext = createContext();
 const UserContextProvider = ({ children }) => {
   const { user, setUser, clearUser } = useLocalStorage();
   const [fetchError, setFetchError] = useState(false);
+  console.log(fetchError);
 
   const { login, register, edit, logout, getSingle } = userServiceFactory(user);
 
@@ -54,6 +55,7 @@ const UserContextProvider = ({ children }) => {
     onSubmitEdit,
     onSubmitLogin,
     onSubmitRegister,
+    setFetchError,
     onLogout,
     getSingle,
   };

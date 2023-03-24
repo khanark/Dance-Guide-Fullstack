@@ -15,8 +15,6 @@ const Header = () => {
     setDropDown(!dropDown);
   };
 
-  console.log(user);
-
   // const onClickLogout = async () => {
   //   clearUser();
   // };

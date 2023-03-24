@@ -9,6 +9,7 @@
 
   .site-navigation {
     display: flex;
+    padding: 10px;
     flex-direction: row;
     align-items: center;
     position: relative;
@@ -104,8 +105,8 @@
   }
 
   .logo-container {
-    width: 200px;
-    height: 100px;
+    width: 100px;
+    height: auto;
 
     img {
       max-width: 100%;
