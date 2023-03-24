@@ -3,6 +3,7 @@ import * as api from "../api/api";
 const endpoints = {
   getAll: "/schools",
   create: "/schools",
+  getSingleSchool: schoolId => `/schools/${schoolId}`,
 };
 
 const getAllSchools = async () => {
@@ -29,4 +30,8 @@ const createSchool = async ({
   });
 };
 
-export { getAllSchools, createSchool };
+const getSingleSchool = id => {
+  return api.get(endpoints.getSingleSchool(id));
+};
+
+export { getAllSchools, createSchool, getSingleSchool };
