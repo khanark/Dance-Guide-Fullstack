@@ -1,76 +1,105 @@
 import "./Catalog.scss";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FiSearch } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import Card from "../../components/CardComponent/Card";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import Spinner from "../../components/spinner/Spinner";
 import { getAllSchools } from "../../services/schools";
 
 const Catalog = () => {
   const [schools, setSchools] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [query, setQuery] = useState("");
+
+  const inputRef = useRef();
+  const selectRef = useRef();
 
   useEffect(() => {
     getAllSchools().then(result => {
       setSchools(result);
+      setIsLoading(false);
     });
   }, []);
+
+  let filteredSchools = schools.filter(school =>
+    school.settlement.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const onSearch = e => {
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case "likes":
+        setSchools([...schools].sort((a, b) => b.likes - a.likes));
+        break;
+      case "newest":
+        setSchools(
+          [...schools].sort((a, b) => {
+            return b._createdAt.localeCompare(a._createdAt);
+          })
+        );
+        break;
+    }
+  };
 
   return (
     <Layout>
       <PageContainer
         styles={{
-          // padding: "0 5rem",
-          // gap: "12px",
           alignItems: "unset",
           justifyContent: "unset",
         }}
       >
         <div className="catalog-page">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            !schools.length && (
+              <div className="missing__schools">
+                <p> Все още няма добавени училища. Бъди първият!</p>
+                <Link to="/create">Създай</Link>
+              </div>
+            )
+          )}
           {schools.length > 0 && (
             <div className="search-wrap">
+              <select
+                className="search-select"
+                defaultValue="likes"
+                onChange={onSearch}
+                ref={selectRef}
+              >
+                <option value="settlement">Населено място</option>
+                <option value="newest">Последно добавени</option>
+                <option value="likes">Най - харесвани</option>
+              </select>
               <input
                 type="text"
-                name="search"
-                id="seach"
                 placeholder="Търсене"
+                ref={inputRef}
+                onChange={e => setQuery(e.target.value)}
+                onClick={() => (selectRef.current.value = "settlement")}
               />
               <span className="search-icon__container">
                 <FiSearch />
               </span>
             </div>
           )}
-          <div className="card-container">
-            {/* {schools.length === 0 ? (
+
+          {!filteredSchools.length && schools.length && !isLoading ? (
             <div className="missing__schools">
-              <p> Все още няма добавени училища. Бъди първият!</p>
-              <Link to="/create">Създай</Link>
+              <p> Няма резултат</p>
             </div>
           ) : (
-            // schools.map(school => <Card key={school._id} {...school} />) */}
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            {/* <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-
-            <Card /> */}
-            {/* )} */}
-          </div>
+            <div className="card-container">
+              {filteredSchools.map(school => (
+                <Card key={school._id} {...school} />
+              ))}
+            </div>
+          )}
         </div>
       </PageContainer>
     </Layout>
