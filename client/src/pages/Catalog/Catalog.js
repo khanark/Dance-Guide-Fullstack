@@ -1,6 +1,6 @@
 import "./Catalog.scss";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -8,22 +8,15 @@ import Card from "../../components/CardComponent/Card";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import Spinner from "../../components/spinner/Spinner";
-import { getAllSchools } from "../../services/schools";
+import { useSchoolContext } from "../../contexts/SchoolsContext";
 
 const Catalog = () => {
-  const [schools, setSchools] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
+
+  const { schools, setSchools, isLoading } = useSchoolContext();
 
   const inputRef = useRef();
   const selectRef = useRef();
-
-  useEffect(() => {
-    getAllSchools().then(result => {
-      setSchools(result);
-      setIsLoading(false);
-    });
-  }, []);
 
   let filteredSchools = schools.filter(school =>
     school.settlement.toLowerCase().includes(query.toLowerCase())
