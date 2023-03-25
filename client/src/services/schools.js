@@ -34,4 +34,12 @@ const getSingleSchool = id => {
   return api.get(endpoints.getSingleSchool(id));
 };
 
-export { getAllSchools, createSchool, getSingleSchool };
+const schoolsFactory = user => {
+  return {
+    singleSchool: getSingleSchool.bind(null, user?._id),
+    createSchool,
+    getAllSchools,
+  };
+};
+
+export default schoolsFactory;
