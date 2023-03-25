@@ -35,10 +35,9 @@ const SchoolContextProvider = ({ children }) => {
 
   const context = {
     schools,
-    singleSchool: schools.find(school => school._id == singleSchoolId),
-    setSingleSchoolId,
-    setSchools,
+    singleSchool,
     onSubmitCreate,
+    setSchools,
     isLoading,
     fetchError,
   };

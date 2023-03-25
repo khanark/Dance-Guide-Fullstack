@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -9,6 +9,10 @@ export const UserContext = createContext();
 const UserContextProvider = ({ children }) => {
   const { user, setUser, clearUser } = useLocalStorage();
   const [fetchError, setFetchError] = useState(false);
+
+  useEffect(() => {
+    setFetchError(false);
+  }, []);
 
   const { login, register, edit, logout, getSingle } = userServiceFactory(user);
 

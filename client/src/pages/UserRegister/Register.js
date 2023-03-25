@@ -70,7 +70,7 @@ const Register = () => {
             <label htmlFor="phoneNumber">
               Телефонен Номер *
               <input
-                type="text"
+                type="number"
                 {...register("phoneNumber", {
                   required: "Моля въведете вашият телефонен номер",
                   pattern: {

@@ -11,8 +11,7 @@ import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { useUserContext } from "../../contexts/UserContext";
 
 const Edit = () => {
-  const { getSingle, onSubmitEdit, fetchError, setFetchError } =
-    useUserContext();
+  const { getSingle, onSubmitEdit, fetchError } = useUserContext();
 
   const {
     register,
@@ -24,7 +23,6 @@ const Edit = () => {
 
   useEffect(() => {
     getSingle().then(data => reset(data));
-    setFetchError(false);
   }, [reset]);
 
   const avatar = watch("avatar");
@@ -97,6 +95,7 @@ const Edit = () => {
             <label htmlFor="phoneNumber">
               Телефонен Номер
               <input
+                type={"number"}
                 {...register("phoneNumber", {
                   required: "Моля въведете вашият телефонен номер",
                   pattern: {

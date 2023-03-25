@@ -36,7 +36,7 @@ const getSingleSchool = id => {
 
 const schoolsFactory = user => {
   return {
-    singleSchool: getSingleSchool.bind(null, user?._id),
+    singleSchool: getSingleSchool,
     createSchool,
     getAllSchools,
   };

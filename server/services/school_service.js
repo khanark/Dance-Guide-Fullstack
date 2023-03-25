@@ -8,7 +8,14 @@ const getAllSchools = async () => {
 
 const getSingleSchool = async id => {
   return DanceSchool.findById(id)
-    .populate("owner", ["email", "firstName", "lastName"])
+    .populate("owner", [
+      "email",
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "moreInfo",
+      "avatar",
+    ])
     .lean();
 };
 

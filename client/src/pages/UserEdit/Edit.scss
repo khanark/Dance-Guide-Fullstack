@@ -38,6 +38,7 @@
     .forgotten-password {
       display: inline-block;
       margin-bottom: 20px;
+      color: #304261;
     }
 
     .forgotten-password:hover {
@@ -51,12 +52,21 @@
     display: block;
   }
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
   #moreInfo {
     font-size: 14px;
     margin-top: 10px;
     height: 50px;
     width: 300px;
     padding: 4px;
+    resize: none;
   }
 
   input {
@@ -99,7 +109,7 @@
     display: flex;
     padding: 10px 50px;
     font-size: 20px;
-    background-color: #5355b2;
+    background-color: #304261;
     border: 0;
     color: white;
     align-items: center;
