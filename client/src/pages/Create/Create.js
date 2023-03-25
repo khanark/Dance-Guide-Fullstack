@@ -1,16 +1,16 @@
 import "./Create.scss";
 
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { useSchoolContext } from "../../contexts/SchoolsContext";
 import { useUserContext } from "../../contexts/UserContext";
-import { createSchool } from "../../services/schools";
 
 const Create = () => {
   const { user } = useUserContext();
-  const navigate = useNavigate();
+
+  const { onSubmitCreate } = useSchoolContext();
 
   const {
     register,
@@ -20,15 +20,6 @@ const Create = () => {
 
   const linkRegex = /^https?:\/\//;
   const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
-
-  const onSubmit = async data => {
-    try {
-      await createSchool({ ...data, ownerId: user._id });
-      navigate("/catalog");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   return (
     <Layout>
@@ -40,7 +31,7 @@ const Create = () => {
       >
         <div className="create-page">
           <div className="form-container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmitCreate)}>
               <label htmlFor="name">
                 Име
                 <input
