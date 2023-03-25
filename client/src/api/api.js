@@ -21,7 +21,6 @@ const request = async (method, url, data) => {
     const res = await fetch(host + url, options);
     const data = await res.json();
     if (!res.ok) {
-      console.log(res.status);
       throw new Error(data.message);
     }
     if (userData?.token) {
