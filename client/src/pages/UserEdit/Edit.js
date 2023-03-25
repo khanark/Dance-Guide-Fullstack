@@ -28,7 +28,6 @@ const Edit = () => {
   }, [reset]);
 
   const avatar = watch("avatar");
-  console.log(avatar);
 
   return (
     <Layout>

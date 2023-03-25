@@ -1,22 +1,20 @@
 import "./Detaisl.scss";
 
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
-import { getSingleSchool } from "../../services/schools";
+import { useSchoolContext } from "../../contexts/SchoolsContext";
 
 const Details = () => {
-  const { schooldId } = useParams();
-
-  useEffect(() => {
-    getSingleSchool(schooldId).then(school => console.log(school));
-  });
+  const { singleSchool, setSingleSchoolId } = useSchoolContext();
+  const { schoolId } = useParams();
+  setSingleSchoolId(schoolId);
+  console.log(singleSchool);
 
   return (
     <Layout>
       <PageContainer>
-        <h2>This is the single schoool page</h2>
+        <h2>laa</h2>
       </PageContainer>
     </Layout>
   );
