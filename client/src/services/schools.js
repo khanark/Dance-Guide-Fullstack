@@ -4,6 +4,8 @@ const endpoints = {
   getAll: "/schools",
   create: "/schools",
   getSingleSchool: schoolId => `/schools/${schoolId}`,
+  likeSchool: schoolId => `/schools/${schoolId}/like`,
+  unlikeSchool: schoolId => `/schools/${schoolId}/unlike`,
 };
 
 const getAllSchools = async () => {
@@ -34,11 +36,21 @@ const getSingleSchool = id => {
   return api.get(endpoints.getSingleSchool(id));
 };
 
+const likeSchool = async (userId, schoolId) => {
+  return api.post(endpoints.likeSchool(schoolId), { userId });
+};
+
+const unLikeSchool = async (userId, schoolId) => {
+  return api.post(endpoints.unlikeSchool(schoolId), { userId });
+};
+
 const schoolsFactory = user => {
   return {
     singleSchool: getSingleSchool,
     createSchool,
     getAllSchools,
+    likeSchool: likeSchool.bind(null, user?._id),
+    unLikeSchool: unLikeSchool.bind(null, user?._id),
   };
 };
 
