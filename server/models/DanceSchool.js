@@ -16,8 +16,11 @@ const danceSchoolSchema = new Schema({
     maxLength: [100, "Description should be maximum 100 characters long"],
   },
   likes: {
-    type: Number,
-    default: 0,
+    count: {
+      type: Number,
+      default: 0,
+    },
+    users: [{ type: ObjectId, ref: "User" }],
   },
   link: {
     type: String,

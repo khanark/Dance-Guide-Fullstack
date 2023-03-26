@@ -3,7 +3,6 @@ const User = require("../models/User");
 
 const getAllSchools = async () => {
   return DanceSchool.find().lean();
-  // .sort({ _createdAt: "desc" })
 };
 
 const getSingleSchool = async id => {
@@ -52,10 +51,31 @@ const createSchool = async ({
   return school;
 };
 
+const likeSchool = async (schoolId, { userId }) => {
+  const school = await DanceSchool.findById(schoolId);
+  if (school.likes.users.includes(userId)) return school;
+  school.likes.users.push(userId);
+  school.likes.count += 1;
+  await school.save();
+  return school;
+};
+
+const unLikeSchool = async (schoolId, { userId }) => {
+  const school = await DanceSchool.findById(schoolId);
+  if (school.likes.users.includes(userId) === false) return school;
+  const userIndex = school.likes.users.indexOf(userId);
+  school.likes.users.splice(userIndex, 1);
+  school.likes.count -= 1;
+  await school.save();
+  return school;
+};
+
 module.exports = {
   getAllSchools,
   getSingleSchool,
   deleteSchool,
   updateSchool,
   createSchool,
+  likeSchool,
+  unLikeSchool,
 };
