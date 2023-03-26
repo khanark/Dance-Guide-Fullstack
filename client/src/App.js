@@ -2,8 +2,8 @@
 
 import { Route, Routes } from "react-router-dom";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import PrivateRoute from "./contexts/ProtectedRoute";
-import SchoolContextProvider from "./contexts/SchoolsContext";
 import UserContextProvider from "./contexts/UserContext";
 import NotFound from "./pages/404/NotFound";
 import About from "./pages/About/About";
@@ -18,7 +18,7 @@ import Register from "./pages/UserRegister/Register";
 function App() {
   return (
     <UserContextProvider>
-      <SchoolContextProvider>
+      <ChakraProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -32,7 +32,7 @@ function App() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </SchoolContextProvider>
+      </ChakraProvider>
     </UserContextProvider>
   );
 }
