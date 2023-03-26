@@ -3,7 +3,7 @@ import "./Edit.scss";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import userAvatar from "../../assets/images/blank-avatar-image.png";
+import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";

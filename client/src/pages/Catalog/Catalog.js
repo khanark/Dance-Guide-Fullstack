@@ -1,6 +1,6 @@
 import "./Catalog.scss";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -8,12 +8,21 @@ import Card from "../../components/CardComponent/Card";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import Spinner from "../../components/spinner/Spinner";
-import { useSchoolContext } from "../../contexts/SchoolsContext";
+import schoolsFactory from "../../services/schools";
 
 const Catalog = () => {
   const [query, setQuery] = useState("");
+  const [schools, setSchools] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { schools, setSchools, isLoading } = useSchoolContext();
+  const { getAllSchools } = schoolsFactory();
+
+  useEffect(() => {
+    getAllSchools().then(data => {
+      setSchools(data);
+      setIsLoading(false);
+    });
+  }, []);
 
   const inputRef = useRef();
   const selectRef = useRef();
@@ -23,10 +32,9 @@ const Catalog = () => {
   );
 
   const onSearch = e => {
-    console.log(e.target.value);
     switch (e.target.value) {
       case "likes":
-        setSchools([...schools].sort((a, b) => b.likes - a.likes));
+        setSchools([...schools].sort((a, b) => b.likes.count - a.likes.count));
         break;
       case "newest":
         setSchools(
