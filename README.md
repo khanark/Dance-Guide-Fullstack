@@ -1,9 +1,3 @@
-<!-- # Dance-Guide-Fullstack
-
-Full stack web application -->
-
-// style me readme file for my app
-
 # Dance-Guide-Fullstack
 
 Full stack web application
