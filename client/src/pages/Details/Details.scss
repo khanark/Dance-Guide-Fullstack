@@ -6,7 +6,7 @@
   margin: auto;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
   .details-page__image {
     width: 40%;
@@ -21,7 +21,62 @@
 
   .details-page__info {
     width: 60%;
-    background-color: #F7F7FF;
+    background-color: #dbd4b7;
+
+    .heading__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .school__name {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 20px 0 0 20px;
+      }
+
+      .created-at {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin: 0 0 20px 20px;
+      }
+    }
+
+    .address {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+
+      .address__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .address__info {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        color: #304261;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    }
+
+
+  }
+
+
+  .contacts,
+  .address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .avatar__container {
@@ -29,11 +84,11 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color: yellow;
     left: 40%;
     transform: translateX(-50%);
     top: 30px;
     overflow: hidden;
+    border: 2px solid #304261;
 
     img {
       width: 100%;
@@ -41,4 +96,75 @@
       object-fit: cover;
     }
   }
+
+
+
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+
+    .contacts__title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .contacts__info {
+      display: flex;
+      font-size: 1.2rem;
+      font-weight: 400;
+      flex-direction: row;
+      gap: 20px;
+
+      .phone,
+      .email,
+      .link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #304261;
+        font-size: 1.2rem;
+        font-weight: 400;
+
+        .page__link:hover {
+          text-decoration: underline;
+        }
+      }
+
+
+      .split__line {
+        width: 1px;
+        height: 30px;
+        padding: 0 1px;
+        background-color: #304261;
+      }
+    }
+
+
+  }
+
+  @media screen and (max-width: 768px) {
+    .contacts {
+      .contacts__info {
+        flex-direction: column;
+        gap: 10px;
+
+        .split__line {
+          display: none;
+        }
+      }
+    }
+
+    .address {
+      .address__info {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
+
 }
