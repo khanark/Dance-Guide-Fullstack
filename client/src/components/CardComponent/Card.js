@@ -24,7 +24,7 @@ const Card = ({ _id, name, image, settlement, street, likes }) => {
             <h3 className="school-name">{name}</h3>
             <div className="likes">
               <IoMdThumbsUp />
-              <p>{likes}</p>
+              <p>{likes.count}</p>
             </div>
           </div>
           <div className="adress-wrapper">
