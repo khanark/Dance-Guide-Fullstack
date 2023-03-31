@@ -14,6 +14,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -98,9 +99,18 @@ const Register = () => {
               <FieldsError msg={errors.password?.message} />
             </label>
 
-            <Link to="/authentication/forgotten" className="forgotten-password">
-              Смяна на паролата?
-            </Link>
+            <label htmlFor="repass">
+              Повторете паролата *
+              <input
+                type="password"
+                {...register("repeatedPassword", {
+                  required: false,
+                  validate: value =>
+                    value === watch("password") || "Паролите не съвпадат",
+                })}
+              />
+              <FieldsError msg={errors.repeatedPassword?.message} />
+            </label>
           </form>
 
           <p className="no-registration">
