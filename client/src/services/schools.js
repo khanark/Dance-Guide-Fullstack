@@ -16,8 +16,9 @@ const createSchool = async ({
   name,
   image,
   link,
-  settlementType,
   settlement,
+  schoolType,
+  description,
   street,
   ownerId,
 }) => {
@@ -25,10 +26,11 @@ const createSchool = async ({
     name,
     image,
     link,
-    settlementType,
     settlement,
     street,
     ownerId,
+    description,
+    schoolType,
   });
 };
 
