@@ -9,7 +9,7 @@ import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { useUserContext } from "../../contexts/UserContext";
 import schoolsFactory from "../../services/schools";
 
-const Create = () => {
+const Create = ({ actionType }) => {
   const { user } = useUserContext();
   const [fetchError, setFetchError] = useState(false);
 
@@ -26,6 +26,7 @@ const Create = () => {
   const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
 
   const onSubmit = async data => {
+    console.log("I am inside onSubmit");
     try {
       await createSchool({ ...data, ownerId: user._id });
       navigate("/catalog");
@@ -78,30 +79,27 @@ const Create = () => {
                 <FieldsError msg={errors.image?.message} />
               </label>
 
-              <label htmlFor="link">
-                Официален сайт
-                <input
+              <label htmlFor="schoolType">
+                Тип на училището
+                <select
                   className="margin-input"
-                  {...register("link", {
-                    required: "Моля добавете официална страница",
-                    pattern: {
-                      value: linkRegex,
-                      message: "Невалиден URL адрес",
-                    },
+                  {...register("schoolType", {
+                    required: "Моля изберете тип на училището",
                   })}
-                />
-                <FieldsError msg={errors.link?.message} />
+                >
+                  <option value="1">Класически балет</option>
+                  <option value="2">Съвременни танци</option>
+                  <option value="3">Оритенталски танци</option>
+                  <option value="4">Народни танци</option>
+                  <option value="5">Хип - Хоп танци</option>
+                  <option value="6">Спортни танци</option>
+                  <option value="7">Други</option>
+                </select>
               </label>
+
               <label htmlFor="adress">
                 Адрес
                 <div className="address-container">
-                  <select
-                    {...register("settlementType")}
-                    className="settlementType"
-                  >
-                    <option value="city">Град</option>
-                    <option value="village">Село</option>
-                  </select>
                   <div className="settlement-wrapper">
                     <input
                       placeholder="населено място"
@@ -140,7 +138,41 @@ const Create = () => {
                 </div>
               </label>
 
-              <button type="submit">Публикувай</button>
+              <label htmlFor="link">
+                Официален сайт
+                <input
+                  className="margin-input"
+                  {...register("link", {
+                    required: "Моля добавете официална страница",
+                    pattern: {
+                      value: linkRegex,
+                      message: "Невалиден URL адрес",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.link?.message} />
+              </label>
+              <label htmlFor="description">
+                Описание
+                <textarea
+                  className="school-description"
+                  {...register("description", {
+                    required: "Моля добавете описание",
+                    minLength: {
+                      value: 10,
+                      message:
+                        "Описанието трябва да съдържа най - малко 10 символа",
+                    },
+                    maxLength: {
+                      value: 300,
+                      message:
+                        "Описанието не може да бъде по - дълго от 300 символа",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.description?.message} />
+              </label>
+              <button type="submit">{actionType}</button>
             </form>
           </div>
           <div className="side-image">
