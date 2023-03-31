@@ -69,7 +69,7 @@ const Catalog = () => {
             <div className="search-wrap">
               <select
                 className="search-select"
-                defaultValue="likes"
+                defaultValue="settlement"
                 onChange={onSearch}
                 ref={selectRef}
               >
