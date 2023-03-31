@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -9,14 +9,10 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
   const { user, setUser, clearUser } = useLocalStorage();
-  const [fetchError, setFetchError] = useState(false);
+  const [fetchError, setFetchError] = useState("");
   const toast = useToast();
 
-  useEffect(() => {
-    setFetchError(false);
-  }, []);
-
-  const { login, register, edit, logout, getSingle } = userServiceFactory(user);
+  const { login, register, logout, edit, getSingle } = userServiceFactory(user);
 
   const navigate = useNavigate();
 
@@ -34,7 +30,7 @@ const UserContextProvider = ({ children }) => {
       setUser(userData);
       setTimeout(() => navigate("/catalog"), 2000);
     } catch (error) {
-      setFetchError(true);
+      setFetchError("Невалидно потребителско име или парола");
     }
   };
 
@@ -61,7 +57,7 @@ const UserContextProvider = ({ children }) => {
       setUser(userData);
       navigate("/catalog");
     } catch (error) {
-      setFetchError(true);
+      setFetchError("Вече съществува потребител с този email");
     }
   };
 
@@ -73,12 +69,12 @@ const UserContextProvider = ({ children }) => {
   const context = {
     user,
     fetchError,
+    getSingle,
     onSubmitEdit,
     onSubmitLogin,
     onSubmitRegister,
     setFetchError,
     onLogout,
-    getSingle,
   };
 
   return (

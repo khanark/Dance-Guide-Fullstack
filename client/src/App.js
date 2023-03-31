@@ -3,8 +3,8 @@
 import { Route, Routes } from "react-router-dom";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import PrivateRoute from "./contexts/ProtectedRoute";
 import UserContextProvider from "./contexts/UserContext";
+import PrivateRoute from "./guards/ProtectedRoute";
 import NotFound from "./pages/404/NotFound";
 import About from "./pages/About/About";
 import Catalog from "./pages/Catalog/Catalog";
@@ -28,7 +28,10 @@ function App() {
           <Route path="/details/:schoolId" element={<Details />} />
           <Route element={<PrivateRoute redirectPath="/login" />}>
             <Route path="/user/edit" element={<Edit />} />
-            <Route path="create" element={<Create />} />
+            <Route
+              path="create"
+              element={<Create actionType={"Публикувай"} />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

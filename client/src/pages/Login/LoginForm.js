@@ -22,9 +22,7 @@ const Login = () => {
     <Layout>
       <PageContainer styles={{ flexDirection: "column", gap: "20px" }}>
         <div className="login-form">
-          {fetchError && (
-            <DatabaseError msg={"Невалидно потребителско име или парола"} />
-          )}
+          {fetchError && <DatabaseError msg={fetchError} />}
           <form>
             <label htmlFor="email">
               Имейл

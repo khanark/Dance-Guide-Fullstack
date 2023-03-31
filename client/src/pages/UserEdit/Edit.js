@@ -11,7 +11,8 @@ import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { useUserContext } from "../../contexts/UserContext";
 
 const Edit = () => {
-  const { getSingle, onSubmitEdit, fetchError } = useUserContext();
+  const { getSingle, onSubmitEdit, fetchError, setFetchError } =
+    useUserContext();
 
   const {
     register,
@@ -34,9 +35,7 @@ const Edit = () => {
           <div className="user-avatar">
             <img src={!avatar ? userAvatar : avatar} alt="user-image" />
           </div>
-          {fetchError && (
-            <DatabaseError msg={"Имаше проблем със запазването на данните"} />
-          )}
+          {fetchError && <DatabaseError msg={fetchError} />}
           <div className="user-image__wrapper"></div>
           <form>
             <label htmlFor="avatar">
