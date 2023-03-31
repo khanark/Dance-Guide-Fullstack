@@ -7,12 +7,12 @@
   justify-content: space-between;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
   .form-container {
     width: 55%;
     height: 100%;
-    background-color: #fffff7;
+    background-color: #dbd4b7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,34 +28,37 @@
         display: block;
         font-size: 16px;
         font-weight: 300;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         font-weight: 400;
       }
 
       button {
-        margin-top: 25px;
         width: 100%;
         height: 40px;
         border: 0;
         color: #fff;
         font-size: 20px;
-        background-color: #6f43b7;
+        background-color: #304261;
         color: white;
         cursor: pointer;
       }
 
       input,
-      select {
+      select,
+      textarea {
 
         width: 100%;
         height: 40px;
-        font-size: 16px;
-        // text-align: center;
-        font-weight: 300;
-        font-style: italic;
-        appearance: none;
-        background-color: #fffff7;
+        font-size: 18px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+
         padding: 0 10px;
+      }
+
+      textarea {
+        resize: none;
       }
 
       // disable google input styles
@@ -66,18 +69,6 @@
         -webkit-box-shadow: 0 0 0 30px #fffff7 inset !important;
       }
 
-      select {
-        font-size: 16px;
-        text-align: center;
-        font-style: italic;
-        // appearance: none;
-        font-weight: 400;
-
-      }
-
-      // .margin-input {
-      //   // margin-bottom: 20px;
-      // }
 
       input {
         border: 0;
@@ -85,26 +76,8 @@
       }
 
       .address-container {
-        display: grid;
-        grid-gap: 2px;
-        align-items: center;
-        grid-template-areas:
-          "town city"
-          "town street";
-
-        .settlementType {
-          grid-area: town;
-          width: 60px;
-          justify-self: center;
-        }
-
-        .settlement {
-          grid-area: city;
-        }
-
-        .street {
-          grid-area: street;
-        }
+        display: flex;
+        flex-direction: column;
       }
     }
   }
