@@ -6,3 +6,16 @@ export const formatDate = val => {
     year: "2-digit",
   });
 };
+
+export const danceTypeFormat = val => {
+  const danceTypes = {
+    1: "Класически балет",
+    2: "Съвременни танци",
+    3: "Ориенталски танци",
+    4: "Народни танци",
+    5: "Хип - Хоп танци",
+    6: "Спортни танци",
+    7: "Други",
+  };
+  return danceTypes[val];
+};
