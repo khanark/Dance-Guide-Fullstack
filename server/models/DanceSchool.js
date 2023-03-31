@@ -12,8 +12,9 @@ const danceSchoolSchema = new Schema({
   },
   description: {
     type: String,
-    minLength: [10, "Description should be minimum 4 characters long"],
-    maxLength: [100, "Description should be maximum 100 characters long"],
+    required: true,
+    minLength: [10, "Description should be minimum 50 characters long"],
+    maxLength: [300, "Description should be maximum 300 characters long"],
   },
   likes: {
     count: {
@@ -43,12 +44,8 @@ const danceSchoolSchema = new Schema({
     },
   },
   _createdAt: {
-    type: String,
-    default: new Date(),
-  },
-  settlementType: {
-    type: String,
-    enum: ["city", "village"],
+    type: Date,
+    default: Date.now(),
   },
   settlement: {
     type: String,
@@ -59,6 +56,10 @@ const danceSchoolSchema = new Schema({
     type: String,
     required: true,
     minLength: [3, "Street should be minimum 3 characters long"],
+  },
+  schoolType: {
+    type: String,
+    required: true,
   },
   owner: { type: ObjectId, ref: "User" },
 });
