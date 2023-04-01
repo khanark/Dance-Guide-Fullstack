@@ -24,6 +24,8 @@ const deleteSchool = async id => {
 
 const updateSchool = async (id, data) => {
   await DanceSchool.findByIdAndUpdate(id, data, { runValidators: true });
+  const updatedSchool = await DanceSchool.findById(id).lean();
+  return updatedSchool;
 };
 
 const createSchool = async ({
