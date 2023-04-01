@@ -1,10 +1,10 @@
 import "./Header.scss";
 
-import { useState } from "react";
 import { HiLogout } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
+import { useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
 
 const Header = () => {
@@ -14,10 +14,6 @@ const Header = () => {
   const onDropDownClick = e => {
     setDropDown(!dropDown);
   };
-
-  // const onClickLogout = async () => {
-  //   clearUser();
-  // };
 
   return (
     <header className="site-header">
@@ -63,11 +59,11 @@ const Header = () => {
                     </h3>
                   </div>
                   <hr />
+                  <Link className="sub-menu-links" to={`/profile`}>
+                    Моят профил
+                  </Link>
                   <Link className="sub-menu-links" to="/user/edit">
                     Редактиране на профила
-                  </Link>
-                  <Link className="sub-menu-links" to={`/catalog`}>
-                    Моите Публикации
                   </Link>
                   <Link
                     to="/"

@@ -2,17 +2,17 @@ import "./Details.scss";
 
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
-import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
-import Layout from "../../components/Layout/Layout";
-import PageContainer from "../../components/Layout/PageContainer/PageContainer";
-import { useUserContext } from "../../contexts/UserContext";
-import schoolsFactory from "../../services/schools";
 import Adress from "./components/Adress";
 import Contacts from "./components/Contacts";
 import Heading from "./components/Heading";
+import Layout from "../../components/Layout/Layout";
 import LikeButton from "./components/LikeButton";
+import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import UserButtons from "./components/UserButtons";
+import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
+import schoolsFactory from "../../services/schools";
+import { useParams } from "react-router-dom";
+import { useUserContext } from "../../contexts/UserContext";
 
 const Details = () => {
   const [school, setSchool] = useState({
@@ -36,7 +36,6 @@ const Details = () => {
   }, []);
 
   const { schoolDetails, isLiked, isOwner } = school;
-  console.log(schoolDetails);
 
   const handleLikes = async () => {
     if (school.isLiked) {

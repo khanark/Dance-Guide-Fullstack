@@ -1,15 +1,15 @@
 import "./Create.scss";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
-import { useUserContext } from "../../contexts/UserContext";
 import schoolsFactory from "../../services/schools";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useUserContext } from "../../contexts/UserContext";
 
-const Create = ({ actionType }) => {
+const Create = () => {
   const { user } = useUserContext();
   const [fetchError, setFetchError] = useState(false);
 
@@ -172,7 +172,7 @@ const Create = ({ actionType }) => {
                 />
                 <FieldsError msg={errors.description?.message} />
               </label>
-              <button type="submit">{actionType}</button>
+              <button type="submit">Публикуване</button>
             </form>
           </div>
           <div className="side-image">
