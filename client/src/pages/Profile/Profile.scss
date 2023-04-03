@@ -14,7 +14,7 @@
       height: 120px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid #304261;
+      border: 3px solid #5554b2;
 
       img {
         width: 100%;
@@ -31,7 +31,8 @@
       p {
         margin: 0;
         font-size: 1.2rem;
-        color: "#304261";
+        color: black;
+        font-weight: 600;
       }
     }
   }
@@ -43,10 +44,11 @@
 
     .heading {
       margin: 0;
-      border-bottom: 2px solid #304261;
-      margin-bottom: 20px;
+      border-bottom: 1px solid black;
+      margin-bottom: 15px;
       font-size: 1.5rem;
-      color: #304261;
+      font-weight: 600;
+      color: black;
     }
 
     .card-container {
@@ -64,12 +66,12 @@
       p {
         margin: 0;
         font-size: 1.2rem;
-        color: "#304261";
+        color: black;
       }
 
       a {
         text-decoration: none;
-        color: #304261;
+        color: #5554b2;
         font-size: 1.2rem;
         font-weight: 600;
         margin-top: 10px;

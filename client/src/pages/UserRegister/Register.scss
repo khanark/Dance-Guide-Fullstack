@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fade-in-bottom 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in-bottom 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   gap: 20px;
 
   label,
@@ -46,7 +46,7 @@
 
     span a {
       font-weight: 400;
-      color: #304261;
+      color: #5554b2;
       font-size: 25px;
       padding-left: 5px;
     }
@@ -58,18 +58,17 @@
     display: flex;
     padding: 10px 50px;
     font-size: 20px;
-    background-color: #304261;
+    background-color: #5554b2;
     border: 0;
     color: white;
     align-items: center;
-    transition: all 0.8s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
   }
 
   button:hover {
     padding-left: 20px;
   }
-
 
   //disable google input styles
   input:-webkit-autofill,

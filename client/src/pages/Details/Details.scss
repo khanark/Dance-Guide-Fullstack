@@ -21,7 +21,7 @@
 
   .details-page__info {
     width: 60%;
-    background-color: #dbd4b7;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -45,7 +45,7 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        color: #304261;
+        color: #5554b2;
       }
 
       a:hover {
@@ -243,5 +243,4 @@
       }
     }
   }
-
 }
