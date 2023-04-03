@@ -8,6 +8,7 @@ import Heading from "./components/Heading";
 import Layout from "../../components/Layout/Layout";
 import LikeButton from "./components/LikeButton";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import Spinner from "../../components/spinner/Spinner";
 import UserButtons from "./components/UserButtons";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
@@ -20,6 +21,7 @@ const Details = () => {
     isOwner: false,
     isLiked: false,
   });
+  const [loading, setLoading] = useState(true);
 
   const { user } = useUserContext();
   const { schoolId } = useParams();
@@ -32,6 +34,7 @@ const Details = () => {
         isLiked: data.likes.users.includes(user?._id),
         isOwner: data.owner?._id == user?._id,
       });
+      setLoading(false);
     });
   }, []);
 
@@ -56,31 +59,36 @@ const Details = () => {
         }}
       >
         <div className="details-page">
-          <div className="details-page__image">
-            <img src={schoolDetails.image} alt="" />
-          </div>
-          <div className="details-page__info">
-            {school.isOwner && <UserButtons id={schoolId} />}
-            <div className="details-wrapper">
-              <Heading {...schoolDetails} />
-              <Adress {...schoolDetails} />
-              <div className="horizontal__line"></div>
-              <Contacts {...schoolDetails} />
-            </div>
-            {!isOwner && user && (
-              <LikeButton handleLikes={handleLikes} isLiked={isLiked} />
-            )}
-          </div>
-          <div className="avatar__container">
-            <img
-              src={
-                !schoolDetails.owner?.avatar
-                  ? defaultAvatar
-                  : schoolDetails.owner?.avatar
-              }
-              alt="owner"
-            />
-          </div>
+          {loading && <Spinner />}
+          {!loading && (
+            <>
+              <div className="details-page__image">
+                <img src={schoolDetails.image} alt="" />
+              </div>
+              <div className="details-page__info">
+                {school.isOwner && <UserButtons id={schoolId} />}
+                <div className="details-wrapper">
+                  <Heading {...schoolDetails} />
+                  <Adress {...schoolDetails} />
+                  <div className="horizontal__line"></div>
+                  <Contacts {...schoolDetails} />
+                </div>
+                {!isOwner && user && (
+                  <LikeButton handleLikes={handleLikes} isLiked={isLiked} />
+                )}
+              </div>
+              <div className="avatar__container">
+                <img
+                  src={
+                    !schoolDetails.owner?.avatar
+                      ? defaultAvatar
+                      : schoolDetails.owner?.avatar
+                  }
+                  alt="owner"
+                />
+              </div>
+            </>
+          )}
         </div>
       </PageContainer>
     </Layout>
