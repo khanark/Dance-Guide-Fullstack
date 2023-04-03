@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-
-const DATABASE_URL = "mongodb://127.0.0.0:27017/danceguide";
+require("dotenv").config();
 
 module.exports = async () => {
   try {
-    await mongoose.connect(DATABASE_URL, {
+    await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
