@@ -12,13 +12,25 @@ const Footer = () => {
       </p>
       <div className="social__links">
         <p>Social Links</p>
-        <Link to="https://github.com/khanark" target={"_blank"}>
+        <Link
+          to="https://github.com/khanark"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <FaGithub />
         </Link>
-        <Link to="https://www.facebook.com/BeeAyJee" target={"_blank"}>
+        <Link
+          to="https://www.facebook.com/BeeAyJee"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <FaFacebook />
         </Link>
-        <Link to="https://www.instagram.com/alqahol1c" target={"_blank"}>
+        <Link
+          to="https://www.instagram.com/alqahol1c"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <FaInstagram />
         </Link>
       </div>

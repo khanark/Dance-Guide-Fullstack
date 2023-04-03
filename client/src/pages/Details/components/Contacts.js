@@ -1,7 +1,7 @@
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { GrFormNextLink } from "react-icons/gr";
-import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { MdEmail } from "react-icons/md";
 
 const Contacts = ({ link, owner, description }) => {
   return (
@@ -20,7 +20,12 @@ const Contacts = ({ link, owner, description }) => {
         <div className="split__line"></div>
         <div className="link">
           <GrFormNextLink />
-          <Link className="page__link" to={link} target={"_blank"}>
+          <Link
+            className="page__link"
+            to={link}
+            target={"_blank"}
+            rel="noreferrer"
+          >
             Официална страница
           </Link>
         </div>
