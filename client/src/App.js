@@ -15,7 +15,7 @@ import PrivateRoute from "./guards/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";
 import Register from "./pages/UserRegister/Register";
 import SchoolEdit from "./pages/SchoolEdit/SchoolEdit";
-import UserContextProvider from "./contexts/UserContext";
+import UserContextProvider from "./contexts/AuthContext";
 
 function App() {
   return (

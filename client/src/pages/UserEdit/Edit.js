@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import Spinner from "../../components/spinner/Spinner";
 import { useForm } from "react-hook-form";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 
 const Edit = () => {

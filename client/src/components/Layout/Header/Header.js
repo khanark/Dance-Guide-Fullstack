@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
 import { useState } from "react";
-import { useUserContext } from "../../../contexts/UserContext";
+import { useUserContext } from "../../../contexts/AuthContext";
 
 const Header = () => {
   let [dropDown, setDropDown] = useState(false);

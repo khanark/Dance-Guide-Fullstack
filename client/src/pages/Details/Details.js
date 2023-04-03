@@ -12,7 +12,7 @@ import UserButtons from "./components/UserButtons";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
 import { useParams } from "react-router-dom";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Details = () => {
   const [school, setSchool] = useState({

@@ -7,7 +7,7 @@ import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Create = () => {
   const { user } = useUserContext();

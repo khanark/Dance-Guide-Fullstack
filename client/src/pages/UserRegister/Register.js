@@ -1,12 +1,12 @@
 import "./Register.scss";
 
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
+import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
-import { useUserContext } from "../../contexts/UserContext";
+import { useForm } from "react-hook-form";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const { onSubmitRegister, fetchError } = useUserContext();
@@ -105,7 +105,7 @@ const Register = () => {
                 type="password"
                 {...register("repeatedPassword", {
                   required: false,
-                  validate: value =>
+                  validate: (value) =>
                     value === watch("password") || "Паролите не съвпадат",
                 })}
               />

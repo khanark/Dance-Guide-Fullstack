@@ -8,7 +8,7 @@ import NoSchool from "./components/NoSchool";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
-import { useUserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Profile = () => {
   const { user } = useUserContext();
