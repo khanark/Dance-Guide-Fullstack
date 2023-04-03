@@ -24,6 +24,9 @@
   "bugs": {
     "url": "https://github.com/khanark/dance-guide-bg/issues"
   },
+  "engines": {
+    "node": ">=14 <15"
+  },
   "homepage": "https://github.com/khanark/dance-guide-bg#readme",
   "description": "",
   "devDependencies": {
