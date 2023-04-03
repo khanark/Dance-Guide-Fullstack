@@ -5,11 +5,13 @@ import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { registerUser } from "../../services/users";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
-  const { onSubmitRegister, fetchError } = useUserContext();
+  const [fetchError, setFetchError] = useState(false);
 
   const {
     register,
@@ -17,6 +19,25 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const { toast, navigate } = useUserContext();
+
+  const onSubmitRegister = async (data) => {
+    try {
+      await registerUser(data);
+      toast({
+        title: "Успешна регистрация",
+        description: "Благодарим за вашата регистрация.",
+        position: "top",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setTimeout(() => navigate("/login"), 2500);
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
 
   return (
     <Layout>

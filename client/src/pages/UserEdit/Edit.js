@@ -1,5 +1,7 @@
 import "./Edit.scss";
 
+import { edit, getSingle } from "../../services/users";
+
 import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
@@ -7,21 +9,32 @@ import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import Spinner from "../../components/spinner/Spinner";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 
 const Edit = () => {
-  const { getSingle, onSubmitEdit, fetchError, setFetchError } =
-    useUserContext();
+  const [fetchError, setFetchError] = useState(false);
+  const { setUser, navigate, user } = useUserContext();
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isLoading },
-  } = useForm({ defaultValues: async () => await getSingle() });
+  } = useForm({ defaultValues: async () => await getSingle(user._id) });
 
   const avatar = watch("avatar");
+
+  const onSubmitEdit = async (data) => {
+    try {
+      const userData = await edit(user._id, data);
+      setUser(userData);
+      navigate("/catalog");
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
 
   return (
     <Layout>
@@ -33,7 +46,11 @@ const Edit = () => {
               <div className="user-avatar">
                 <img src={!avatar ? userAvatar : avatar} alt="user-image" />
               </div>
-              {fetchError && <DatabaseError msg={fetchError} />}
+              {fetchError && (
+                <DatabaseError
+                  msg={"Вече съществува потребител с този email"}
+                />
+              )}
               <div className="user-image__wrapper"></div>
               <form>
                 <label htmlFor="avatar">

@@ -6,11 +6,13 @@ import { IoLogIn } from "react-icons/io5";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { login } from "../../services/users";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Login = () => {
-  const { onSubmitLogin, fetchError } = useUserContext();
+  const [fetchError, setFetchError] = useState(false);
 
   const {
     register,
@@ -18,11 +20,33 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const { setUser, navigate, toast } = useUserContext();
+
+  const onSubmitLogin = async (data) => {
+    try {
+      const userData = await login(data);
+      toast({
+        title: "Успешно влизане",
+        description: `Привет ${userData.firstName} !!!`,
+        position: "top",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setUser(userData);
+      setTimeout(() => navigate("/catalog"), 2500);
+    } catch (error) {
+      setFetchError(true);
+    }
+  };
+
   return (
     <Layout>
       <PageContainer styles={{ flexDirection: "column", gap: "20px" }}>
         <div className="login-form">
-          {fetchError && <DatabaseError msg={fetchError} />}
+          {fetchError && (
+            <DatabaseError msg={"Невалидно потребителско име или парола"} />
+          )}
           <form>
             <label htmlFor="email">
               Имейл

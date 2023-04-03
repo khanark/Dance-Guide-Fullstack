@@ -1,83 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-import userServiceFactory from "../services/users";
 
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
   const { user, setUser, clearUser } = useLocalStorage();
-  const [fetchError, setFetchError] = useState("");
+
   const toast = useToast();
-
-  const { login, register, logout, edit, getSingle } = userServiceFactory(user);
-
   const navigate = useNavigate();
-
-  const onSubmitLogin = async (data) => {
-    try {
-      const userData = await login(data);
-      toast({
-        title: "Успешно влизане",
-        description: `Привет ${userData.firstName} !!!`,
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
-      });
-      setUser(userData);
-      setTimeout(() => navigate("/catalog"), 2500);
-    } catch (error) {
-      setFetchError("Невалидно потребителско име или парола");
-    }
-  };
-  //  dawdas
-
-  const onSubmitRegister = async (data) => {
-    try {
-      await register(data);
-      toast({
-        title: "Успешна регистрация",
-        description: "Благодарим за вашата регистрация.",
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
-      });
-      setTimeout(() => navigate("/login"), 2500);
-    } catch (error) {
-      setFetchError(true);
-    }
-  };
-
-  const onSubmitEdit = async (data) => {
-    try {
-      const userData = await edit(data);
-      setUser(userData);
-      navigate("/catalog");
-    } catch (error) {
-      setFetchError("Вече съществува потребител с този email");
-    }
-  };
-
-  const onLogout = async () => {
-    clearUser();
-    await logout();
-  };
-
-  // this is new added line
 
   const context = {
     user,
-    fetchError,
-    getSingle,
-    onSubmitEdit,
-    onSubmitLogin,
-    onSubmitRegister,
-    setFetchError,
-    onLogout,
+    setUser,
+    clearUser,
+    toast,
+    navigate,
   };
 
   return (
