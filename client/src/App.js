@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/LoginForm";
 import NotFound from "./pages/404/NotFound";
 import PrivateRoute from "./guards/ProtectedRoute";
+import Profile from "./pages/Profile/Profile";
 import Register from "./pages/UserRegister/Register";
 import SchoolEdit from "./pages/SchoolEdit/SchoolEdit";
 import UserContextProvider from "./contexts/UserContext";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/details/:schoolId" element={<Details />} />
           <Route element={<PrivateRoute redirectPath="/login" />}>
             <Route path="/user/edit" element={<Edit />} />
+            <Route path="/user/profile" element={<Profile />} />
             <Route path="create" element={<Create />} />
             <Route path="/school/edit/:schoolId" element={<SchoolEdit />} />
           </Route>

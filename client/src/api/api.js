@@ -40,6 +40,6 @@ const get = request.bind(null, "GET");
 const post = request.bind(null, "POST");
 const put = request.bind(null, "PUT");
 const patch = request.bind(null, "PATCH");
-const remove = request.bind(null, "DELETE");
+const del = request.bind(null, "DELETE");
 
-export { get, post, put, patch, remove };
+export { get, post, put, patch, del };

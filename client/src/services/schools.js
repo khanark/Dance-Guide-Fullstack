@@ -42,6 +42,10 @@ const updateSchool = (id, data) => {
   return api.put(endpoints.getSingleSchool(id), { ...data });
 };
 
+const deleteSchool = (id) => {
+  return api.del(endpoints.getSingleSchool(id))
+}
+
 const likeSchool = async (userId, schoolId) => {
   return api.post(endpoints.likeSchool(schoolId), { userId });
 };
@@ -56,6 +60,7 @@ const schoolsFactory = user => {
     updateSchool,
     createSchool,
     getAllSchools,
+    deleteSchool,
     likeSchool: likeSchool.bind(null, user?._id),
     unLikeSchool: unLikeSchool.bind(null, user?._id),
   };

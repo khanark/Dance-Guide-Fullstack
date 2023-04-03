@@ -26,7 +26,7 @@ const Details = () => {
   const { singleSchool, likeSchool, unLikeSchool } = schoolsFactory(user);
 
   useEffect(() => {
-    singleSchool(schoolId).then(data => {
+    singleSchool(schoolId).then((data) => {
       setSchool({
         schoolDetails: data,
         isLiked: data.likes.users.includes(user?._id),

@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
-import { useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 import userServiceFactory from "../services/users";
 
 export const UserContext = createContext();
@@ -16,42 +16,42 @@ const UserContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const onSubmitLogin = async data => {
+  const onSubmitLogin = async (data) => {
     try {
       const userData = await login(data);
       toast({
-        title: "Успешно влизане.",
-        description: `Привет ${userData.firstName} ^^.`,
+        title: "Успешно влизане",
+        description: `Привет ${userData.firstName} !!!`,
         position: "top",
         status: "success",
         duration: 2000,
         isClosable: false,
       });
       setUser(userData);
-      setTimeout(() => navigate("/catalog"), 2000);
+      setTimeout(() => navigate("/catalog"), 2500);
     } catch (error) {
       setFetchError("Невалидно потребителско име или парола");
     }
   };
 
-  const onSubmitRegister = async data => {
+  const onSubmitRegister = async (data) => {
     try {
       await register(data);
       toast({
-        title: "Успешна регистрация.",
+        title: "Успешна регистрация",
         description: "Благодарим за вашата регистрация.",
         position: "top",
         status: "success",
         duration: 2000,
         isClosable: false,
       });
-      setTimeout(() => navigate("/login"), 2000);
+      setTimeout(() => navigate("/login"), 2500);
     } catch (error) {
       setFetchError(true);
     }
   };
 
-  const onSubmitEdit = async data => {
+  const onSubmitEdit = async (data) => {
     try {
       const userData = await edit(data);
       setUser(userData);

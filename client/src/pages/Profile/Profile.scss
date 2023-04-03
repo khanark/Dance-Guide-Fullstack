@@ -1,0 +1,83 @@
+.profile__page {
+  flex: 1;
+
+  .user__info {
+    width: 40%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .user__image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #304261;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .user-perfonal__info {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        margin: 0;
+        font-size: 1.2rem;
+        color: "#304261";
+      }
+    }
+  }
+
+  .user-added__schools,
+  .user-liked__schools {
+    width: 80%;
+    margin: auto;
+
+    .heading {
+      margin: 0;
+      border-bottom: 2px solid #304261;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #304261;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 25px;
+    }
+
+    .no-schools {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        margin: 0;
+        font-size: 1.2rem;
+        color: "#304261";
+      }
+
+      a {
+        text-decoration: none;
+        color: #304261;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

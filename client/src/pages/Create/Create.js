@@ -25,8 +25,7 @@ const Create = () => {
   const linkRegex = /^https?:\/\//;
   const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
 
-  const onSubmit = async data => {
-    console.log("I am inside onSubmit");
+  const onSubmit = async (data) => {
     try {
       await createSchool({ ...data, ownerId: user._id });
       navigate("/catalog");

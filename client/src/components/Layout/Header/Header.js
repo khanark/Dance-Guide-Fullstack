@@ -11,7 +11,7 @@ const Header = () => {
   let [dropDown, setDropDown] = useState(false);
   const { user, onLogout } = useUserContext();
 
-  const onDropDownClick = e => {
+  const onDropDownClick = (e) => {
     setDropDown(!dropDown);
   };
 
@@ -59,7 +59,7 @@ const Header = () => {
                     </h3>
                   </div>
                   <hr />
-                  <Link className="sub-menu-links" to={`/profile`}>
+                  <Link className="sub-menu-links" to={`/user/profile`}>
                     Моят профил
                   </Link>
                   <Link className="sub-menu-links" to="/user/edit">

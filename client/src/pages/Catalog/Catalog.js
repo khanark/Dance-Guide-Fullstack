@@ -18,7 +18,7 @@ const Catalog = () => {
   const { getAllSchools } = schoolsFactory();
 
   useEffect(() => {
-    getAllSchools().then(data => {
+    getAllSchools().then((data) => {
       setSchools(data);
       setIsLoading(false);
     });
@@ -27,18 +27,18 @@ const Catalog = () => {
   const inputRef = useRef();
   const selectRef = useRef();
 
-  let filteredSchools = schools.filter(school =>
+  let filteredSchools = schools.filter((school) =>
     school.settlement.toLowerCase().includes(query.toLowerCase())
   );
 
-  const onSearch = e => {
+  const onSearch = (e) => {
     switch (e.target.value) {
       case "likes":
-        setSchools([...schools].sort((a, b) => b.likes.count - a.likes.count));
+        setSchools(schools.sort((a, b) => b.likes.count - a.likes.count));
         break;
       case "newest":
         setSchools(
-          [...schools].sort((a, b) => {
+          schools.sort((a, b) => {
             return b._createdAt.localeCompare(a._createdAt);
           })
         );
@@ -70,7 +70,7 @@ const Catalog = () => {
               type="text"
               placeholder="Търсене"
               ref={inputRef}
-              onChange={e => setQuery(e.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
               onClick={() => (selectRef.current.value = "settlement")}
             />
             <span className="search-icon__container">
@@ -93,7 +93,7 @@ const Catalog = () => {
             </div>
           ) : (
             <div className="card-container">
-              {filteredSchools.map(school => (
+              {filteredSchools.map((school) => (
                 <Card key={school._id} {...school} />
               ))}
             </div>
