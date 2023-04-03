@@ -1,4 +1,4 @@
-const host = "https://dance-guide-bg.onrender.com/";
+const host = "https://dance-guide-bg.onrender.com";
 
 const request = async (method, url, data) => {
   const options = {
