@@ -66,6 +66,8 @@ const UserContextProvider = ({ children }) => {
     await logout();
   };
 
+  // this is new added line
+
   const context = {
     user,
     fetchError,
