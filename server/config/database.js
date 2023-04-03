@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DATABASE_URL = "mongodb://127.0.0.1:27017/danceguide";
+const DATABASE_URL = "mongodb://127.0.0.0:27017/danceguide";
 
 module.exports = async () => {
   try {
