@@ -7,6 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import NoSchool from "./components/NoSchool";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import { Spinner } from "@chakra-ui/react";
+import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
 import { useUserContext } from "../../contexts/AuthContext";
 
@@ -42,7 +43,7 @@ const Profile = () => {
         <div className="profile__page">
           <div className="user__info">
             <div className="user__image">
-              <img src={user.avatar} alt="user" />
+              <img src={user.avatar ? user.avatar : defaultAvatar} alt="user" />
             </div>
             <div className="user-perfonal__info">
               <p>
