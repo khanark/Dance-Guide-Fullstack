@@ -6,6 +6,8 @@ const request = async (method, url, data) => {
     headers: {},
   };
 
+  // new line
+
   const userData = JSON.parse(localStorage.getItem("userData"));
 
   if (userData) {
