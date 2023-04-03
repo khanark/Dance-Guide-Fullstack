@@ -23,7 +23,7 @@ const request = async (method, url, data) => {
     if (!res.ok) {
       throw new Error(data.message);
     }
-    if (res.status == 401) {
+    if (res.status === 401) {
       localStorage.removeItem("userData");
       window.location.pathname = "/login";
     }
