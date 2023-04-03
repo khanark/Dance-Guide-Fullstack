@@ -42,11 +42,11 @@ const Details = () => {
 
   const handleLikes = async () => {
     if (school.isLiked) {
-      await unLikeSchool(schoolId);
       setSchool({ ...school, isLiked: false });
+      await unLikeSchool(schoolId);
     } else {
-      await likeSchool(schoolId);
       setSchool({ ...school, isLiked: true });
+      await likeSchool(schoolId);
     }
   };
 
