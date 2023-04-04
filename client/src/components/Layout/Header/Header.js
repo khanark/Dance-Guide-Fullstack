@@ -9,7 +9,7 @@ import { useUserContext } from "../../../contexts/AuthContext";
 
 const Header = () => {
   let [dropDown, setDropDown] = useState(false);
-  const { user, onLogout } = useUserContext();
+  const { user, clearUser } = useUserContext();
 
   const onDropDownClick = (e) => {
     setDropDown(!dropDown);
@@ -68,7 +68,7 @@ const Header = () => {
                   <Link
                     to="/"
                     className="sub-menu-links logout-btn"
-                    onClick={onLogout}
+                    onClick={clearUser}
                   >
                     <p>Изход</p>
                     <HiLogout />

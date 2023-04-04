@@ -17,7 +17,7 @@
       height: 90px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #304261;
+      border: 2px solid #5554b2;
     }
   }
 
@@ -64,8 +64,9 @@
   #moreInfo {
     font-size: 14px;
     margin-top: 10px;
+    border: 0.2px solid black;
     height: 50px;
-    width: 300px;
+    width: 100%;
     padding: 4px;
     resize: none;
   }
@@ -84,10 +85,9 @@
   }
 
   label {
-    padding-bottom: 25px;
-    font-weight: 300;
+    padding-bottom: 15px;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   label:last-child {
@@ -111,7 +111,7 @@
     display: flex;
     padding: 10px 50px;
     font-size: 20px;
-    background-color: #304261;
+    background-color: #5554b2;
     border: 0;
     color: white;
     align-items: center;

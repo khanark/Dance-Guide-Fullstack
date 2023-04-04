@@ -4,13 +4,13 @@ const endpoints = {
   login: "/users/login",
   register: "/users/register",
   logout: "/users/logout",
-  single: userId => `/users/${userId}`,
+  single: (userId) => `/users/${userId}`,
 };
 
 const login = async ({ email, password }) =>
   api.post(endpoints.login, { email, password });
 
-const register = async ({
+const registerUser = async ({
   email,
   firstName,
   lastName,
@@ -40,7 +40,7 @@ const edit = async (
   });
 };
 
-const getSingle = userId => {
+const getSingle = (userId) => {
   return api.get(endpoints.single(userId));
 };
 
@@ -48,14 +48,4 @@ const logout = async () => {
   return api.get(endpoints.logout);
 };
 
-const userServiceFactory = user => {
-  return {
-    login,
-    register,
-    logout,
-    edit: edit.bind(null, user?._id),
-    getSingle: getSingle.bind(null, user?._id),
-  };
-};
-
-export default userServiceFactory;
+export { login, registerUser, edit, logout, getSingle };
