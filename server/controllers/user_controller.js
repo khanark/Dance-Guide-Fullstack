@@ -16,13 +16,21 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const user = await register(req.body);
-  res.status(202).json(user);
+  try {
+    const user = await register(req.body);
+    res.status(202).json(user);
+  } catch (error) {
+    res.status(401).json({ message: "Invalid credentials" });
+  }
 });
 
 router.post("/login", async (req, res) => {
-  const user = await login(req.body);
-  res.status(200).json(user);
+  try {
+    const user = await login(req.body);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(401).json({ message: "Invalid credentials" });
+  }
 });
 
 router.get("/logout", authorize, async (req, res) => {
@@ -38,11 +46,15 @@ router.get("/:id", validateId, authorize, async (req, res) => {
 });
 
 router.put("/:id", validateId, authorize, async (req, res) => {
-  const user = await updateUser(req.params.id, req.body);
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
+  try {
+    const user = await updateUser(req.params.id, req.body);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ message: "Invalid data" });
   }
-  res.status(200).json(user);
 });
 
 module.exports = router;

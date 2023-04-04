@@ -11,7 +11,6 @@ const errorParser = (err) => {
 
 module.exports = () => {
   return (err, req, res, next) => {
-    console.log(err);
     const error = errorParser(err);
     res.status(err.cause || 500).json({ message: error.message });
   };
