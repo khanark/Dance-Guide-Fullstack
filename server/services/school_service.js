@@ -1,11 +1,11 @@
 const DanceSchool = require("../models/DanceSchool");
 const User = require("../models/User");
 
-const getAllSchools = async () => {
+const getAllSchools = async (query) => {
   return DanceSchool.find().lean();
 };
 
-const getSingleSchool = async id => {
+const getSingleSchool = async (id) => {
   return DanceSchool.findById(id)
     .populate("owner", [
       "email",
@@ -18,7 +18,7 @@ const getSingleSchool = async id => {
     .lean();
 };
 
-const deleteSchool = async id => {
+const deleteSchool = async (id) => {
   await DanceSchool.findByIdAndRemove(id);
 };
 
