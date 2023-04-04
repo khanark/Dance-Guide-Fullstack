@@ -42,14 +42,25 @@ const Profile = () => {
       >
         <div className="profile__page">
           <div className="user__info">
-            <div className="user__image">
-              <img src={user.avatar ? user.avatar : defaultAvatar} alt="user" />
+            <div className="user__info__left">
+              <div className="user__image">
+                <img
+                  src={user.avatar ? user.avatar : defaultAvatar}
+                  alt="user"
+                />
+              </div>
+              <div className="user-perfonal__info">
+                <p>
+                  {user.firstName} {user.lastName}
+                </p>
+                <p>{user.email}</p>
+              </div>
             </div>
-            <div className="user-perfonal__info">
+            <div className="user__info__right">
+              <h3>За мен:</h3>
               <p>
-                {user.firstName} {user.lastName}
+                {user.moreInfo ? user.moreInfo : "Няма допълнителна информация"}
               </p>
-              <p>{user.email}</p>
             </div>
           </div>
           <div className="user-added__schools">

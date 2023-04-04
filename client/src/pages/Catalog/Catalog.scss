@@ -68,3 +68,10 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(1fr, 1fr);
+    grid-template-rows: auto;
+  }
+}

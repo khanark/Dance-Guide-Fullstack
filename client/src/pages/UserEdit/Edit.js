@@ -48,7 +48,7 @@ const Edit = () => {
               </div>
               {fetchError && (
                 <DatabaseError
-                  msg={"Вече съществува потребител с този email"}
+                  msg={"Потребител с този имейл вече съществува"}
                 />
               )}
               <div className="user-image__wrapper"></div>
@@ -70,10 +70,10 @@ const Edit = () => {
                   Имейл
                   <input
                     {...register("email", {
-                      required: "Моля въведете имейл адрес",
+                      required: "Задължително поле",
                       pattern: {
                         value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/,
-                        message: "Невалиден имейл формат",
+                        message: "Невалиден имейл адрес",
                       },
                     })}
                   />
@@ -83,11 +83,10 @@ const Edit = () => {
                   Име
                   <input
                     {...register("firstName", {
-                      required: "Моля въведете вашето име",
+                      required: "Задължително поле",
                       minLength: {
                         value: 3,
-                        message:
-                          "Името трябва да съдържа най - малко 3 символа",
+                        message: "Минимален брой символи 3",
                       },
                     })}
                   />
@@ -97,11 +96,10 @@ const Edit = () => {
                   Фамилия
                   <input
                     {...register("lastName", {
-                      required: "Моля въведете вашата фамилия",
+                      required: "Задължително поле",
                       minLength: {
                         value: 3,
-                        message:
-                          "Фамилията трябва да съдържа най - малко 3 символа",
+                        message: "Минимален брой символи 3",
                       },
                     })}
                   />
@@ -112,11 +110,11 @@ const Edit = () => {
                   <input
                     type={"number"}
                     {...register("phoneNumber", {
-                      required: "Моля въведете вашият телефонен номер",
+                      required: "Задължително поле",
                       pattern: {
                         value:
                           /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
-                        message: "Невалиден формат на т. номер",
+                        message: "Невалиден телефонен номер",
                       },
                     })}
                   />
@@ -124,7 +122,15 @@ const Edit = () => {
                 </label>
                 <label htmlFor="moreInfo">
                   Допълнителна информация
-                  <textarea id="moreInfo" {...register("moreInfo")} />
+                  <textarea
+                    id="moreInfo"
+                    {...register("moreInfo", {
+                      maxLength: {
+                        value: 200,
+                        message: "Максимален брой символи 200",
+                      },
+                    })}
+                  />
                 </label>
                 <Link
                   to="/authentication/forgotten"

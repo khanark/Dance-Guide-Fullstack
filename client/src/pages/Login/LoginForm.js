@@ -59,10 +59,10 @@ const Login = () => {
               Имейл
               <input
                 {...register("email", {
-                  required: "Моля въведете имейл адрес",
+                  required: "Задължително поле",
                   pattern: {
                     value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/,
-                    message: "Невалиден имейл формат",
+                    message: "Невалиден имейл адрес",
                   },
                 })}
               />
@@ -74,7 +74,7 @@ const Login = () => {
                 <input
                   type={eye ? "text" : "password"}
                   {...register("password", {
-                    required: "Моля въведете парола",
+                    required: "Задължително поле",
                   })}
                 />
                 <button

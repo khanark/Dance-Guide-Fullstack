@@ -5,6 +5,7 @@ import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { RiUserAddFill } from "react-icons/ri";
 import { Spinner } from "@chakra-ui/react";
 import { registerUser } from "../../services/users";
 import { useForm } from "react-hook-form";
@@ -48,9 +49,7 @@ const Register = () => {
       <PageContainer styles={{ flexDirection: "column", gap: "20px" }}>
         <div className="register-form">
           {fetchError && (
-            <DatabaseError
-              msg={"Вече има регистриран потребител със този имейл адрес"}
-            />
+            <DatabaseError msg={"Потребител с този имейл вече съществува"} />
           )}
           {isLoading && <Spinner />}
           <form>
@@ -58,10 +57,10 @@ const Register = () => {
               Имейл *
               <input
                 {...register("email", {
-                  required: "Моля въведете имейл адрес",
+                  required: "Задължително поле",
                   pattern: {
                     value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/,
-                    message: "Невалиден имейл формат",
+                    message: "Невалиден имейл адрес",
                   },
                 })}
               />
@@ -71,10 +70,10 @@ const Register = () => {
               Име *
               <input
                 {...register("firstName", {
-                  required: "Моля въведете вашето име",
+                  required: "Задължително поле",
                   minLength: {
                     value: 3,
-                    message: "Името трябва да съдържа най - малко 3 символа",
+                    message: "Минимален брой символи 3",
                   },
                 })}
               />
@@ -84,11 +83,10 @@ const Register = () => {
               Фамилия *
               <input
                 {...register("lastName", {
-                  required: "Моля въведете вашата фамилия",
+                  required: "Задължително поле",
                   minLength: {
                     value: 3,
-                    message:
-                      "Фамилията трябва да съдържа най - малко 3 символа",
+                    message: "Минимален брой символи 3",
                   },
                 })}
               />
@@ -99,11 +97,11 @@ const Register = () => {
               <input
                 type="number"
                 {...register("phoneNumber", {
-                  required: "Моля въведете вашият телефонен номер",
+                  required: "Задължително поле",
                   pattern: {
                     value:
                       /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
-                    message: "Невалиден формат на т. номер",
+                    message: "Невалиден телефонен номер",
                   },
                 })}
               />
@@ -115,10 +113,10 @@ const Register = () => {
               <input
                 type="password"
                 {...register("password", {
-                  required: "Моля въведете парола",
+                  required: "Задължително поле",
                   minLength: {
                     value: 4,
-                    message: "Паролата трябва да съдържа най - малко 4 символа",
+                    message: "Минимален брой символи 4",
                   },
                 })}
               />
@@ -151,6 +149,7 @@ const Register = () => {
             onClick={handleSubmit(onSubmitRegister)}
           >
             Регистрирай се
+            <RiUserAddFill />
           </button>
         </div>
       </PageContainer>

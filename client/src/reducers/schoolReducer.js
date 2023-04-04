@@ -1,3 +1,5 @@
+//  in case of future use
+
 export const SCHOOL_ACTIONS = {
   GET_SCHOOLS: "GET_SCHOOLS",
   ADD_SCHOOL: "ADD_SCHOOL",
