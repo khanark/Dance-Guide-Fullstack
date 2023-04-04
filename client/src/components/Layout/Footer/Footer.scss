@@ -1,10 +1,9 @@
 .site-footer {
+  position: sticky;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-self: center;
   align-items: center;
-  // min-height: 50px;
   text-align: center;
   margin-top: auto;
   padding: 10px 10%;

@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 const modelLocalStorage = (value) => {
-  const { _id, avatar, firstName, lastName, email, token } = value;
+  const { _id, avatar, firstName, lastName, email, moreInfo, token } = value;
   return {
     _id,
     avatar,
     firstName,
     lastName,
     email,
+    moreInfo,
     token,
   };
 };

@@ -1,6 +1,6 @@
 .catalog-page {
-  max-width: 100%;
   flex: 1;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,12 +66,5 @@
       font-size: 30px;
       color: white;
     }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .card-container {
-    grid-template-columns: repeat(1fr, 1fr);
-    grid-template-rows: auto;
   }
 }

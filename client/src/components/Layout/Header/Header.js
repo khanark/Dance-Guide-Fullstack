@@ -12,9 +12,12 @@ const Header = () => {
   let [dropDown, setDropDown] = useState(false);
   const { user, clearUser } = useUserContext();
 
-  const onDropDownClick = (e) => {
+  const onDropDownClick = () => {
+    console.log("I am inside this functions");
     setDropDown(!dropDown);
   };
+
+  console.log("header => " + dropDown);
 
   const onLogoutClick = async () => {
     await logout();
@@ -34,7 +37,7 @@ const Header = () => {
             <Link to="/">Начало</Link>
           </li>
           <li>
-            <Link to="/about">За Нас</Link>
+            <Link to="/about">За нас</Link>
           </li>
           <li>
             <Link to="/catalog">Каталог</Link>
@@ -65,7 +68,7 @@ const Header = () => {
                     </h3>
                   </div>
                   <hr />
-                  <Link className="sub-menu-links" to={`/user/profile`}>
+                  <Link className="sub-menu-links" to="/user/profile">
                     Моят профил
                   </Link>
                   <Link className="sub-menu-links" to="/user/edit">
