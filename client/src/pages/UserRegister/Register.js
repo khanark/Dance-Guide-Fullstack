@@ -5,6 +5,7 @@ import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
+import { Spinner } from "@chakra-ui/react";
 import { registerUser } from "../../services/users";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -12,6 +13,7 @@ import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const [fetchError, setFetchError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -25,6 +27,7 @@ const Register = () => {
   const onSubmitRegister = async (data) => {
     try {
       await registerUser(data);
+      setIsLoading(true);
       toast({
         title: "Успешна регистрация",
         description: "Благодарим за вашата регистрация.",
@@ -36,6 +39,7 @@ const Register = () => {
       setTimeout(() => navigate("/login"), 2500);
     } catch (error) {
       setFetchError(true);
+      setIsLoading(false);
     }
   };
 
@@ -48,6 +52,7 @@ const Register = () => {
               msg={"Вече има регистриран потребител със този имейл адрес"}
             />
           )}
+          {isLoading && <Spinner />}
           <form>
             <label htmlFor="email">
               Имейл *
@@ -140,7 +145,11 @@ const Register = () => {
               <Link to="/login">Вход!</Link>
             </span>
           </p>
-          <button type="submit" onClick={handleSubmit(onSubmitRegister)}>
+          <button
+            type="submit"
+            disabled={isLoading}
+            onClick={handleSubmit(onSubmitRegister)}
+          >
             Регистрирай се
           </button>
         </div>

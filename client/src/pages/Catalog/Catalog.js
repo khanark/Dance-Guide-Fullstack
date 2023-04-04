@@ -9,10 +9,11 @@ import { Link } from "react-router-dom";
 import PageContainer from "../../components/Layout/PageContainer/PageContainer";
 import Spinner from "../../components/spinner/Spinner";
 import schoolsFactory from "../../services/schools";
+import { useSchoolContext } from "../../contexts/SchoolContext";
 
 const Catalog = () => {
   const [query, setQuery] = useState("");
-  const [schools, setSchools] = useState([]);
+  const { schools, setSchools } = useSchoolContext();
   const [isLoading, setIsLoading] = useState(true);
 
   const { getAllSchools } = schoolsFactory();
@@ -37,11 +38,7 @@ const Catalog = () => {
         setSchools(schools.sort((a, b) => b.likes.count - a.likes.count));
         break;
       case "newest":
-        setSchools(
-          schools.sort((a, b) => {
-            return b._createdAt.localeCompare(a._createdAt);
-          })
-        );
+        setSchools(schools.reverse());
         break;
     }
   };

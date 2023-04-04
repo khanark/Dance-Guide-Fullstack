@@ -9,19 +9,16 @@ import { useForm } from "react-hook-form";
 
 const SchoolEdit = () => {
   const { schoolId } = useParams();
-
   const { singleSchool, updateSchool } = schoolsFactory();
-
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isLoading },
   } = useForm({ defaultValues: async () => await singleSchool(schoolId) });
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     await updateSchool(schoolId, data);
     navigate(`/details/${schoolId}`);
   };

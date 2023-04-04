@@ -11,6 +11,7 @@ import { useUserContext } from "../../contexts/AuthContext";
 
 const Create = () => {
   const { user } = useUserContext();
+  // This one should be used if there is a repeating name of the school
   const [fetchError, setFetchError] = useState(false);
 
   const { createSchool } = schoolsFactory(user);

@@ -4,6 +4,7 @@ import { HiLogout } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
+import { logout } from "../../../services/users";
 import { useState } from "react";
 import { useUserContext } from "../../../contexts/AuthContext";
 
@@ -13,6 +14,11 @@ const Header = () => {
 
   const onDropDownClick = (e) => {
     setDropDown(!dropDown);
+  };
+
+  const onLogoutClick = async () => {
+    await logout();
+    clearUser();
   };
 
   return (
@@ -68,7 +74,7 @@ const Header = () => {
                   <Link
                     to="/"
                     className="sub-menu-links logout-btn"
-                    onClick={clearUser}
+                    onClick={onLogoutClick}
                   >
                     <p>Изход</p>
                     <HiLogout />
