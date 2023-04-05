@@ -33,7 +33,7 @@
     .second__paragraph {
       -webkit-animation: slide-in-blurred-right 1.2s
         cubic-bezier(0.23, 1, 0.32, 1) 0.2s both;
-      animation: slide-in-blurred-right 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.2s
+      animation: slide-in-blurred-right 1s cubic-bezier(0.23, 1, 0.32, 1) 0.2s
         both;
     }
   }
@@ -52,7 +52,7 @@
   }
 
   .btn__call-to-action:hover {
-    background-color: white;
+    background: transparent;
     color: #5554b2;
     border: 1px solid #5554b2;
   }
@@ -142,26 +142,6 @@
     transform-origin: 50% 50%;
     -webkit-filter: blur(0);
     filter: blur(0);
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
     opacity: 1;
   }
 }

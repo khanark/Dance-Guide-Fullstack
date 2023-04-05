@@ -2,37 +2,59 @@
   flex: 1;
 
   .user__info {
-    width: 40%;
-    margin: 40px auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 4rem;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 
-    .user__image {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid #5554b2;
+    .user__info__left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .user__image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #5554b2;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .user-perfonal__info {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p {
+          margin: 0;
+          font-size: 1.2rem;
+          color: black;
+          font-weight: 400;
+        }
       }
     }
 
-    .user-perfonal__info {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      p {
+    .user__info__right {
+      align-self: start;
+      h3 {
         margin: 0;
         font-size: 1.2rem;
         color: black;
         font-weight: 600;
+      }
+      p {
+        margin: 0;
+        font-size: 1rem;
+        color: black;
+        font-weight: 400;
       }
     }
   }
@@ -56,6 +78,7 @@
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: auto;
       gap: 25px;
+      margin-bottom: 15px;
     }
 
     .no-schools {

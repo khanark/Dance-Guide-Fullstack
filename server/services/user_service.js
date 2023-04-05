@@ -63,11 +63,7 @@ const createToken = async ({
   return jwt.sign(payload, SECRET);
 };
 
-const verifyToken = async headers => {
-  const token = headers["x-authorization"];
-  if (!token) {
-    sendError("No authorization", 401);
-  }
+const verifyToken = async (token) => {
   const decodedUser = await jwt.verify(token, SECRET);
   const existingUser = await User.findById(decodedUser._id);
   if (!existingUser) {
@@ -76,14 +72,14 @@ const verifyToken = async headers => {
   return decodedUser;
 };
 
-const getSingleUser = async id => {
+const getSingleUser = async (id) => {
   const user = await User.findById(id).populate("danceSchools").lean();
   return userViewModel(user);
 };
 
 const getAllUsers = async () => {
   const users = await User.find();
-  return users.map(user => userViewModel(user));
+  return users.map((user) => userViewModel(user));
 };
 
 const updateUser = async (id, data) => {

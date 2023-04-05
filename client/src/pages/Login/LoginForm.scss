@@ -1,4 +1,5 @@
 .login-form {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,15 +24,19 @@
   }
 
   label {
-    padding-bottom: 25px;
-    font-weight: 300;
+    padding-bottom: 20px;
     font-size: 18px;
-    font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
+
+    .eye-btn {
+      position: absolute;
+      right: 0;
+      top: 22px;
+    }
   }
 
   label:last-child {
-    padding-bottom: 30px;
+    padding-bottom: 20px;
   }
 
   .no-registration {
@@ -64,6 +69,7 @@
   .form-button {
     display: flex;
     padding: 10px 50px;
+    gap: 0.5rem;
     font-size: 20px;
     background-color: #5554b2;
     border: 0;

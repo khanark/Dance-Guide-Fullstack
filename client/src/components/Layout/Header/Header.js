@@ -4,6 +4,7 @@ import { HiLogout } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
+import { logout } from "../../../services/users";
 import { useState } from "react";
 import { useUserContext } from "../../../contexts/AuthContext";
 
@@ -11,8 +12,16 @@ const Header = () => {
   let [dropDown, setDropDown] = useState(false);
   const { user, clearUser } = useUserContext();
 
-  const onDropDownClick = (e) => {
+  const onDropDownClick = () => {
+    console.log("I am inside this functions");
     setDropDown(!dropDown);
+  };
+
+  console.log("header => " + dropDown);
+
+  const onLogoutClick = async () => {
+    await logout();
+    clearUser();
   };
 
   return (
@@ -28,7 +37,7 @@ const Header = () => {
             <Link to="/">Начало</Link>
           </li>
           <li>
-            <Link to="/about">За Нас</Link>
+            <Link to="/about">За нас</Link>
           </li>
           <li>
             <Link to="/catalog">Каталог</Link>
@@ -59,7 +68,7 @@ const Header = () => {
                     </h3>
                   </div>
                   <hr />
-                  <Link className="sub-menu-links" to={`/user/profile`}>
+                  <Link className="sub-menu-links" to="/user/profile">
                     Моят профил
                   </Link>
                   <Link className="sub-menu-links" to="/user/edit">
@@ -68,7 +77,7 @@ const Header = () => {
                   <Link
                     to="/"
                     className="sub-menu-links logout-btn"
-                    onClick={clearUser}
+                    onClick={onLogoutClick}
                   >
                     <p>Изход</p>
                     <HiLogout />

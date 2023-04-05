@@ -51,6 +51,7 @@ const userSchema = new Schema({
   },
   moreInfo: {
     type: String,
+    maxLength: [200, "More info should be maximum 200 characters long"],
   },
   danceSchools: [{ type: ObjectId, ref: "DanceSchool" }],
 });
