@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authorize = require("../middlewares/authorize.js");
 const validateId = require("../middlewares/validateId.js");
+const { cloudinary } = require("../util/cloudinary.js");
 
 const {
   register,
@@ -47,12 +48,30 @@ router.get("/:id", validateId, authorize, async (req, res) => {
 
 router.put("/:id", validateId, authorize, async (req, res) => {
   try {
-    const user = await updateUser(req.params.id, req.body);
+    let uploadedResponse = null;
+
+    console.log("BEFORE");
+
+    if (req.body.avatarIsFile) {
+      uploadedResponse = await cloudinary.uploader.upload(req.body.avatar, {
+        upload_preset: "danceguide_user_avatars",
+      });
+    }
+
+    console.log("AFTER");
+    const user = await updateUser(req.params.id, {
+      ...req.body,
+      avatar: req.body.avatarIsFile
+        ? uploadedResponse.public_id
+        : req.body.avatar,
+    });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: "Invalid data" });
   }
 });

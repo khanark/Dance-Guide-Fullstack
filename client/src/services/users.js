@@ -28,7 +28,7 @@ const registerUser = async ({
 
 const edit = async (
   userId,
-  { avatar, email, firstName, lastName, phoneNumber, moreInfo }
+  { avatar, email, firstName, lastName, phoneNumber, moreInfo, avatarIsFile }
 ) => {
   return api.put(endpoints.single(userId), {
     avatar,
@@ -37,6 +37,7 @@ const edit = async (
     lastName,
     phoneNumber,
     moreInfo,
+    avatarIsFile,
   });
 };
 

@@ -1,7 +1,7 @@
 import "./Spinner.scss";
 
-const Spinner = () => {
+const CustomSpinner = () => {
   return <div className="loader">Loading...</div>;
 };
 
-export default Spinner;
+export default CustomSpinner;

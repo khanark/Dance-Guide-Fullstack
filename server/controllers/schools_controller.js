@@ -48,7 +48,9 @@ router.post("/", authorize, async (req, res) => {
 });
 
 router.delete("/:id", validateId, authorize, async (req, res) => {
+  console.log(req.params.id);
   const school = await deleteSchool(req.params.id);
+  console.log(school);
   if (!school) {
     return res.status(404).json({ message: "School not found" });
   }

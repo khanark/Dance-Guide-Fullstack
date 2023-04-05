@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import schoolsFactory from "../../../services/schools";
 import { useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
 const UserButtons = ({ id }) => {
   const { deleteSchool } = schoolsFactory();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -18,6 +20,7 @@ const UserButtons = ({ id }) => {
     e.preventDefault();
     onClose();
     await deleteSchool(id);
+    setIsLoading(true);
     toast({
       title: "Успешно изтриване",
       description: `Публикацията беше изтрита успешно.`,
@@ -28,6 +31,8 @@ const UserButtons = ({ id }) => {
     });
     setTimeout(() => navigate("/catalog"), 2500);
   };
+
+  console.log(isLoading);
 
   return (
     <div className="user-action__buttons">
@@ -45,10 +50,10 @@ const UserButtons = ({ id }) => {
         <MdEdit />
         <p>Редактиране</p>
       </Link>
-      <Link onClick={onOpen}>
+      <button type="button" onClick={onOpen} disabled={isLoading}>
         <MdDelete />
         <p>Изтриване</p>
-      </Link>
+      </button>
     </div>
   );
 };

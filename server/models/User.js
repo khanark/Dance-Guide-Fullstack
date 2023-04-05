@@ -10,7 +10,6 @@ const validator = require("validator");
 const userSchema = new Schema({
   avatar: {
     type: String,
-    match: [/^https?:\/\//, "Invalid avatar format"],
   },
   phoneNumber: {
     type: String,

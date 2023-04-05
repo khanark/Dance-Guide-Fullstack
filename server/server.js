@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3030;
 
 const start = async () => {
-  app.use(express.json());
+  app.use(express.json({ limit: "50mb" }));
   app.use(CORS());
   app.use(trimmer());
 

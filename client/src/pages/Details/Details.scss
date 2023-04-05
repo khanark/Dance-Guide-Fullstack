@@ -41,7 +41,8 @@
         display: inline-block;
       }
 
-      a {
+      a,
+      button {
         display: flex;
         align-items: center;
         gap: 5px;

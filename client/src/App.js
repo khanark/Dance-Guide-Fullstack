@@ -9,7 +9,6 @@ import Create from "./pages/Create/Create";
 import Details from "./pages/Details/Details";
 import Edit from "./pages/UserEdit/Edit";
 import Home from "./pages/Home/Home";
-import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login/LoginForm";
 import NotFound from "./pages/404/NotFound";
 import PrivateRoute from "./guards/ProtectedRoute";
@@ -24,7 +23,6 @@ function App() {
     <UserContextProvider>
       <SchoolContextProvider>
         <ChakraProvider>
-          <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -40,7 +38,6 @@ function App() {
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Layout>
         </ChakraProvider>
       </SchoolContextProvider>
     </UserContextProvider>

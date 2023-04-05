@@ -19,7 +19,9 @@ const getSingleSchool = async (id) => {
 };
 
 const deleteSchool = async (id) => {
+  const school = await DanceSchool.findById(id);
   await DanceSchool.findByIdAndRemove(id);
+  return school;
 };
 
 const updateSchool = async (id, data) => {
