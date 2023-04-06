@@ -6,12 +6,17 @@ import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const SchoolEdit = () => {
   const { schoolId } = useParams();
   const { singleSchool, updateSchool } = schoolsFactory();
-  const [httpLoading, setHttpLoading] = useState(false);
+  const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
+  const [fetchState, setFetchState] = useState({
+    httpLoading: false,
+    fetchError: false,
+  });
 
   const {
     register,
@@ -21,26 +26,37 @@ const SchoolEdit = () => {
 
   const { navigate, toast } = useUserContext();
 
+  const handleAvatarChange = (e) => {
+    preloadAvatar(e.target.files[0]);
+  };
+
   const onSubmit = async (data) => {
-    await updateSchool(schoolId, data);
-    setHttpLoading(true);
-    toast({
-      title: "Успешно редактиране",
-      description: `Промените бяха запазени успешно.`,
-      position: "top",
-      status: "success",
-      duration: 2000,
-      isClosable: false,
-    });
-    setTimeout(() => navigate("/user/profile"), 2500);
+    try {
+      setFetchState({ ...fetchState, httpLoading: true });
+      await updateSchool(schoolId, {
+        ...data,
+        image: uploadedAvatar || data.image,
+        isImageFile: Boolean(uploadedAvatar),
+      });
+      toast({
+        title: "Успешно редактиране",
+        description: `Промените бяха запазени успешно.`,
+        position: "top",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setTimeout(() => navigate("/user/profile"), 2500);
+    } catch (error) {
+      setFetchState({ ...fetchState, httpLoading: false, fetchError: true });
+    }
   };
 
   const linkRegex = /^https?:\/\//;
-  const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
 
   return (
     <Layout>
-      {httpLoading && (
+      {fetchState.httpLoading && (
         <Spinner style={{ alignSelf: "center", marginTop: "25px" }} />
       )}
       <div className="create-page">
@@ -71,13 +87,9 @@ const SchoolEdit = () => {
                 Снимка
                 <input
                   className="margin-input"
-                  {...register("image", {
-                    required: "Моля добавете снимка",
-                    pattern: {
-                      value: imageRegex,
-                      message: "Невалиден URL адрес",
-                    },
-                  })}
+                  type="file"
+                  {...register("image", { required: "Моля изберете снимка" })}
+                  onChange={handleAvatarChange}
                 />
                 <FieldsError msg={errors.image?.message} />
               </label>
@@ -175,7 +187,7 @@ const SchoolEdit = () => {
                 />
                 <FieldsError msg={errors.description?.message} />
               </label>
-              <button type="submit" disabled={httpLoading}>
+              <button type="submit" disabled={fetchState.httpLoading}>
                 Запазване
               </button>
             </form>

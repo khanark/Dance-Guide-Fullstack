@@ -76,11 +76,26 @@ router.delete("/:id", validateId, authorize, async (req, res) => {
 });
 
 router.put("/:id", validateId, authorize, async (req, res) => {
-  const school = await updateSchool(req.params.id, req.body);
-  if (!school) {
-    return res.status(404).json({ message: "School not found" });
-  }
-  res.status(200).json(school);
+  try {
+    let uploadedResponse = null;
+
+    if (req.body.isImageFile) {
+      uploadedResponse = await cloudinary.uploader.upload(req.body.image, {
+        upload_preset: "danceguide_schools_images",
+      });
+    }
+
+    const school = await updateSchool(req.params.id, {
+      ...req.body,
+      image: req.body.isImageFile ? uploadedResponse.public_id : req.body.image,
+    });
+
+    if (!school) {
+      return res.status(404).json({ message: "School not found" });
+    }
+
+    res.status(200).json(school);
+  } catch (error) {}
 });
 
 module.exports = router;

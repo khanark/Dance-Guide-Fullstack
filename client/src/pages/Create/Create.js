@@ -29,7 +29,6 @@ const Create = () => {
   };
 
   const linkRegex = /^https?:\/\//;
-  const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
 
   const onSubmit = async (data) => {
     try {
