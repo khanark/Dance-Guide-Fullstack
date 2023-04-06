@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 import { SCHOOL_ACTIONS } from "../reducers/schoolReducer";
 import { schoolReducer } from "../reducers/schoolReducer";

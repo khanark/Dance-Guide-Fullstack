@@ -1,12 +1,12 @@
 import "./Details.scss";
 
+import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useState } from "react";
 
 import Adress from "./components/Adress";
 import Contacts from "./components/Contacts";
 import CustomSpinner from "../../components/spinner/Spinner";
 import Heading from "./components/Heading";
-import { Image } from "cloudinary-react";
 import Layout from "../../components/Layout/Layout";
 import LikeButton from "./components/LikeButton";
 import UserButtons from "./components/UserButtons";
@@ -60,10 +60,11 @@ const Details = () => {
             <div className="details-page__image">
               <Image
                 cloudName="du4uhmyq2"
-                width="300"
                 publicId={schoolDetails.image}
-                crop="scale"
-              />
+                loading="lazy"
+              >
+                <Placeholder type="blur" />
+              </Image>
             </div>
             <div className="details-page__info">
               {school.isOwner && <UserButtons id={schoolId} />}

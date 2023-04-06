@@ -1,9 +1,9 @@
 import "./Profile.scss";
 
+import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
-import { Image } from "cloudinary-react";
 import Layout from "../../components/Layout/Layout";
 import NoSchool from "./components/NoSchool";
 import { Spinner } from "@chakra-ui/react";
@@ -42,10 +42,11 @@ const Profile = () => {
               {user.avatar && (
                 <Image
                   cloudName="du4uhmyq2"
-                  width="300"
                   publicId={user.avatar}
-                  crop="scale"
-                />
+                  loading="lazy"
+                >
+                  <Placeholder type="blur" />
+                </Image>
               )}
             </div>
             <div className="user-perfonal__info">

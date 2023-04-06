@@ -13,14 +13,14 @@ import { useSchoolContext } from "../../contexts/SchoolContext";
 const Catalog = () => {
   const [query, setQuery] = useState("");
   const { schools, setSchools } = useSchoolContext();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState({});
 
   const { getAllSchools } = schoolsFactory();
 
   useEffect(() => {
     getAllSchools().then((data) => {
-      setSchools(data);
       setIsLoading(false);
+      setSchools(data);
     });
   }, []);
 
@@ -75,7 +75,7 @@ const Catalog = () => {
           </div>
         )}
 
-        {isLoading && <CustomSpinner />}
+        {isLoading && !Boolean(schools.length) && <CustomSpinner />}
 
         {!filteredSchools.length && schools.length && !isLoading ? (
           <div className="missing__schools">

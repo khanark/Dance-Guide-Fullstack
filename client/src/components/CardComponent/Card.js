@@ -3,7 +3,8 @@
 
 import "./Card.scss";
 
-import { Image } from "cloudinary-react";
+import { Image, Placeholder } from "cloudinary-react";
+
 import { IoMdThumbsUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { MdPinDrop } from "react-icons/md";
@@ -19,12 +20,9 @@ const Card = ({ _id, name, image, settlement, likes }) => {
           </div>
         </Link>
         <header className="card-header">
-          <Image
-            cloudName="du4uhmyq2"
-            width="300"
-            publicId={image}
-            crop="scale"
-          />
+          <Image cloudName="du4uhmyq2" publicId={image} loading="lazy">
+            <Placeholder type="blur" />
+          </Image>
         </header>
         <div className="card-body">
           <div className="main-heading">

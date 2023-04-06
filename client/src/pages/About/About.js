@@ -2,7 +2,7 @@ import "./About.scss";
 
 import CardInfo from "./CardInfo/CardInfo";
 import Layout from "../../components/Layout/Layout";
-import banner from "../../assets/images/about-page-logo.png";
+import banner from "../../assets/images/another-about-page-logo.png";
 
 const About = () => {
   return (
