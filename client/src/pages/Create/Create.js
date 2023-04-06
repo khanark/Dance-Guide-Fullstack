@@ -80,7 +80,16 @@ const Create = () => {
               <input
                 className="margin-input"
                 type="file"
-                {...register("image", { required: "Моля изберете снимка" })}
+                {...register("image", {
+                  required: "Моля изберете снимка",
+                  validate: {
+                    lessThan5MB: (files) =>
+                      files[0]?.size < 5000000 || "Максимален размер 5MB",
+                    acceptedFormats: (files) =>
+                      ["image/jpeg", "image/png"].includes(files[0]?.type) ||
+                      "Само формати: jpeg/png",
+                  },
+                })}
                 onChange={handleAvatarChange}
               />
               <FieldsError msg={errors.image?.message} />
