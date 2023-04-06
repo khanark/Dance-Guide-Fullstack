@@ -1,5 +1,6 @@
 import "./Profile.scss";
 
+import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
@@ -32,57 +33,68 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="profile__page">
-      <div className="user__info">
-        <div className="user__info__left">
-          <div className="user__image">
-            <img src={user.avatar ? user.avatar : defaultAvatar} alt="user" />
+    <Layout>
+      <div className="profile__page">
+        <div className="user__info">
+          <div className="user__info__left">
+            <div className="user__image">
+              {!user.avatar && <img src={defaultAvatar} alt="" />}
+              {user.avatar && (
+                <Image
+                  cloudName="du4uhmyq2"
+                  publicId={user.avatar}
+                  loading="lazy"
+                >
+                  <Placeholder type="blur" />
+                </Image>
+              )}
+            </div>
+            <div className="user-perfonal__info">
+              <p>
+                {user.firstName} {user.lastName}
+              </p>
+              <p>{user.email}</p>
+            </div>
           </div>
-          <div className="user-perfonal__info">
+          <div className="user__info__right">
+            <h3>За мен:</h3>
             <p>
-              {user.firstName} {user.lastName}
+              {user.moreInfo ? user.moreInfo : "Няма допълнителна информация"}
             </p>
-            <p>{user.email}</p>
           </div>
         </div>
-        <div className="user__info__right">
-          <h3>За мен:</h3>
-          <p>
-            {user.moreInfo ? user.moreInfo : "Няма допълнителна информация"}
-          </p>
+        <div className="user-added__schools">
+          <h3 className="heading">Моите училища</h3>
+          {loading && <Spinner />}
+          {!schools.own.length && !loading && (
+            <NoSchool
+              msg="Нямате добавени училища"
+              redirect={{ name: "Създай", path: "/create" }}
+            />
+          )}
+          <div className="card-container">
+            {schools.own.map((school) => (
+              <Card key={school._id} {...school} />
+            ))}
+          </div>
+        </div>
+        <div className="user-liked__schools">
+          <h3 className="heading">Харесани училища</h3>
+          {loading && <Spinner />}
+          {!schools.liked.length && !loading && (
+            <NoSchool
+              msg="Нямате харесани училища"
+              redirect={{ name: "Каталог", path: "/catalog" }}
+            />
+          )}
+          <div className="card-container">
+            {schools.liked.map((school) => (
+              <Card key={school._id} {...school} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="user-added__schools">
-        <h3 className="heading">Моите училища</h3>
-        {loading && <Spinner />}
-        {!schools.own.length && !loading && (
-          <NoSchool
-            msg="Нямате добавени училища"
-            redirect={{ name: "Създай", path: "/create" }}
-          />
-        )}
-        <div className="card-container">
-          {schools.own.map((school) => (
-            <Card key={school._id} {...school} />
-          ))}
-        </div>
-      </div>
-      <div className="user-liked__schools">
-        <h3 className="heading">Харесани училища</h3>
-        {loading && <Spinner />}
-        {!schools.liked.length && !loading && (
-          <NoSchool
-            msg="Нямате харесани училища"
-            redirect={{ name: "Каталог", path: "/catalog" }}
-          />
-        )}
-        <div className="card-container">
-          {schools.liked.map((school) => (
-            <Card key={school._id} {...school} />
-          ))}
-        </div>
-      </div>
-    </div>
+    </Layout>
   );
 };
 

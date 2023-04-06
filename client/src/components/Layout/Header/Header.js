@@ -1,6 +1,7 @@
 import "./Header.scss";
 
 import { HiLogout } from "react-icons/hi";
+import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
@@ -13,11 +14,9 @@ const Header = () => {
   const { user, clearUser } = useUserContext();
 
   const onDropDownClick = () => {
-    console.log("I am inside this functions");
+    ("I am inside this functions");
     setDropDown(!dropDown);
   };
-
-  console.log("header => " + dropDown);
 
   const onLogoutClick = async () => {
     await logout();
@@ -54,11 +53,22 @@ const Header = () => {
         </ul>
         {user && (
           <>
-            <img
-              src={!user.avatar ? defaultAvatar : user.avatar}
-              alt="userImg"
-              onClick={onDropDownClick}
-            />
+            {!user.avatar && (
+              <img
+                src={defaultAvatar}
+                alt="user-avatar"
+                onClick={onDropDownClick}
+              />
+            )}
+            {user.avatar && (
+              <Image
+                cloudName="du4uhmyq2"
+                width="300"
+                publicId={user.avatar}
+                crop="scale"
+                onClick={onDropDownClick}
+              />
+            )}
             {dropDown && (
               <div className="sub-menu-wrap">
                 <div className="sub-menu">

@@ -2,18 +2,26 @@ import "./Edit.scss";
 
 import { edit, getSingle } from "../../services/users";
 
+import CustomSpinner from "../../components/spinner/Spinner";
 import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
+import { Image } from "cloudinary-react";
+import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
-import Spinner from "../../components/spinner/Spinner";
+import { Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 
 const Edit = () => {
-  const [fetchError, setFetchError] = useState(false);
-  const { setUser, navigate, user } = useUserContext();
+  const { setUser, navigate, user, toast } = useUserContext();
+  const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
+  const [fetchState, setFetchState] = useState({
+    httpLoading: false,
+    fetchError: false,
+  });
 
   const {
     register,
@@ -24,118 +32,154 @@ const Edit = () => {
 
   const avatar = watch("avatar");
 
+  const handleAvatarChange = (e) => {
+    preloadAvatar(e.target.files[0]);
+  };
+
   const onSubmitEdit = async (data) => {
     try {
-      const userData = await edit(user._id, data);
+      setFetchState({ ...fetchState, httpLoading: true, fetchError: false });
+      const userData = await edit(user._id, {
+        ...data,
+        avatar: uploadedAvatar || data.avatar,
+        avatarIsFile: Boolean(uploadedAvatar),
+      });
       setUser(userData);
-      navigate("/user/profile");
+      toast({
+        title: "Успешно редактиране",
+        description: `Промените бяха запазени успешно.`,
+        position: "top",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setTimeout(() => navigate("/user/profile"), 2500);
     } catch (error) {
-      setFetchError(true);
+      setFetchState({ ...fetchState, httpLoading: false, fetchError: true });
     }
   };
 
   return (
-    <div className="edit-form">
-      {isLoading && <Spinner />}
-      {!isLoading && (
-        <>
-          <div className="user-avatar">
-            <img src={!avatar ? userAvatar : avatar} alt="user-image" />
-          </div>
-          {fetchError && (
-            <DatabaseError msg={"Потребител с този имейл вече съществува"} />
-          )}
-          <div className="user-image__wrapper"></div>
-          <form>
-            <label htmlFor="avatar">
-              Профилна снимка
-              <input
-                id="avatar"
-                {...register("avatar", {
-                  pattern: {
-                    value: /^https?:\/\//,
-                    message: "Невалиден URL адрес",
-                  },
-                })}
-              />
-              <FieldsError msg={errors.avatar?.message} />
-            </label>
-            <label htmlFor="email">
-              Имейл
-              <input
-                {...register("email", {
-                  required: "Задължително поле",
-                  pattern: {
-                    value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/,
-                    message: "Невалиден имейл адрес",
-                  },
-                })}
-              />
-              <FieldsError msg={errors.email?.message} />
-            </label>
-            <label htmlFor="firstName">
-              Име
-              <input
-                {...register("firstName", {
-                  required: "Задължително поле",
-                  minLength: {
-                    value: 3,
-                    message: "Минимален брой символи 3",
-                  },
-                })}
-              />
-              <FieldsError msg={errors.firstName?.message} />
-            </label>
-            <label htmlFor="lastName">
-              Фамилия
-              <input
-                {...register("lastName", {
-                  required: "Задължително поле",
-                  minLength: {
-                    value: 3,
-                    message: "Минимален брой символи 3",
-                  },
-                })}
-              />
-              <FieldsError msg={errors.lastName?.message} />
-            </label>
-            <label htmlFor="phoneNumber">
-              Телефонен Номер
-              <input
-                type={"number"}
-                {...register("phoneNumber", {
-                  required: "Задължително поле",
-                  pattern: {
-                    value:
-                      /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
-                    message: "Невалиден телефонен номер",
-                  },
-                })}
-              />
-              <FieldsError msg={errors.phoneNumber?.message} />
-            </label>
-            <label htmlFor="moreInfo">
-              Допълнителна информация
-              <textarea
-                id="moreInfo"
-                {...register("moreInfo", {
-                  maxLength: {
-                    value: 200,
-                    message: "Максимален брой символи 200",
-                  },
-                })}
-              />
-            </label>
-            <Link to="/authentication/forgotten" className="forgotten-password">
-              Смяна на паролата?
-            </Link>
-          </form>
-          <button type="submit" onClick={handleSubmit(onSubmitEdit)}>
-            Запази
-          </button>
-        </>
-      )}
-    </div>
+    <Layout>
+      <div className="edit-form">
+        {isLoading && <CustomSpinner />}
+        {!isLoading && (
+          <>
+            {fetchState.httpLoading && (
+              <Spinner style={{ marginBottom: "25px" }} />
+            )}
+            <div className="user-avatar">
+              {typeof avatar == "string" && (
+                <Image
+                  cloudName="du4uhmyq2"
+                  width="300"
+                  publicId={avatar}
+                  crop="scale"
+                />
+              )}
+              {!avatar && <img src={userAvatar} alt="user-avatar" />}
+            </div>
+            <div className="user-image__wrapper"></div>
+            <form>
+              {fetchState.fetchError && (
+                <DatabaseError
+                  msg={"Потребител с този имейл вече съществува"}
+                />
+              )}
+              <label htmlFor="avatar">
+                Профилна снимка
+                <input
+                  type="file"
+                  id="avatar"
+                  {...register("avatar")}
+                  onChange={handleAvatarChange}
+                />
+                <FieldsError msg={errors.avatar?.message} />
+              </label>
+              <label htmlFor="email">
+                Имейл
+                <input
+                  {...register("email", {
+                    required: "Задължително поле",
+                    pattern: {
+                      value: /^[\w-.]+@([\w-]+.)+[\w-]{2,}$/,
+                      message: "Невалиден имейл адрес",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.email?.message} />
+              </label>
+              <label htmlFor="firstName">
+                Име
+                <input
+                  {...register("firstName", {
+                    required: "Задължително поле",
+                    minLength: {
+                      value: 3,
+                      message: "Минимален брой символи 3",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.firstName?.message} />
+              </label>
+              <label htmlFor="lastName">
+                Фамилия
+                <input
+                  {...register("lastName", {
+                    required: "Задължително поле",
+                    minLength: {
+                      value: 3,
+                      message: "Минимален брой символи 3",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.lastName?.message} />
+              </label>
+              <label htmlFor="phoneNumber">
+                Телефонен Номер
+                <input
+                  type={"number"}
+                  {...register("phoneNumber", {
+                    required: "Задължително поле",
+                    pattern: {
+                      value:
+                        /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
+                      message: "Невалиден телефонен номер",
+                    },
+                  })}
+                />
+                <FieldsError msg={errors.phoneNumber?.message} />
+              </label>
+              <label htmlFor="moreInfo">
+                Допълнителна информация
+                <textarea
+                  id="moreInfo"
+                  {...register("moreInfo", {
+                    maxLength: {
+                      value: 200,
+                      message: "Максимален брой символи 200",
+                    },
+                  })}
+                />
+              </label>
+              <Link
+                to="/authentication/forgotten"
+                className="forgotten-password"
+              >
+                Смяна на паролата?
+              </Link>
+            </form>
+            <button
+              type="submit"
+              disabled={fetchState.httpLoading}
+              onClick={handleSubmit(onSubmitEdit)}
+            >
+              Запази
+            </button>
+          </>
+        )}
+      </div>
+    </Layout>
   );
 };
 

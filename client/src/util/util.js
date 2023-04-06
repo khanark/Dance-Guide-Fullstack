@@ -1,4 +1,4 @@
-export const formatDate = val => {
+export const formatDate = (val) => {
   const date = new Date(val);
   return date.toLocaleDateString("bg-BG", {
     day: "numeric",
@@ -7,7 +7,7 @@ export const formatDate = val => {
   });
 };
 
-export const danceTypeFormat = val => {
+export const danceTypeFormat = (val) => {
   const danceTypes = {
     1: "Класически балет",
     2: "Съвременни танци",

@@ -1,12 +1,14 @@
 import "./Details.scss";
 
+import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useState } from "react";
 
 import Adress from "./components/Adress";
 import Contacts from "./components/Contacts";
+import CustomSpinner from "../../components/spinner/Spinner";
 import Heading from "./components/Heading";
+import Layout from "../../components/Layout/Layout";
 import LikeButton from "./components/LikeButton";
-import Spinner from "../../components/spinner/Spinner";
 import UserButtons from "./components/UserButtons";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
@@ -21,8 +23,6 @@ const Details = () => {
   });
 
   const [loading, setLoading] = useState(true);
-
-  // get the single school from the state instead making a request
 
   const { user } = useUserContext();
   const { schoolId } = useParams();
@@ -52,38 +52,48 @@ const Details = () => {
   };
 
   return (
-    <div className="details-page">
-      {loading && <Spinner />}
-      {!loading && (
-        <>
-          <div className="details-page__image">
-            <img src={schoolDetails.image} alt="" />
-          </div>
-          <div className="details-page__info">
-            {school.isOwner && <UserButtons id={schoolId} />}
-            <div className="details-wrapper">
-              <Heading {...schoolDetails} />
-              <Adress {...schoolDetails} />
-              <div className="horizontal__line"></div>
-              <Contacts {...schoolDetails} />
+    <Layout>
+      <div className="details-page">
+        {loading && <CustomSpinner />}
+        {!loading && (
+          <>
+            <div className="details-page__image">
+              <Image
+                cloudName="du4uhmyq2"
+                publicId={schoolDetails.image}
+                loading="lazy"
+              >
+                <Placeholder type="blur" />
+              </Image>
             </div>
-            {!isOwner && user && (
-              <LikeButton handleLikes={handleLikes} isLiked={isLiked} />
-            )}
-          </div>
-          <div className="avatar__container">
-            <img
-              src={
-                !schoolDetails.owner?.avatar
-                  ? defaultAvatar
-                  : schoolDetails.owner?.avatar
-              }
-              alt="owner"
-            />
-          </div>
-        </>
-      )}
-    </div>
+            <div className="details-page__info">
+              {school.isOwner && <UserButtons id={schoolId} />}
+              <div className="details-wrapper">
+                <Heading {...schoolDetails} />
+                <Adress {...schoolDetails} />
+                <div className="horizontal__line"></div>
+                <Contacts {...schoolDetails} />
+              </div>
+              {!isOwner && user && (
+                <LikeButton handleLikes={handleLikes} isLiked={isLiked} />
+              )}
+            </div>
+            <div className="avatar__container">
+              {!schoolDetails.owner?.avatar && (
+                <img src={defaultAvatar} alt="default-owner-img" />
+              )}
+              {schoolDetails.owner?.avatar && (
+                <Image
+                  cloudName="du4uhmyq2"
+                  width="300"
+                  publicId={schoolDetails.owner.avatar}
+                />
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </Layout>
   );
 };
 
