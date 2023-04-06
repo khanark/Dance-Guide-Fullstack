@@ -5,51 +5,32 @@ import { Link } from "react-router-dom";
 import schoolsFactory from "../../../services/schools";
 import { useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useNotification } from "../../../hooks/useNotification";
 import { useState } from "react";
-import { useToast } from "@chakra-ui/react";
 
 const UserButtons = ({ id }) => {
   const { deleteSchool } = schoolsFactory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [fetchState, setFetchState] = useState({
-    isLoading: false,
-    fetchError: false,
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-  const toast = useToast();
+  const { notificateSuccess } = useNotification();
 
   const onClickDelete = async (e) => {
     e.preventDefault();
     onClose();
     try {
+      setIsLoading(true);
       await deleteSchool(id);
-      setFetchState((state) => ({
-        ...state,
-        isLoading: true,
-        fetchError: false,
-      }));
-      toast({
+      notificateSuccess({
         title: "Успешно изтриване",
-        description: `Публикацията беше изтрита успешно.`,
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
+        description: "Публикацията беше изтрита успешно",
       });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: true,
-      }));
+      setIsLoading(false);
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: false,
-      }));
+      setIsLoading(false);
     }
   };
 
@@ -69,7 +50,7 @@ const UserButtons = ({ id }) => {
         <MdEdit />
         <p>Редактиране</p>
       </Link>
-      <button type="button" onClick={onOpen} disabled={fetchState.isLoading}>
+      <button type="button" onClick={onOpen} disabled={isLoading}>
         <MdDelete />
         <p>Изтриване</p>
       </button>

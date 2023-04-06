@@ -2,22 +2,21 @@ import "./LoginForm.scss";
 
 import { IoEye, IoEyeOff, IoLogIn } from "react-icons/io5";
 
-import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
 import { login } from "../../services/users";
 import { useForm } from "react-hook-form";
+import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [eye, setEye] = useState(false);
-  const [fetchState, setFetchState] = useState({
-    isLoading: false,
-    fetchError: false,
-  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { notificateSuccess, notificateError } = useNotification();
 
   const {
     register,
@@ -25,49 +24,34 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const { setUser, navigate, toast } = useUserContext();
+  const { setUser, navigate } = useUserContext();
 
   const onSubmitLogin = async (data) => {
     try {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: true,
-        fetchError: false,
-      }));
+      setIsLoading(true);
       const userData = await login(data);
-      toast({
+      notificateSuccess({
         title: "Успешно влизане",
         description: `Привет ${userData.firstName} !!!`,
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
       });
       setUser(userData);
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: true,
-      }));
+      setIsLoading(false);
+      notificateError({
+        title: "Грешка при влизане",
+        description: "Грешно потребителско име или парола",
+      });
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: false,
-      }));
+      setIsLoading(false);
     }
   };
 
   return (
     <Layout>
       <div className="login-form">
-        {fetchState.isLoading && <Spinner style={{ marginBottom: "25px" }} />}
+        {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form>
-          {fetchState.fetchError && (
-            <DatabaseError msg={"Невалидно потребителско име или парола"} />
-          )}
           <label htmlFor="email">
             Имейл
             <input
@@ -113,7 +97,7 @@ const Login = () => {
         <button
           className="form-button"
           type="button"
-          disabled={fetchState.isLoading}
+          disabled={isLoading}
           onClick={handleSubmit(onSubmitLogin)}
         >
           Вход

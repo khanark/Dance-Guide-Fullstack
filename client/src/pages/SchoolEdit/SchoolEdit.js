@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
+import { useNotification } from "../../hooks/useNotification";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
@@ -13,10 +14,7 @@ const SchoolEdit = () => {
   const { schoolId } = useParams();
   const { singleSchool, updateSchool } = schoolsFactory();
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
-  const [fetchState, setFetchState] = useState({
-    httpLoading: false,
-    fetchError: false,
-  });
+  const [httpLoading, setHttpLoading] = useState(false);
 
   const {
     register,
@@ -24,7 +22,8 @@ const SchoolEdit = () => {
     formState: { errors, isLoading },
   } = useForm({ defaultValues: async () => await singleSchool(schoolId) });
 
-  const { navigate, toast } = useUserContext();
+  const { navigate } = useUserContext();
+  const { notificateError, notificateSuccess } = useNotification();
 
   const handleAvatarChange = (e) => {
     preloadAvatar(e.target.files[0]);
@@ -32,37 +31,25 @@ const SchoolEdit = () => {
 
   const onSubmit = async (data) => {
     try {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: true,
-        fetchError: false,
-      }));
+      setHttpLoading(true);
       await updateSchool(schoolId, {
         ...data,
         image: uploadedAvatar || data.image,
         isImageFile: Boolean(uploadedAvatar),
       });
-      toast({
+      notificateSuccess({
         title: "Успешно редактиране",
-        description: `Промените бяха запазени успешно.`,
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
+        description: `Промените бяха запазени успешно`,
       });
       setTimeout(() => navigate("/user/profile"), 1500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: false,
-        fetchError: true,
-      }));
+      setHttpLoading(false);
+      notificateError({
+        title: "Грешка при запазване",
+        description: "Имаше грешка при запазването на промените",
+      });
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: false,
-        fetchError: false,
-      }));
+      setHttpLoading(false);
     }
   };
 
@@ -70,7 +57,7 @@ const SchoolEdit = () => {
 
   return (
     <Layout>
-      {fetchState.httpLoading && (
+      {httpLoading && (
         <Spinner style={{ alignSelf: "center", marginTop: "25px" }} />
       )}
       <div className="create-page">
@@ -218,7 +205,7 @@ const SchoolEdit = () => {
                 />
                 <FieldsError msg={errors.description?.message} />
               </label>
-              <button type="submit" disabled={fetchState.httpLoading}>
+              <button type="submit" disabled={httpLoading}>
                 Запазване
               </button>
             </form>

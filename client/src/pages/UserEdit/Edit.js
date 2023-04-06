@@ -3,25 +3,24 @@ import "./Edit.scss";
 import { edit, getSingle } from "../../services/users";
 
 import CustomSpinner from "../../components/spinner/Spinner";
-import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import { Image } from "cloudinary-react";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 
 const Edit = () => {
-  const { setUser, navigate, user, toast } = useUserContext();
+  const { setUser, navigate, user } = useUserContext();
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
-  const [fetchState, setFetchState] = useState({
-    httpLoading: false,
-    fetchError: false,
-  });
+  const [httpLoading, setHttpLoading] = useState(false);
+
+  const { notificateSuccess, notificateError } = useNotification();
 
   const {
     register,
@@ -38,38 +37,26 @@ const Edit = () => {
 
   const onSubmitEdit = async (data) => {
     try {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: true,
-        fetchError: false,
-      }));
+      setHttpLoading(true);
       const userData = await edit(user._id, {
         ...data,
         avatar: uploadedAvatar || data.avatar,
         avatarIsFile: Boolean(uploadedAvatar),
       });
       setUser(userData);
-      toast({
+      notificateSuccess({
         title: "Успешно редактиране",
-        description: `Промените бяха запазени успешно.`,
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
+        description: "Промените бяха запазени успешно",
       });
       setTimeout(() => navigate("/user/profile"), 2500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: false,
-        fetchError: true,
-      }));
+      setHttpLoading(false);
+      notificateError({
+        title: "Грешка при запазване",
+        description: "Потребител с този имейл вече съществува",
+      });
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        httpLoading: false,
-        fetchError: false,
-      }));
+      setHttpLoading(false);
     }
   };
 
@@ -79,9 +66,7 @@ const Edit = () => {
         {isLoading && <CustomSpinner />}
         {!isLoading && (
           <>
-            {fetchState.httpLoading && (
-              <Spinner style={{ marginBottom: "25px" }} />
-            )}
+            {httpLoading && <Spinner style={{ marginBottom: "25px" }} />}
             <div className="user-avatar">
               {typeof avatar == "string" && (
                 <Image
@@ -95,11 +80,6 @@ const Edit = () => {
             </div>
             <div className="user-image__wrapper"></div>
             <form>
-              {fetchState.fetchError && (
-                <DatabaseError
-                  msg={"Потребител с този имейл вече съществува"}
-                />
-              )}
               <label htmlFor="avatar">
                 Профилна снимка
                 <input
@@ -202,7 +182,7 @@ const Edit = () => {
             </form>
             <button
               type="submit"
-              disabled={fetchState.httpLoading}
+              disabled={httpLoading}
               onClick={handleSubmit(onSubmitEdit)}
             >
               Запази
