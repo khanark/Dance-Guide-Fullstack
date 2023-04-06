@@ -83,8 +83,6 @@ const getAllUsers = async () => {
 };
 
 const updateUser = async (id, data) => {
-  console.log(data);
-
   await User.findByIdAndUpdate(id, data, { runValidators: true });
   const updatedUser = await User.findById(id).lean();
   return userViewModel(updatedUser);

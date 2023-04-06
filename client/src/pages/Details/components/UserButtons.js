@@ -32,8 +32,6 @@ const UserButtons = ({ id }) => {
     setTimeout(() => navigate("/catalog"), 2500);
   };
 
-  console.log(isLoading);
-
   return (
     <div className="user-action__buttons">
       {isOpen && (

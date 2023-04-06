@@ -32,8 +32,6 @@ const Profile = () => {
     });
   }, []);
 
-  console.log(user.avatar);
-
   return (
     <Layout>
       <div className="profile__page">

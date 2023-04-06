@@ -50,15 +50,12 @@ router.put("/:id", validateId, authorize, async (req, res) => {
   try {
     let uploadedResponse = null;
 
-    console.log("BEFORE");
-
     if (req.body.avatarIsFile) {
       uploadedResponse = await cloudinary.uploader.upload(req.body.avatar, {
         upload_preset: "danceguide_user_avatars",
       });
     }
 
-    console.log("AFTER");
     const user = await updateUser(req.params.id, {
       ...req.body,
       avatar: req.body.avatarIsFile
@@ -71,7 +68,6 @@ router.put("/:id", validateId, authorize, async (req, res) => {
     }
     res.status(200).json(user);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ message: "Invalid data" });
   }
 });

@@ -24,8 +24,6 @@ const Details = () => {
 
   const [loading, setLoading] = useState(true);
 
-  // get the single school from the state instead making a request
-
   const { user } = useUserContext();
   const { schoolId } = useParams();
   const { singleSchool, likeSchool, unLikeSchool } = schoolsFactory(user);

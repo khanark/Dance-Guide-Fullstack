@@ -12,8 +12,10 @@ import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
-  const [fetchError, setFetchError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [fetchState, setFetchState] = useState({
+    isLoading: false,
+    fetchError: false,
+  });
 
   const {
     register,
@@ -26,8 +28,8 @@ const Register = () => {
 
   const onSubmitRegister = async (data) => {
     try {
+      setFetchState({ ...fetchState, isLoading: true, fetchError: false });
       await registerUser(data);
-      setIsLoading(true);
       toast({
         title: "Успешна регистрация",
         description: "Благодарим за вашата регистрация.",
@@ -38,18 +40,16 @@ const Register = () => {
       });
       setTimeout(() => navigate("/login"), 2500);
     } catch (error) {
-      setFetchError(true);
-      setIsLoading(false);
+      setFetchState({ ...fetchState, isLoading: false, fetchError: true });
     }
   };
 
   return (
     <Layout>
       <div className="register-form">
-        {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
-
+        {fetchState.isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form>
-          {fetchError && (
+          {fetchState.fetchError && (
             <DatabaseError msg={"Потребител с този имейл вече съществува"} />
           )}
           <label htmlFor="email">
@@ -144,7 +144,7 @@ const Register = () => {
         </p>
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={fetchState.isLoading}
           onClick={handleSubmit(onSubmitRegister)}
         >
           Регистрирай се

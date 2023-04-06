@@ -14,7 +14,7 @@ const Header = () => {
   const { user, clearUser } = useUserContext();
 
   const onDropDownClick = () => {
-    console.log("I am inside this functions");
+    ("I am inside this functions");
     setDropDown(!dropDown);
   };
 

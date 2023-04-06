@@ -11,14 +11,17 @@ import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
 
 const Edit = () => {
-  const [fetchError, setFetchError] = useState(false);
   const { setUser, navigate, user, toast } = useUserContext();
-  const [httpLoading, setHttpLoading] = useState(false);
-  const [previewAvatar, setPreviewAvatar] = useState("");
+  const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
+  const [fetchState, setFetchState] = useState({
+    httpLoading: false,
+    fetchError: false,
+  });
 
   const {
     register,
@@ -29,27 +32,18 @@ const Edit = () => {
 
   const avatar = watch("avatar");
 
-  const previewImageSource = (image) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onloadend = () => {
-      setPreviewAvatar(reader.result);
-    };
+  const handleAvatarChange = (e) => {
+    preloadAvatar(e.target.files[0]);
   };
 
   const onSubmitEdit = async (data) => {
-    console.log("Inside onSubmitEdit");
-    if (typeof data.avatar !== "string") {
-      previewImageSource(data.avatar[0]);
-    }
     try {
-      console.log(previewAvatar);
+      setFetchState({ ...fetchState, httpLoading: true, fetchError: false });
       const userData = await edit(user._id, {
         ...data,
-        avatar: previewAvatar || data.avatar,
-        avatarIsFile: Boolean(previewAvatar),
+        avatar: uploadedAvatar || data.avatar,
+        avatarIsFile: Boolean(uploadedAvatar),
       });
-      setHttpLoading(true);
       setUser(userData);
       toast({
         title: "Успешно редактиране",
@@ -61,7 +55,7 @@ const Edit = () => {
       });
       setTimeout(() => navigate("/user/profile"), 2500);
     } catch (error) {
-      setFetchError(true);
+      setFetchState({ ...fetchState, httpLoading: false, fetchError: true });
     }
   };
 
@@ -71,7 +65,9 @@ const Edit = () => {
         {isLoading && <CustomSpinner />}
         {!isLoading && (
           <>
-            {httpLoading && <Spinner style={{ marginBottom: "25px" }} />}
+            {fetchState.httpLoading && (
+              <Spinner style={{ marginBottom: "25px" }} />
+            )}
             <div className="user-avatar">
               {typeof avatar == "string" && (
                 <Image
@@ -85,14 +81,19 @@ const Edit = () => {
             </div>
             <div className="user-image__wrapper"></div>
             <form>
-              {fetchError && (
+              {fetchState.fetchError && (
                 <DatabaseError
                   msg={"Потребител с този имейл вече съществува"}
                 />
               )}
               <label htmlFor="avatar">
                 Профилна снимка
-                <input type="file" id="avatar" {...register("avatar")} />
+                <input
+                  type="file"
+                  id="avatar"
+                  {...register("avatar")}
+                  onChange={handleAvatarChange}
+                />
                 <FieldsError msg={errors.avatar?.message} />
               </label>
               <label htmlFor="email">
@@ -170,7 +171,7 @@ const Edit = () => {
             </form>
             <button
               type="submit"
-              disabled={httpLoading}
+              disabled={fetchState.httpLoading}
               onClick={handleSubmit(onSubmitEdit)}
             >
               Запази

@@ -23,21 +23,21 @@ function App() {
     <UserContextProvider>
       <SchoolContextProvider>
         <ChakraProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/details/:schoolId" element={<Details />} />
-              <Route element={<PrivateRoute redirectPath="/login" />}>
-                <Route path="/user/edit" element={<Edit />} />
-                <Route path="/user/profile" element={<Profile />} />
-                <Route path="create" element={<Create />} />
-                <Route path="/school/edit/:schoolId" element={<SchoolEdit />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/details/:schoolId" element={<Details />} />
+            <Route element={<PrivateRoute redirectPath="/login" />}>
+              <Route path="/user/edit" element={<Edit />} />
+              <Route path="/user/profile" element={<Profile />} />
+              <Route path="create" element={<Create />} />
+              <Route path="/school/edit/:schoolId" element={<SchoolEdit />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </ChakraProvider>
       </SchoolContextProvider>
     </UserContextProvider>

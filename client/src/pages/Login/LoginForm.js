@@ -13,11 +13,11 @@ import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Login = () => {
-  const [fetchError, setFetchError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [eye, setEye] = useState(false);
-
-  console.log("login => " + isLoading);
+  const [fetchState, setFetchState] = useState({
+    isLoading: false,
+    fetchError: false,
+  });
 
   const {
     register,
@@ -29,8 +29,8 @@ const Login = () => {
 
   const onSubmitLogin = async (data) => {
     try {
+      setFetchState({ ...fetchState, isLoading: true, fetchError: false });
       const userData = await login(data);
-      setIsLoading(true);
       toast({
         title: "Успешно влизане",
         description: `Привет ${userData.firstName} !!!`,
@@ -42,17 +42,16 @@ const Login = () => {
       setUser(userData);
       setTimeout(() => navigate("/catalog"), 2500);
     } catch (error) {
-      setFetchError(true);
-      setIsLoading(false);
+      setFetchState({ ...fetchState, isLoading: false, fetchError: true });
     }
   };
 
   return (
     <Layout>
       <div className="login-form">
-        {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
+        {fetchState.isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form>
-          {fetchError && (
+          {fetchState.fetchError && (
             <DatabaseError msg={"Невалидно потребителско име или парола"} />
           )}
           <label htmlFor="email">
@@ -100,7 +99,7 @@ const Login = () => {
         <button
           className="form-button"
           type="button"
-          disabled={isLoading}
+          disabled={fetchState.isLoading}
           onClick={handleSubmit(onSubmitLogin)}
         >
           Вход
