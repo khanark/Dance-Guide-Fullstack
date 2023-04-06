@@ -30,8 +30,6 @@ const danceSchoolSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
-    match: [/^https?:\/\//, "Invalid image format"],
   },
   social: {
     facebook: {

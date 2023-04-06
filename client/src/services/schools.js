@@ -3,9 +3,9 @@ import * as api from "../api/api";
 const endpoints = {
   getAll: "/schools",
   create: "/schools",
-  getSingleSchool: schoolId => `/schools/${schoolId}`,
-  likeSchool: schoolId => `/schools/${schoolId}/like`,
-  unlikeSchool: schoolId => `/schools/${schoolId}/unlike`,
+  getSingleSchool: (schoolId) => `/schools/${schoolId}`,
+  likeSchool: (schoolId) => `/schools/${schoolId}/like`,
+  unlikeSchool: (schoolId) => `/schools/${schoolId}/unlike`,
 };
 
 const getAllSchools = async () => {
@@ -20,6 +20,7 @@ const createSchool = async ({
   schoolType,
   description,
   street,
+  isImageFile,
   ownerId,
 }) => {
   return api.post(endpoints.create, {
@@ -30,11 +31,12 @@ const createSchool = async ({
     street,
     ownerId,
     description,
+    isImageFile,
     schoolType,
   });
 };
 
-const getSingleSchool = id => {
+const getSingleSchool = (id) => {
   return api.get(endpoints.getSingleSchool(id));
 };
 
@@ -43,8 +45,8 @@ const updateSchool = (id, data) => {
 };
 
 const deleteSchool = (id) => {
-  return api.del(endpoints.getSingleSchool(id))
-}
+  return api.del(endpoints.getSingleSchool(id));
+};
 
 const likeSchool = async (userId, schoolId) => {
   return api.post(endpoints.likeSchool(schoolId), { userId });
@@ -54,7 +56,7 @@ const unLikeSchool = async (userId, schoolId) => {
   return api.post(endpoints.unlikeSchool(schoolId), { userId });
 };
 
-const schoolsFactory = user => {
+const schoolsFactory = (user) => {
   return {
     singleSchool: getSingleSchool,
     updateSchool,

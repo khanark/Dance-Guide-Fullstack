@@ -1,5 +1,6 @@
 const validateId = require("../middlewares/validateId");
 const authorize = require("../middlewares/authorize");
+const { cloudinary } = require("../util/cloudinary.js");
 
 const {
   getAllSchools,
@@ -43,8 +44,25 @@ router.post("/:id/unlike", validateId, authorize, async (req, res) => {
 });
 
 router.post("/", authorize, async (req, res) => {
-  const school = await createSchool(req.body);
-  res.status(200).json(school);
+  try {
+    let uploadedResponse = null;
+
+    if (req.body.isImageFile) {
+      uploadedResponse = await cloudinary.uploader.upload(req.body.image, {
+        upload_preset: "danceguide_schools_images",
+      });
+    }
+
+    const school = await createSchool({
+      ...req.body,
+      image: req.body.isImageFile ? uploadedResponse.public_id : req.body.image,
+    });
+
+    res.status(200).json(school);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: "Invalid data" });
+  }
 });
 
 router.delete("/:id", validateId, authorize, async (req, res) => {

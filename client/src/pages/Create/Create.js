@@ -4,17 +4,19 @@ import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Create = () => {
-  const { user } = useUserContext();
-  // This one should be used if there is a repeating name of the school
-  const [fetchError, setFetchError] = useState(false);
+  const { user, toast, navigate } = useUserContext();
+  const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
+  const [fetchState, setFetchState] = useState({
+    isLoading: false,
+    fetchError: false,
+  });
 
   const { createSchool } = schoolsFactory(user);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -22,15 +24,32 @@ const Create = () => {
     formState: { errors },
   } = useForm();
 
+  const handleAvatarChange = (e) => {
+    preloadAvatar(e.target.files[0]);
+  };
+
   const linkRegex = /^https?:\/\//;
   const imageRegex = /(https?:\/\/.*\.(?:jpg|jpeg|png))/;
 
   const onSubmit = async (data) => {
     try {
-      await createSchool({ ...data, ownerId: user._id });
-      navigate("/catalog");
+      setFetchState({ ...fetchState, isLoading: true });
+      await createSchool({
+        ...data,
+        ownerId: user._id,
+        image: uploadedAvatar || data.image,
+        isImageFile: Boolean(uploadedAvatar),
+      });
+      toast({
+        title: "Успешно създаване",
+        description: "Училището е създадено успешно",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setTimeout(() => navigate("/catalog"), 2500);
     } catch (error) {
-      setFetchError(true);
+      setFetchState({ ...fetchState, fetchError: true, isLoading: false });
     }
   };
 
@@ -61,13 +80,9 @@ const Create = () => {
               Снимка
               <input
                 className="margin-input"
-                {...register("image", {
-                  required: "Моля добавете снимка",
-                  pattern: {
-                    value: imageRegex,
-                    message: "Невалиден URL адрес",
-                  },
-                })}
+                type="file"
+                {...register("image", { required: "Моля изберете снимка" })}
+                onChange={handleAvatarChange}
               />
               <FieldsError msg={errors.image?.message} />
             </label>
