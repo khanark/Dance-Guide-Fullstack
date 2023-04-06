@@ -5,19 +5,18 @@ import Layout from "../../components/Layout/Layout";
 import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
+import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Create = () => {
-  const { user, toast, navigate } = useUserContext();
+  const { user, navigate } = useUserContext();
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
-  const [fetchState, setFetchState] = useState({
-    isLoading: false,
-    fetchError: false,
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const { createSchool } = schoolsFactory(user);
+  const { notificateSuccess, notificateError } = useNotification();
 
   const {
     register,
@@ -33,44 +32,32 @@ const Create = () => {
 
   const onSubmit = async (data) => {
     try {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: true,
-        fetchError: false,
-      }));
+      setIsLoading(true);
       await createSchool({
         ...data,
         ownerId: user._id,
         image: uploadedAvatar || data.image,
         isImageFile: Boolean(uploadedAvatar),
       });
-      toast({
+      notificateSuccess({
         title: "Успешно създаване",
         description: "Училището е създадено успешно",
-        status: "success",
-        position: "top",
-        duration: 2000,
-        isClosable: false,
       });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: true,
-      }));
+      setIsLoading(false);
+      notificateError({
+        title: "Проблем при създаване",
+        description: "Имаше проблем при създаването",
+      });
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: false,
-      }));
+      setIsLoading(false);
     }
   };
 
   return (
     <Layout>
-      {fetchState.isLoading && (
+      {isLoading && (
         <Spinner style={{ marginTop: "80px", alignSelf: "center" }} />
       )}
       <div className="create-page">

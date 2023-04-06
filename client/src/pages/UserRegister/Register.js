@@ -1,6 +1,5 @@
 import "./Register.scss";
 
-import DatabaseError from "../../components/Forms/Errors/Database/DatabaseError";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
@@ -8,14 +7,12 @@ import { RiUserAddFill } from "react-icons/ri";
 import { Spinner } from "@chakra-ui/react";
 import { registerUser } from "../../services/users";
 import { useForm } from "react-hook-form";
+import { useNotification } from "../../hooks/useNotification";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
-  const [fetchState, setFetchState] = useState({
-    isLoading: false,
-    fetchError: false,
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -24,48 +21,34 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { toast, navigate } = useUserContext();
+  const { navigate } = useUserContext();
+  const { notificateError, notificateSuccess } = useNotification();
 
   const onSubmitRegister = async (data) => {
     try {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: true,
-        fetchError: false,
-      }));
+      setIsLoading(true);
       await registerUser(data);
-      toast({
+      notificateSuccess({
         title: "Успешна регистрация",
-        description: "Благодарим за вашата регистрация.",
-        position: "top",
-        status: "success",
-        duration: 2000,
-        isClosable: false,
+        description: "Благодарим за вашата регистрация",
       });
       setTimeout(() => navigate("/login"), 1500);
     } catch (error) {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: true,
-      }));
+      setIsLoading(false);
+      notificateError({
+        title: "Грешка при регистрация",
+        description: "Потребител с този имейл адрес вече съществува",
+      });
     } finally {
-      setFetchState((state) => ({
-        ...state,
-        isLoading: false,
-        fetchError: false,
-      }));
+      setIsLoading(false);
     }
   };
 
   return (
     <Layout>
       <div className="register-form">
-        {fetchState.isLoading && <Spinner style={{ marginBottom: "25px" }} />}
+        {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form>
-          {fetchState.fetchError && (
-            <DatabaseError msg={"Потребител с този имейл вече съществува"} />
-          )}
           <label htmlFor="email">
             Имейл *
             <input
@@ -158,7 +141,7 @@ const Register = () => {
         </p>
         <button
           type="submit"
-          disabled={fetchState.isLoading}
+          disabled={isLoading}
           onClick={handleSubmit(onSubmitRegister)}
         >
           Регистрирай се
