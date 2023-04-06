@@ -91,7 +91,15 @@ const Edit = () => {
                 <input
                   type="file"
                   id="avatar"
-                  {...register("avatar")}
+                  {...register("avatar", {
+                    validate: {
+                      lessThan5MB: (files) =>
+                        files[0]?.size < 5000000 || "Максимален размер 5MB",
+                      acceptedFormats: (files) =>
+                        ["image/jpeg", "image/png"].includes(files[0]?.type) ||
+                        "Само формати: jpeg/png",
+                    },
+                  })}
                   onChange={handleAvatarChange}
                 />
                 <FieldsError msg={errors.avatar?.message} />

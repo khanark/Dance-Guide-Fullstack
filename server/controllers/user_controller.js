@@ -47,10 +47,13 @@ router.get("/:id", validateId, authorize, async (req, res) => {
 });
 
 router.put("/:id", validateId, authorize, async (req, res) => {
+  if (typeof req.body.avatar === "object") {
+    delete req.body.avatar;
+  }
   try {
     let uploadedResponse = null;
 
-    if (req.body.avatarIsFile) {
+    if (req.body.avatarIsFile && req.body.avatar) {
       uploadedResponse = await cloudinary.uploader.upload(req.body.avatar, {
         upload_preset: "danceguide_user_avatars",
       });

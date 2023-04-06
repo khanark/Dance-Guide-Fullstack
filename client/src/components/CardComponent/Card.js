@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { MdPinDrop } from "react-icons/md";
 
 const Card = ({ _id, name, image, settlement, likes }) => {
-  console.log(image);
   return (
     <div className="card-wrapper">
       <div className="card">
