@@ -58,7 +58,12 @@ const Details = () => {
         {!loading && (
           <>
             <div className="details-page__image">
-              <img src={schoolDetails.image} alt="" />
+              <Image
+                cloudName="du4uhmyq2"
+                width="300"
+                publicId={schoolDetails.image}
+                crop="scale"
+              />
             </div>
             <div className="details-page__info">
               {school.isOwner && <UserButtons id={schoolId} />}
