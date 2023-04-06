@@ -29,7 +29,11 @@ const Login = () => {
 
   const onSubmitLogin = async (data) => {
     try {
-      setFetchState({ ...fetchState, isLoading: true, fetchError: false });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: true,
+        fetchError: false,
+      }));
       const userData = await login(data);
       toast({
         title: "Успешно влизане",
@@ -40,9 +44,19 @@ const Login = () => {
         isClosable: false,
       });
       setUser(userData);
-      setTimeout(() => navigate("/catalog"), 2500);
+      setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      setFetchState({ ...fetchState, isLoading: false, fetchError: true });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: false,
+      }));
     }
   };
 

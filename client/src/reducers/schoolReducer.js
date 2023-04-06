@@ -5,6 +5,8 @@ export const SCHOOL_ACTIONS = {
   ADD_SCHOOL: "ADD_SCHOOL",
   DELETE_SCHOOL: "DELETE_SCHOOL",
   UPDATE_SCHOOL: "UPDATE_SCHOOL",
+  SORT_SCHOOLS_BY_LIKES: "SORT_SCHOOLS_BY_LIKES",
+  SORT_SCHOOLS_BY_LATEST: "SORT_SCHOOLS_BY_LATEST",
 };
 
 export const schoolReducer = (state, actions) => {
@@ -21,5 +23,9 @@ export const schoolReducer = (state, actions) => {
           ? { ...school, ...actions.payload.data }
           : school
       );
+    case "SORT_SCHOOLS_BY_LIKES":
+      return state.sort((a, b) => b.likes.count - a.likes.count);
+    case "SORT_SCHOOLS_BY_LATEST":
+      return state.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 };

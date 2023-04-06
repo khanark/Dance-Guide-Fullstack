@@ -38,7 +38,11 @@ const Edit = () => {
 
   const onSubmitEdit = async (data) => {
     try {
-      setFetchState({ ...fetchState, httpLoading: true, fetchError: false });
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: true,
+        fetchError: false,
+      }));
       const userData = await edit(user._id, {
         ...data,
         avatar: uploadedAvatar || data.avatar,
@@ -55,7 +59,17 @@ const Edit = () => {
       });
       setTimeout(() => navigate("/user/profile"), 2500);
     } catch (error) {
-      setFetchState({ ...fetchState, httpLoading: false, fetchError: true });
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: false,
+        fetchError: false,
+      }));
     }
   };
 
@@ -93,11 +107,20 @@ const Edit = () => {
                   id="avatar"
                   {...register("avatar", {
                     validate: {
-                      lessThan5MB: (files) =>
-                        files[0]?.size < 5000000 || "Максимален размер 5MB",
-                      acceptedFormats: (files) =>
-                        ["image/jpeg", "image/png"].includes(files[0]?.type) ||
-                        "Само формати: jpeg/png",
+                      lessThan5MB: (files) => {
+                        if (!uploadedAvatar) return;
+                        return (
+                          files[0]?.size < 5000000 || "Максимален размер 5MB"
+                        );
+                      },
+                      acceptedFormats: (files) => {
+                        if (!uploadedAvatar) return;
+                        return (
+                          ["image/jpeg", "image/png"].includes(
+                            files[0]?.type
+                          ) || "Само формати: jpeg/png"
+                        );
+                      },
                     },
                   })}
                   onChange={handleAvatarChange}

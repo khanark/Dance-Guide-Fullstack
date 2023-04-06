@@ -32,7 +32,11 @@ const SchoolEdit = () => {
 
   const onSubmit = async (data) => {
     try {
-      setFetchState({ ...fetchState, httpLoading: true });
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: true,
+        fetchError: false,
+      }));
       await updateSchool(schoolId, {
         ...data,
         image: uploadedAvatar || data.image,
@@ -46,9 +50,19 @@ const SchoolEdit = () => {
         duration: 2000,
         isClosable: false,
       });
-      setTimeout(() => navigate("/user/profile"), 2500);
+      setTimeout(() => navigate("/user/profile"), 1500);
     } catch (error) {
-      setFetchState({ ...fetchState, httpLoading: false, fetchError: true });
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        httpLoading: false,
+        fetchError: false,
+      }));
     }
   };
 
@@ -90,11 +104,20 @@ const SchoolEdit = () => {
                   type="file"
                   {...register("image", {
                     validate: {
-                      lessThan5MB: (files) =>
-                        files[0]?.size < 5000000 || "Максимален размер 5MB",
-                      acceptedFormats: (files) =>
-                        ["image/jpeg", "image/png"].includes(files[0]?.type) ||
-                        "Само формати: jpeg/png",
+                      lessThan5MB: (files) => {
+                        if (!uploadedAvatar) return;
+                        return (
+                          files[0]?.size < 5000000 || "Максимален размер 5MB"
+                        );
+                      },
+                      acceptedFormats: (files) => {
+                        if (!uploadedAvatar) return;
+                        return (
+                          ["image/jpeg", "image/png"].includes(
+                            files[0]?.type
+                          ) || "Само формати: jpeg/png"
+                        );
+                      },
                     },
                   })}
                   onChange={handleAvatarChange}

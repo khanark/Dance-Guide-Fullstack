@@ -28,7 +28,11 @@ const Register = () => {
 
   const onSubmitRegister = async (data) => {
     try {
-      setFetchState({ ...fetchState, isLoading: true, fetchError: false });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: true,
+        fetchError: false,
+      }));
       await registerUser(data);
       toast({
         title: "Успешна регистрация",
@@ -38,9 +42,19 @@ const Register = () => {
         duration: 2000,
         isClosable: false,
       });
-      setTimeout(() => navigate("/login"), 2500);
+      setTimeout(() => navigate("/login"), 1500);
     } catch (error) {
-      setFetchState({ ...fetchState, isLoading: false, fetchError: true });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: false,
+      }));
     }
   };
 

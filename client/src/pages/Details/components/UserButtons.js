@@ -11,7 +11,10 @@ import { useToast } from "@chakra-ui/react";
 const UserButtons = ({ id }) => {
   const { deleteSchool } = schoolsFactory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLoading, setIsLoading] = useState(false);
+  const [fetchState, setFetchState] = useState({
+    isLoading: false,
+    fetchError: false,
+  });
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -19,17 +22,35 @@ const UserButtons = ({ id }) => {
   const onClickDelete = async (e) => {
     e.preventDefault();
     onClose();
-    await deleteSchool(id);
-    setIsLoading(true);
-    toast({
-      title: "Успешно изтриване",
-      description: `Публикацията беше изтрита успешно.`,
-      position: "top",
-      status: "success",
-      duration: 2000,
-      isClosable: false,
-    });
-    setTimeout(() => navigate("/catalog"), 2500);
+    try {
+      await deleteSchool(id);
+      setFetchState((state) => ({
+        ...state,
+        isLoading: true,
+        fetchError: false,
+      }));
+      toast({
+        title: "Успешно изтриване",
+        description: `Публикацията беше изтрита успешно.`,
+        position: "top",
+        status: "success",
+        duration: 2000,
+        isClosable: false,
+      });
+      setTimeout(() => navigate("/catalog"), 1500);
+    } catch (error) {
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: false,
+      }));
+    }
   };
 
   return (
@@ -48,7 +69,7 @@ const UserButtons = ({ id }) => {
         <MdEdit />
         <p>Редактиране</p>
       </Link>
-      <button type="button" onClick={onOpen} disabled={isLoading}>
+      <button type="button" onClick={onOpen} disabled={fetchState.isLoading}>
         <MdDelete />
         <p>Изтриване</p>
       </button>

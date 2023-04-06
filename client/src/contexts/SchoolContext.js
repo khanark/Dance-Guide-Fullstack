@@ -12,8 +12,18 @@ const SchoolContextProvider = ({ children }) => {
     dispatch({ type: SCHOOL_ACTIONS.GET_SCHOOLS, payload: schools });
   };
 
+  const sortByLikes = () => {
+    dispatch({ type: SCHOOL_ACTIONS.SORT_SCHOOLS_BY_LIKES });
+  };
+
+  const sortByLatest = () => {
+    dispatch({ type: SCHOOL_ACTIONS.SORT_SCHOOLS_BY_LATEST });
+  };
+
   const context = {
     schools: state,
+    sortByLatest,
+    sortByLikes,
     setSchools,
   };
 

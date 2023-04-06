@@ -12,7 +12,7 @@ import { useSchoolContext } from "../../contexts/SchoolContext";
 
 const Catalog = () => {
   const [query, setQuery] = useState("");
-  const { schools, setSchools } = useSchoolContext();
+  const { schools, setSchools, sortByLikes, sortByLatest } = useSchoolContext();
   const [isLoading, setIsLoading] = useState({});
 
   const { getAllSchools } = schoolsFactory();
@@ -32,12 +32,13 @@ const Catalog = () => {
   );
 
   const onSearch = (e) => {
+    debugger;
     switch (e.target.value) {
       case "likes":
-        setSchools(schools.sort((a, b) => b.likes.count - a.likes.count));
+        sortByLikes();
         break;
       case "newest":
-        setSchools(schools.reverse());
+        sortByLatest();
         break;
     }
   };
