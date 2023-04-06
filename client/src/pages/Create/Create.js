@@ -2,6 +2,7 @@ import "./Create.scss";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
+import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -32,7 +33,11 @@ const Create = () => {
 
   const onSubmit = async (data) => {
     try {
-      setFetchState({ ...fetchState, isLoading: true });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: true,
+        fetchError: false,
+      }));
       await createSchool({
         ...data,
         ownerId: user._id,
@@ -43,17 +48,31 @@ const Create = () => {
         title: "Успешно създаване",
         description: "Училището е създадено успешно",
         status: "success",
+        position: "top",
         duration: 2000,
         isClosable: false,
       });
-      setTimeout(() => navigate("/catalog"), 2500);
+      setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      setFetchState({ ...fetchState, fetchError: true, isLoading: false });
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: true,
+      }));
+    } finally {
+      setFetchState((state) => ({
+        ...state,
+        isLoading: false,
+        fetchError: false,
+      }));
     }
   };
 
   return (
     <Layout>
+      {fetchState.isLoading && (
+        <Spinner style={{ marginTop: "80px", alignSelf: "center" }} />
+      )}
       <div className="create-page">
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)}>

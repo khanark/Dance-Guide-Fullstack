@@ -19,7 +19,13 @@ const Card = ({ _id, name, image, settlement, likes }) => {
           </div>
         </Link>
         <header className="card-header">
-          <Image cloudName="du4uhmyq2" publicId={image} loading="lazy">
+          <Image
+            cloudName="du4uhmyq2"
+            crop="scale"
+            width="300"
+            publicId={image}
+            loading="lazy"
+          >
             <Placeholder type="blur" />
           </Image>
         </header>
