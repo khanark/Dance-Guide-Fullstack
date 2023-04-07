@@ -32,7 +32,6 @@ const Catalog = () => {
   );
 
   const onSearch = (e) => {
-    debugger;
     switch (e.target.value) {
       case "likes":
         sortByLikes();

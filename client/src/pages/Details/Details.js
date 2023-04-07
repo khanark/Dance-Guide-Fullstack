@@ -61,6 +61,8 @@ const Details = () => {
               <Image
                 cloudName="du4uhmyq2"
                 publicId={schoolDetails.image}
+                crop="scale"
+                width="300"
                 loading="lazy"
               >
                 <Placeholder type="blur" />
