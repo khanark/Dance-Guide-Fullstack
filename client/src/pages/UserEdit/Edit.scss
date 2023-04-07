@@ -67,7 +67,9 @@
     font-size: 14px;
     margin-top: 10px;
     border: 0.2px solid black;
-    height: 50px;
+    height: 100px;
+    text-align: justify;
+    text-justify: auto;
     width: 100%;
     padding: 4px;
     resize: none;
@@ -83,12 +85,12 @@
 
     padding-bottom: 5px;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   label {
     padding-bottom: 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
 
