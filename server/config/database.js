@@ -6,6 +6,8 @@ const database =
     ? process.env.MONGODB_URL
     : process.env.MONGODB_URL_DEV;
 
+console.log(database);
+
 module.exports = async () => {
   try {
     await mongoose.connect(database, {
