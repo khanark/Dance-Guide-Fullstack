@@ -166,12 +166,17 @@ const Edit = () => {
                 <textarea
                   id="moreInfo"
                   {...register("moreInfo", {
+                    minLength: {
+                      value: 10,
+                      message: "Минимален брой символи 10",
+                    },
                     maxLength: {
                       value: 200,
                       message: "Максимален брой символи 200",
                     },
                   })}
                 />
+                <FieldsError msg={errors.moreInfo?.message} />
               </label>
               <Link
                 to="/authentication/forgotten"
