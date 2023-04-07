@@ -24,8 +24,8 @@ export const schoolReducer = (state, actions) => {
           : school
       );
     case "SORT_SCHOOLS_BY_LIKES":
-      return state.sort((a, b) => b.likes.count - a.likes.count);
+      return [...state.sort((a, b) => b.likes.count - a.likes.count)];
     case "SORT_SCHOOLS_BY_LATEST":
-      return state.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      return [...state.sort((a, b) => b.createdAt.localeCompare(a.createdAt))];
   }
 };
