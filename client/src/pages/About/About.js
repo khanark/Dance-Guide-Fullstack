@@ -3,8 +3,14 @@ import "./About.scss";
 import CardInfo from "./CardInfo/CardInfo";
 import Layout from "../../components/Layout/Layout";
 import banner from "../../assets/images/another-about-page-logo.png";
+import { setPageTitle } from "../../util/util";
+import { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    setPageTitle("За нас");
+  }, []);
+
   return (
     <Layout>
       <div className="about_page">

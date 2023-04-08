@@ -19,3 +19,7 @@ export const danceTypeFormat = (val) => {
   };
   return danceTypes[val];
 };
+
+export const setPageTitle = (title) => {
+  document.title = `DanceGuide | ${title}`;
+};

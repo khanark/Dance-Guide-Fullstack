@@ -1,12 +1,13 @@
 import "./Header.scss";
 
+import { useEffect, useRef, useState } from "react";
+
 import { HiLogout } from "react-icons/hi";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
 import { logout } from "../../../services/users";
-import { useState } from "react";
 import { useUserContext } from "../../../contexts/AuthContext";
 
 const Header = () => {
@@ -14,9 +15,21 @@ const Header = () => {
   const { user, clearUser } = useUserContext();
 
   const onDropDownClick = () => {
-    ("I am inside this functions");
     setDropDown(!dropDown);
   };
+
+  // const menuRef = useRef();
+
+  // useEffect(() => {
+  //   const onClick = (e) => {
+  //     if (!menuRef.current?.contains(e.target)) {
+  //       setDropDown(false);
+  //     }
+  //   };
+
+  //   document.addEventListener("click", onClick);
+  //   return () => document.body.addEventListener("click", onClick);
+  // }, []);
 
   const onLogoutClick = async () => {
     await logout();
@@ -58,6 +71,7 @@ const Header = () => {
                 src={defaultAvatar}
                 alt="user-avatar"
                 onClick={onDropDownClick}
+                // ref={menuRef}
               />
             )}
             {user.avatar && (
@@ -67,6 +81,7 @@ const Header = () => {
                 publicId={user.avatar}
                 crop="scale"
                 onClick={onDropDownClick}
+                // ref={menuRef}
               />
             )}
             {dropDown && (

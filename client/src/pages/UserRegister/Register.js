@@ -1,27 +1,33 @@
 import "./Register.scss";
 
+import { useEffect, useState } from "react";
+
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { RiUserAddFill } from "react-icons/ri";
 import { Spinner } from "@chakra-ui/react";
 import { registerUser } from "../../services/users";
+import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
-import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setPageTitle("Регистрация");
+  }, []);
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
-  const { navigate } = useUserContext();
+  const { navigate, setEmail } = useUserContext();
   const { notificateError, notificateSuccess } = useNotification();
 
   const onSubmitRegister = async (data) => {
@@ -33,6 +39,7 @@ const Register = () => {
         description: "Благодарим за вашата регистрация",
       });
       setTimeout(() => navigate("/login"), 1500);
+      setEmail(data.email);
     } catch (error) {
       setIsLoading(false);
       notificateError({

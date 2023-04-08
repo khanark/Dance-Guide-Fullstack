@@ -1,30 +1,35 @@
 import "./LoginForm.scss";
 
 import { IoEye, IoEyeOff, IoLogIn } from "react-icons/io5";
+import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
 import { login } from "../../services/users";
+import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
-import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [eye, setEye] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setPageTitle("Вход");
+  }, []);
+
   const { notificateSuccess, notificateError } = useNotification();
+
+  const { setUser, navigate, email, setEmail } = useUserContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
-  const { setUser, navigate } = useUserContext();
+  } = useForm({ defaultValues: { email }, mode: "onBlur" });
 
   const onSubmitLogin = async (data) => {
     try {
@@ -34,7 +39,7 @@ const Login = () => {
         title: "Успешно влизане",
         description: `Привет ${userData.firstName} !!!`,
       });
-      setUser(userData);
+      setUser({ ...userData, isNewAcc: Boolean(email) });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
       setIsLoading(false);
@@ -44,6 +49,7 @@ const Login = () => {
       });
     } finally {
       setIsLoading(false);
+      setEmail("");
     }
   };
 
@@ -83,10 +89,10 @@ const Login = () => {
               </button>
             </div>
             <FieldsError msg={errors.password?.message} />
-            <Link to="/user/forgotten" className="forgotten-password">
-              Забравена парола?
-            </Link>
           </label>
+          <Link to="/user/forgotten" className="forgotten-password">
+            Забравена парола?
+          </Link>
         </form>
         <p className="no-registration">
           Нямаш регистрация?
