@@ -40,6 +40,7 @@ const Login = () => {
         description: `Привет ${userData.firstName} !!!`,
       });
       setUser({ ...userData, isNewAcc: Boolean(email) });
+      setEmail("");
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
       setIsLoading(false);
@@ -49,7 +50,6 @@ const Login = () => {
       });
     } finally {
       setIsLoading(false);
-      setEmail("");
     }
   };
 

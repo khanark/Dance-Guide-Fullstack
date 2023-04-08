@@ -15,6 +15,7 @@ const getSingleSchool = async (id) => {
       "moreInfo",
       "avatar",
     ])
+    .populate("feedbacks.owner", ["firstName", "lastName", "avatar"])
     .lean();
 };
 
