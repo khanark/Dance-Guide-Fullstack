@@ -1,12 +1,14 @@
 import "./Create.scss";
 
+import { useEffect, useState } from "react";
+
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
+import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
-import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 
@@ -15,6 +17,10 @@ const Create = () => {
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setPageTitle("Създаване на обява");
+  }, []);
+
   const { createSchool } = schoolsFactory(user);
   const { notificateSuccess, notificateError } = useNotification();
 
@@ -22,7 +28,7 @@ const Create = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const handleAvatarChange = (e) => {
     preloadAvatar(e.target.files[0]);

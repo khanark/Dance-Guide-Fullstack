@@ -1,6 +1,7 @@
 import "./Edit.scss";
 
 import { edit, getSingle } from "../../services/users";
+import { useEffect, useState } from "react";
 
 import CustomSpinner from "../../components/spinner/Spinner";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
@@ -8,9 +9,9 @@ import { Image } from "cloudinary-react";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
+import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
-import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
@@ -20,14 +21,21 @@ const Edit = () => {
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
   const [httpLoading, setHttpLoading] = useState(false);
 
+  useEffect(() => {
+    setPageTitle("Редактиране на потребител");
+  }, []);
+
   const { notificateSuccess, notificateError } = useNotification();
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isLoading },
-  } = useForm({ defaultValues: async () => await getSingle(user._id) });
+    formState: { errors, isLoading, isDirty },
+  } = useForm({
+    defaultValues: async () => await getSingle(user._id),
+    mode: "onBlur",
+  });
 
   const avatar = watch("avatar");
 
@@ -36,6 +44,7 @@ const Edit = () => {
   };
 
   const onSubmitEdit = async (data) => {
+    if (!isDirty) return;
     try {
       setHttpLoading(true);
       const userData = await edit(user._id, {
@@ -166,12 +175,17 @@ const Edit = () => {
                 <textarea
                   id="moreInfo"
                   {...register("moreInfo", {
+                    minLength: {
+                      value: 10,
+                      message: "Минимален брой символи 10",
+                    },
                     maxLength: {
                       value: 200,
                       message: "Максимален брой символи 200",
                     },
                   })}
                 />
+                <FieldsError msg={errors.moreInfo?.message} />
               </label>
               <Link
                 to="/authentication/forgotten"

@@ -1,6 +1,6 @@
 export const formatDate = (val) => {
   const date = new Date(val);
-  return date.toLocaleDateString("bg-BG", {
+  return date.toLocaleString("bg-BG", {
     day: "numeric",
     month: "long",
     year: "2-digit",
@@ -18,4 +18,8 @@ export const danceTypeFormat = (val) => {
     7: "Други",
   };
   return danceTypes[val];
+};
+
+export const setPageTitle = (title) => {
+  document.title = `DanceGuide | ${title}`;
 };

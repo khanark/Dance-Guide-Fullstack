@@ -9,6 +9,7 @@ import NoSchool from "./components/NoSchool";
 import { Spinner } from "@chakra-ui/react";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
+import { setPageTitle } from "../../util/util";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Profile = () => {
@@ -22,6 +23,7 @@ const Profile = () => {
   const { getAllSchools } = schoolsFactory();
 
   useEffect(() => {
+    setPageTitle("Профил");
     getAllSchools().then((data) => {
       setSchools({
         ...schools,
@@ -43,6 +45,8 @@ const Profile = () => {
                 <Image
                   cloudName="du4uhmyq2"
                   publicId={user.avatar}
+                  crop="scale"
+                  width="300"
                   loading="lazy"
                 >
                   <Placeholder type="blur" />

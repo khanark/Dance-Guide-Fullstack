@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
+
 import CustomSpinner from "../../components/spinner/Spinner";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Spinner } from "@chakra-ui/react";
 import schoolsFactory from "../../services/schools";
+import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 
@@ -16,11 +18,18 @@ const SchoolEdit = () => {
   const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
   const [httpLoading, setHttpLoading] = useState(false);
 
+  useEffect(() => {
+    setPageTitle("Редактиране на обява");
+  }, []);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
-  } = useForm({ defaultValues: async () => await singleSchool(schoolId) });
+    formState: { errors, isLoading, isDirty },
+  } = useForm({
+    defaultValues: async () => await singleSchool(schoolId),
+    mode: "onBlur",
+  });
 
   const { navigate } = useUserContext();
   const { notificateError, notificateSuccess } = useNotification();
@@ -30,6 +39,7 @@ const SchoolEdit = () => {
   };
 
   const onSubmit = async (data) => {
+    if (!isDirty) return;
     try {
       setHttpLoading(true);
       await updateSchool(schoolId, {

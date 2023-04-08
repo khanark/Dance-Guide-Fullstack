@@ -5,19 +5,26 @@ import { useEffect, useRef, useState } from "react";
 import Card from "../../components/CardComponent/Card";
 import CustomSpinner from "../../components/spinner/Spinner";
 import { FiSearch } from "react-icons/fi";
+import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import schoolsFactory from "../../services/schools";
+import { setPageTitle } from "../../util/util";
 import { useSchoolContext } from "../../contexts/SchoolContext";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Catalog = () => {
   const [query, setQuery] = useState("");
   const { schools, setSchools, sortByLikes, sortByLatest } = useSchoolContext();
   const [isLoading, setIsLoading] = useState({});
+  const [showComponent, setShowComponent] = useState(false);
 
   const { getAllSchools } = schoolsFactory();
+  const { user } = useUserContext();
 
   useEffect(() => {
+    setPageTitle("Каталог");
+    setTimeout(() => setShowComponent(true), 1200);
     getAllSchools().then((data) => {
       setIsLoading(false);
       setSchools(data);
@@ -44,6 +51,7 @@ const Catalog = () => {
 
   return (
     <Layout>
+      {user?.isNewAcc && showComponent && <GreetModal />}
       <div className="catalog-page">
         <div className="search-wrap">
           <select
