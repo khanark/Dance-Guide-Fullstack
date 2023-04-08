@@ -12,12 +12,10 @@ const Contacts = ({ link, owner, description }) => {
           <BsFillTelephoneFill />
           <p>{owner?.phoneNumber}</p>
         </div>
-        <div className="split__line"></div>
         <div className="email">
           <MdEmail />
           <p>{owner?.email}</p>
         </div>
-        <div className="split__line"></div>
         <div className="link">
           <GrFormNextLink />
           <Link
