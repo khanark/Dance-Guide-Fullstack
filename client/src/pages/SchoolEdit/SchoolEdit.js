@@ -39,7 +39,7 @@ const SchoolEdit = () => {
   };
 
   const onSubmit = async (data) => {
-    if (!isDirty) return;
+    if (!isDirty && !uploadedAvatar) return;
     try {
       setHttpLoading(true);
       await updateSchool(schoolId, {
