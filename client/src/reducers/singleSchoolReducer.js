@@ -3,6 +3,7 @@ export const singleSchoolActions = {
   SET_LIKED: "SET_LIKED",
   ADD_FEEDBACK: "ADD_FEEDBACK",
   REMOVE_FEEDBACK: "REMOVE_FEEDBACK",
+  UPDATE_FEEDBACK: "UPDATE_FEEDBACK",
 };
 
 const singleSchoolReducer = (state, actions) => {
@@ -26,6 +27,18 @@ const singleSchoolReducer = (state, actions) => {
           ...state.schoolDetails,
           feedbacks: state.schoolDetails.feedbacks.filter(
             (feedback) => feedback._id !== actions.payload
+          ),
+        },
+      };
+    case "UPDATE_FEEDBACK":
+      return {
+        ...state,
+        schoolDetails: {
+          ...state.schoolDetails,
+          feedbacks: state.schoolDetails.feedbacks.map((feedback) =>
+            feedback._id === actions.payload.feedbackId
+              ? { ...feedback, ...actions.payload.data }
+              : feedback
           ),
         },
       };

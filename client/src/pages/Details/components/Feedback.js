@@ -1,11 +1,17 @@
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Image, Placeholder } from "cloudinary-react";
+import { deleteFeedback, updateFeedback } from "../../../services/feedbacks";
 
+import EditFeedbackModal from "./EditFeedbackModal";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
-import { deleteFeedback } from "../../../services/feedbacks";
 import { singleSchoolActions } from "../../../reducers/singleSchoolReducer";
+import { useDisclosure } from "@chakra-ui/react";
+import { useUserContext } from "../../../contexts/AuthContext";
 
 const Feedback = ({ owner, text, _id, schoolId, dispatch }) => {
+  const { user } = useUserContext();
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
   const onDeleteClick = async () => {
     try {
       await deleteFeedback(schoolId, _id);
@@ -18,8 +24,19 @@ const Feedback = ({ owner, text, _id, schoolId, dispatch }) => {
     }
   };
 
+  const isOwner = owner._id == user?._id;
+
   return (
     <div className="feedback">
+      {isOpen && (
+        <EditFeedbackModal
+          schoolId={schoolId}
+          feedbackId={_id}
+          text={text}
+          dispatch={dispatch}
+          disclosure={{ onOpen, isOpen, onClose }}
+        />
+      )}
       <div className="feedback-user">
         <div className="feedback-user__avatar">
           {!owner.avatar && (
@@ -32,16 +49,18 @@ const Feedback = ({ owner, text, _id, schoolId, dispatch }) => {
         <h3 className="feedback-user__name">
           {owner?.firstName} {owner?.lastName}
         </h3>
-        <div className="feedback-user__buttons">
-          <AiFillEdit
-            className="feedback-user__button"
-            onClick={() => console.log("edit")}
-          />
-          <AiFillDelete
-            className="feedback-user__button"
-            onClick={onDeleteClick}
-          />
-        </div>
+        {isOwner && (
+          <div className="feedback-user__buttons">
+            <AiFillEdit
+              className="feedback-user__button"
+              onClick={() => onOpen()}
+            />
+            <AiFillDelete
+              className="feedback-user__button"
+              onClick={onDeleteClick}
+            />
+          </div>
+        )}
       </div>
 
       <div className="feedback-content">

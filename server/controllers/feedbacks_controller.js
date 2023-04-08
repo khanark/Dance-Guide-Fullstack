@@ -7,8 +7,8 @@ const {
 } = require("../services/feedbacks_service");
 
 router.get("/:id", async (req, res) => {
-  const { schoolId } = req.query;
-  const feedback = await getSingleFeedback(req.params.id, schoolId);
+  const { feedbackId } = req.query;
+  const feedback = await getSingleFeedback(req.params.id, feedbackId);
   res.status(200).json(feedback);
 });
 
@@ -24,8 +24,8 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const { schoolId } = req.query;
-  const feedback = await deleteFeedback(req.params.id, schoolId);
+  const { feedbackId } = req.query;
+  const feedback = await deleteFeedback(req.params.id, feedbackId);
   res.status(200).json(feedback);
 });
 

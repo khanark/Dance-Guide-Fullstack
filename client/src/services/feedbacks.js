@@ -5,7 +5,7 @@ import * as api from "../api/api";
 const endpoints = {
   create: (schoolId) => `/feedbacks/${schoolId}`,
   singleFeedback: (schoolId, feedbackId) =>
-    `/feedbacks/${schoolId}?schoolId=${feedbackId}`,
+    `/feedbacks/${schoolId}?feedbackId=${feedbackId}`,
 };
 
 const addFeedback = (schoolId, data) => {
@@ -16,4 +16,8 @@ const deleteFeedback = (schoolId, feedbackId) => {
   return api.del(endpoints.singleFeedback(schoolId, feedbackId));
 };
 
-export { addFeedback, deleteFeedback };
+const updateFeedback = (schoolId, feedbackId, data) => {
+  return api.put(endpoints.singleFeedback(schoolId, feedbackId), data);
+};
+
+export { addFeedback, deleteFeedback, updateFeedback };
