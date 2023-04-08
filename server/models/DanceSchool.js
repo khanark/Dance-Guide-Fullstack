@@ -24,7 +24,12 @@ const danceSchoolSchema = new Schema(
       },
       users: [{ type: ObjectId, ref: "User" }],
     },
-    comments: [{ type: ObjectId, ref: "Comment" }],
+    feedbacks: [
+      {
+        owner: { type: ObjectId, ref: "User" },
+        text: { type: String },
+      },
+    ],
     link: {
       type: String,
       required: true,
