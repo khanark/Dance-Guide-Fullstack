@@ -39,7 +39,7 @@ const Register = () => {
         description: "Благодарим за вашата регистрация",
       });
       setTimeout(() => navigate("/login"), 1500);
-      setEmail(data.email);
+      setEmail(data.email.toLowerCase());
     } catch (error) {
       setIsLoading(false);
       notificateError({
