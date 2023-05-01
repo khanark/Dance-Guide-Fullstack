@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -6,13 +8,27 @@
   text-decoration: none;
 }
 
-body {
-  font-family: "Roboto Slab", serif;
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  --clr-main--dark: #e03131;
+  --clr-main--light: #fa5252;
+  --clr-grey--dark: #dee2e6;
+  --clr-grey--light: #f8f9fa;
+}
+
+body #root {
+  font-family: "Rubik", sans-serif;
+  color: var(--clr-grey--light);
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 46.25%;
+  }
+}

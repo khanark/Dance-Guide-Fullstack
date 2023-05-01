@@ -1,14 +1,15 @@
-import "./Layout.scss";
+import "./Layout.css";
 
 import Footer from "./Footer/Footer";
-import Header from "./Header/Header";
+import Navigation from "../Navigation/Navigation";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isLandingPage }) => {
+  console.log(isLandingPage);
   return (
     <div className="site-layout">
-      <Header />
+      <Navigation isLandingPage={isLandingPage} />
       <main className="main-container">{children}</main>
-      <Footer />
+      {!isLandingPage && <Footer />}
     </div>
   );
 };
