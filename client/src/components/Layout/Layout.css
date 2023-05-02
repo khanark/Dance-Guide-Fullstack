@@ -1,4 +1,3 @@
-.site-layout {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+.layout-bg {
+  background-color: var(--clr-grey--dark);
 }

@@ -21,7 +21,7 @@ html {
 
 body #root {
   font-family: "Rubik", sans-serif;
-  color: var(--clr-grey--light);
+  color: var(--clr-grey--dark);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

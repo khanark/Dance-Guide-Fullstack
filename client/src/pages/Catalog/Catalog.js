@@ -1,4 +1,6 @@
-import "./Catalog.scss";
+// import "./Catalog.scss";
+
+import "../../App.css";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -8,6 +10,7 @@ import { FiSearch } from "react-icons/fi";
 import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
+import catalogHeaderImage from "../../assets/images/page_headers/catalog-header.jpg";
 import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
 import { useSchoolContext } from "../../contexts/SchoolContext";
@@ -52,7 +55,7 @@ const Catalog = () => {
   return (
     <Layout>
       {user?.isNewAcc && showComponent && <GreetModal />}
-      <div className="catalog-page">
+      {/* <div className="catalog-page">
         <div className="search-wrap">
           <select
             className="search-select"
@@ -96,6 +99,29 @@ const Catalog = () => {
             ))}
           </div>
         )}
+      </div> */}
+      <div className="catalog-page page">
+        <header className="container grid grid--cols-2">
+          <div className="header-left-box">
+            <h1 className="page-title--primary">
+              Find your dance school from all around the country!
+            </h1>
+            <h2 className="title-secondary">Search by different critera.</h2>
+            <p className="page-desc">
+              Our search feature allows users to easily find what they are
+              looking for by filtering through various criteria, such as
+              location, style, and more.
+            </p>
+            <button className="btn">Browse Schools</button>
+          </div>
+          <div className="header-right-box">
+            <img
+              src={catalogHeaderImage}
+              alt="catalog header"
+              className="page-header--img"
+            />
+          </div>
+        </header>
       </div>
     </Layout>
   );

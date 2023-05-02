@@ -20,10 +20,10 @@ const Home = () => {
       </header> */}
 
         <section className="hero container">
-          <h1 className="title-primary">
+          <h1 className="title-primary text-shadow">
             Your <span>ultimate</span> resource for dance schools in your area!
           </h1>
-          <p className="desc">
+          <p className="desc text-shadow">
             With DanceGuide, you can easily search for dance schools by
             location, dance style, and even instructor. Our user-friendly
             interface makes it easy to find the information you need quickly, so
@@ -40,7 +40,7 @@ const Home = () => {
                 />
               ))}
             </ul>
-            <p className="customer-description">
+            <p className="customer-description text-shadow">
               Over <span>250,000+</span> people already found their passion!
             </p>
           </div>

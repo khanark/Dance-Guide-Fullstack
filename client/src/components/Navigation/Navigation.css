@@ -1,27 +1,25 @@
-header {
-  background-color: var(--clr-main--dark);
-}
+/* header {
+  background-color: #fff;
+} */
 
 .header-nav {
   height: 6.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #fff;
+  /* color: var(--clr-main--dark); */
 }
 
-.landing {
-  color: #fff;
-  background: transparent !important;
+.landing-bg {
+  background-color: var(--clr-main--dark);
 }
 
-.landing.nav-link {
-  color: var(--clr-gray-dark);
+.landing-link {
+  color: #fff;
 }
 
 .logo {
   font-size: 2rem;
-  /* text-transform: uppercase; */
   font-weight: 600;
   letter-spacing: -1.05;
 }
@@ -72,19 +70,15 @@ header {
 .catalog-link {
   text-shadow: none;
   font-weight: 500;
-}
-
-.catalog-link.nav-link {
   font-size: 1.4rem;
 }
+
+/* .catalog-link.nav-link {
+} */
 
 .nav-link:hover {
   text-shadow: none;
   color: var(--clr-main--light);
-}
-
-.hidden {
-  display: none;
 }
 
 @media screen and (max-width: 768px) {
