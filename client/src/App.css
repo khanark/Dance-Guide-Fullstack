@@ -1,15 +1,28 @@
 @import "./index.css";
 
-.container {
-  max-width: 140rem;
+.container-primary,
+.container-secondary {
   margin: 0 auto;
   padding: 0 2rem;
 }
 
+.container-primary {
+  max-width: 160rem;
+}
+
+.container-secondary {
+  max-width: 140rem;
+}
+
 .page {
   padding: 9.6rem 0;
-  /* background-color: #f9d6d6; */
   margin: 0;
+}
+
+.section {
+  margin-top: 9.6rem;
+  padding: 9.6rem 0;
+  color: #212529;
 }
 
 .grid {
@@ -21,6 +34,10 @@
 
 .grid--cols-2 {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.width-full {
+  width: 100%;
 }
 
 .title-primary,

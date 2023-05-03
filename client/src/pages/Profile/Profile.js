@@ -1,6 +1,5 @@
 import "./Profile.scss";
 
-import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
@@ -11,6 +10,8 @@ import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
 import { useUserContext } from "../../contexts/AuthContext";
+
+// import { Image, Placeholder } from "cloudinary-react";
 
 const Profile = () => {
   const { user } = useUserContext();
@@ -41,7 +42,7 @@ const Profile = () => {
           <div className="user__info__left">
             <div className="user__image">
               {!user.avatar && <img src={defaultAvatar} alt="" />}
-              {user.avatar && (
+              {/* {user.avatar && (
                 <Image
                   cloudName="du4uhmyq2"
                   publicId={user.avatar}
@@ -51,7 +52,7 @@ const Profile = () => {
                 >
                   <Placeholder type="blur" />
                 </Image>
-              )}
+              )} */}
             </div>
             <div className="user-perfonal__info">
               <p>

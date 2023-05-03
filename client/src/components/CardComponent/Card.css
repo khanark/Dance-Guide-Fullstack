@@ -1,0 +1,50 @@
+.catalog-list--item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.catalog-list--item:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.item-info {
+  padding: 2.4rem;
+}
+
+.item-img {
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.title-tertirty {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 2.4rem;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+
+.item-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.item-contacts-info {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  gap: 0.8rem;
+}
+
+.contacts-icon {
+  width: 24px;
+  height: 24px;
+}

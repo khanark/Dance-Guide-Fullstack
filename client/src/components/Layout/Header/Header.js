@@ -3,12 +3,13 @@ import "./Header.scss";
 import { useEffect, useRef, useState } from "react";
 
 import { HiLogout } from "react-icons/hi";
-import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import logo from "../../../assets/images/header-logo-no-woman-cropped.png";
 import { logout } from "../../../services/users";
 import { useUserContext } from "../../../contexts/AuthContext";
+
+// import { Image } from "cloudinary-react";
 
 const Header = () => {
   let [dropDown, setDropDown] = useState(false);

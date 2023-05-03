@@ -1,6 +1,5 @@
 import "./Details.scss";
 
-import { Image, Placeholder } from "cloudinary-react";
 import { useEffect, useReducer, useState } from "react";
 
 import Adress from "./components/Adress";
@@ -19,6 +18,8 @@ import { singleSchoolActions } from "../../reducers/singleSchoolReducer";
 import singleSchoolReducer from "../../reducers/singleSchoolReducer";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../../contexts/AuthContext";
+
+// import { Image, Placeholder } from "cloudinary-react";
 
 const Details = () => {
   const [school, dispatch] = useReducer(singleSchoolReducer, {});
@@ -65,7 +66,7 @@ const Details = () => {
           {!loading && (
             <>
               <div className="details-page__image">
-                <Image
+                {/* <Image
                   cloudName="du4uhmyq2"
                   publicId={schoolDetails.image}
                   crop="scale"
@@ -73,7 +74,7 @@ const Details = () => {
                   loading="lazy"
                 >
                   <Placeholder type="blur" />
-                </Image>
+                </Image> */}
               </div>
               <div className="details-page__info">
                 {school.isOwner && <UserButtons id={schoolId} />}
@@ -97,13 +98,13 @@ const Details = () => {
                 {!schoolDetails.owner?.avatar && (
                   <img src={defaultAvatar} alt="default-owner-img" />
                 )}
-                {schoolDetails.owner?.avatar && (
+                {/* {schoolDetails.owner?.avatar && (
                   <Image
                     cloudName="du4uhmyq2"
                     width="300"
                     publicId={schoolDetails.owner.avatar}
                   />
-                )}
+                )} */}
               </div>
             </>
           )}
