@@ -15,13 +15,14 @@ html {
 :root {
   --clr-main--dark: #e03131;
   --clr-main--light: #fa5252;
-  --clr-grey--dark: #dee2e6;
+  --clr-grey--dark: #212529;
   --clr-grey--light: #f8f9fa;
+  --clr-page-desc: #d3d3d4;
 }
 
 body #root {
   font-family: "Rubik", sans-serif;
-  color: var(--clr-grey--dark);
+  color: var(--clr-grey--light);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

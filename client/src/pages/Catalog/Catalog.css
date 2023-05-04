@@ -86,3 +86,37 @@
   column-gap: 1.6rem;
   row-gap: 2.4rem;
 }
+
+@media screen and (max-width: 1340px) {
+  .catalog-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .catalog-list {
+    grid-template-columns: auto;
+    gap: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .catalog,
+  .page-header.grid--cols-2 {
+    grid-template-columns: auto;
+    gap: 6.4rem;
+  }
+
+  .catalog {
+    gap: 6.4rem;
+  }
+
+  .header-right-box {
+    display: none;
+  }
+
+  .catalog-search--menu {
+    width: 100%;
+  }
+}

@@ -14,14 +14,8 @@
   max-width: 140rem;
 }
 
-.page {
-  padding: 9.6rem 0;
-  margin: 0;
-}
-
 .section {
-  margin-top: 9.6rem;
-  padding: 9.6rem 0;
+  padding: 9.6rem 0rem;
   color: #212529;
 }
 
@@ -34,6 +28,10 @@
 
 .grid--cols-2 {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--cols-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .width-full {
@@ -53,10 +51,6 @@
   color: #fff;
 }
 
-.page-title--primary {
-  color: #212529;
-}
-
 .title-secondary {
   font-size: 3.6rem;
   font-weight: 600;
@@ -73,10 +67,6 @@
   line-height: 1.6;
   font-weight: 500;
   margin-bottom: 4.4rem;
-}
-
-.page-desc {
-  color: #212529;
 }
 
 .page-header--image {

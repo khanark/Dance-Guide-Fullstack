@@ -1,0 +1,24 @@
+.page-title--primary {
+  color: #fff;
+}
+
+.page-desc {
+  color: var(--clr-page-desc);
+}
+
+.page-header--image {
+  border: 1px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .page-header.grid--cols-2 {
+    grid-template-columns: auto;
+    gap: 2.4rem;
+  }
+
+  .page-header--image {
+    display: none;
+  }
+}
