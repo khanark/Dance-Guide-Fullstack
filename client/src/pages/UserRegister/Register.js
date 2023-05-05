@@ -1,4 +1,4 @@
-import "./Register.scss";
+import "../../assets/styles/Form.css";
 
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setPageTitle("Регистрация");
+    setPageTitle("Sign Up");
   }, []);
 
   const {
@@ -53,12 +53,45 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="register-form">
+      <div className="form-wrapper section">
         {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
-        <form>
-          <label htmlFor="email">
-            Имейл *
+        <form className="form">
+          <h2 className="title-secondary">Let's get started</h2>
+          <p className="form-desc">Experience more, sign up with us!</p>
+          <div className="form-names--wrapper">
+            <label htmlFor="firstName" className="form-label">
+              <p className="input-label">First name</p>
+              <input
+                className="form-input"
+                {...register("firstName", {
+                  required: "Задължително поле",
+                  minLength: {
+                    value: 3,
+                    message: "Минимален брой символи 3",
+                  },
+                })}
+              />
+              <FieldsError msg={errors.firstName?.message} />
+            </label>
+            <label htmlFor="lastName" className="form-label">
+              <p className="input-label">Last name</p>
+              <input
+                className="form-input"
+                {...register("lastName", {
+                  required: "Задължително поле",
+                  minLength: {
+                    value: 3,
+                    message: "Минимален брой символи 3",
+                  },
+                })}
+              />
+              <FieldsError msg={errors.lastName?.message} />
+            </label>
+          </div>
+          <label htmlFor="email" className="form-label">
+            <p className="input-label">Email</p>
             <input
+              className="form-input"
               {...register("email", {
                 required: "Задължително поле",
                 pattern: {
@@ -69,51 +102,29 @@ const Register = () => {
             />
             <FieldsError msg={errors.email?.message} />
           </label>
-          <label htmlFor="firstName">
-            Име *
-            <input
-              {...register("firstName", {
-                required: "Задължително поле",
-                minLength: {
-                  value: 3,
-                  message: "Минимален брой символи 3",
-                },
-              })}
-            />
-            <FieldsError msg={errors.firstName?.message} />
-          </label>
-          <label htmlFor="lastName">
-            Фамилия *
-            <input
-              {...register("lastName", {
-                required: "Задължително поле",
-                minLength: {
-                  value: 3,
-                  message: "Минимален брой символи 3",
-                },
-              })}
-            />
-            <FieldsError msg={errors.lastName?.message} />
-          </label>
-          <label htmlFor="phoneNumber">
-            Телефонен Номер *
-            <input
-              type="number"
-              {...register("phoneNumber", {
-                required: "Задължително поле",
-                pattern: {
-                  value:
-                    /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
-                  message: "Невалиден телефонен номер",
-                },
-              })}
-            />
+          <label htmlFor="phoneNumber" className="form-label">
+            <div className="form-number--wrapper">
+              <span className="phone-prefix">+359 (0)</span>
+              <input
+                className="form-input"
+                type="number"
+                {...register("phoneNumber", {
+                  required: "Задължително поле",
+                  pattern: {
+                    value:
+                      /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/,
+                    message: "Невалиден телефонен номер",
+                  },
+                })}
+              />
+            </div>
             <FieldsError msg={errors.phoneNumber?.message} />
           </label>
 
-          <label htmlFor="password">
-            Парола *
+          <label htmlFor="password" className="form-label">
+            <p className="input-label">Password</p>
             <input
+              className="form-input"
               type="password"
               {...register("password", {
                 required: "Задължително поле",
@@ -126,9 +137,10 @@ const Register = () => {
             <FieldsError msg={errors.password?.message} />
           </label>
 
-          <label htmlFor="repass">
-            Повторете паролата *
+          <label htmlFor="repass" className="form-label">
+            <p className="input-label">Password repeat</p>
             <input
+              className="form-input"
               type="password"
               {...register("repeatedPassword", {
                 required: false,
@@ -138,22 +150,15 @@ const Register = () => {
             />
             <FieldsError msg={errors.repeatedPassword?.message} />
           </label>
+          <button
+            type="submit"
+            className="btn"
+            disabled={isLoading}
+            onClick={handleSubmit(onSubmitRegister)}
+          >
+            Register
+          </button>
         </form>
-
-        <p className="no-registration">
-          Вече си част от нас?
-          <span>
-            <Link to="/login">Вход!</Link>
-          </span>
-        </p>
-        <button
-          type="submit"
-          disabled={isLoading}
-          onClick={handleSubmit(onSubmitRegister)}
-        >
-          Регистрирай се
-          <RiUserAddFill />
-        </button>
       </div>
     </Layout>
   );

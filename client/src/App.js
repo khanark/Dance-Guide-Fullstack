@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 
-import About from "./pages/About/About";
 import Catalog from "./pages/Catalog/Catalog";
 import { ChakraProvider } from "@chakra-ui/react";
 import Create from "./pages/Create/Create";
@@ -23,7 +22,6 @@ function App() {
         <ChakraProvider>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/catalog" element={<Catalog />} />

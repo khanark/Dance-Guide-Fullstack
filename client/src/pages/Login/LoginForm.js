@@ -1,4 +1,4 @@
-import "./LoginForm.scss";
+import "../../assets/styles/Form.css";
 
 import { IoEye, IoEyeOff, IoLogIn } from "react-icons/io5";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setPageTitle("Вход");
+    setPageTitle("Login");
   }, []);
 
   const { notificateSuccess, notificateError } = useNotification();
@@ -55,12 +55,13 @@ const Login = () => {
 
   return (
     <Layout>
-      <div className="login-form">
+      <div className="form-wrapper section">
         {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
-        <form>
-          <label htmlFor="email">
-            Имейл
+        <form className="form">
+          <label htmlFor="email" className="form-label">
+            <p className="input-label">Email</p>
             <input
+              className="form-input"
               {...register("email", {
                 required: "Задължително поле",
                 pattern: {
@@ -71,10 +72,11 @@ const Login = () => {
             />
             <FieldsError msg={errors.email?.message} />
           </label>
-          <label htmlFor="password">
-            Парола
+          <label htmlFor="password" className="form-label">
+            <p className="input-label">Password</p>
             <div style={{ position: "relative" }}>
               <input
+                className="form-input"
                 type={eye ? "text" : "password"}
                 {...register("password", {
                   required: "Задължително поле",
@@ -90,25 +92,15 @@ const Login = () => {
             </div>
             <FieldsError msg={errors.password?.message} />
           </label>
-          <Link to="/user/forgotten" className="forgotten-password">
-            Забравена парола?
-          </Link>
+          <button
+            className="btn"
+            type="button"
+            disabled={isLoading}
+            onClick={handleSubmit(onSubmitLogin)}
+          >
+            Login
+          </button>
         </form>
-        <p className="no-registration">
-          Нямаш регистрация?
-          <span>
-            <Link to="/register">Регистрай се!</Link>
-          </span>
-        </p>
-        <button
-          className="form-button"
-          type="button"
-          disabled={isLoading}
-          onClick={handleSubmit(onSubmitLogin)}
-        >
-          Вход
-          <IoLogIn />
-        </button>
       </div>
     </Layout>
   );

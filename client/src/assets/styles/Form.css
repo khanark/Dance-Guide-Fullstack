@@ -1,0 +1,63 @@
+@import url("../../App.css");
+
+.form-wrapper {
+  background-color: var(--clr-grey--light);
+}
+
+.form-names--wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3.2rem;
+}
+
+.form-number--wrapper {
+  display: flex;
+  align-items: center;
+}
+.form-label {
+  display: block;
+  margin-bottom: 2.4rem;
+}
+
+.phone-prefix {
+  padding: 0.8rem;
+  font-size: 1.4rem;
+  padding: 0.8rem;
+}
+
+.form {
+  padding: 2.4rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.form-title {
+  font-size: 3.6rem;
+  font-weight: 500;
+  color: #555;
+  padding-bottom: 2.4rem;
+}
+.form-desc {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 4.4rem;
+}
+.input-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+.form-input {
+  display: block;
+  padding: 1.6rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.5px solid #eee;
+  border-radius: 0.4rem;
+  outline: none;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-input:focus {
+  box-shadow: inset 0px 0px 2px var(--clr-grey--dark);
+}

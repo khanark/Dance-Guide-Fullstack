@@ -26,7 +26,7 @@ const Catalog = () => {
   const { user } = useUserContext();
 
   useEffect(() => {
-    setPageTitle("Каталог");
+    setPageTitle("Catalog");
     setTimeout(() => setShowComponent(true), 1200);
     getAllSchools().then((data) => {
       setIsLoading(false);

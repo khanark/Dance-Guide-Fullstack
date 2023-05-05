@@ -9,7 +9,9 @@ const Navigation = ({ isLandingPage }) => {
   return (
     <header className={!isLandingPage && "landing-bg"}>
       <nav
-        className={`header-nav container-primary ${!isLandingPage && "landing-link"}`}
+        className={`header-nav container-primary ${
+          !isLandingPage && "landing-link"
+        }`}
       >
         <h2 className="logo">
           <Link to="/">DanceGuide</Link>
@@ -59,8 +61,8 @@ const Navigation = ({ isLandingPage }) => {
             </ul>
           </li>
           <li>
-            <Link to="/login" className="nav-link">
-              Sign In
+            <Link to="/register" className="nav-link">
+              Sign Up
             </Link>
           </li>
         </ul>

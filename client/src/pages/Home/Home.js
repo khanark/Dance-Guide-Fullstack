@@ -2,7 +2,6 @@ import "./Home.css";
 
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
-import Navigation from "../../components/Navigation/Navigation";
 import customerImages from "../../assets/images/customers/CustomerImages";
 import { setPageTitle } from "../../util/util";
 import { useEffect } from "react";
@@ -15,10 +14,6 @@ const Home = () => {
   return (
     <div className="home-page">
       <Layout isLandingPage={true}>
-        {/* <header>
-        <Navigation />
-      </header> */}
-
         <section className="hero container">
           <h1 className="title-primary text-shadow">
             Your <span>ultimate</span> resource for dance schools in your area!
@@ -47,8 +42,8 @@ const Home = () => {
           <Link to="/catalog" className="btn btn--browse">
             Browse Catalog
           </Link>
-          <Link to="/login" className="btn btn--signin">
-            Sign In
+          <Link to="/register" className="btn btn--signin">
+            Sign Up
           </Link>
         </section>
       </Layout>
