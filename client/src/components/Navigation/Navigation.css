@@ -73,6 +73,24 @@
   font-size: 1.4rem;
 }
 
+.auth-page {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.auth-page .nav-link {
+  border: 1px solid #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 4px;
+}
+
+.auth-question {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #bcbebf;
+}
+
 /* .catalog-link.nav-link {
 } */
 

@@ -68,6 +68,7 @@ const Catalog = () => {
                 <div
                   className={`search-menu-hidden-box ${!accordion && "hidden"}`}
                 >
+                  {/* At some point you need to finish the logic here */}
                   <button className="hidden-box--btn">Hip Hop</button>
                   <button className="hidden-box--btn">Balet</button>
                   <button className="hidden-box--btn">Folklore</button>

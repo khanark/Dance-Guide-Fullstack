@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <Layout>
+    <Layout authPage="register">
       <div className="form-wrapper section">
         {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form className="form">

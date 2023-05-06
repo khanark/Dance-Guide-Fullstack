@@ -54,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <Layout authPage="login">
       <div className="form-wrapper section">
         {isLoading && <Spinner style={{ marginBottom: "25px" }} />}
         <form className="form">
