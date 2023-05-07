@@ -85,6 +85,10 @@
   border-radius: 4px;
 }
 
+.auth-page .nav-link:hover {
+  border-color: var(--clr-main--dark);
+}
+
 .auth-question {
   font-size: 1.4rem;
   font-weight: 500;

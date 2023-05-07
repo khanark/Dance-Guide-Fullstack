@@ -1,0 +1,12 @@
+.password-wrapper {
+  position: relative;
+}
+
+.eye-icon {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  color: #555;
+  right: 1.5rem;
+  top: 25%;
+}

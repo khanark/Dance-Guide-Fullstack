@@ -6,7 +6,7 @@ import Create from "./pages/Create/Create";
 import Details from "./pages/Details/Details";
 import Edit from "./pages/UserEdit/Edit";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/LoginForm";
+import Login from "./pages/Login/Login";
 import NotFound from "./pages/404/NotFound";
 import PrivateRoute from "./guards/ProtectedRoute";
 import Profile from "./pages/Profile/Profile";

@@ -1,4 +1,4 @@
-import "./FieldsError.scss";
+import "./FieldsError.css";
 
 const FieldsError = ({ msg }) => (
   <p className="field-error">{msg ? msg : ""}</p>

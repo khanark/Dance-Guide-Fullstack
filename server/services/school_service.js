@@ -2,7 +2,9 @@ const DanceSchool = require("../models/DanceSchool");
 const User = require("../models/User");
 
 const getAllSchools = async (query) => {
-  return DanceSchool.find().lean();
+  return DanceSchool.find()
+    .populate("owner", ["email, phoneNumber, link"])
+    .lean();
 };
 
 const getSingleSchool = async (id) => {

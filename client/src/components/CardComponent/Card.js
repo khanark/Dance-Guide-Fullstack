@@ -7,11 +7,13 @@ import {
   AdvancedImage,
   lazyload,
   placeholder,
+  resize,
   responsive,
 } from "@cloudinary/react";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const Card = ({ _id, name, image, settlement, likes }) => {
   const cld = new Cloudinary({
@@ -20,19 +22,19 @@ const Card = ({ _id, name, image, settlement, likes }) => {
     },
   });
 
-  const url = cld.image(image, { width: 300, height: 300, crop: "fill" });
-  console.log(url);
+  const url = cld.image(image);
+  url.resize(fill().width(300).height(300));
+
   return (
     <Link to={`/details/${_id}`}>
       <div className="catalog-list--item">
         {/* <img src={image} alt="worman-card-image" className="item-img" /> */}
         <AdvancedImage
-          width="400px"
-          height="400px"
           className="item-img"
           cldImg={url}
-          plugins={[lazyload(), placeholder({ mode: "blur" })]}
+          plugins={[lazyload(), responsive(), placeholder({ mode: "blur" })]}
         />
+
         <div className="item-info">
           <h2 className="title-tertirty">{name}</h2>
           <h3 className="subtitle">Contacts</h3>
