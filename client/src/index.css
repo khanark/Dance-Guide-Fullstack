@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -16,16 +16,38 @@ html {
   --clr-main--dark: #e03131;
   --clr-main--light: #fa5252;
   --clr-grey--dark: #212529;
+  --clr-grey--dark--hover: #343a40;
   --clr-grey--light: #f8f9fa;
   --clr-page-desc: #d3d3d4;
 }
 
 body #root {
-  font-family: "Rubik", sans-serif;
-  color: var(--clr-grey--light);
+  font-family: "Inter", sans-serif;
+  color: var(--clr-grey--dark);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Define the style for the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+/* Define the style for the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+/* Define the style for the scrollbar thumb when hovering over it */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Define the style for the scrollbar corner */
+::-webkit-scrollbar-corner {
+  background-color: #f5f5f5;
 }
 
 @media screen and (max-width: 768px) {

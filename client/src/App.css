@@ -3,7 +3,6 @@
 .container-primary,
 .container-secondary {
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
 .container-primary {
@@ -15,8 +14,7 @@
 }
 
 .section {
-  padding: 9.6rem 0rem;
-  color: #212529;
+  padding: 9.6rem 2rem;
 }
 
 .grid {

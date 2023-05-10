@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
+import PageContainer from "../../components/FramerContainer";
 import { Spinner } from "@chakra-ui/react";
 import { registerSchemaValidation } from "../../YupSchemas/validation_schema";
 import { registerUser } from "../../services/users";
@@ -61,7 +62,7 @@ const Register = () => {
         <form className="form">
           <h2 className="title-secondary">Let's get started</h2>
           <p className="form-desc">Experience more, sign up with us!</p>
-          <div className="form-names--wrapper">
+          <div className="form-grid--wrapper">
             <label htmlFor="firstName" className="form-label">
               <p className="input-label">First name</p>
               <input className="form-input" {...register("firstName")} />

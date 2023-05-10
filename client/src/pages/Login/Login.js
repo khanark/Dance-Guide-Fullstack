@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
+import PageContainer from "../../components/FramerContainer";
 import { Spinner } from "@chakra-ui/react";
 import { login } from "../../services/users";
 import { loginSchemaValidation } from "../../YupSchemas/validation_schema";

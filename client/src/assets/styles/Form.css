@@ -1,16 +1,16 @@
 @import url("../../App.css");
 
 .form-wrapper {
-  background-color: var(--clr-grey--light);
+  background-color: #e9e9ea;
 }
 
-.form-names--wrapper {
+.form-grid--wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 3.2rem;
 }
 
-.form-number--wrapper {
+.form-flex--wrapper {
   display: flex;
   align-items: center;
 }
@@ -22,13 +22,11 @@
   padding: 2.4rem;
   max-width: 64rem;
   margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
-.form-title {
-  font-size: 3.6rem;
-  font-weight: 500;
-  color: #555;
-  padding-bottom: 2.4rem;
-}
+
 .form-desc {
   font-size: 1.6rem;
   line-height: 1.5;
@@ -37,7 +35,7 @@
 }
 .input-label {
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 0.8rem;
 }
 .form-input {
@@ -66,5 +64,5 @@
 }
 
 .form-input:focus {
-  box-shadow: inset 0px 0px 2px var(--clr-grey--dark);
+  box-shadow: inset 0px 0px 2px #888;
 }

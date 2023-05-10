@@ -5,6 +5,7 @@ export const useNotification = () => {
     isClosable: false,
     duration: 2000,
     position: "top",
+    fontSize: "2xl",
   });
 
   const notificateSuccess = ({ title, description }) =>

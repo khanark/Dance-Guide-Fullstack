@@ -15,7 +15,7 @@ const PageHeader = ({ image }) => {
         </p>
       </div>
       <div className="header-right-box">
-        <img src={image} alt="catalog header" className="page-header--img" />
+        <img src={image} className="page-header--img" alt="catalog header" />
       </div>
     </header>
   );

@@ -4,7 +4,8 @@ import "../../App.css";
 import { useEffect, useRef, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
-import CustomSpinner from "../../components/spinner/Spinner";
+import CustomSpinner from "../../components/Spinner/Spinner";
+import FilterMenu from "../../components/FilterMenu/FIlterMenu";
 import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
@@ -44,7 +45,8 @@ const Catalog = () => {
         <PageHeader image={catalogHeaderImage} />
         <main className="section-catalog section">
           <div className="catalog container-primary">
-            <div className="catalog-search--menu">
+            <FilterMenu />
+            {/* <div className="catalog-search--menu">
               <h3 className="catalog-search-menu--title">Filter by</h3>
               <button
                 className="search-menu--style"
@@ -56,13 +58,13 @@ const Catalog = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="chevron-down"
+                    className="chevron-down"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                     />
                   </svg>
@@ -70,7 +72,7 @@ const Catalog = () => {
                 <div
                   className={`search-menu-hidden-box ${!accordion && "hidden"}`}
                 >
-                  {/* At some point you need to finish the logic here */}
+                  At some point you need to finish the logic here
                   <button className="hidden-box--btn">Hip Hop</button>
                   <button className="hidden-box--btn">Balet</button>
                   <button className="hidden-box--btn">Folklore</button>
@@ -79,7 +81,8 @@ const Catalog = () => {
               </button>
               <button className="btn-search">Newest</button>
               <button className="btn-search">Oldest</button>
-            </div>
+              {user && <button className="btn btn--add">Add school</button>}
+            </div> */}
             <div className="catalog-list">
               {isLoading && <CustomSpinner />}
               {schools.map((school) => (

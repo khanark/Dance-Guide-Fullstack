@@ -1,5 +1,6 @@
 .section-catalog {
-  background-color: var(--clr-grey--light);
+  /* background-color: var(--clr-grey--light); */
+  background-color: #e9e9ea;
 }
 
 .catalog {
@@ -85,6 +86,10 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 1.6rem;
   row-gap: 2.4rem;
+}
+
+.btn--add {
+  background: transparent;
 }
 
 @media screen and (max-width: 1340px) {

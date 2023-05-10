@@ -1,11 +1,26 @@
 import "./Navigation.css";
 
-import { Link } from "react-router-dom";
+import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
+import { Link, useNavigate } from "react-router-dom";
+
+import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
+import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 import { useState } from "react";
+import { useUserContext } from "../../contexts/AuthContext";
 
 const Navigation = ({ isLandingPage, authPage }) => {
-  const [catalogClick, setCatalogClick] = useState(false);
-  console.log(authPage);
+  const { user, clearUser } = useUserContext();
+  const [dropdown, setDropdown] = useState(false);
+
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    clearUser(); // clearing the user from local storage upon logout
+    navigate("/catalog"); // redirecting the user to the catalog page
+  };
+
+  const userImage = useCloudinaryImage(user?.avatar);
+
   return (
     <header className={!isLandingPage && "landing-bg"}>
       <nav
@@ -41,47 +56,102 @@ const Navigation = ({ isLandingPage, authPage }) => {
               </Link>
             </li>
             <li>
-              <button
-                type="button"
-                className="nav-link nav-link--catalog"
-                onClick={() => setCatalogClick((prev) => !prev)}
-              >
+              <Link to="/catalog" className="nav-link">
                 Catalog
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="catalog-menu--icon"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
-                </span>
-              </button>
-              <ul className={`catalog-menu ${catalogClick ? "open" : ""}`}>
-                <li>
-                  <Link to="/catalog" className="catalog-link nav-link">
-                    Browse
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/create" className="catalog-link nav-link">
-                    List Item
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/register" className="nav-link">
-                Sign Up
               </Link>
             </li>
+            {user && (
+              <li>
+                <Link to="/create" className="nav-link nav-link--create">
+                  Create School
+                </Link>
+              </li>
+            )}
+            {!user && (
+              <li>
+                <Link to="/register" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className="dropdown-menu-wrapper">
+                <div
+                  className="user-btn"
+                  onClick={() => setDropdown((bool) => !bool)}
+                >
+                  {userImage ? (
+                    <AdvancedImage
+                      cldImg={userImage}
+                      className="user-avatar--img"
+                      plugins={[lazyload(), responsive()]}
+                    />
+                  ) : (
+                    <img
+                      src={user ? user?.avatar : defaultAvatar}
+                      className="user-avatar--img"
+                      alt="user-avatar"
+                    />
+                  )}
+                </div>
+
+                <div
+                  className={`user-dropdown--menu ${
+                    dropdown ? "active" : "inactive"
+                  }`}
+                >
+                  <h3 className="user-dropdown--username">
+                    {user?.firstName} {user?.lastName}
+                  </h3>
+                  <p className="user-dropdown--email">{user?.email}</p>
+                  <ul className="user-dropdown--list">
+                    <li className="link-wrapper">
+                      <Link to="/user/profile" className="user-dropdown--link">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="user-dropdown--icon"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                          />
+                        </svg>
+
+                        <p>Profile</p>
+                      </Link>
+                    </li>
+                    <li className="link-wrapper">
+                      <button
+                        to="/user/profile"
+                        className="user-dropdown--link"
+                        onClick={onLogoutClick}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="user-dropdown--icon"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                          />
+                        </svg>
+                        <p>Logout</p>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            )}
           </ul>
         )}
       </nav>

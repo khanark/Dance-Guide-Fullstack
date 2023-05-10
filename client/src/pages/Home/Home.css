@@ -39,6 +39,7 @@
 .customer-description {
   font-size: 1.8rem;
   font-weight: 500;
+  color: var(--clr-page-desc);
 }
 
 .customer-description span {
@@ -57,6 +58,10 @@
   color: #fff;
   transition: all 0.3s;
   margin-right: 1.8rem;
+}
+
+.desc {
+  color: var(--clr-page-desc);
 }
 
 .btn:hover {

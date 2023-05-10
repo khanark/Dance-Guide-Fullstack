@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from "react";
 
 import Adress from "./components/Adress";
 import Contacts from "./components/Contacts";
-import CustomSpinner from "../../components/spinner/Spinner";
+import CustomSpinner from "../../components/Spinner/Spinner";
 import Feedback from "./components/Feedback";
 import FeedbackButton from "./components/FeedbackButton";
 import FeedbackPost from "./components/FeedbackPost";

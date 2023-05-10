@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <Layout isLandingPage={true}>
-        <section className="hero container">
+        <section className="hero container section">
           <h1 className="title-primary text-shadow">
             Your <span>ultimate</span> resource for dance schools in your area!
           </h1>
@@ -40,7 +40,7 @@ const Home = () => {
             </p>
           </div>
           <Link to="/catalog" className="btn btn--browse">
-            Browse Catalog
+            Catalog
           </Link>
           <Link to="/register" className="btn btn--signin">
             Sign Up
