@@ -88,6 +88,11 @@
   row-gap: 2.4rem;
 }
 
+.loading {
+  grid-column: 1 / -1;
+  margin: 10% auto;
+}
+
 .btn--add {
   background: transparent;
 }

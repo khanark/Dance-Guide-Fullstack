@@ -1,14 +1,14 @@
 import "./Catalog.css";
 import "../../App.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
-import CustomSpinner from "../../components/Spinner/Spinner";
 import FilterMenu from "../../components/FilterMenu/FIlterMenu";
 import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import { Spinner } from "@chakra-ui/react";
 import catalogHeaderImage from "../../assets/images/page_headers/catalog-header.jpg";
 import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
@@ -28,15 +28,10 @@ const Catalog = () => {
   const { getAllSchools } = schoolsFactory();
   const { user } = useUserContext();
 
-  console.log(schools);
-
   useEffect(() => {
     setPageTitle("Catalog");
-    // finish this logic, I need it to make so that only the button has a spinner when using the filterin feature
-    if (Object.values(filters).every((val) => val == "")) {
-      setIsLoading(true);
-    }
-    // setSchools([]);
+    setIsLoading(true);
+    setSchools([]);
     setTimeout(() => setShowComponent(true), 1200);
     getAllSchools(filters)
       .then((data) => {
@@ -55,7 +50,7 @@ const Catalog = () => {
           <div className="catalog container-primary">
             <FilterMenu setFilters={setFilters} filters={filters} />
             <div className="catalog-list">
-              {isLoading && <CustomSpinner />}
+              {isLoading && <Spinner className="loading" />}
               {schools.map((school) => (
                 <Card key={school._id} {...school} />
               ))}
