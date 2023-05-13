@@ -1,7 +1,7 @@
 import "./Create.css";
 import "../../assets/styles/Form.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
@@ -30,6 +30,7 @@ const Create = () => {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -77,14 +78,25 @@ const Create = () => {
             <input className="form-input" {...register("name")} />
             <FieldsError msg={errors.name?.message} />
           </label>
-          <label htmlFor="schoolPhoto" className="form-label">
+          <label htmlFor="schoolPhoto" className="form-label form-label--photo">
             <p className="input-label">Photo</p>
-            <input
-              type="file"
-              className="form-input"
-              {...register("image")}
-              onChange={handleAvatarChange}
-            />
+            <div className="btn-upload-wrapper">
+              <input
+                type="file"
+                className="form-input photo-input"
+                id="image"
+                {...register("image")}
+                onChange={handleAvatarChange}
+              />
+              <label
+                type="label"
+                className="btn-upload"
+                for="image"
+                // onClick={onUploadFileClick}
+              >
+                Upload...
+              </label>
+            </div>
             <FieldsError msg={errors.image?.message} />
           </label>
           <label htmlFor="schoolType" className="form-label">
