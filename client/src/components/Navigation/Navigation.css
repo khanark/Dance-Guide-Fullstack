@@ -191,14 +191,14 @@
 }
 
 .user-dropdown--username {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--clr-main--light);
   letter-spacing: -0.05em;
   margin-bottom: 0.8rem;
 }
 .user-dropdown--email {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #bcbebf;
   margin-bottom: 3.2rem;
 }
@@ -241,7 +241,7 @@
 .user-dropdown--link p {
   font-size: 1.4rem;
   font-weight: 500;
-  color: var(--clr-grey--dark);
+  color: #666;
 }
 
 .user-dropdown--link:hover p {
@@ -249,8 +249,8 @@
 }
 
 .user-dropdown--icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 @media screen and (max-width: 768px) {

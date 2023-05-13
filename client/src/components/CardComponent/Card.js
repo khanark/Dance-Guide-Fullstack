@@ -11,7 +11,7 @@ import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 
 const Card = ({ _id, name, image, settlement, likes }) => {
   const url = useCloudinaryImage(image);
-  url.resize(fill().width(300).height(300));
+  url.resize(fill().width(400).height(400));
 
   return (
     <Link to={`/details/${_id}`}>
@@ -46,7 +46,29 @@ const Card = ({ _id, name, image, settlement, likes }) => {
         />
         <div className="item-info">
           <h2 className="title-tertirty">{name}</h2>
-          <p className="settlement">{settlement}</p>
+          <div className="settlement-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="settlement-icon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+              />
+            </svg>
+
+            <p className="settlement">{settlement}</p>
+          </div>
           <h3 className="subtitle">Contacts</h3>
           <ul className="item-contacts">
             <li className="item-contacts-info">

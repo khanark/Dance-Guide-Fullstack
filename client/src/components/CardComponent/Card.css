@@ -1,15 +1,17 @@
 .catalog-list--item {
   position: relative;
-  background-color: #fff;
+  background-color: inherit;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  transition: all 0.4s;
 }
 
 .catalog-list--item:hover {
-  background-color: #eee;
-  color: var(--clr-main--light);
-  filter: brightness(0.8);
+  /* color: var(--clr-main--light); */
+  /* filter: brightness(0.8); */
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: none;
   cursor: pointer;
 }
 
@@ -25,7 +27,7 @@
 .settlement {
   font-size: 1.6rem;
   font-weight: 500;
-  margin-bottom: 3.2rem;
+  /* margin-bottom: 3.2rem; */
   color: #555;
 }
 
@@ -56,9 +58,19 @@
 }
 
 .contacts-icon,
-.likes-icon {
-  width: 24px;
-  height: 24px;
+.likes-icon,
+.settlement-icon {
+  display: inline-block;
+  stroke: #666;
+  width: 20px;
+  height: 20px;
+}
+
+.settlement-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 3.2rem;
 }
 
 .likes-info {

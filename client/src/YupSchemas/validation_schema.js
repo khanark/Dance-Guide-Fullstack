@@ -43,12 +43,12 @@ export const createSchoolSchemaValidation = yup.object().shape({
     .test(
       "fileSize",
       "File size is too large",
-      (value) => !value || value.size <= FILE_SIZE
+      (value) => !value || value[0].size <= FILE_SIZE
     )
     .test(
       "fileFormat",
       "Unsupported file format",
-      (value) => !value || SUPPORTED_FORMATS.includes(value.type)
+      (value) => !value || SUPPORTED_FORMATS.includes(value[0].type)
     ),
   schoolType: yup.string().required("Required"),
   settlement: yup

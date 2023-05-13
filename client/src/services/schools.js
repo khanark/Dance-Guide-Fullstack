@@ -1,15 +1,20 @@
 import * as api from "../api/api";
 
 const endpoints = {
-  getAll: "/schools",
+  getAll: (query) => (query ? `/schools?${query}` : "/schools"),
   create: "/schools",
   getSingleSchool: (schoolId) => `/schools/${schoolId}`,
   likeSchool: (schoolId) => `/schools/${schoolId}/like`,
   unlikeSchool: (schoolId) => `/schools/${schoolId}/unlike`,
 };
 
-const getAllSchools = async () => {
-  return api.get(endpoints.getAll);
+const getAllSchools = async (filters) => {
+  const query = Object.entries(filters || []).filter(([key, val]) => {
+    return val !== "";
+  });
+  const composedQuery = new URLSearchParams(query);
+  console.log(composedQuery.toString());
+  return api.get(endpoints.getAll(composedQuery.toString()));
 };
 
 const createSchool = async ({

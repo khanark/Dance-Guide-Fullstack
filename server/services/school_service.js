@@ -2,8 +2,6 @@ const DanceSchool = require("../models/DanceSchool");
 const User = require("../models/User");
 
 const getAllSchools = async (query, sortObj) => {
-  const { location, style } = query; // if query is empty, it will be undefined
-
   return DanceSchool.find(query)
     .sort(sortObj)
     .populate("owner", ["email, phoneNumber, link"])

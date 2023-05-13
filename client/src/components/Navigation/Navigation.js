@@ -2,10 +2,10 @@ import "./Navigation.css";
 
 import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
-import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Navigation = ({ isLandingPage, authPage }) => {
@@ -80,7 +80,7 @@ const Navigation = ({ isLandingPage, authPage }) => {
                   className="user-btn"
                   onClick={() => setDropdown((bool) => !bool)}
                 >
-                  {userImage ? (
+                  {user?.avatar ? (
                     <AdvancedImage
                       cldImg={userImage}
                       className="user-avatar--img"
@@ -88,7 +88,7 @@ const Navigation = ({ isLandingPage, authPage }) => {
                     />
                   ) : (
                     <img
-                      src={user ? user?.avatar : defaultAvatar}
+                      src={defaultAvatar}
                       className="user-avatar--img"
                       alt="user-avatar"
                     />

@@ -4,6 +4,7 @@
 
 .page-desc {
   color: var(--clr-page-desc);
+  margin-bottom: 0 !important;
 }
 
 .page-header--img {

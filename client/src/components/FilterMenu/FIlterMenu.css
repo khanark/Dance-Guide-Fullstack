@@ -11,18 +11,22 @@
   margin-bottom: 1.6rem;
 }
 
+.input-location-wrapper {
+  position: relative;
+}
+
 .menu-title {
   font-size: 2.4rem;
   font-weight: 500;
   padding-bottom: 0.8rem;
   margin-bottom: 1.6rem;
-  border-bottom: 2px solid #ebebeb;
+  border-bottom: 2px solid #ccc;
   color: var(--clr-main--light);
 }
 
 .input-title {
   font-size: 1.4rem;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0.4rem;
 }
 .input-field {
@@ -30,7 +34,8 @@
   font-size: 1.8rem;
   border-radius: 0.4rem;
   padding: 0.8rem;
-  box-shadow: inset 0px 0px 3px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border: 1px solid #ccc;
 }
 
 .btn-filter {
@@ -43,6 +48,16 @@
   padding: 1.4rem;
   background-color: var(--clr-grey--dark);
   transition: all 0.3s;
+}
+
+.location-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  stroke: #ccc;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
 }
 
 .btn-filter:hover {

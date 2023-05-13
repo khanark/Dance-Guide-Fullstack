@@ -111,15 +111,18 @@ const Register = () => {
             />
             <FieldsError msg={errors.repeatedPassword?.message} />
           </label>
-          <button
-            type="submit"
-            className="btn form-btn"
-            disabled={isLoading}
-            onClick={handleSubmit(onSubmitRegister)}
-          >
-            {isLoading && <Spinner className="btn-spinner" />}
-            Register
-          </button>
+          <div className="btn-wrapper">
+            <button
+              type="submit"
+              className="btn form-btn"
+              disabled={isLoading}
+              onClick={handleSubmit(onSubmitRegister)}
+            >
+              {isLoading && <Spinner className="btn-spinner" />}
+              Register
+            </button>
+            {isLoading && <p className="btn-desc">Please wait...</p>}
+          </div>
         </form>
       </div>
     </Layout>

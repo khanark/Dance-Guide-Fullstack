@@ -38,10 +38,10 @@
 
 .title-primary,
 .page-title--primary {
-  font-size: 5.2rem;
+  font-size: 6.4rem;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -1.5px;
+  letter-spacing: -1.05px;
   margin-bottom: 3.2rem;
 }
 
@@ -56,7 +56,7 @@
   color: #212529;
   color: var(--clr-main--light);
   letter-spacing: -1.5px;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .page-desc,

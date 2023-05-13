@@ -17,7 +17,7 @@ const router = require("express").Router();
 router.get("/", async (req, res) => {
   const { location, style, order } = req.query; // if query is empty, it will be undefined
   const query = {};
-  let sortObj = {};
+  const sortObj = {};
 
   // generation of query object
   if (location) {
@@ -29,14 +29,14 @@ router.get("/", async (req, res) => {
   }
 
   if (order == "newest") {
-    sortObj = { createdAt: -1 };
+    sortObj.createdAt = -1;
   } else if (order == "oldest") {
-    sortObj = { createdAt: 1 };
-  } else if (order == "most-liked") {
-    sortObj = { likes: -1 };
+    sortObj.createdAt = 1;
+  } else if (order == "likes") {
+    sortObj["likes.count"] = -1;
   }
 
-  const schools = await getAllSchools({ location, style }, sortObj);
+  const schools = await getAllSchools(query, sortObj);
   res.status(200).json(schools);
 });
 

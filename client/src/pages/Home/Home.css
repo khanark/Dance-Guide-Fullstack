@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: center;
   gap: 1.6rem;
-  margin-bottom: 4.4rem;
+  margin-bottom: 4rem;
 }
 
 .customer-img {
@@ -62,6 +62,7 @@
 
 .desc {
   color: var(--clr-page-desc);
+  margin-bottom: 1.6rem !important;
 }
 
 .btn:hover {

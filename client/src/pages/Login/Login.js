@@ -93,15 +93,18 @@ const Login = () => {
               </button>
             </div>
           </label>
-          <button
-            className="btn form-btn"
-            type="button"
-            disabled={isLoading}
-            onClick={handleSubmit(onSubmitLogin)}
-          >
-            {isLoading && <Spinner className="btn-spinner" />}
-            Login
-          </button>
+          <div className="button-wrapper">
+            <button
+              className="btn form-btn"
+              type="button"
+              disabled={isLoading}
+              onClick={handleSubmit(onSubmitLogin)}
+            >
+              {isLoading && <Spinner className="btn-spinner" />}
+              Login
+            </button>
+            {isLoading && <p className="btn-desc">Please wait...</p>}
+          </div>
         </form>
       </div>
     </Layout>

@@ -8,7 +8,6 @@ import CustomSpinner from "../../components/Spinner/Spinner";
 import FilterMenu from "../../components/FilterMenu/FIlterMenu";
 import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
-import { Link } from "react-router-dom";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import catalogHeaderImage from "../../assets/images/page_headers/catalog-header.jpg";
 import schoolsFactory from "../../services/schools";
@@ -17,11 +16,14 @@ import { useSchoolContext } from "../../contexts/SchoolContext";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Catalog = () => {
-  const [query, setQuery] = useState("");
-  const { schools, setSchools, sortByLikes, sortByLatest } = useSchoolContext();
-  const [accordion, setAccordion] = useState(false);
-  const [isLoading, setIsLoading] = useState({});
+  const { schools, setSchools } = useSchoolContext();
+  const [isLoading, setIsLoading] = useState();
   const [showComponent, setShowComponent] = useState(false);
+  const [filters, setFilters] = useState({
+    location: "",
+    style: "",
+    order: "",
+  });
 
   const { getAllSchools } = schoolsFactory();
   const { user } = useUserContext();
@@ -30,12 +32,18 @@ const Catalog = () => {
 
   useEffect(() => {
     setPageTitle("Catalog");
+    // finish this logic, I need it to make so that only the button has a spinner when using the filterin feature
+    if (Object.values(filters).every((val) => val == "")) {
+      setIsLoading(true);
+    }
+    // setSchools([]);
     setTimeout(() => setShowComponent(true), 1200);
-    getAllSchools().then((data) => {
-      setIsLoading(false);
-      setSchools(data);
-    });
-  }, []);
+    getAllSchools(filters)
+      .then((data) => {
+        setSchools(data);
+      })
+      .finally(() => setIsLoading(false));
+  }, [filters]);
 
   return (
     <Layout>
@@ -45,44 +53,7 @@ const Catalog = () => {
         <PageHeader image={catalogHeaderImage} />
         <main className="section-catalog section">
           <div className="catalog container-primary">
-            <FilterMenu />
-            {/* <div className="catalog-search--menu">
-              <h3 className="catalog-search-menu--title">Filter by</h3>
-              <button
-                className="search-menu--style"
-                onClick={() => setAccordion((prev) => !prev)}
-              >
-                <div className="box-top btn-search">
-                  <p>Style</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="chevron-down"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
-                </div>
-                <div
-                  className={`search-menu-hidden-box ${!accordion && "hidden"}`}
-                >
-                  At some point you need to finish the logic here
-                  <button className="hidden-box--btn">Hip Hop</button>
-                  <button className="hidden-box--btn">Balet</button>
-                  <button className="hidden-box--btn">Folklore</button>
-                  <button className="hidden-box--btn">Modern Dance</button>
-                </div>
-              </button>
-              <button className="btn-search">Newest</button>
-              <button className="btn-search">Oldest</button>
-              {user && <button className="btn btn--add">Add school</button>}
-            </div> */}
+            <FilterMenu setFilters={setFilters} filters={filters} />
             <div className="catalog-list">
               {isLoading && <CustomSpinner />}
               {schools.map((school) => (
