@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import CustomSpinner from "../../components/spinner/Spinner";
+import CustomSpinner from "../../components/Spinner/Spinner";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
 import { Spinner } from "@chakra-ui/react";

@@ -3,9 +3,8 @@ import "./Edit.scss";
 import { edit, getSingle } from "../../services/users";
 import { useEffect, useState } from "react";
 
-import CustomSpinner from "../../components/spinner/Spinner";
+import CustomSpinner from "../../components/Spinner/Spinner";
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
-import { Image } from "cloudinary-react";
 import Layout from "../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { Spinner } from "@chakra-ui/react";
@@ -15,6 +14,8 @@ import { useNotification } from "../../hooks/useNotification";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import userAvatar from "../../assets/images/blank-avatar-image.jpg";
+
+// import { Image } from "cloudinary-react";
 
 const Edit = () => {
   const { setUser, navigate, user } = useUserContext();
@@ -77,14 +78,14 @@ const Edit = () => {
           <>
             {httpLoading && <Spinner style={{ marginBottom: "25px" }} />}
             <div className="user-avatar">
-              {typeof avatar == "string" && (
+              {/* {typeof avatar == "string" && (
                 <Image
                   cloudName="du4uhmyq2"
                   width="300"
                   publicId={avatar}
                   crop="scale"
                 />
-              )}
+              )} */}
               {!avatar && <img src={userAvatar} alt="user-avatar" />}
             </div>
             <div className="user-image__wrapper"></div>

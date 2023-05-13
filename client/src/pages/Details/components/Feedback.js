@@ -1,5 +1,4 @@
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { Image, Placeholder } from "cloudinary-react";
 import { deleteFeedback, updateFeedback } from "../../../services/feedbacks";
 
 import EditFeedbackModal from "./EditFeedbackModal";
@@ -7,6 +6,8 @@ import defaultAvatar from "../../../assets/images/blank-avatar-image.jpg";
 import { singleSchoolActions } from "../../../reducers/singleSchoolReducer";
 import { useDisclosure } from "@chakra-ui/react";
 import { useUserContext } from "../../../contexts/AuthContext";
+
+// import { Image, Placeholder } from "cloudinary-react";
 
 const Feedback = ({ owner, text, _id, schoolId, dispatch }) => {
   const { user } = useUserContext();
@@ -42,9 +43,9 @@ const Feedback = ({ owner, text, _id, schoolId, dispatch }) => {
           {!owner.avatar && (
             <img src={defaultAvatar} alt="User Avatar" className="avatar" />
           )}
-          {owner.avatar && (
+          {/* {owner.avatar && (
             <Image cloudName="du4uhmyq2" width="300" publicId={owner.avatar} />
-          )}
+          )} */}
         </div>
         <h3 className="feedback-user__name">
           {owner?.firstName} {owner?.lastName}

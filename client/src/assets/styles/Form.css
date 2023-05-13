@@ -1,0 +1,82 @@
+@import url("../../App.css");
+
+.form-wrapper {
+  background-color: #e9e9ea;
+}
+
+.form-grid--wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3.2rem;
+}
+
+.form-flex--wrapper {
+  display: flex;
+  align-items: center;
+}
+.form-label {
+  display: block;
+  margin-bottom: 2.4rem;
+}
+
+.form {
+  position: relative;
+  z-index: 2;
+  padding: 2.4rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-desc {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 4.4rem;
+}
+.input-label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+.form-input {
+  display: block;
+  padding: 1.6rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.5px solid #eee;
+  border-radius: 0.4rem;
+  outline: none;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-input::placeholder {
+  color: #999;
+  font-size: 1.4rem;
+}
+
+.form-btn {
+  display: block;
+}
+
+.btn-spinner {
+  margin-right: 0.8rem;
+}
+
+.form-input:focus {
+  box-shadow: inset 0px 0px 2px #888;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  text-align: start;
+  gap: 0.8rem;
+}
+
+.btn-desc {
+  font-size: 1.4rem;
+  color: #ccc;
+}

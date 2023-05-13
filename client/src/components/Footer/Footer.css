@@ -1,0 +1,34 @@
+.section-footer {
+  background-color: #212529;
+}
+.footer {
+  color: #fff;
+  align-items: start !important;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.footer-about--desc {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.contact-list {
+  display: flex;
+  gap: 2.4rem;
+}
+.contact-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer.grid--cols-3 {
+    grid-template-columns: auto;
+    gap: 2.4rem;
+  }
+}

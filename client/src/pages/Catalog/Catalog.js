@@ -1,101 +1,67 @@
-import "./Catalog.scss";
+import "./Catalog.css";
+import "../../App.css";
 
 import { useEffect, useRef, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
-import CustomSpinner from "../../components/spinner/Spinner";
-import { FiSearch } from "react-icons/fi";
+import CustomSpinner from "../../components/Spinner/Spinner";
+import FilterMenu from "../../components/FilterMenu/FIlterMenu";
 import GreetModal from "../../components/Modal/Modal";
 import Layout from "../../components/Layout/Layout";
-import { Link } from "react-router-dom";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import catalogHeaderImage from "../../assets/images/page_headers/catalog-header.jpg";
 import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
 import { useSchoolContext } from "../../contexts/SchoolContext";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Catalog = () => {
-  const [query, setQuery] = useState("");
-  const { schools, setSchools, sortByLikes, sortByLatest } = useSchoolContext();
-  const [isLoading, setIsLoading] = useState({});
+  const { schools, setSchools } = useSchoolContext();
+  const [isLoading, setIsLoading] = useState();
   const [showComponent, setShowComponent] = useState(false);
+  const [filters, setFilters] = useState({
+    location: "",
+    style: "",
+    order: "",
+  });
 
   const { getAllSchools } = schoolsFactory();
   const { user } = useUserContext();
 
+  console.log(schools);
+
   useEffect(() => {
-    setPageTitle("Каталог");
-    setTimeout(() => setShowComponent(true), 1200);
-    getAllSchools().then((data) => {
-      setIsLoading(false);
-      setSchools(data);
-    });
-  }, []);
-
-  const inputRef = useRef();
-  const selectRef = useRef();
-
-  let filteredSchools = schools.filter((school) =>
-    school.settlement.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const onSearch = (e) => {
-    switch (e.target.value) {
-      case "likes":
-        sortByLikes();
-        break;
-      case "newest":
-        sortByLatest();
-        break;
+    setPageTitle("Catalog");
+    // finish this logic, I need it to make so that only the button has a spinner when using the filterin feature
+    if (Object.values(filters).every((val) => val == "")) {
+      setIsLoading(true);
     }
-  };
+    // setSchools([]);
+    setTimeout(() => setShowComponent(true), 1200);
+    getAllSchools(filters)
+      .then((data) => {
+        setSchools(data);
+      })
+      .finally(() => setIsLoading(false));
+  }, [filters]);
 
   return (
     <Layout>
       {user?.isNewAcc && showComponent && <GreetModal />}
+
       <div className="catalog-page">
-        <div className="search-wrap">
-          <select
-            className="search-select"
-            defaultValue="settlement"
-            onChange={onSearch}
-            ref={selectRef}
-          >
-            <option value="settlement">Населено място</option>
-            <option value="newest">Последно добавени</option>
-            <option value="likes">Най - харесвани</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Търсене"
-            ref={inputRef}
-            onChange={(e) => setQuery(e.target.value)}
-            onClick={() => (selectRef.current.value = "settlement")}
-          />
-          <span className="search-icon__container">
-            <FiSearch />
-          </span>
-        </div>
-
-        {!schools.length && !isLoading && (
-          <div className="missing__schools">
-            <p> Все още няма добавени училища. Бъди първият!</p>
-            <Link to="/create">Създай</Link>
+        <PageHeader image={catalogHeaderImage} />
+        <main className="section-catalog section">
+          <div className="catalog container-primary">
+            <FilterMenu setFilters={setFilters} filters={filters} />
+            <div className="catalog-list">
+              {isLoading && <CustomSpinner />}
+              {schools.map((school) => (
+                <Card key={school._id} {...school} />
+              ))}
+            </div>
           </div>
-        )}
-
-        {isLoading && !Boolean(schools.length) && <CustomSpinner />}
-
-        {!filteredSchools.length && schools.length && !isLoading ? (
-          <div className="missing__schools">
-            <p> Няма резултат</p>
-          </div>
-        ) : (
-          <div className="card-container">
-            {filteredSchools.map((school) => (
-              <Card key={school._id} {...school} />
-            ))}
-          </div>
-        )}
+        </main>
       </div>
     </Layout>
   );

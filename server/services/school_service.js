@@ -1,8 +1,11 @@
 const DanceSchool = require("../models/DanceSchool");
 const User = require("../models/User");
 
-const getAllSchools = async (query) => {
-  return DanceSchool.find().lean();
+const getAllSchools = async (query, sortObj) => {
+  return DanceSchool.find(query)
+    .sort(sortObj)
+    .populate("owner", ["email, phoneNumber, link"])
+    .lean();
 };
 
 const getSingleSchool = async (id) => {

@@ -1,0 +1,42 @@
+.page-title--primary {
+  color: #fff;
+}
+
+.page-desc {
+  color: var(--clr-page-desc);
+  margin-bottom: 0 !important;
+}
+
+.page-header--img {
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.header-right-box {
+  position: relative;
+}
+
+.header-right-box:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background-color: var(--clr-main--dark);
+  transform: rotate(-2deg);
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .page-header.grid--cols-2 {
+    grid-template-columns: auto;
+    gap: 2.4rem;
+  }
+
+  .page-header--image {
+    display: none;
+  }
+}
