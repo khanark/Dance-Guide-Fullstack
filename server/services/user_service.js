@@ -73,7 +73,9 @@ const verifyToken = async (token) => {
 };
 
 const getSingleUser = async (id) => {
-  const user = await User.findById(id).populate("danceSchools").lean();
+  const user = await User.findById(id)
+    .populate(["danceSchools", "likedSchools"])
+    .lean();
   console.log(user);
   return userViewModel(user);
 };
