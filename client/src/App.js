@@ -28,7 +28,7 @@ function App() {
             <Route path="/details/:schoolId" element={<Details />} />
             <Route element={<PrivateRoute redirectPath="/login" />}>
               <Route path="/user/edit" element={<Edit />} />
-              <Route path="/user/profile" element={<Profile />} />
+              <Route path="/user/profile/:userId" element={<Profile />} />
               <Route path="/create" element={<Create />} />
               <Route path="/school/edit/:schoolId" element={<SchoolEdit />} />
             </Route>

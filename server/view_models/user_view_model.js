@@ -8,6 +8,7 @@ module.exports = (user, token) => {
     avatar,
     moreInfo,
     danceSchools,
+    likedSchools,
   } = user;
   return {
     _id,
@@ -18,6 +19,7 @@ module.exports = (user, token) => {
     avatar,
     moreInfo,
     danceSchools,
+    likedSchools,
     token,
   };
 };

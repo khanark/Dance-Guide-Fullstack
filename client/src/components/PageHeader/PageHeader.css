@@ -1,10 +1,18 @@
-.page-title--primary {
-  color: #fff;
+.page-header .title-primary {
+  color: var(--clr-main--dark);
 }
 
-.page-desc {
-  color: var(--clr-page-desc);
-  margin-bottom: 0 !important;
+.page-header .title-secondary {
+  color: var(--clr-grey--dark);
+}
+
+.page-header .title-primary,
+.page-header .title-secondary {
+  color: var(--clr-grey--dark);
+}
+
+.page-header .desc {
+  color: var(--clr-grey--light);
 }
 
 .page-header--img {
@@ -24,7 +32,6 @@
   left: 10px;
   width: 100%;
   height: 100%;
-  opacity: 0.8;
   background-color: var(--clr-main--dark);
   transform: rotate(-2deg);
   border-radius: 8px;

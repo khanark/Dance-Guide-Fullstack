@@ -3,7 +3,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--clr-grey--light);
 }
 
 .header-nav.container-primary {
@@ -11,11 +10,11 @@
 }
 
 .landing-bg {
-  background-color: var(--clr-grey--dark);
+  background-color: #f68b8b;
 }
 
 .landing-link {
-  color: #fff;
+  color: #f68b8b;
 }
 
 .nav-link--create,
@@ -23,36 +22,12 @@
   position: relative;
 }
 
-.nav-link--create:before {
-  content: "";
-  width: 5rem;
-  position: absolute;
-  height: 0.2rem;
-  bottom: -0.8rem;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0.8rem;
-  display: block;
-  background-color: var(--clr-main--dark);
-}
-
 .logo {
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: -1.05;
+  color: var(--clr-grey--dark);
   z-index: 1;
-}
-
-.logo:before {
-  content: "";
-  position: absolute;
-  width: 55%;
-  left: -2px;
-  top: -1.5px;
-  border-radius: 8px;
-  height: 120%;
-  z-index: -1;
-  background-color: var(--clr-main--dark);
 }
 
 .nav {
@@ -66,13 +41,13 @@
   font-size: 1.6rem;
   font-weight: 500;
   transition: all 0.3s;
+  color: var(--clr-grey--dark);
 }
 
 .nav-link.nav-link--catalog {
   position: absolute;
   width: 50%;
   height: 100%;
-  background-color: red;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -115,27 +90,27 @@
 }
 
 .auth-page .nav-link {
-  border: 1px solid #fff;
+  border: 1px solid var(--clr-grey--dark);
   padding: 0.8rem 1.6rem;
   border-radius: 4px;
 }
 
 .auth-page .nav-link:hover {
-  border-color: var(--clr-main--dark);
+  border-color: #fff;
+  color: #fff;
 }
 
 .auth-question {
   font-size: 1.4rem;
   font-weight: 500;
-  color: #bcbebf;
+  color: var(--clr-grey--dark);
 }
 
 /* .catalog-link.nav-link {
 } */
 
 .nav-link:hover {
-  text-shadow: none;
-  color: var(--clr-main--light);
+  color: var(--clr-grey--light);
 }
 
 /* USER DROPDOWN */
@@ -177,7 +152,7 @@
   position: absolute;
   width: 1.5rem;
   height: 1.5rem;
-  top: -1rem;
+  top: -0.5rem;
   right: 2rem;
   transform: rotate(45deg);
   background-color: #fff;
@@ -214,7 +189,6 @@
 .user-avatar--img {
   width: 5rem;
   height: 5rem;
-  border: 2px solid var(--clr-main--dark);
   border-radius: 50%;
   object-fit: cover;
   transition: all 0.3s;
@@ -223,6 +197,10 @@
 
 .user-avatar--img:hover {
   border-color: var(--clr-main--light);
+}
+
+.nav-link--active {
+  color: #fff;
 }
 
 .user-dropdown--link {

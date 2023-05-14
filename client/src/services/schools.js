@@ -13,7 +13,6 @@ const getAllSchools = async (filters) => {
     return val !== "";
   });
   const composedQuery = new URLSearchParams(query);
-  console.log(composedQuery.toString());
   return api.get(endpoints.getAll(composedQuery.toString()));
 };
 

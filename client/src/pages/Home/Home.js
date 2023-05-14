@@ -15,7 +15,7 @@ const Home = () => {
     <div className="home-page">
       <Layout isLandingPage={true}>
         <section className="hero container section">
-          <h1 className="title-primary text-shadow">
+          <h1 className="title-primary">
             Your <span>ultimate</span> resource for dance schools in your area!
           </h1>
           <p className="desc text-shadow">

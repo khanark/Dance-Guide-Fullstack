@@ -45,7 +45,9 @@ const Catalog = () => {
       {user?.isNewAcc && showComponent && <GreetModal />}
 
       <div className="catalog-page">
-        <PageHeader image={catalogHeaderImage} />
+        <header className="catalog-header">
+          <PageHeader image={catalogHeaderImage} />
+        </header>
         <main className="section-catalog section">
           <div className="catalog container-primary">
             <FilterMenu setFilters={setFilters} filters={filters} />

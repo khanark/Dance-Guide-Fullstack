@@ -2,13 +2,18 @@ import "./Navigation.css";
 
 import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
+import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
-const Navigation = ({ isLandingPage, authPage }) => {
+const Navigation = ({
+  isLandingPage,
+  authPage,
+  onNavLinkClick,
+  navLinkActive,
+}) => {
   const { user, clearUser } = useUserContext();
   const [dropdown, setDropdown] = useState(false);
 
@@ -22,7 +27,7 @@ const Navigation = ({ isLandingPage, authPage }) => {
   const userImage = useCloudinaryImage(user?.avatar);
 
   return (
-    <header className={!isLandingPage && "landing-bg"}>
+    <header className={`nav-header ${!isLandingPage && "landing-bg"}`}>
       <nav
         className={`header-nav container-primary ${
           !isLandingPage && "landing-link"
@@ -51,18 +56,39 @@ const Navigation = ({ isLandingPage, authPage }) => {
         {!authPage && (
           <ul className="nav">
             <li>
-              <Link to="/" className="nav-link">
+              <Link
+                id="nav-link--1"
+                to="/"
+                className={`nav-link ${
+                  navLinkActive == "nav-link--1" ? "nav-link--active" : ""
+                }`}
+                onClick={onNavLinkClick}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/catalog" className="nav-link">
+              <Link
+                id="nav-link--2"
+                to="/catalog"
+                className={`nav-link ${
+                  navLinkActive == "nav-link--2" ? "nav-link--active" : ""
+                }`}
+                onClick={onNavLinkClick}
+              >
                 Catalog
               </Link>
             </li>
             {user && (
               <li>
-                <Link to="/create" className="nav-link nav-link--create">
+                <Link
+                  id="nav-link--3"
+                  to="/create"
+                  className={`nav-link ${
+                    navLinkActive == "nav-link--3" ? "nav-link--active" : ""
+                  }`}
+                  onClick={onNavLinkClick}
+                >
                   Create School
                 </Link>
               </li>
@@ -106,7 +132,10 @@ const Navigation = ({ isLandingPage, authPage }) => {
                   <p className="user-dropdown--email">{user?.email}</p>
                   <ul className="user-dropdown--list">
                     <li className="link-wrapper">
-                      <Link to="/user/profile" className="user-dropdown--link">
+                      <Link
+                        to={`/user/profile/${user?._id}`}
+                        className="user-dropdown--link"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
