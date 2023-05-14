@@ -1,13 +1,23 @@
 import { useState } from "react";
 
 const modelLocalStorage = (value) => {
-  const { _id, avatar, firstName, lastName, email, moreInfo, token, isNewAcc } =
-    value;
+  const {
+    _id,
+    avatar,
+    firstName,
+    lastName,
+    email,
+    moreInfo,
+    token,
+    isNewAcc,
+    phoneNumber,
+  } = value;
   return {
     _id,
     avatar,
     firstName,
     lastName,
+    phoneNumber,
     email,
     moreInfo,
     token,

@@ -1,8 +1,11 @@
 .filter-menu {
+  position: sticky;
+  top: 16rem;
+  z-index: 999;
   width: 30rem;
   padding: 2.4rem;
   background-color: #fff;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.07);
   border-radius: 8px;
 }
 
@@ -15,13 +18,17 @@
   position: relative;
 }
 
+.menu-title,
+.input-title {
+  color: var(--clr-grey--dark) !important;
+}
+
 .menu-title {
   font-size: 2.4rem;
   font-weight: 500;
   padding-bottom: 0.8rem;
   margin-bottom: 1.6rem;
   border-bottom: 2px solid #ccc;
-  color: var(--clr-main--light);
 }
 
 .input-title {
@@ -31,7 +38,7 @@
 }
 .input-field {
   width: 100%;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   border-radius: 0.4rem;
   padding: 0.8rem;
   outline: none;
@@ -62,4 +69,21 @@
 
 .btn-filter:hover {
   background-color: var(--clr-grey--dark--hover);
+}
+
+@media screen and (max-width: 768px) {
+  .filter-menu {
+    top: 2rem;
+    width: 100%;
+  }
+
+  .filter-menu form {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .menu-title {
+    text-align: center;
+  }
 }

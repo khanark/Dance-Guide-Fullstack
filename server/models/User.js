@@ -53,6 +53,7 @@ const userSchema = new Schema({
     maxLength: [200, "More info should be maximum 200 characters long"],
   },
   danceSchools: [{ type: ObjectId, ref: "DanceSchool" }],
+  likedSchools: [{ type: ObjectId, ref: "DanceSchool" }],
 });
 
 userSchema.index(

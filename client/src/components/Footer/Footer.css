@@ -1,8 +1,8 @@
 .section-footer {
-  background-color: #212529;
+  background-color: #f68b8b;
 }
+
 .footer {
-  color: #fff;
   align-items: start !important;
 }
 
@@ -16,6 +16,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.5;
+  color: var(--clr-grey--dark);
 }
 .contact-list {
   display: flex;

@@ -2,7 +2,6 @@ import "./FIlterMenu.css";
 
 const FilterMenu = ({ filters, setFilters }) => {
   const onChangeHandler = (e) => {
-    console.log(e.target.value);
     setFilters((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -18,7 +17,6 @@ const FilterMenu = ({ filters, setFilters }) => {
   };
 
   const setDebouncedLocation = debounce(onChangeHandler, 500);
-  console.log(filters);
 
   return (
     <div className="filter-menu">
@@ -84,7 +82,6 @@ const FilterMenu = ({ filters, setFilters }) => {
             <option value="oldest">Oldest</option>
           </select>
         </label>
-        {/* <button className="btn-filter">Search</button> */}
       </form>
     </div>
   );

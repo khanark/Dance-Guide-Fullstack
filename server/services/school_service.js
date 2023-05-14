@@ -63,9 +63,12 @@ const createSchool = async ({
 
 const likeSchool = async (schoolId, { userId }) => {
   const school = await DanceSchool.findById(schoolId);
+  const user = await User.findById(userId);
   if (school.likes.users.includes(userId)) return school;
   school.likes.users.push(userId);
   school.likes.count += 1;
+  user.likedSchools.push(schoolId);
+  await user.save();
   await school.save();
   return school;
 };

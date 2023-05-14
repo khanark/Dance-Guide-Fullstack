@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"); */
 
 * {
   margin: 0;
@@ -10,44 +12,36 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 :root {
-  --clr-main--dark: #e03131;
-  --clr-main--light: #fa5252;
-  --clr-grey--dark: #212529;
-  --clr-grey--dark--hover: #343a40;
-  --clr-grey--light: #f8f9fa;
-  --clr-page-desc: #d3d3d4;
+  --clr-main--dark: #f03e3e;
+  --clr-main--dark-hover: #f36565;
+  --clr-main--bg: #fff5f5;
+  --clr-grey--dark: #333131;
+  --clr-grey--dark--hover: #6d7379;
+  --clr-grey--light: #666262;
 }
 
 body #root {
   font-family: "Inter", sans-serif;
-  color: var(--clr-grey--dark);
+  color: var(--clr-grey--light);
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Define the style for the scrollbar track */
-::-webkit-scrollbar-track {
-  background-color: #f5f5f5;
+html::-webkit-scrollbar {
+  width: 0.25vw;
 }
 
-/* Define the style for the scrollbar thumb */
-::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 5px;
+html::-webkit-scrollbar-track {
+  background-color: var(--clr-grey--dark--hover);
 }
 
-/* Define the style for the scrollbar thumb when hovering over it */
-::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
-}
-
-/* Define the style for the scrollbar corner */
-::-webkit-scrollbar-corner {
-  background-color: #f5f5f5;
+html::-webkit-scrollbar-thumb {
+  background-color: #e9e9ea;
 }
 
 @media screen and (max-width: 768px) {
