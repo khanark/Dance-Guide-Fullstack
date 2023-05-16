@@ -103,7 +103,9 @@ const Login = () => {
               {isLoading && <Spinner className="btn-spinner" />}
               Login
             </button>
-            {isLoading && <p className="btn-desc">Please wait...</p>}
+            {isLoading && (
+              <p className="btn-desc">Opening the door for you...</p>
+            )}
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import "./Create.css";
 import "../../assets/styles/Form.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
@@ -30,7 +30,6 @@ const Create = () => {
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -84,8 +83,8 @@ const Create = () => {
               <input
                 type="file"
                 className="form-input photo-input"
-                id="image"
                 {...register("image")}
+                id="image"
                 onChange={handleAvatarChange}
               />
               <label
@@ -146,6 +145,7 @@ const Create = () => {
             {isLoading && <Spinner className="btn-spinner" />}
             Create
           </button>
+          {isLoading && <p className="btn-desc">Creating school...</p>}
         </form>
       </div>
     </Layout>
