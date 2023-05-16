@@ -121,7 +121,11 @@ const Register = () => {
               {isLoading && <Spinner className="btn-spinner" />}
               Register
             </button>
-            {isLoading && <p className="btn-desc">Please wait...</p>}
+            {isLoading && (
+              <p className="btn-desc">
+                Sit back while we create your account...
+              </p>
+            )}
           </div>
         </form>
       </div>

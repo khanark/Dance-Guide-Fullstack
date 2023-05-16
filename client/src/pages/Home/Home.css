@@ -3,7 +3,11 @@
 .home-page {
   height: 100vh;
   position: relative;
-  background-image: linear-gradient(rgba(34, 34, 34, 0.6), rgb(34, 34, 34, 0.6)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(51, 49, 49, 0.9),
+      rgb(51, 49, 49, 0.6)
+    ),
     url("../../assets/images/hero-image.jpg");
   background-position: center;
   background-size: cover;
@@ -68,7 +72,7 @@
 
 .btn--signin:hover {
   box-shadow: none;
-  background-color: var(--clr-main--light);
+  background-color: var(--clr-main--dark-hover);
 }
 
 .title-primary span {

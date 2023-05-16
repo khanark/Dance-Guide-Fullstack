@@ -1,22 +1,26 @@
 .section-footer {
-  background-color: #f68b8b;
+  background-color: var(--clr-grey--dark);
 }
 
 .footer {
   align-items: start !important;
 }
 
+.footer .title-secondary {
+  color: #fff;
+}
+
 .footer-nav {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 0.8rem;
 }
 
 .footer-about--desc {
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--clr-grey--dark);
+  color: #ccc;
 }
 .contact-list {
   display: flex;

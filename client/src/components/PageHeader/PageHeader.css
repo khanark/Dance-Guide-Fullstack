@@ -1,18 +1,14 @@
-.page-header .title-primary {
+.page-header .title-primary,
+.page-header .title-secondary {
+  color: #fff;
+}
+
+.page-header .title-secondary {
   color: var(--clr-main--dark);
 }
 
-.page-header .title-secondary {
-  color: var(--clr-grey--dark);
-}
-
-.page-header .title-primary,
-.page-header .title-secondary {
-  color: var(--clr-grey--dark);
-}
-
 .page-header .desc {
-  color: var(--clr-grey--light);
+  color: #ccc;
 }
 
 .page-header--img {
