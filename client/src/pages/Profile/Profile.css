@@ -182,3 +182,7 @@
   color: var(--clr-grey--dark) !important;
   border-bottom: 2px solid var(--clr-main--dark) !important;
 }
+
+.school-list {
+  min-height: 56rem;
+}
