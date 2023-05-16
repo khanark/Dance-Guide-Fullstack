@@ -3,7 +3,12 @@
 
 import "./Card.css";
 
-import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
+import {
+  AdvancedImage,
+  lazyload,
+  placeholder,
+  responsive,
+} from "@cloudinary/react";
 
 import { Link } from "react-router-dom";
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -41,7 +46,9 @@ const Card = ({ _id, name, image, settlement, likes }) => {
         /> */}
         <AdvancedImage
           cldImg={url}
-          plugins={[lazyload(), responsive()]}
+          //  use the plugins to lazy load and add a responsive behavior to the image
+
+          // plugins={[lazyload(), responsive({steps:  }), placeholder({ mode: "blur" })]}
           className="item-img"
         />
         <div className="item-info">

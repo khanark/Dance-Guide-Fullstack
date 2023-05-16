@@ -31,7 +31,6 @@ const Catalog = () => {
   useEffect(() => {
     setPageTitle("Catalog");
     setIsLoading(true);
-    setSchools([]);
     setTimeout(() => setShowComponent(true), 1200);
     getAllSchools(filters)
       .then((data) => {

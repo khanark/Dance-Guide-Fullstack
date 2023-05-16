@@ -184,6 +184,12 @@ const Navigation = ({
           </ul>
         )}
       </nav>
+      <div className="reconstruction ">
+        <h3 className="subtitle">Website is under reconstruction!</h3>
+        <p className="desc">
+          Some of the features might be missing or not working as expected.
+        </p>
+      </div>
     </header>
   );
 };
