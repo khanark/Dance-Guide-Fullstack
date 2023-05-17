@@ -32,6 +32,7 @@ const Catalog = () => {
     setPageTitle("Catalog");
     setIsLoading(true);
     setTimeout(() => setShowComponent(true), 1200);
+    console.log(filters);
     getAllSchools(filters)
       .then((data) => {
         setSchools(data);

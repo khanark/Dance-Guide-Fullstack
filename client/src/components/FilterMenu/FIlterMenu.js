@@ -1,22 +1,31 @@
 import "./FIlterMenu.css";
 
+import { useEffect, useState } from "react";
+
 const FilterMenu = ({ filters, setFilters }) => {
+  const [debouncedLocation, setDebouncedLocation] = useState("");
+
+  useEffect(() => {
+    const debouncedTimer = setTimeout(() => {
+      setFilters((prevState) => ({
+        ...prevState,
+        location: debouncedLocation,
+      }));
+    }, 500);
+
+    return () => clearTimeout(debouncedTimer);
+  }, [debouncedLocation]);
+
   const onChangeHandler = (e) => {
-    setFilters((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.name === "location") {
+      setDebouncedLocation(e.target.value);
+    } else {
+      setFilters((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
-
-  const debounce = (cb, delay) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => cb(...args), delay);
-    };
-  };
-
-  const setDebouncedLocation = debounce(onChangeHandler, 500);
 
   return (
     <div className="filter-menu">
@@ -30,8 +39,8 @@ const FilterMenu = ({ filters, setFilters }) => {
               name="location"
               placeholder="Sofia..."
               className="input-field"
-              value={filters.location}
-              onChange={setDebouncedLocation}
+              value={debouncedLocation}
+              onChange={onChangeHandler}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -122,9 +122,7 @@ const Register = () => {
               Register
             </button>
             {isLoading && (
-              <p className="btn-desc">
-                Sit back while we create your account...
-              </p>
+              <p className="btn-desc">Creating your account ☻...</p>
             )}
           </div>
         </form>
