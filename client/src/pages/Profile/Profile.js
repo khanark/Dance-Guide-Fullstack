@@ -10,7 +10,6 @@ import NoSchool from "./components/NoSchool";
 import { Spinner } from "@chakra-ui/react";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import { getSingle } from "../../services/users";
-import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 import { useParams } from "react-router-dom";
@@ -26,6 +25,8 @@ const Profile = () => {
     setActiveButton(e.target.id);
   }
 
+  const isCurrentLoggedInUser = user?._id == userId;
+
   useEffect(() => {
     setPageTitle("Profile");
     setLoading(true);
@@ -35,8 +36,6 @@ const Profile = () => {
       })
       .finally(() => setLoading(false));
   }, []);
-
-  console.log(user);
 
   return (
     <Layout>
@@ -144,24 +143,26 @@ const Profile = () => {
                   </p>
                 </div>
                 <div className="user-btns--wrapper">
-                  <button className="btn user-btn--wrapper">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="user-btn--icon"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-                      />
-                    </svg>
+                  {!isCurrentLoggedInUser && (
+                    <button className="btn user-btn--wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        className="user-btn--icon"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                        />
+                      </svg>
 
-                    <p className="subtitle">Send Message</p>
-                  </button>
+                      <p className="subtitle">Send Message</p>
+                    </button>
+                  )}
                   <button className="btn user-btn--wrapper">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -200,27 +201,39 @@ const Profile = () => {
                   >
                     Liked
                   </button>
-                  <button
-                    id="user-btn--3"
-                    className={`subtitle ${
-                      activeButton == "user-btn--3" ? "active" : ""
-                    }`}
-                    onClick={onUserButtonClick}
-                  >
-                    Send message to the user
-                  </button>
+                  {!isCurrentLoggedInUser && (
+                    <button
+                      id="user-btn--3"
+                      className={`subtitle ${
+                        activeButton == "user-btn--3" ? "active" : ""
+                      }`}
+                      onClick={onUserButtonClick}
+                    >
+                      Send message to the user
+                    </button>
+                  )}
                 </div>
               </div>
-              <ul className="school-list grid grid--cols-3">
-                {activeButton == "user-btn--1" &&
-                  user?.danceSchools.map((school) => (
+              {activeButton == "user-btn--1" &&
+              user?.danceSchools.length > 0 ? (
+                <ul className="school-list grid grid--cols-3">
+                  {user?.danceSchools.map((school) => (
                     <Card key={school._id} {...school} />
                   ))}
-                {activeButton == "user-btn--2" &&
-                  user?.likedSchools.map((school) => (
+                </ul>
+              ) : (
+                <p className="desc">You have not created any school yet.</p>
+              )}
+              {activeButton == "user-btn--2" &&
+              user?.likedSchools.length > 0 ? (
+                <ul className="school-list grid grid--cols-3">
+                  {user?.likedSchools.map((school) => (
                     <Card key={school._id} {...school} />
                   ))}
-              </ul>
+                </ul>
+              ) : (
+                <p className="desc">You have not liked any school yet.</p>
+              )}
             </div>
           )}
         </div>
