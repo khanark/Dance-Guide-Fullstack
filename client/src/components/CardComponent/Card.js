@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 
-const Card = ({ _id, name, image, settlement, likes }) => {
+const Card = ({ _id, name, image, settlement, likes, owner }) => {
+  console.log(owner);
   const url = useCloudinaryImage(image);
   url.resize(fill().width(400).height(400));
 
@@ -38,17 +39,9 @@ const Card = ({ _id, name, image, settlement, likes }) => {
           </svg>
           <p className="text-likes">{likes.count}</p>
         </div>
-
-        {/* <AdvancedImage
-          className="item-img"
-          cldImg={url}
-          plugins={[lazyload(), responsive()]}
-        /> */}
         <AdvancedImage
           cldImg={url}
-          //  use the plugins to lazy load and add a responsive behavior to the image
-
-          // plugins={[lazyload(), responsive({steps:  }), placeholder({ mode: "blur" })]}
+          plugins={[lazyload(), responsive(), placeholder()]}
           className="item-img"
         />
         <div className="item-info">
