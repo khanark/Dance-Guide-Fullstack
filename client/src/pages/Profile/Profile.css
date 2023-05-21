@@ -75,12 +75,6 @@
   margin-bottom: 1.6rem;
 }
 
-.profile-box--right .title-secondary {
-  color: var(--clr-grey--dark);
-  letter-spacing: -1.75px;
-  margin: 0;
-}
-
 .user-hometown--wrapper,
 .user-btns--wrapper,
 .profile-box-header--top {
@@ -103,8 +97,8 @@
 .user-hometown--icon,
 .user-btn--icon,
 .line-devider--icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .line-devider--icon {
@@ -119,7 +113,11 @@
 .profile-box-header--top {
   position: relative;
   gap: 4.8rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.profile-box-header--top .title-secondary {
+  margin-bottom: 0;
 }
 
 .user-hometown {

@@ -3,6 +3,12 @@
   color: #fff;
 }
 
+.page-header .title-primary,
+.page-header .title-secondary,
+.page-header .desc {
+  margin-top: 0;
+}
+
 .page-header .title-secondary {
   color: var(--clr-main--dark);
 }

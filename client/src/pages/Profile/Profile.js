@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import Card from "../../components/CardComponent/Card";
 import Layout from "../../components/Layout/Layout";
-import NoSchool from "./components/NoSchool";
+import ProfileEditModalLeft from "../../components/Modal/ProfileEditModalLeft";
 import { Spinner } from "@chakra-ui/react";
 import { convertToPascalCase } from "../../util/util";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
@@ -40,6 +40,7 @@ const Profile = () => {
 
   return (
     <Layout>
+      <ProfileEditModalLeft />
       <section className="profile-page section">
         <div className="profile container-secondary grid grid--cols-2">
           <div className="profile-box--left">
@@ -98,9 +99,9 @@ const Profile = () => {
               <div className="profile-box-right-main">
                 <div className="profile-box-header--wrapper">
                   <div className="profile-box-header--top">
-                    <h3 className="title-secondary">
+                    <h4 className="title-secondary">
                       {convertToPascalCase(user?.firstName, user?.lastName)}
-                    </h3>
+                    </h4>
                     <div className="user-hometown--wrapper">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -121,9 +122,9 @@ const Profile = () => {
                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                         />
                       </svg>
-                      <p className="user-hometown">
+                      <span className="user-hometown">
                         {convertToPascalCase(user?.city)}
-                      </p>
+                      </span>
                     </div>
                     <button
                       type="button"
@@ -145,9 +146,9 @@ const Profile = () => {
                       </svg>
                     </button>
                   </div>
-                  <p className="subtitle user-ocupation">
+                  <h5 className="subtitle user-ocupation">
                     {convertToPascalCase(user?.expertise)}
-                  </p>
+                  </h5>
                 </div>
                 <div className="user-btns--wrapper">
                   {!isCurrentLoggedInUser && (

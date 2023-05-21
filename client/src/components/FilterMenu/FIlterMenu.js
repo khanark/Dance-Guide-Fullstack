@@ -48,7 +48,7 @@ const FilterMenu = ({ filters, setFilters }) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              class="location-icon"
+              className="location-icon"
             >
               <path
                 strokeLinecap="round"
