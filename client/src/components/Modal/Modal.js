@@ -36,37 +36,50 @@ const GreetModal = () => {
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Добре дошли във DanceGuide!</ModalHeader>
+          <ModalHeader
+            fontWeight={"bold"}
+            fontSize={"2.4rem"}
+            color={"#333"}
+            align={"center"}
+          >
+            Welcome to DanceGuide!
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Text fontWeight="bold" mb="1rem">
-              Благодарим ви, че посетихте нашия уебсайт!
+            <Text
+              fontSize={"1.6rem"}
+              fontWeight="bold"
+              mb="1.6rem"
+              color={"#555"}
+              align={"center"}
+            >
+              Thanks for visiting our website!
             </Text>
             <Text>
-              Нашата цел е да ви предоставим най-доброто потребителско
-              изживяване и да ви помогнем да постигнете целите си. За да ви
-              улесним, предлагаме ви възможността да завършите профила, за да
-              създадете своята първа публикация.
+              Our goal is to provide you with the best user experience and help
+              you achieve your goals. To make it easier for you, we offer you
+              the opportunity to complete your profile in order to create your
+              first publication.
             </Text>
             <Text marginTop="4">
-              Като попълните своя профил, можете да го използвате за да се
-              свържете с други потребители и да споделите повече информация за
-              себе си.
+              By completing your profile, you can use it to connect with other
+              users and share more information about yourself. You can also use
+              it to create your first publication.
             </Text>
             <Text marginTop="4">
-              Ако решите да създадете първа си публикация, можете да споделите
-              вашата мисия, знания или преживявания с другите потребители на
-              нашия уебсайт. Възможността да бъдете част от нашата общност и да
-              споделяте своите мисли и идеи с другите е едно от най-ценните
-              неща, които нашият уебсайт може да ви предложи.
+              If you decide to create your first publication, you can share your
+              mission, knowledge, or experiences with other users on our
+              website. The opportunity to be part of our community and share
+              your thoughts and ideas with others is one of the most valuable
+              things our website can offer you.
             </Text>
-            <Text marginTop="4" fontWeight="500">
-              Затова, преди да започнете да използвате нашия уебсайт, ви
-              препоръчваме да завършите профила си.{" "}
+            <Text marginTop="4" fontWeight="500" color={"#555"}>
+              Therefore, before you start using our website, we recommend
+              completing your profile.
             </Text>
             <Text marginTop="4">
-              Благодарим ви, че избрахте DanceGuide и се надяваме да се включите
-              активно в нашата общност!
+              Thank you for choosing DanceGuide, and we hope you actively engage
+              in our community!
             </Text>
           </ModalBody>
 
@@ -74,16 +87,15 @@ const GreetModal = () => {
             <Button
               colorScheme="purple"
               mr={3}
-              onClick={() => onClickNavigate("/user/edit")}
+              onClick={() => onClickNavigate(`/user/profile/${user?._id}`)}
             >
-              Завърши профила
+              Complete registration
             </Button>
             <Button
               colorScheme="gray"
-              mr={3}
               onClick={() => onClickNavigate("/catalog")}
             >
-              Каталог
+              Catalog
             </Button>
           </ModalFooter>
         </ModalContent>

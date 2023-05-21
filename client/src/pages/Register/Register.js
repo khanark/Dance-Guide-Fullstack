@@ -44,7 +44,6 @@ const Register = () => {
       setTimeout(() => navigate("/login"), 1500);
       setEmail(data.email.toLowerCase());
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
       notificateError({
         title: "Грешка при регистрация",
