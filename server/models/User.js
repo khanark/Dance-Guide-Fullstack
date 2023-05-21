@@ -14,14 +14,12 @@ const userSchema = new Schema({
   phoneNumber: {
     type: String,
     required: true,
-    validate: {
-      validator: function (value) {
-        return /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/.test(
-          value
-        );
-      },
-      message: "Invalid phone format",
-    },
+    // validate: {
+    //   validator: function (value) {
+    //     return /^\+359\d{9}$/.test(value);
+    //   },
+    //   message: "Invalid phone format",
+    // },
   },
   email: {
     type: String,
@@ -32,6 +30,16 @@ const userSchema = new Schema({
       },
       message: "Invalid email adress",
     },
+  },
+  city: {
+    type: String,
+    required: true,
+    minLength: [3, "City should be minumum 4 characters long"],
+  },
+  expertise: {
+    type: String,
+    required: true,
+    minLength: [4, "Expertise should be minumum 4 characters long"],
   },
   firstName: {
     type: String,
@@ -55,6 +63,20 @@ const userSchema = new Schema({
   danceSchools: [{ type: ObjectId, ref: "DanceSchool" }],
   likedSchools: [{ type: ObjectId, ref: "DanceSchool" }],
 });
+
+userSchema.pre("save", function (next) {
+  if (this.phoneNumber && !this.phoneNumber.startsWith("+359")) {
+    this.phoneNumber = "+359" + this.phoneNumber;
+  }
+  next();
+});
+
+// userSchema.pre("validate", function (next) {
+//   if (this.phoneNumber && !this.phoneNumber.startsWith("+359")) {
+//     this.phoneNumber = "+359" + this.phoneNumber;
+//   }
+//   next();
+// });
 
 userSchema.index(
   { email: 1 },

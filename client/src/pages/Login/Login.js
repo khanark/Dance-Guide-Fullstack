@@ -34,7 +34,7 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     defaultValues: { email },
-    mode: "onBlur",
+
     resolver: yupResolver(loginSchemaValidation),
   });
 
@@ -64,8 +64,8 @@ const Login = () => {
     <Layout authPage="login">
       <div className="form-wrapper section">
         <form className="form">
-          <h2 className="title-secondary">Welcome back</h2>
-          <p className="form-desc">Sign in to join our community!</p>
+          <h3 className="title-secondary">Welcome back</h3>
+          <h5 className="form-desc">Sign in to join our community!</h5>
           <label htmlFor="email" className="form-label">
             <p className="input-label">Email</p>
             <input className="form-input" {...register("email")} />

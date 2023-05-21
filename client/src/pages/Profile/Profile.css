@@ -4,13 +4,14 @@
 }
 
 .profile-page .grid--cols-2 {
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 20rem 1fr;
   align-items: start;
 }
 
 .user-profile--img {
-  width: 30rem;
-  height: 30rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 0.4rem;
   object-fit: cover;
 }
 
@@ -18,14 +19,14 @@
   width: 100%;
   height: 0.1rem;
   background-color: #ccc;
-  margin: 4rem 0;
+  margin: 2rem 0;
   position: relative;
 }
 
 .line-devider--text {
   position: absolute;
   top: 50%;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -36,35 +37,42 @@
 
 .devider-text--left {
   left: 0;
+  padding-left: 0;
 }
 .devider-text--right {
   right: 0;
+  padding-right: 0;
 }
 
 .user-info--wrapper {
-  margin-bottom: 3.2rem;
+  margin-bottom: 1.6rem;
 }
 
 .user-info--wrapper .subtitle {
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
+  margin: 0;
   font-weight: 600;
 }
 
 .user-info--text {
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   font-weight: 500;
   color: var(--clr-main--dark);
+}
+
+.additional-info {
+  color: #555;
 }
 
 /* .profile-box--right {
 } */
 
 .profile-box-right-main {
-  height: 30rem;
+  height: 20rem;
   flex-direction: column;
   justify-content: space-between;
   display: flex;
-  margin-bottom: 4rem;
+  margin-bottom: 1.6rem;
 }
 
 .profile-box--right .title-secondary {
@@ -115,7 +123,8 @@
 }
 
 .user-hometown {
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
+  color: #555;
 }
 
 .user-ocupation {
@@ -124,10 +133,10 @@
 }
 
 .additional-info--desc {
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
+  margin: 0;
   font-weight: 500;
   color: #555;
-  margin-bottom: 3.2rem;
 }
 
 .user-btn--wrapper {
@@ -140,9 +149,11 @@
   padding: 0.8rem 1.6rem;
 }
 
-.user-btn--wrapper .subtitle {
+.subtitle {
   margin: 0;
-  font-size: 1.8rem;
+}
+
+.user-btn--wrapper .subtitle {
   font-weight: 600;
 }
 
@@ -184,5 +195,11 @@
 }
 
 .school-list {
-  min-height: 56rem;
+  justify-content: unset;
+  align-items: unset;
+}
+
+.profile-page .grid--cols-2.school-list {
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3.2rem;
 }

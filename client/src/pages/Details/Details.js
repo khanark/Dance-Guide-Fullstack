@@ -65,17 +65,7 @@ const Details = () => {
           {loading && <CustomSpinner />}
           {!loading && (
             <>
-              <div className="details-page__image">
-                {/* <Image
-                  cloudName="du4uhmyq2"
-                  publicId={schoolDetails.image}
-                  crop="scale"
-                  width="300"
-                  loading="lazy"
-                >
-                  <Placeholder type="blur" />
-                </Image> */}
-              </div>
+              <div className="details-page__image"></div>
               <div className="details-page__info">
                 {school.isOwner && <UserButtons id={schoolId} />}
                 <div className="details-wrapper">
@@ -98,13 +88,6 @@ const Details = () => {
                 {!schoolDetails.owner?.avatar && (
                   <img src={defaultAvatar} alt="default-owner-img" />
                 )}
-                {/* {schoolDetails.owner?.avatar && (
-                  <Image
-                    cloudName="du4uhmyq2"
-                    width="300"
-                    publicId={schoolDetails.owner.avatar}
-                  />
-                )} */}
               </div>
             </>
           )}

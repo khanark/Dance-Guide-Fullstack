@@ -7,6 +7,8 @@ module.exports = (user, token) => {
     phoneNumber,
     avatar,
     moreInfo,
+    city,
+    expertise,
     danceSchools,
     likedSchools,
   } = user;
@@ -15,6 +17,8 @@ module.exports = (user, token) => {
     email,
     firstName,
     lastName,
+    expertise,
+    city,
     phoneNumber,
     avatar,
     moreInfo,

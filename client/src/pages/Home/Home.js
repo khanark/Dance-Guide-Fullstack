@@ -18,12 +18,12 @@ const Home = () => {
           <h1 className="title-primary">
             Your <span>ultimate</span> resource for dance schools in your area!
           </h1>
-          <p className="desc text-shadow">
+          <h5 className="desc text-shadow">
             With DanceGuide, you can easily search for dance schools by
             location, dance style, and even instructor. Our user-friendly
             interface makes it easy to find the information you need quickly, so
             you can get back to what you love - dancing.
-          </p>
+          </h5>
           <div className="customers-wrapper">
             <ul className="customers">
               {customerImages.map((img, i) => (
@@ -35,9 +35,9 @@ const Home = () => {
                 />
               ))}
             </ul>
-            <p className="customer-description text-shadow">
+            <h4 className="customer-description text-shadow">
               Over <span>250,000+</span> people already found their passion!
-            </p>
+            </h4>
           </div>
           <Link to="/catalog" className="btn btn--browse">
             Catalog

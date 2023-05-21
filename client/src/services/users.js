@@ -15,12 +15,16 @@ const registerUser = async ({
   firstName,
   lastName,
   phoneNumber,
+  expertise,
+  city,
   password,
 }) => {
   return await api.post(endpoints.register, {
     email,
     firstName,
     lastName,
+    expertise,
+    city,
     phoneNumber,
     password,
   });

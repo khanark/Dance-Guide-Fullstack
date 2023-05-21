@@ -53,12 +53,11 @@
 }
 
 .customer-description {
-  font-size: 1.8rem;
+  margin: 0;
   font-weight: 500;
 }
 
 .customer-description span {
-  font-size: 1.8rem;
   font-weight: 700;
   color: var(--clr-main--dark);
 }

@@ -21,6 +21,7 @@ router.post("/register", async (req, res) => {
     const user = await register(req.body);
     res.status(202).json(user);
   } catch (error) {
+    console.log(error);
     res.status(401).json({ message: "Invalid credentials" });
   }
 });

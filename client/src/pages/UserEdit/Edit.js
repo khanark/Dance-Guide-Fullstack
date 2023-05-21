@@ -35,7 +35,6 @@ const Edit = () => {
     formState: { errors, isLoading, isDirty },
   } = useForm({
     defaultValues: async () => await getSingle(user._id),
-    mode: "onBlur",
   });
 
   const avatar = watch("avatar");
