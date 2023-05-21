@@ -8,6 +8,38 @@
   align-items: start;
 }
 
+.profile-img--wrapper {
+  /* z-index: -; */
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.image-label,
+.image-input {
+  position: absolute;
+}
+
+.image-label {
+  z-index: 3;
+  padding: 0.4rem;
+  position: absolute;
+  text-align: center;
+  bottom: 0%;
+  display: block;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+
+.image-label:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.image-input {
+  z-index: -999;
+}
+
 .user-profile--img {
   width: 20rem;
   height: 20rem;

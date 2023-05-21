@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
-import PageContainer from "../../components/FramerContainer";
 import { Spinner } from "@chakra-ui/react";
 import { login } from "../../services/users";
 import { loginSchemaValidation } from "../../YupSchemas/validation_schema";
@@ -43,8 +42,8 @@ const Login = () => {
       setIsLoading(true);
       const userData = await login(data);
       notificateSuccess({
-        title: "Успешно влизане",
-        description: `Привет ${userData.firstName} !!!`,
+        title: "Login successful.",
+        description: `Nice to see you back ${userData.firstName} ☺ !`,
       });
       setUser({ ...userData, isNewAcc: Boolean(email) });
       setEmail("");
@@ -52,8 +51,8 @@ const Login = () => {
     } catch (error) {
       setIsLoading(false);
       notificateError({
-        title: "Грешка при влизане",
-        description: "Грешно потребителско име или парола",
+        title: "Wrong details.",
+        description: "Wrong username or password.",
       });
     } finally {
       setIsLoading(false);

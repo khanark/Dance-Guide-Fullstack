@@ -17,10 +17,20 @@ import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const { userId } = useParams();
+  const [previewImage, setPreviewImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [activeButton, setActiveButton] = useState("user-btn--1");
   const userImage = useCloudinaryImage(user?.avatar);
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const onChangeImage = (e) => {
+    setSelectedImage(e.target.files[0]);
+  };
 
   function onUserButtonClick(e) {
     setActiveButton(e.target.id);
@@ -38,25 +48,60 @@ const Profile = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  console.log(user);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    console.log("triggered");
+    const objectUrl = URL.createObjectURL(selectedImage);
+    console.log(objectUrl);
+    setPreviewImage(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedImage]);
+
   return (
     <Layout>
       <ProfileEditModalLeft />
       <section className="profile-page section">
         <div className="profile container-secondary grid grid--cols-2">
           <div className="profile-box--left">
-            {user?.avatar ? (
-              <AdvancedImage
-                cldImg={userImage}
-                className="user-profile--img"
-                plugins={[lazyload(), responsive()]}
-              />
-            ) : (
-              <img
-                src={defaultAvatar}
-                className="user-profile--img"
-                alt="user-avatar"
-              />
-            )}
+            <div className="profile-img--wrapper">
+              {selectedImage && (
+                <img
+                  src={previewImage}
+                  alt="preview"
+                  className="user-profile--img"
+                />
+              )}
+              {!selectedImage && (
+                <>
+                  {user?.avatar ? (
+                    <AdvancedImage
+                      cldImg={userImage}
+                      className="user-profile--img"
+                      plugins={[lazyload(), responsive()]}
+                    />
+                  ) : (
+                    <img
+                      src={defaultAvatar}
+                      className="user-profile--img"
+                      alt="user-avatar"
+                    />
+                  )}
+                </>
+              )}
+              <form onChange={onSubmit}>
+                <input
+                  type="file"
+                  id="image"
+                  className="image-input"
+                  onChange={onChangeImage}
+                />
+                <label htmlFor="image" className="image-label">
+                  {user?.avatar ? "Change" : "Upload"}
+                </label>
+              </form>
+            </div>
             <div className="line-devider">
               <span className="line-devider--text devider-text--left">
                 About Me
