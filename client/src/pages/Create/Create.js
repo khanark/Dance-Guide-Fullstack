@@ -89,7 +89,7 @@ const Create = () => {
               <label
                 type="label"
                 className="btn-upload"
-                for="image"
+                htmlFor="image"
                 // onClick={onUploadFileClick}
               >
                 Upload...

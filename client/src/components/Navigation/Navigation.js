@@ -1,8 +1,8 @@
 import "./Navigation.css";
 
 import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
-import { Link, useNavigate } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 import { useState } from "react";
@@ -17,11 +17,8 @@ const Navigation = ({
   const { user, clearUser } = useUserContext();
   const [dropdown, setDropdown] = useState(false);
 
-  const navigate = useNavigate();
-
   const onLogoutClick = () => {
     clearUser(); // clearing the user from local storage upon logout
-    navigate("/catalog"); // redirecting the user to the catalog page
   };
 
   const userImage = useCloudinaryImage(user?.avatar);
@@ -156,7 +153,7 @@ const Navigation = ({
                     </li>
                     <li className="link-wrapper">
                       <Link
-                        to="/user/profile"
+                        to="/catalog"
                         className="user-dropdown--link"
                         onClick={onLogoutClick}
                       >

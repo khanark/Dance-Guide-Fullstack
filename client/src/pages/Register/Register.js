@@ -46,8 +46,8 @@ const Register = () => {
     } catch (error) {
       setIsLoading(false);
       notificateError({
-        title: "Грешка при регистрация",
-        description: "Потребител с този имейл адрес вече съществува",
+        title: "Register failed.",
+        description: `${error.message}`,
       });
     } finally {
       setIsLoading(false);
