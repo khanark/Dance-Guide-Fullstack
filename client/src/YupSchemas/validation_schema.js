@@ -15,13 +15,17 @@ export const registerSchemaValidation = yup.object().shape({
     .min(2, "Minimum of 2 characters")
     .max(50, "Maximum of 50 characters"),
   email: yup.string().email("Invalid email address").required("Required"),
+  expertise: yup
+    .string()
+    .required("Required")
+    .min(4, "Minimum of 4 characters"),
+  city: yup.string().required("Required").min(3, "Minimum of 3 characters"),
   password: yup.string().required("Required").min(5, "Minimum of 5 characters"),
   phoneNumber: yup
     .string()
     .required("Required")
     .test("phone", "Invalid phone number", (value) => {
-      const phoneRegex =
-        /^(?:\+359|0)(?:87|88|89)(?:\d{7}|\d{3}\s\d{2}\s\d{2}|\d{3}-\d{2}-\d{2})$/;
+      const phoneRegex = /^\d{9}$/;
       return phoneRegex.test(value);
     }),
 });

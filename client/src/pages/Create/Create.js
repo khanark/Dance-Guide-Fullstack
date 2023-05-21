@@ -32,7 +32,6 @@ const Create = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "onBlur",
     resolver: yupResolver(createSchoolSchemaValidation),
   });
 
@@ -68,7 +67,7 @@ const Create = () => {
     <Layout>
       <div className="form-wrapper section blurry-background">
         <form className="form">
-          <h2 className="title-secondary">Create school</h2>
+          <h3 className="title-secondary">Create school</h3>
           <p className="form-desc">
             Make the whole world know about your school!
           </p>

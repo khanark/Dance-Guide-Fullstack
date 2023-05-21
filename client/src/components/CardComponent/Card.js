@@ -3,21 +3,15 @@
 
 import "./Card.css";
 
-import {
-  AdvancedImage,
-  lazyload,
-  placeholder,
-  responsive,
-} from "@cloudinary/react";
+import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
 
 import { Link } from "react-router-dom";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 
 const Card = ({ _id, name, image, settlement, likes, owner }) => {
-  console.log(owner);
   const url = useCloudinaryImage(image);
-  url.resize(fill().width(400).height(400));
+  url.resize(fill(300, 300));
 
   return (
     <Link to={`/details/${_id}`}>
@@ -27,49 +21,51 @@ const Card = ({ _id, name, image, settlement, likes, owner }) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             class="likes-icon"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"
             />
           </svg>
-          <p className="text-likes">{likes.count}</p>
+          <h5 className="text-likes">{likes.count}</h5>
         </div>
-        <AdvancedImage
-          cldImg={url}
-          plugins={[lazyload(), responsive(), placeholder()]}
-          className="item-img"
-        />
+        <div className="card-img--wrapper">
+          <AdvancedImage
+            cldImg={url}
+            plugins={[lazyload(), responsive()]}
+            className="item-img"
+          />
+        </div>
         <div className="item-info">
-          <h2 className="title-tertirty">{name}</h2>
+          <h4 className="card-title">{name}</h4>
           <div className="settlement-wrapper">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               class="settlement-icon"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
               />
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
               />
             </svg>
 
-            <p className="settlement">{settlement}</p>
+            <span>{settlement}</span>
           </div>
-          <h3 className="subtitle">Contacts</h3>
+          <h5>Contacts</h5>
           <ul className="item-contacts">
             <li className="item-contacts-info">
               <svg
@@ -103,7 +99,7 @@ const Card = ({ _id, name, image, settlement, likes, owner }) => {
                 />
               </svg>
 
-              <p>borislav.godumov@outlook.com</p>
+              <span>borislav.godumov@outlook.com</span>
             </li>
             <li className="item-contacts-info">
               <svg
@@ -121,7 +117,7 @@ const Card = ({ _id, name, image, settlement, likes, owner }) => {
                 />
               </svg>
 
-              <p>www.dancestyle.bg</p>
+              <span>www.dancestyle.bg</span>
             </li>
           </ul>
         </div>

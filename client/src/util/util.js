@@ -23,3 +23,13 @@ export const danceTypeFormat = (val) => {
 export const setPageTitle = (title) => {
   document.title = `DanceGuide | ${title}`;
 };
+
+export const convertToPascalCase = (...args) => {
+  if (args.some((arg) => arg === undefined || arg === null)) return;
+
+  return args
+    .join(" ")
+    .split(" ")
+    .map((w) => w.replace(w[0], w[0].toUpperCase()))
+    .join(" ");
+};

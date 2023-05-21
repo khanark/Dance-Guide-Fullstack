@@ -5,7 +5,11 @@
   justify-content: space-between;
 }
 
-.reconstruction {
+.nav-header {
+  border-bottom: 1px solid #555;
+}
+
+/* .reconstruction {
   background-color: orange;
   display: flex;
   flex-direction: column;
@@ -13,10 +17,10 @@
 
   text-align: center;
   padding: 0.8rem 2rem;
-}
+} */
 
 .reconstruction .desc {
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   color: #555;
   margin: 0 !important;
 }
@@ -34,8 +38,9 @@
 }
 
 .logo {
-  font-size: 2rem;
+  /* font-size: 2rem; */
   font-weight: 600;
+  margin: 0;
   letter-spacing: -1.05;
   color: #fff;
   z-index: 1;
@@ -49,7 +54,7 @@
 
 .nav-link {
   display: inline-block;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
   font-weight: 500;
   transition: all 0.3s;
   color: #fff;
@@ -91,7 +96,7 @@
 .catalog-link {
   text-shadow: none;
   font-weight: 500;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
 }
 
 .auth-page {
@@ -112,7 +117,7 @@
 }
 
 .auth-question {
-  font-size: 1.4rem;
+  margin: 0;
   font-weight: 500;
   color: #ccc;
 }
@@ -138,23 +143,26 @@
 .user-dropdown--menu {
   position: absolute;
   z-index: 3;
-  top: 7rem;
-  right: -5px;
+  top: 5rem;
+  right: -18px;
+  transform: translateX(-18px);
   border: 2px solid var(--clr-main--light);
-  width: 20rem;
+  width: 15rem;
   padding: 2rem;
   background-color: #fff;
   color: var(--clr-grey--dark);
   border-radius: 0.8rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s;
 }
 
 .active {
+  display: block;
   opacity: 1;
 }
 
 .inactive {
+  display: none;
   opacity: 0;
 }
 
@@ -174,19 +182,18 @@
 .user-dropdown--username,
 .user-dropdown--email {
   text-align: center;
+  margin: 0;
 }
 
 .user-dropdown--username {
-  font-size: 1.8rem;
   font-weight: 700;
   color: var(--clr-main--light);
   letter-spacing: -0.05em;
   margin-bottom: 0.8rem;
 }
 .user-dropdown--email {
-  font-size: 1.4rem;
   color: #bcbebf;
-  margin-bottom: 3.2rem;
+  margin-bottom: 1.6rem;
 }
 
 .user-dropdown--list {
@@ -198,16 +205,17 @@
 }
 
 .user-avatar--img {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   object-fit: cover;
   transition: all 0.3s;
   cursor: pointer;
+  border: 3px solid #ccc;
 }
 
 .user-avatar--img:hover {
-  border-color: var(--clr-main--light);
+  border-color: #fff;
 }
 
 .nav-link--active {
@@ -217,9 +225,9 @@
 .user-dropdown--link {
   display: flex;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.6rem;
   padding: 0.8rem 0;
-  border-top: 1px solid var(--clr-main--light);
+  border-top: 1px solid #ccc;
   transition: all 0.3s;
 }
 
@@ -228,9 +236,10 @@
 }
 
 .user-dropdown--link p {
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
+  margin: 0;
   font-weight: 500;
-  color: #666;
+  color: #555;
 }
 
 .user-dropdown--link:hover p {

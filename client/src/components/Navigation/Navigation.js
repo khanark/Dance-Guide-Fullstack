@@ -33,9 +33,9 @@ const Navigation = ({
           !isLandingPage && "landing-link"
         }`}
       >
-        <h2 className="logo">
+        <h4 className="logo">
           <Link to="/">DanceGuide</Link>
-        </h2>
+        </h4>
         {authPage && (
           <div className="auth-page">
             <p className="auth-question">
@@ -126,9 +126,9 @@ const Navigation = ({
                     dropdown ? "active" : "inactive"
                   }`}
                 >
-                  <h3 className="user-dropdown--username">
+                  <h4 className="user-dropdown--username">
                     {user?.firstName} {user?.lastName}
-                  </h3>
+                  </h4>
                   <p className="user-dropdown--email">{user?.email}</p>
                   <ul className="user-dropdown--list">
                     <li className="link-wrapper">
@@ -155,7 +155,7 @@ const Navigation = ({
                       </Link>
                     </li>
                     <li className="link-wrapper">
-                      <button
+                      <Link
                         to="/user/profile"
                         className="user-dropdown--link"
                         onClick={onLogoutClick}
@@ -175,7 +175,7 @@ const Navigation = ({
                           />
                         </svg>
                         <p>Logout</p>
-                      </button>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -184,12 +184,12 @@ const Navigation = ({
           </ul>
         )}
       </nav>
-      <div className="reconstruction ">
+      {/* <div className="reconstruction ">
         <h3 className="subtitle">Website is under reconstruction!</h3>
         <p className="desc">
           Some of the features might be missing or not working as expected.
         </p>
-      </div>
+      </div> */}
     </header>
   );
 };

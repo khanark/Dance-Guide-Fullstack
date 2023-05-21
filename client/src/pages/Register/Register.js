@@ -25,10 +25,8 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
-    mode: "onBlur",
     resolver: yupResolver(registerSchemaValidation),
   });
 
@@ -46,6 +44,7 @@ const Register = () => {
       setTimeout(() => navigate("/login"), 1500);
       setEmail(data.email.toLowerCase());
     } catch (error) {
+      console.log(error);
       setIsLoading(false);
       notificateError({
         title: "Грешка при регистрация",
@@ -60,8 +59,8 @@ const Register = () => {
     <Layout authPage="register">
       <div className="form-wrapper section">
         <form className="form">
-          <h2 className="title-secondary">Let's get started</h2>
-          <p className="form-desc">Experience more, sign up with us!</p>
+          <h3 className="title-secondary">Let's get started</h3>
+          <h5 className="form-desc">Experience more, sign up with us!</h5>
           <div className="form-grid--wrapper">
             <label htmlFor="firstName" className="form-label">
               <p className="input-label">First name</p>
@@ -79,13 +78,33 @@ const Register = () => {
             <input className="form-input" {...register("email")} />
             <FieldsError msg={errors.email?.message} />
           </label>
+          <label htmlFor="city" className="form-label">
+            <p className="input-label">City</p>
+            <input
+              className="form-input"
+              placeholder="Plovdiv..."
+              {...register("city")}
+            />
+            <FieldsError msg={errors.city?.message} />
+          </label>
+          <label htmlFor="expertise" className="form-label form-expertise">
+            <p className="input-label">Dance expertise</p>
+            <input
+              className="form-input"
+              placeholder="Dance Expert..."
+              {...register("expertise")}
+            />
+            <FieldsError msg={errors.expertise?.message} />
+          </label>
+
           <label htmlFor="phoneNumber" className="form-label">
+            <p className="input-label">Phone number</p>
             <div className="form-number--prepend">
-              <p className="phone-prefix">+359 (0)</p>
+              <p className="phone-prefix">+359</p>
               <input
                 className="form-input"
                 type="number"
-                placeholder="877 558 277, 08 775 582 77"
+                placeholder="877558277"
                 {...register("phoneNumber")}
               />
             </div>
@@ -113,8 +132,8 @@ const Register = () => {
           </label>
           <div className="btn-wrapper">
             <button
-              type="submit"
               className="btn form-btn"
+              type="button"
               disabled={isLoading}
               onClick={handleSubmit(onSubmitRegister)}
             >

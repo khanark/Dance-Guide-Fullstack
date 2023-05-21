@@ -28,7 +28,6 @@ const SchoolEdit = () => {
     formState: { errors, isLoading, isDirty },
   } = useForm({
     defaultValues: async () => await singleSchool(schoolId),
-    mode: "onBlur",
   });
 
   const { navigate } = useUserContext();

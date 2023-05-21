@@ -19,6 +19,8 @@ const register = async ({
   firstName,
   lastName,
   phoneNumber,
+  expertise,
+  city,
 }) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = new User({
@@ -27,6 +29,8 @@ const register = async ({
     firstName,
     lastName,
     phoneNumber,
+    expertise,
+    city,
   });
   await user.save();
   const token = await createToken(user);
