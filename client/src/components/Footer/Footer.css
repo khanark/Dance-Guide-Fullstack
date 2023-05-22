@@ -16,6 +16,11 @@
   gap: 0.8rem;
 }
 
+.footer-nav .nav-link,
+.contact-list .nav-link {
+  padding: 0;
+}
+
 .footer-about--desc {
   /* font-size: 1.4rem; */
   color: #ccc;
