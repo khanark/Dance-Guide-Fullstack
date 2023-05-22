@@ -54,6 +54,7 @@ const Create = () => {
       });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
+      console.log(error);
       setIsLoading(false);
       notificateError({
         title: "Something went wrong",
