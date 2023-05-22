@@ -253,6 +253,6 @@
 
 @media screen and (max-width: 768px) {
   .nav {
-    gap: 1.6rem;
+    gap: 0.4rem;
   }
 }
