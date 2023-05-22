@@ -63,7 +63,6 @@
 }
 
 .title-secondary {
-  letter-spacing: -0.5px;
   font-weight: 600;
   color: var(--clr-grey--dark);
 }
