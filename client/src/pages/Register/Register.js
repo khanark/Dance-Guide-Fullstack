@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
 import Layout from "../../components/Layout/Layout";
-import PageContainer from "../../components/FramerContainer";
 import { Spinner } from "@chakra-ui/react";
 import { registerSchemaValidation } from "../../YupSchemas/validation_schema";
 import { registerUser } from "../../services/users";
@@ -38,8 +37,8 @@ const Register = () => {
       setIsLoading(true);
       await registerUser(data);
       notificateSuccess({
-        title: "Успешна регистрация",
-        description: "Благодарим за вашата регистрация",
+        title: "Successfull registration",
+        description: "Thanks for signing up!",
       });
       setTimeout(() => navigate("/login"), 1500);
       setEmail(data.email.toLowerCase());

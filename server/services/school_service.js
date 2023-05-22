@@ -4,7 +4,7 @@ const User = require("../models/User");
 const getAllSchools = async (query, sortObj) => {
   return DanceSchool.find(query)
     .sort(sortObj)
-    .populate("owner", ["email, phoneNumber, link"])
+    .populate("owner", ["email", "phoneNumber"])
     .lean();
 };
 
