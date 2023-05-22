@@ -40,6 +40,8 @@ const Catalog = () => {
       .finally(() => setIsLoading(false));
   }, [filters]);
 
+  console.log(schools);
+
   return (
     <Layout>
       {user?.isNewAcc && showComponent && <GreetModal />}

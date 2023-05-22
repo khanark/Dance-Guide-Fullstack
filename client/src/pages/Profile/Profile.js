@@ -24,10 +24,6 @@ const Profile = () => {
   const [activeButton, setActiveButton] = useState("user-btn--1");
   const userImage = useCloudinaryImage(user?.avatar);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
   const onChangeImage = (e) => {
     setSelectedImage(e.target.files[0]);
   };
@@ -48,19 +44,16 @@ const Profile = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log(user);
-
   useEffect(() => {
     if (!selectedImage) return;
-    console.log("triggered");
     const objectUrl = URL.createObjectURL(selectedImage);
-    console.log(objectUrl);
     setPreviewImage(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedImage]);
 
   return (
     <Layout>
+      {/* This modal window isn't rendering FIX IT */}
       <ProfileEditModalLeft />
       <section className="profile-page section">
         <div className="profile container-secondary grid grid--cols-2">
@@ -90,7 +83,7 @@ const Profile = () => {
                   )}
                 </>
               )}
-              <form onChange={onSubmit}>
+              <form>
                 <input
                   type="file"
                   id="image"

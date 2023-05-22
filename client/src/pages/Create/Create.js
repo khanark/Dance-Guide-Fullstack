@@ -49,15 +49,15 @@ const Create = () => {
         isImageFile: Boolean(uploadedAvatar),
       });
       notificateSuccess({
-        title: "Успешно създаване",
-        description: "Училището е създадено успешно",
+        title: "Successfully created",
+        description: "The school was successfully created!",
       });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
       setIsLoading(false);
       notificateError({
-        title: "Проблем при създаване",
-        description: "Имаше проблем при създаването",
+        title: "Something went wrong",
+        description: "Please try again later.",
       });
     } finally {
       setIsLoading(false);
