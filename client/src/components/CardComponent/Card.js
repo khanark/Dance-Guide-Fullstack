@@ -1,23 +1,20 @@
-// This is what the card should render
-// name, description, link, image, city, street  (owner info)
+import './Card.css';
 
-import "./Card.css";
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
+import { useEffect, useState } from 'react';
 
-import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
-import { useEffect, useState } from "react";
-
-import { Link } from "react-router-dom";
-import { fill } from "@cloudinary/url-gen/actions/resize";
-import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
+import { Link } from 'react-router-dom';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 
 const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
-  const [matchedLink, setMatchedLink] = useState("");
+  const [matchedLink, setMatchedLink] = useState('');
 
-  const matchLink = (link) => {
+  const matchLink = link => {
     const regex = /https?:\/\/(.*?)(\/|$)/;
     if (!link) return;
     const result = regex.exec(link);
-    return result[1] || "no external link";
+    return result[1] || 'no external link';
   };
 
   useEffect(() => {
@@ -48,11 +45,7 @@ const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
           <p className="text-likes">{likes.count}</p>
         </div>
         <div className="card-img--wrapper">
-          <AdvancedImage
-            cldImg={url}
-            plugins={[lazyload(), responsive()]}
-            className="item-img"
-          />
+          <AdvancedImage cldImg={url} plugins={[lazyload(), responsive()]} className="item-img" />
         </div>
         <div className="item-info">
           <h4 className="card-title">{name}</h4>

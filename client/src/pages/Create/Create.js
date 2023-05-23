@@ -11,7 +11,6 @@ import schoolsFactory from "../../services/schools";
 import { setPageTitle } from "../../util/util";
 import { useForm } from "react-hook-form";
 import { useNotification } from "../../hooks/useNotification";
-import { useUploadAvatar } from "../../hooks/useUploadAvatar";
 import { useUserContext } from "../../contexts/AuthContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -41,9 +40,6 @@ const Create = () => {
   };
 
   const onSubmit = async (data) => {
-    // try to see what happens when you put a file in the image field
-    console.log(data.image[0]);
-
     try {
       setIsLoading(true);
       await createSchool({
@@ -72,9 +68,7 @@ const Create = () => {
       <div className="form-wrapper section blurry-background">
         <form className="form">
           <h3 className="title-secondary">Create school</h3>
-          <p className="form-desc">
-            Make the whole world know about your school!
-          </p>
+          <p className="form-desc">Make the whole world know about your school!</p>
           <label htmlFor="schoolName" className="form-label">
             <p className="input-label">Name</p>
             <input className="form-input" {...register("name")} />
@@ -128,10 +122,7 @@ const Create = () => {
           </label>
           <label htmlFor="description" className="form-label">
             <p className="input-label">Description</p>
-            <textarea
-              className="form-input"
-              {...register("description")}
-            ></textarea>
+            <textarea className="form-input" {...register("description")}></textarea>
             <FieldsError msg={errors.description?.message} />
           </label>
           <button

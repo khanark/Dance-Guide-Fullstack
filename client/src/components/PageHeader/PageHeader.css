@@ -9,11 +9,16 @@
   margin-top: 0;
 }
 
+.page-header .title-primary {
+  margin-bottom: 1.6rem;
+}
+
 .page-header .title-secondary {
   color: var(--clr-main--dark);
 }
 
 .page-header .desc {
+  margin-bottom: 0 !important;
   color: #ccc;
 }
 
