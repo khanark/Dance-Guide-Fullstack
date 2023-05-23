@@ -79,9 +79,15 @@ router.post("/", authorize, async (req, res) => {
       image: req.body.isImageFile ? uploadedResponse.public_id : req.body.image,
     });
 
+    console.log(school);
+
     res.status(200).json(school);
   } catch (error) {
-    res.status(400).json({ message: "Invalid data" });
+    res.status(400).json({
+      message: `${
+        error.code == 11000 ? "School already exists" : "Invalid data"
+      }`,
+    });
   }
 });
 

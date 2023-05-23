@@ -42,17 +42,20 @@ export const createSchoolSchemaValidation = yup.object().shape({
     .min(4, "Minimum of 4 characters")
     .max(20, "Maximum of 20 characters"),
   image: yup
-    .mixed()
-    .required("Required")
+    .mixed() // mixed is used for files
+    .test("requiredImage", "Image is required", (value) => {
+      console.log(Boolean(value));
+      return value.length > 0;
+    }) // value is an array of files
     .test(
       "fileSize",
       "File size is too large",
-      (value) => !value || value[0].size <= FILE_SIZE
+      (value) => value[0] && value[0].size <= FILE_SIZE
     )
     .test(
       "fileFormat",
       "Unsupported file format",
-      (value) => !value || SUPPORTED_FORMATS.includes(value[0].type)
+      (value) => value[0] && SUPPORTED_FORMATS.includes(value[0].type)
     ),
   schoolType: yup.string().required("Required"),
   settlement: yup
