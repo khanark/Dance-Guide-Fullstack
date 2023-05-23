@@ -17,7 +17,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const Create = () => {
   const { user, navigate } = useUserContext();
-  const [uploadedAvatar, preloadAvatar] = useUploadAvatar();
+  const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -36,17 +36,21 @@ const Create = () => {
   });
 
   const handleAvatarChange = (e) => {
-    preloadAvatar(e.target.files[0]);
+    const file = URL.createObjectURL(e.target.files[0]);
+    setSelectedImage(file);
   };
 
   const onSubmit = async (data) => {
+    // try to see what happens when you put a file in the image field
+    console.log(data.image[0]);
+
     try {
       setIsLoading(true);
       await createSchool({
         ...data,
         ownerId: user._id,
-        image: uploadedAvatar || data.image,
-        isImageFile: Boolean(uploadedAvatar),
+        image: selectedImage || data.image,
+        isImageFile: Boolean(selectedImage),
       });
       notificateSuccess({
         title: "Successfully created",
@@ -54,11 +58,10 @@ const Create = () => {
       });
       setTimeout(() => navigate("/catalog"), 1500);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
       notificateError({
         title: "Something went wrong",
-        description: "Please try again later.",
+        description: error.message || "Couldn't create the school",
       });
     } finally {
       setIsLoading(false);
@@ -80,16 +83,16 @@ const Create = () => {
           <label htmlFor="schoolPhoto" className="form-label form-label--photo">
             <p className="input-label">Photo</p>
             <div className="btn-upload-wrapper">
-              <input
-                type="file"
-                className="form-input photo-input"
-                {...register("image")}
-                id="image"
-                onChange={handleAvatarChange}
-              />
               <label type="label" className="btn-upload" htmlFor="image">
                 Upload
               </label>
+              <input
+                type="file"
+                className="form-input photo-input"
+                onChange={handleAvatarChange}
+                {...register("image")}
+                id="image"
+              />
             </div>
             <FieldsError msg={errors.image?.message} />
           </label>
