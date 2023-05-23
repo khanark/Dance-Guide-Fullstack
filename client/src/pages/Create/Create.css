@@ -57,3 +57,7 @@
   left: 0;
   transform: translateY(-50%);
 }
+
+.photo-input::-webkit-file-upload-button {
+  visibility: hidden;
+}

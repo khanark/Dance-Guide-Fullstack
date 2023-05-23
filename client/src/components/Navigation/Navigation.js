@@ -1,11 +1,11 @@
 import "./Navigation.css";
 
 import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
+import { useEffect, useRef, useState } from "react";
 
 import { Link } from "react-router-dom";
 import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
-import { useState } from "react";
 import { useUserContext } from "../../contexts/AuthContext";
 
 const Navigation = ({
@@ -14,8 +14,14 @@ const Navigation = ({
   onNavLinkClick,
   navLinkActive,
 }) => {
-  const { user, clearUser } = useUserContext();
+  const { user, clearUser, setNavigationRef } = useUserContext();
   const [dropdown, setDropdown] = useState(false);
+
+  const navigationRef = useRef(null);
+
+  useEffect(() => {
+    setNavigationRef(navigationRef);
+  }, []);
 
   const onLogoutClick = () => {
     clearUser(); // clearing the user from local storage upon logout
@@ -24,7 +30,10 @@ const Navigation = ({
   const userImage = useCloudinaryImage(user?.avatar);
 
   return (
-    <header className={`nav-header ${!isLandingPage && "landing-bg"}`}>
+    <header
+      ref={navigationRef}
+      className={`nav-header ${!isLandingPage && "landing-bg"}`}
+    >
       <nav
         className={`header-nav container-primary ${
           !isLandingPage && "landing-link"

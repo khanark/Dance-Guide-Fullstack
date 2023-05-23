@@ -7,6 +7,7 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
   const { user, setUser, clearUser } = useLocalStorage();
+  const [navigationRef, setNavigationRef] = useState(null); // This is so we can scroll to the top of the navigation bar
 
   // This state is being used if the user is new
   const [email, setEmail] = useState("");
@@ -20,6 +21,8 @@ const UserContextProvider = ({ children }) => {
     setEmail,
     email,
     navigate,
+    navigationRef,
+    setNavigationRef,
   };
 
   return (

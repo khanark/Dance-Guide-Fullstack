@@ -87,13 +87,8 @@ const Create = () => {
                 id="image"
                 onChange={handleAvatarChange}
               />
-              <label
-                type="label"
-                className="btn-upload"
-                htmlFor="image"
-                // onClick={onUploadFileClick}
-              >
-                Upload...
+              <label type="label" className="btn-upload" htmlFor="image">
+                Upload
               </label>
             </div>
             <FieldsError msg={errors.image?.message} />

@@ -7,6 +7,7 @@ import Navigation from "../Navigation/Navigation";
 
 const Layout = ({ children, isLandingPage, authPage }) => {
   const [navLinkActive, setNavLinkActive] = useState("");
+  const [catalogRef, setCatalogRef] = useState(null);
 
   const onNavLinkClick = useCallback(
     (e) => {
@@ -27,7 +28,7 @@ const Layout = ({ children, isLandingPage, authPage }) => {
         navLinkActive={navLinkActive}
       />
       <main className="main-container">{children}</main>
-      {!isLandingPage && <Footer />}
+      {!isLandingPage && <Footer catalogRef={catalogRef} />}
     </div>
   );
 };
