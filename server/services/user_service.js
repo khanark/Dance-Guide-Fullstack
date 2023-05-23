@@ -78,7 +78,8 @@ const verifyToken = async (token) => {
 
 const getSingleUser = async (id) => {
   const user = await User.findById(id)
-    .populate(["danceSchools", "likedSchools"])
+    .populate("danceSchools.owner", ["email", "phoneNumber"])
+    .populate("likedSchools.owner", ["email", "phoneNumber"])
     .lean();
   console.log(user);
   return userViewModel(user);

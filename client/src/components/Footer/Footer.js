@@ -17,7 +17,7 @@ const Footer = () => {
       <footer className="section-footer section">
         <div className="footer container-secondary grid grid--cols-3">
           <div className="footer-nav-wrapper">
-            <h3 className="title-secondary">Site Navigation</h3>
+            <h4 className="title-secondary">Site Navigation</h4>
             <nav className="footer-nav">
               <Link to="/" className="nav-link">
                 Home
@@ -28,7 +28,7 @@ const Footer = () => {
             </nav>
           </div>
           <div className="footer-about">
-            <h3 className="title-secondary">About</h3>
+            <h4 className="title-secondary">About</h4>
             <p className="footer-about--desc">
               DanceGuide was built as a project for the ReactJS course at{" "}
               <Link
@@ -42,7 +42,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-contact">
-            <h3 className="title-secondary">Contact</h3>
+            <h4 className="title-secondary">Contacts</h4>
             <ul className="contact-list">
               <Link
                 to="https://github.com/khanark"

@@ -1,5 +1,5 @@
-// const host = "https://dance-guide-bg.onrender.com";
-const host = "http://localhost:3030";
+const host = 'https://dance-guide-bg.onrender.com';
+// const host = 'http://localhost:3030';
 
 const request = async (method, url, data) => {
   const options = {
@@ -9,14 +9,14 @@ const request = async (method, url, data) => {
 
   // new line
 
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const userData = JSON.parse(localStorage.getItem('userData'));
 
   if (userData) {
-    options.headers["x-authorization"] = userData.token;
+    options.headers['x-authorization'] = userData.token;
   }
 
   if (data) {
-    options.headers["content-type"] = "application/json";
+    options.headers['content-type'] = 'application/json';
     options.body = JSON.stringify(data);
   }
 
@@ -27,8 +27,8 @@ const request = async (method, url, data) => {
       throw new Error(data.message);
     }
     if (res.status === 401) {
-      localStorage.removeItem("userData");
-      window.location.pathname = "/login";
+      localStorage.removeItem('userData');
+      window.location.pathname = '/login';
     }
     if (userData?.token) {
       data.token = userData.token;
@@ -39,10 +39,10 @@ const request = async (method, url, data) => {
   }
 };
 
-const get = request.bind(null, "GET");
-const post = request.bind(null, "POST");
-const put = request.bind(null, "PUT");
-const patch = request.bind(null, "PATCH");
-const del = request.bind(null, "DELETE");
+const get = request.bind(null, 'GET');
+const post = request.bind(null, 'POST');
+const put = request.bind(null, 'PUT');
+const patch = request.bind(null, 'PATCH');
+const del = request.bind(null, 'DELETE');
 
 export { get, post, put, patch, del };

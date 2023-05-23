@@ -1,19 +1,19 @@
-import "./Profile.css";
-import "../../App.css";
+import './Profile.css';
+import '../../App.css';
 
-import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
-import { useEffect, useState } from "react";
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
+import { useEffect, useState } from 'react';
 
-import Card from "../../components/CardComponent/Card";
-import Layout from "../../components/Layout/Layout";
-import ProfileEditModalLeft from "../../components/Modal/ProfileEditModalLeft";
-import { Spinner } from "@chakra-ui/react";
-import { convertToPascalCase } from "../../util/util";
-import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
-import { getSingle } from "../../services/users";
-import { setPageTitle } from "../../util/util";
-import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
-import { useParams } from "react-router-dom";
+import Card from '../../components/CardComponent/Card';
+import Layout from '../../components/Layout/Layout';
+import ProfileEditModalLeft from '../../components/Modal/ProfileEditModalLeft';
+import { Spinner } from '@chakra-ui/react';
+import { convertToPascalCase } from '../../util/util';
+import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
+import { getSingle } from '../../services/users';
+import { setPageTitle } from '../../util/util';
+import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const { userId } = useParams();
@@ -21,10 +21,10 @@ const Profile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [activeButton, setActiveButton] = useState("user-btn--1");
+  const [activeButton, setActiveButton] = useState('user-btn--1');
   const userImage = useCloudinaryImage(user?.avatar);
 
-  const onChangeImage = (e) => {
+  const onChangeImage = e => {
     setSelectedImage(e.target.files[0]);
   };
 
@@ -35,10 +35,10 @@ const Profile = () => {
   const isCurrentLoggedInUser = user?._id == userId;
 
   useEffect(() => {
-    setPageTitle("Profile");
+    setPageTitle('Profile');
     setLoading(true);
     getSingle(userId)
-      .then((user) => {
+      .then(user => {
         setUser(user);
       })
       .finally(() => setLoading(false));
@@ -60,11 +60,7 @@ const Profile = () => {
           <div className="profile-box--left">
             <div className="profile-img--wrapper">
               {selectedImage && (
-                <img
-                  src={previewImage}
-                  alt="preview"
-                  className="user-profile--img"
-                />
+                <img src={previewImage} alt="preview" className="user-profile--img" />
               )}
               {!selectedImage && (
                 <>
@@ -75,30 +71,19 @@ const Profile = () => {
                       plugins={[lazyload(), responsive()]}
                     />
                   ) : (
-                    <img
-                      src={defaultAvatar}
-                      className="user-profile--img"
-                      alt="user-avatar"
-                    />
+                    <img src={defaultAvatar} className="user-profile--img" alt="user-avatar" />
                   )}
                 </>
               )}
               <form>
-                <input
-                  type="file"
-                  id="image"
-                  className="image-input"
-                  onChange={onChangeImage}
-                />
+                <input type="file" id="image" className="image-input" onChange={onChangeImage} />
                 <label htmlFor="image" className="image-label">
-                  {user?.avatar ? "Change" : "Upload"}
+                  {user?.avatar ? 'Change' : 'Upload'}
                 </label>
               </form>
             </div>
             <div className="line-devider">
-              <span className="line-devider--text devider-text--left">
-                About Me
-              </span>
+              <span className="line-devider--text devider-text--left">About Me</span>
               <button className="line-devider--text devider-text--right">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +103,7 @@ const Profile = () => {
             </div>
             <div className="user-info--wrapper">
               <p className="user-info--text additional-info">
-                {user?.moreInfo || "No additional information"}
+                {user?.moreInfo || 'No additional information'}
               </p>
             </div>
             <div className="user-info--wrapper">
@@ -160,14 +145,9 @@ const Profile = () => {
                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                         />
                       </svg>
-                      <span className="user-hometown">
-                        {convertToPascalCase(user?.city)}
-                      </span>
+                      <span className="user-hometown">{convertToPascalCase(user?.city)}</span>
                     </div>
-                    <button
-                      type="button"
-                      className="line-devider--text devider-text--right"
-                    >
+                    <button type="button" className="line-devider--text devider-text--right">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -231,18 +211,14 @@ const Profile = () => {
                 <div className="user-options">
                   <button
                     id="user-btn--1"
-                    className={`subtitle ${
-                      activeButton == "user-btn--1" ? "active" : ""
-                    }`}
+                    className={`subtitle ${activeButton == 'user-btn--1' ? 'active' : ''}`}
                     onClick={onUserButtonClick}
                   >
                     Created
                   </button>
                   <button
                     id="user-btn--2"
-                    className={`subtitle ${
-                      activeButton == "user-btn--2" ? "active" : ""
-                    }`}
+                    className={`subtitle ${activeButton == 'user-btn--2' ? 'active' : ''}`}
                     onClick={onUserButtonClick}
                   >
                     Liked
@@ -250,9 +226,7 @@ const Profile = () => {
                   {!isCurrentLoggedInUser && (
                     <button
                       id="user-btn--3"
-                      className={`subtitle ${
-                        activeButton == "user-btn--3" ? "active" : ""
-                      }`}
+                      className={`subtitle ${activeButton == 'user-btn--3' ? 'active' : ''}`}
                       onClick={onUserButtonClick}
                     >
                       Send message to the user
@@ -261,12 +235,10 @@ const Profile = () => {
                 </div>
               </div>
               <ul className="school-list grid grid--cols-2">
-                {activeButton == "user-btn--1" ? (
+                {activeButton == 'user-btn--1' ? (
                   <>
                     {user?.danceSchools.length > 0 ? (
-                      user?.danceSchools.map((school) => (
-                        <Card key={school.id} {...school} />
-                      ))
+                      user?.danceSchools.map(school => <Card key={school.id} {...school} />)
                     ) : (
                       <p className="subtitle">No schools created yet</p>
                     )}
@@ -274,9 +246,7 @@ const Profile = () => {
                 ) : (
                   <>
                     {user?.likedSchools.length > 0 ? (
-                      user?.likedSchools.map((school) => (
-                        <Card key={school.id} {...school} />
-                      ))
+                      user?.likedSchools.map(school => <Card key={school.id} {...school} />)
                     ) : (
                       <p className="subtitle">No schools liked yet</p>
                     )}
