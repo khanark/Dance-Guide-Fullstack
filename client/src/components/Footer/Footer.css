@@ -1,9 +1,13 @@
 .section-footer {
   background-color: var(--clr-grey--dark);
+  position: relative;
 }
 
 .footer {
   align-items: start !important;
+}
+
+.footer {
 }
 
 .footer .title-secondary {
@@ -23,20 +27,70 @@
 
 .footer-about--desc {
   /* font-size: 1.4rem; */
-  color: #ccc;
+  color: #fff;
 }
 .contact-list {
   display: flex;
   gap: 2.4rem;
+  align-items: center;
 }
 .contact-icon {
   width: 3.2rem;
   height: 3.2rem;
 }
 
+.footer-secondary {
+  border-top: 1px solid #555;
+}
+
+.footer-secondary--desc {
+  margin-bottom: 0;
+  padding: 1.6rem;
+  color: #888;
+  text-align: center;
+}
+
+.university-link {
+  color: var(--clr-main--dark);
+  border-bottom: 1px solid var(--clr-main--dark);
+}
+
+.university-link:hover {
+  color: var(--clr-main--dark-hover);
+  border-bottom: 1px solid var(--clr-main--dark-hover);
+}
+
+.scrool-top {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translate(5%, -50%);
+  background-color: #555;
+  padding: 0.8rem;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.scrool-top:hover {
+  background-color: #888;
+}
+
+.scrool-top--icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: #fff;
+}
+
 @media screen and (max-width: 768px) {
   .footer.grid--cols-3 {
     grid-template-columns: auto;
     gap: 2.4rem;
+  }
+
+  .scrool-top {
+    right: unset;
+    top: unset;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
