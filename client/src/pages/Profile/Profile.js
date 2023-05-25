@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Card from '../../components/CardComponent/Card';
 import Layout from '../../components/Layout/Layout';
 import ProfileEditModalLeft from '../../components/Modal/ProfileEditModalLeft';
+import ProfileEditModalRight from '../../components/Modal/ProfileEditModalRight';
 import { Spinner } from '@chakra-ui/react';
 import { convertToPascalCase } from '../../util/util';
 import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
@@ -22,7 +23,6 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [activeButton, setActiveButton] = useState('user-btn--1');
-  const userImage = useCloudinaryImage(user?.avatar);
 
   const onChangeImage = e => {
     setSelectedImage(e.target.files[0]);
@@ -33,6 +33,7 @@ const Profile = () => {
   }
 
   const isCurrentLoggedInUser = user?._id == userId;
+  const userImage = useCloudinaryImage(user?.avatar);
 
   useEffect(() => {
     setPageTitle('Profile');
@@ -55,8 +56,6 @@ const Profile = () => {
 
   return (
     <Layout>
-      {/* This modal window isn't rendering FIX IT */}
-      <ProfileEditModalLeft />
       <section className="profile-page section">
         <div className="profile container-secondary grid grid--cols-2">
           <div className="profile-box--left">
@@ -86,22 +85,7 @@ const Profile = () => {
             </div>
             <div className="line-devider">
               <span className="line-devider--text devider-text--left">About Me</span>
-              <button className="line-devider--text devider-text--right">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="line-devider--icon"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
-              </button>
+              <ProfileEditModalLeft {...user} setUser={setUser} />
             </div>
             <div className="user-info--wrapper">
               <p className="user-info--text additional-info">
@@ -109,11 +93,11 @@ const Profile = () => {
               </p>
             </div>
             <div className="user-info--wrapper">
-              <h5 className="subtitle">Email:</h5>
+              <h5 className="subtitle">Email</h5>
               <p className="user-info--text">{user?.email}</p>
             </div>
             <div className="user-info--wrapper">
-              <h5 className="subtitle">Phone:</h5>
+              <h5 className="subtitle">Phone</h5>
               <p className="user-info--text">{user?.phoneNumber}</p>
             </div>
           </div>
@@ -149,22 +133,7 @@ const Profile = () => {
                       </svg>
                       <span className="user-hometown">{convertToPascalCase(user?.city)}</span>
                     </div>
-                    <button type="button" className="line-devider--text devider-text--right">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="line-devider--icon"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                        />
-                      </svg>
-                    </button>
+                    <ProfileEditModalRight {...user} />
                   </div>
                   <h5 className="subtitle user-ocupation">
                     {convertToPascalCase(user?.expertise)}

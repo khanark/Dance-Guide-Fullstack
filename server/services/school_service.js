@@ -70,8 +70,6 @@ const unLikeSchool = async (schoolId, { userId }) => {
   const userIndex = school.likes.users.indexOf(userId);
   const schoolIndex = user.likedSchools.indexOf(schoolId);
   user.likedSchools.splice(schoolIndex, 1);
-  console.log(user.likedSchools);
-
   school.likes.users.splice(userIndex, 1);
   school.likes.count -= 1;
   await user.save();

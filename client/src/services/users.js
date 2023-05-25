@@ -1,14 +1,13 @@
-import * as api from "../api/api";
+import * as api from '../api/api';
 
 const endpoints = {
-  login: "/users/login",
-  register: "/users/register",
-  logout: "/users/logout",
-  single: (userId) => `/users/${userId}`,
+  login: '/users/login',
+  register: '/users/register',
+  logout: '/users/logout',
+  single: userId => `/users/${userId}`,
 };
 
-const login = async ({ email, password }) =>
-  api.post(endpoints.login, { email, password });
+const login = async ({ email, password }) => api.post(endpoints.login, { email, password });
 
 const registerUser = async ({
   email,
@@ -30,22 +29,11 @@ const registerUser = async ({
   });
 };
 
-const edit = async (
-  userId,
-  { avatar, email, firstName, lastName, phoneNumber, moreInfo, avatarIsFile }
-) => {
-  return api.put(endpoints.single(userId), {
-    avatar,
-    email,
-    firstName,
-    lastName,
-    phoneNumber,
-    moreInfo,
-    avatarIsFile,
-  });
+const editUser = async (userId, data) => {
+  return api.patch(endpoints.single(userId), data);
 };
 
-const getSingle = (userId) => {
+const getSingle = userId => {
   return api.get(endpoints.single(userId));
 };
 
@@ -53,4 +41,4 @@ const logout = async () => {
   return api.get(endpoints.logout);
 };
 
-export { login, registerUser, edit, logout, getSingle };
+export { login, registerUser, editUser, logout, getSingle };
