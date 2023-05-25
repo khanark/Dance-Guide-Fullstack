@@ -19,6 +19,7 @@ const Catalog = () => {
   const { schools, setSchools } = useSchoolContext();
   const [isLoading, setIsLoading] = useState(true);
   const [showComponent, setShowComponent] = useState(false);
+
   const [filters, setFilters] = useState({
     location: '',
     style: '',

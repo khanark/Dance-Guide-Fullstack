@@ -89,8 +89,8 @@ const getAllUsers = async () => {
 
 const updateUser = async (id, data) => {
   await User.findByIdAndUpdate(id, data, { runValidators: true });
-  const updatedUser = await User.findById(id).lean();
-  return userViewModel(updatedUser);
+  return getSingleUser(id);
+  // return userViewModel(updatedUser);
 };
 
 module.exports = {
