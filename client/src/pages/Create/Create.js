@@ -1,18 +1,18 @@
-import "./Create.css";
-import "../../assets/styles/Form.css";
+import './Create.css';
+import '../../assets/styles/Form.css';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
-import Layout from "../../components/Layout/Layout";
-import { Spinner } from "@chakra-ui/react";
-import { createSchoolSchemaValidation } from "../../YupSchemas/validation_schema";
-import schoolsFactory from "../../services/schools";
-import { setPageTitle } from "../../util/util";
-import { useForm } from "react-hook-form";
-import { useNotification } from "../../hooks/useNotification";
-import { useUserContext } from "../../contexts/AuthContext";
-import { yupResolver } from "@hookform/resolvers/yup";
+import FieldsError from '../../components/Forms/Errors/Fields/FieldsError';
+import Layout from '../../components/Layout/Layout';
+import { Spinner } from '@chakra-ui/react';
+import { createSchoolSchemaValidation } from '../../YupSchemas/validation_schema';
+import schoolsFactory from '../../services/schools';
+import { setPageTitle } from '../../util/util';
+import { useForm } from 'react-hook-form';
+import { useNotification } from '../../hooks/useNotification';
+import { useUserContext } from '../../contexts/AuthContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Create = () => {
   const { user, navigate } = useUserContext();
@@ -20,7 +20,7 @@ const Create = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setPageTitle("Create School");
+    setPageTitle('Create School');
   }, []);
 
   const { createSchool } = schoolsFactory(user);
@@ -34,12 +34,18 @@ const Create = () => {
     resolver: yupResolver(createSchoolSchemaValidation),
   });
 
-  const handleAvatarChange = (e) => {
-    const file = URL.createObjectURL(e.target.files[0]);
-    setSelectedImage(file);
+  const handleAvatarChange = e => {
+    const image = e.target.files[0];
+    if (!image) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onloadend = async () => {
+      setSelectedImage(reader.result);
+    };
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
+    console.log(selectedImage);
     try {
       setIsLoading(true);
       await createSchool({
@@ -49,14 +55,14 @@ const Create = () => {
         isImageFile: Boolean(selectedImage),
       });
       notificateSuccess({
-        title: "Successfully created",
-        description: "The school was successfully created!",
+        title: 'Successfully created',
+        description: 'The school was successfully created!',
       });
-      setTimeout(() => navigate("/catalog"), 1500);
+      setTimeout(() => navigate('/catalog'), 1500);
     } catch (error) {
       setIsLoading(false);
       notificateError({
-        title: "Something went wrong",
+        title: 'Something went wrong',
         description: error.message || "Couldn't create the school",
       });
     } finally {
@@ -71,7 +77,7 @@ const Create = () => {
           <p className="form-desc">Make the whole world know about your school!</p>
           <label htmlFor="schoolName" className="form-label">
             <p className="input-label">Name</p>
-            <input className="form-input" {...register("name")} />
+            <input className="form-input" {...register('name')} />
             <FieldsError msg={errors.name?.message} />
           </label>
           <label htmlFor="schoolPhoto" className="form-label form-label--photo">
@@ -83,8 +89,8 @@ const Create = () => {
               <input
                 type="file"
                 className="form-input photo-input"
+                {...register('image')}
                 onChange={handleAvatarChange}
-                {...register("image")}
                 id="image"
               />
             </div>
@@ -92,7 +98,7 @@ const Create = () => {
           </label>
           <label htmlFor="schoolType" className="form-label">
             <p className="input-label">Style</p>
-            <select className="form-input" {...register("schoolType")}>
+            <select className="form-input" {...register('schoolType')}>
               <option value="1">Classical Ballet</option>
               <option value="2">Modern Dances</option>
               <option value="3">Oriental Dances</option>
@@ -106,23 +112,23 @@ const Create = () => {
           <div className="form-grid--wrapper">
             <label htmlFor="settlement" className="form-label">
               <p className="input-label">City</p>
-              <input className="form-input" {...register("settlement")} />
+              <input className="form-input" {...register('settlement')} />
               <FieldsError msg={errors.settlement?.message} />
             </label>
             <label htmlFor="street" className="form-label">
               <p className="input-label">Street</p>
-              <input className="form-input" {...register("street")} />
+              <input className="form-input" {...register('street')} />
               <FieldsError msg={errors.street?.message} />
             </label>
           </div>
           <label htmlFor="link" className="form-label">
             <p className="input-label">Website</p>
-            <input className="form-input" {...register("link")} />
+            <input className="form-input" {...register('link')} />
             <FieldsError msg={errors.link?.message} />
           </label>
           <label htmlFor="description" className="form-label">
             <p className="input-label">Description</p>
-            <textarea className="form-input" {...register("description")}></textarea>
+            <textarea className="form-input" {...register('description')}></textarea>
             <FieldsError msg={errors.description?.message} />
           </label>
           <button

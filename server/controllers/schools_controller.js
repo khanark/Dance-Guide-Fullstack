@@ -1,6 +1,6 @@
-const validateId = require("../middlewares/validateId");
-const authorize = require("../middlewares/authorize");
-const { cloudinary } = require("../util/cloudinary.js");
+const validateId = require('../middlewares/validateId');
+const authorize = require('../middlewares/authorize');
+const { cloudinary } = require('../util/cloudinary.js');
 
 const {
   getAllSchools,
@@ -10,11 +10,11 @@ const {
   updateSchool,
   likeSchool,
   unLikeSchool,
-} = require("../services/school_service");
+} = require('../services/school_service');
 
-const router = require("express").Router();
+const router = require('express').Router();
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   const { location, style, order } = req.query; // if query is empty, it will be undefined
   const query = {};
   const sortObj = {};
@@ -28,49 +28,50 @@ router.get("/", async (req, res) => {
     query.schoolType = style;
   }
 
-  if (order == "newest") {
+  if (order == 'newest') {
     sortObj.createdAt = -1;
-  } else if (order == "oldest") {
+  } else if (order == 'oldest') {
     sortObj.createdAt = 1;
-  } else if (order == "likes") {
-    sortObj["likes.count"] = -1;
+  } else if (order == 'likes') {
+    sortObj['likes.count'] = -1;
   }
 
   const schools = await getAllSchools(query, sortObj);
   res.status(200).json(schools);
 });
 
-router.get("/:id", validateId, async (req, res) => {
+router.get('/:id', validateId, async (req, res) => {
   const school = await getSingleSchool(req.params.id);
   if (!school) {
-    return res.status(404).json({ message: "School not found" });
+    return res.status(404).json({ message: 'School not found' });
   }
   res.status(200).json(school);
 });
 
-router.post("/:id/like", validateId, authorize, async (req, res) => {
+router.post('/:id/like', validateId, authorize, async (req, res) => {
   const school = await likeSchool(req.params.id, req.body);
   if (!school) {
-    return res.status(404).json({ message: "School not found" });
+    return res.status(404).json({ message: 'School not found' });
   }
   res.status(200).json(school);
 });
 
-router.post("/:id/unlike", validateId, authorize, async (req, res) => {
+router.post('/:id/unlike', validateId, authorize, async (req, res) => {
   const school = await unLikeSchool(req.params.id, req.body);
   if (!school) {
-    return res.status(404).json({ message: "School not found" });
+    return res.status(404).json({ message: 'School not found' });
   }
   res.status(200).json(school);
 });
 
-router.post("/", authorize, async (req, res) => {
+router.post('/', authorize, async (req, res) => {
   try {
     let uploadedResponse = null;
+    console.log(req.body.image);
 
     if (req.body.isImageFile) {
       uploadedResponse = await cloudinary.uploader.upload(req.body.image, {
-        upload_preset: "danceguide_schools_images",
+        upload_preset: 'danceguide_schools_images',
       });
     }
 
@@ -79,35 +80,32 @@ router.post("/", authorize, async (req, res) => {
       image: req.body.isImageFile ? uploadedResponse.public_id : req.body.image,
     });
 
-    console.log(school);
-
     res.status(200).json(school);
   } catch (error) {
+    console.log(error);
     res.status(400).json({
-      message: `${
-        error.code == 11000 ? "School already exists" : "Invalid data"
-      }`,
+      message: `${error.code == 11000 ? 'School already exists' : 'Invalid data'}`,
     });
   }
 });
 
-router.delete("/:id", validateId, authorize, async (req, res) => {
+router.delete('/:id', validateId, authorize, async (req, res) => {
   req.params.id;
   const school = await deleteSchool(req.params.id);
   school;
   if (!school) {
-    return res.status(404).json({ message: "School not found" });
+    return res.status(404).json({ message: 'School not found' });
   }
-  res.status(200).json({ message: "School was deleted successfully" });
+  res.status(200).json({ message: 'School was deleted successfully' });
 });
 
-router.put("/:id", validateId, authorize, async (req, res) => {
+router.put('/:id', validateId, authorize, async (req, res) => {
   try {
     let uploadedResponse = null;
 
     if (req.body.isImageFile) {
       uploadedResponse = await cloudinary.uploader.upload(req.body.image, {
-        upload_preset: "danceguide_schools_images",
+        upload_preset: 'danceguide_schools_images',
       });
     }
 
@@ -117,7 +115,7 @@ router.put("/:id", validateId, authorize, async (req, res) => {
     });
 
     if (!school) {
-      return res.status(404).json({ message: "School not found" });
+      return res.status(404).json({ message: 'School not found' });
     }
 
     res.status(200).json(school);
