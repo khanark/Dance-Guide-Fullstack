@@ -9,7 +9,6 @@ import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 
 const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
   const [matchedLink, setMatchedLink] = useState('');
-
   const matchLink = link => {
     const regex = /https?:\/\/(.*?)(\/|$)/;
     if (!link) return;
