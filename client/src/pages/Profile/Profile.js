@@ -51,6 +51,8 @@ const Profile = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedImage]);
 
+  console.log(user);
+
   return (
     <Layout>
       {/* This modal window isn't rendering FIX IT */}

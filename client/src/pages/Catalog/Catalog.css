@@ -96,12 +96,24 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 3.2rem;
-  row-gap: 9.6rem;
+  row-gap: 6.4rem;
 }
 
 .loading {
   grid-column: 1 / -1;
-  margin: 10% auto;
+  margin:  auto;
+}
+
+.schools-loading {
+  margin-top: 10%;
+  grid-column: 1/-1;
+  grid-row: 1/ -1;
+  text-align: center;
+  color: #ccc;
+}
+
+.list-schools-loading {
+  gap: 0;
 }
 
 .btn--add {
