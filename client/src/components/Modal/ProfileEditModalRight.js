@@ -2,16 +2,29 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 
 import FieldsError from '../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
+import { editUser } from '../../services/users';
 import { useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
-const ProfileEditModalRight = ({ firstName, lastName, city, expertise }) => {
+const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setUser }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
+    handleSubmit,
     formState: { isDirty, errors },
   } = useForm({ defaultValues: { firstName, lastName, city, expertise } });
+
+  const onSubmit = async data => {
+    if (!isDirty) return;
+    setIsLoading(true);
+    const updatedUser = await editUser(_id, data);
+    setIsLoading(false);
+    setUser(prevUser => ({ ...prevUser, ...updatedUser }));
+    onClose();
+  };
 
   return (
     <>
@@ -34,7 +47,7 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <form className="form" style={{ width: '100%' }}>
+          <form className="form" style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
             <div className="form-grid--wrapper">
               <label htmlFor="firstName" className="form-label">
                 <p className="input-label">First name</p>
@@ -63,10 +76,10 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise }) => {
               </button>
               <div className="btn-wrapper">
                 <button type="submit" className="btn btn-modal">
-                  <Spinner className="btn-spinner modal-spinner" />
+                  {isLoading && <Spinner className="btn-spinner modal-spinner" />}
                   Save
                 </button>
-                <p className="btn-desc">Updating...</p>
+                {isLoading && <p className="btn-desc">Updating...</p>}
               </div>
             </div>
           </form>
