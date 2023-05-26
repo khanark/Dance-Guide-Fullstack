@@ -133,7 +133,7 @@ const Profile = () => {
                       </svg>
                       <span className="user-hometown">{convertToPascalCase(user?.city)}</span>
                     </div>
-                    <ProfileEditModalRight {...user} />
+                    <ProfileEditModalRight {...user} setUser={setUser} />
                   </div>
                   <h5 className="subtitle user-ocupation">
                     {convertToPascalCase(user?.expertise)}
