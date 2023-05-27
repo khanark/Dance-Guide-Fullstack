@@ -1,24 +1,20 @@
 import './Card.css';
 
-import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
-import { useEffect, useState } from 'react';
+import { AdvancedImage, lazyload, placeholder, responsive } from '@cloudinary/react';
 
 import { Link } from 'react-router-dom';
 import { fill } from '@cloudinary/url-gen/actions/resize';
 import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 
 const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
-  const [matchedLink, setMatchedLink] = useState('');
   const matchLink = link => {
     const regex = /https?:\/\/(.*?)(\/|$)/;
-    if (!link) return;
+    if (!link) {
+      return;
+    }
     const result = regex.exec(link);
     return result[1] || 'no external link';
   };
-
-  useEffect(() => {
-    setMatchedLink(matchLink(link));
-  }, [link]);
 
   const url = useCloudinaryImage(image);
   url.resize(fill(300, 300));
@@ -44,7 +40,12 @@ const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
           <p className="text-likes">{likes.count}</p>
         </div>
         <div className="card-img--wrapper">
-          <AdvancedImage cldImg={url} plugins={[lazyload(), responsive()]} className="item-img" />
+          <AdvancedImage
+            cldImg={url}
+            pl
+            ugins={[lazyload(), responsive(), placeholder({ mode: 'blur' })]}
+            className="item-img"
+          />
         </div>
         <div className="item-info">
           <h4 className="card-title">{name}</h4>
@@ -123,7 +124,7 @@ const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
                 />
               </svg>
 
-              <span>{matchedLink}</span>
+              <span>{matchLink(link)}</span>
             </li>
           </ul>
         </div>

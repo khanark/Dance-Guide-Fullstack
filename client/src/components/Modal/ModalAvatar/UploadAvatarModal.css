@@ -1,0 +1,29 @@
+.image-wrapper {
+	width: 20rem;
+	margin: 0 auto;
+	border-radius: 0.4rem;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: 2.4rem;
+}
+
+.modal-header {
+	margin-bottom: 2.4rem;
+	border-bottom: 2px solid #eee;
+}
+
+.modal-description {
+	color: #555;
+}
+
+
+.modal-title {
+	color: #333;
+	margin-bottom: 0;
+}
+
+.modal-btns {
+	padding-top: 1rem;
+	border-top: 2px solid #eee;
+
+}

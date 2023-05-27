@@ -36,7 +36,9 @@ const Create = () => {
 
   const handleAvatarChange = e => {
     const image = e.target.files[0];
-    if (!image) return;
+    if (!image) {
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = async () => {
@@ -45,7 +47,6 @@ const Create = () => {
   };
 
   const onSubmit = async data => {
-    console.log(selectedImage);
     try {
       setIsLoading(true);
       await createSchool({

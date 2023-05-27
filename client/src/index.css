@@ -10,7 +10,7 @@
   text-decoration: none;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Poppins:400");
+@import url("https://fonts.googleapis.com/css?family=Poppins:wght:400;600;700&display=swap");
 
 html {
   font-size: 87.5%;
@@ -91,15 +91,16 @@ small,
 }
 
 html::-webkit-scrollbar {
-  width: 0.25vw;
+  width: 0.5vw;
 }
 
 html::-webkit-scrollbar-track {
-  background-color: var(--clr-grey--dark--hover);
+  background-color: #555;
 }
 
 html::-webkit-scrollbar-thumb {
-  background-color: #e9e9ea;
+  background-color: #999;
+  border-radius: 100px;
 }
 
 @media screen and (max-width: 768px) {

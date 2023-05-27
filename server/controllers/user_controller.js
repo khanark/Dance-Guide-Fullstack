@@ -38,6 +38,23 @@ router.get('/logout', authorize, async (req, res) => {
   res.status(200).json({ message: 'You have been logged out!' });
 });
 
+router.patch('/:id/avatar', validateId, authorize, async (req, res) => {
+  try {
+    const uploadedResponse = await cloudinary.uploader.upload(req.body.avatar, {
+      upload_preset: 'danceguide_user_avatars',
+    });
+
+    const user = await updateUser(req.params.id, {
+      avatar: uploadedResponse.public_id,
+    });
+    res.status(200).json(user);
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: `There has been an error uploading the image${error.message}` });
+  }
+});
+
 router.get('/:id', validateId, authorize, async (req, res) => {
   const user = await getSingleUser(req.params.id);
   if (!user) {
@@ -47,24 +64,8 @@ router.get('/:id', validateId, authorize, async (req, res) => {
 });
 
 router.patch('/:id', validateId, authorize, async (req, res) => {
-  // if (typeof req.body.avatar === 'object') {
-  //   delete req.body.avatar;
-  // }
   try {
-    // let uploadedResponse = null;
-
-    // if (req.body.avatarIsFile && req.body.avatar) {
-    //   uploadedResponse = await cloudinary.uploader.upload(req.body.avatar, {
-    //     upload_preset: 'danceguide_user_avatars',
-    //   });
-    // }
-
-    // const user = await updateUser(req.params.id, {
-    //   ...req.body,
-    //   avatar: req.body.avatarIsFile ? uploadedResponse.public_id : req.body.avatar,
-    // });
     const user = await updateUser(req.params.id, req.body);
-
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

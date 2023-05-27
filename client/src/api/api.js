@@ -1,5 +1,5 @@
-// const host = 'https://dance-guide-bg.onrender.com';
-const host = 'http://localhost:3030';
+const host = 'https://dance-guide-bg.onrender.com';
+// const host = 'http://localhost:3030';
 
 const request = async (method, url, data) => {
   const options = {
@@ -8,7 +8,6 @@ const request = async (method, url, data) => {
   };
 
   // new line
-
   const userData = JSON.parse(localStorage.getItem('userData'));
 
   if (userData) {

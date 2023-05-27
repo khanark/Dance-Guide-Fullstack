@@ -1,13 +1,16 @@
-import "./FIlterMenu.css";
+import './FIlterMenu.css';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const FilterMenu = ({ filters, setFilters }) => {
-  const [debouncedLocation, setDebouncedLocation] = useState("");
+  const [debouncedLocation, setDebouncedLocation] = useState('');
 
   useEffect(() => {
+    if (!debouncedLocation) {
+      return;
+    }
     const debouncedTimer = setTimeout(() => {
-      setFilters((prevState) => ({
+      setFilters(prevState => ({
         ...prevState,
         location: debouncedLocation,
       }));
@@ -16,11 +19,11 @@ const FilterMenu = ({ filters, setFilters }) => {
     return () => clearTimeout(debouncedTimer);
   }, [debouncedLocation]);
 
-  const onChangeHandler = (e) => {
-    if (e.target.name === "location") {
+  const onChangeHandler = e => {
+    if (e.target.name === 'location') {
       setDebouncedLocation(e.target.value);
     } else {
-      setFilters((prevState) => ({
+      setFilters(prevState => ({
         ...prevState,
         [e.target.name]: e.target.value,
       }));

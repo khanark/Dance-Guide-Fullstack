@@ -9,6 +9,7 @@ import Layout from '../../components/Layout/Layout';
 import ProfileEditModalLeft from '../../components/Modal/ProfileEditModalLeft';
 import ProfileEditModalRight from '../../components/Modal/ProfileEditModalRight';
 import { Spinner } from '@chakra-ui/react';
+import UploadAvatarModal from '../../components/Modal/ModalAvatar/UploadAvatarModal';
 import { convertToPascalCase } from '../../util/util';
 import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
 import { getSingle } from '../../services/users';
@@ -18,21 +19,15 @@ import { useParams } from 'react-router-dom';
 
 const Profile = () => {
   const { userId } = useParams();
-  const [previewImage, setPreviewImage] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [activeButton, setActiveButton] = useState('user-btn--1');
-
-  const onChangeImage = e => {
-    setSelectedImage(e.target.files[0]);
-  };
 
   function onUserButtonClick(e) {
     setActiveButton(e.target.id);
   }
 
-  const isCurrentLoggedInUser = user?._id == userId;
+  const isCurrentLoggedInUser = user?._id === userId;
   const userImage = useCloudinaryImage(user?.avatar);
 
   useEffect(() => {
@@ -43,16 +38,7 @@ const Profile = () => {
         setUser(user);
       })
       .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    if (!selectedImage) return;
-    const objectUrl = URL.createObjectURL(selectedImage);
-    setPreviewImage(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedImage]);
-
-  console.log(user);
+  }, [userId]);
 
   return (
     <Layout>
@@ -60,28 +46,17 @@ const Profile = () => {
         <div className="profile container-secondary grid grid--cols-2">
           <div className="profile-box--left">
             <div className="profile-img--wrapper">
-              {selectedImage && (
-                <img src={previewImage} alt="preview" className="user-profile--img" />
+              {user?.avatar ? (
+                <AdvancedImage
+                  cldImg={userImage}
+                  className="user-profile--img"
+                  plugins={[lazyload(), responsive()]}
+                />
+              ) : (
+                <img src={defaultAvatar} className="user-profile--img" alt="user-avatar" />
               )}
-              {!selectedImage && (
-                <>
-                  {user?.avatar ? (
-                    <AdvancedImage
-                      cldImg={userImage}
-                      className="user-profile--img"
-                      plugins={[lazyload(), responsive()]}
-                    />
-                  ) : (
-                    <img src={defaultAvatar} className="user-profile--img" alt="user-avatar" />
-                  )}
-                </>
-              )}
-              <form>
-                <input type="file" id="image" className="image-input" onChange={onChangeImage} />
-                <label htmlFor="image" className="image-label">
-                  {user?.avatar ? 'Change' : 'Upload'}
-                </label>
-              </form>
+
+              <UploadAvatarModal {...user} setUser={setUser} />
             </div>
             <div className="line-devider">
               <span className="line-devider--text devider-text--left">About Me</span>
@@ -182,14 +157,14 @@ const Profile = () => {
                 <div className="user-options">
                   <button
                     id="user-btn--1"
-                    className={`subtitle ${activeButton == 'user-btn--1' ? 'active' : ''}`}
+                    className={`subtitle ${activeButton === 'user-btn--1' ? 'active' : ''}`}
                     onClick={onUserButtonClick}
                   >
                     Created
                   </button>
                   <button
                     id="user-btn--2"
-                    className={`subtitle ${activeButton == 'user-btn--2' ? 'active' : ''}`}
+                    className={`subtitle ${activeButton === 'user-btn--2' ? 'active' : ''}`}
                     onClick={onUserButtonClick}
                   >
                     Liked
@@ -197,7 +172,7 @@ const Profile = () => {
                   {!isCurrentLoggedInUser && (
                     <button
                       id="user-btn--3"
-                      className={`subtitle ${activeButton == 'user-btn--3' ? 'active' : ''}`}
+                      className={`subtitle ${activeButton === 'user-btn--3' ? 'active' : ''}`}
                       onClick={onUserButtonClick}
                     >
                       Send message to the user
@@ -206,10 +181,10 @@ const Profile = () => {
                 </div>
               </div>
               <ul className="school-list grid grid--cols-2">
-                {activeButton == 'user-btn--1' ? (
+                {activeButton === 'user-btn--1' ? (
                   <>
                     {user?.danceSchools.length > 0 ? (
-                      user?.danceSchools.map(school => <Card key={school.id} {...school} />)
+                      user?.danceSchools.map(school => <Card key={school._id} {...school} />)
                     ) : (
                       <p className="subtitle">No schools created yet</p>
                     )}
@@ -217,7 +192,7 @@ const Profile = () => {
                 ) : (
                   <>
                     {user?.likedSchools.length > 0 ? (
-                      user?.likedSchools.map(school => <Card key={school.id} {...school} />)
+                      user?.likedSchools.map(school => <Card key={school._id} {...school} />)
                     ) : (
                       <p className="subtitle">No schools liked yet</p>
                     )}
