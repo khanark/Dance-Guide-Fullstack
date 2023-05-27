@@ -1,7 +1,7 @@
-import "./NotFound.scss";
+import './NotFound.scss';
 
-import { GiFishEscape } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { GiFishEscape } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   return (

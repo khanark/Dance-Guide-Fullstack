@@ -18,7 +18,9 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setU
   } = useForm({ defaultValues: { firstName, lastName, city, expertise } });
 
   const onSubmit = async data => {
-    if (!isDirty) return;
+    if (!isDirty) {
+      return;
+    }
     setIsLoading(true);
     const updatedUser = await editUser(_id, data);
     setIsLoading(false);

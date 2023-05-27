@@ -1,24 +1,24 @@
-import "../../assets/styles/Form.css";
-import "./Register.css";
+import '../../assets/styles/Form.css';
+import './Register.css';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import FieldsError from "../../components/Forms/Errors/Fields/FieldsError";
-import Layout from "../../components/Layout/Layout";
-import { Spinner } from "@chakra-ui/react";
-import { registerSchemaValidation } from "../../YupSchemas/validation_schema";
-import { registerUser } from "../../services/users";
-import { setPageTitle } from "../../util/util";
-import { useForm } from "react-hook-form";
-import { useNotification } from "../../hooks/useNotification";
-import { useUserContext } from "../../contexts/AuthContext";
-import { yupResolver } from "@hookform/resolvers/yup";
+import FieldsError from '../../components/Forms/Errors/Fields/FieldsError';
+import Layout from '../../components/Layout/Layout';
+import { Spinner } from '@chakra-ui/react';
+import { registerSchemaValidation } from '../../YupSchemas/validation_schema';
+import { registerUser } from '../../services/users';
+import { setPageTitle } from '../../util/util';
+import { useForm } from 'react-hook-form';
+import { useNotification } from '../../hooks/useNotification';
+import { useUserContext } from '../../contexts/AuthContext';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setPageTitle("Sign Up");
+    setPageTitle('Sign Up');
   }, []);
 
   const {
@@ -32,20 +32,20 @@ const Register = () => {
   const { navigate, setEmail } = useUserContext();
   const { notificateError, notificateSuccess } = useNotification();
 
-  const onSubmitRegister = async (data) => {
+  const onSubmitRegister = async data => {
     try {
       setIsLoading(true);
       await registerUser(data);
       notificateSuccess({
-        title: "Successfull registration",
-        description: "Thanks for signing up!",
+        title: 'Successfull registration',
+        description: 'Thanks for signing up!',
       });
-      setTimeout(() => navigate("/login"), 1500);
+      setTimeout(() => navigate('/login'), 1500);
       setEmail(data.email.toLowerCase());
     } catch (error) {
       setIsLoading(false);
       notificateError({
-        title: "Register failed.",
+        title: 'Register failed.',
         description: `${error.message}`,
       });
     } finally {
@@ -62,27 +62,23 @@ const Register = () => {
           <div className="form-grid--wrapper">
             <label htmlFor="firstName" className="form-label">
               <p className="input-label">First name</p>
-              <input className="form-input" {...register("firstName")} />
+              <input className="form-input" {...register('firstName')} />
               <FieldsError msg={errors.firstName?.message} />
             </label>
             <label htmlFor="lastName" className="form-label">
               <p className="input-label">Last name</p>
-              <input className="form-input" {...register("lastName")} />
+              <input className="form-input" {...register('lastName')} />
               <FieldsError msg={errors.lastName?.message} />
             </label>
           </div>
           <label htmlFor="email" className="form-label">
             <p className="input-label">Email</p>
-            <input className="form-input" {...register("email")} />
+            <input className="form-input" {...register('email')} />
             <FieldsError msg={errors.email?.message} />
           </label>
           <label htmlFor="city" className="form-label">
             <p className="input-label">City</p>
-            <input
-              className="form-input"
-              placeholder="Plovdiv..."
-              {...register("city")}
-            />
+            <input className="form-input" placeholder="Plovdiv..." {...register('city')} />
             <FieldsError msg={errors.city?.message} />
           </label>
           <label htmlFor="expertise" className="form-label form-expertise">
@@ -90,7 +86,7 @@ const Register = () => {
             <input
               className="form-input"
               placeholder="Dance Expert..."
-              {...register("expertise")}
+              {...register('expertise')}
             />
             <FieldsError msg={errors.expertise?.message} />
           </label>
@@ -103,7 +99,7 @@ const Register = () => {
                 className="form-input"
                 type="number"
                 placeholder="877558277"
-                {...register("phoneNumber")}
+                {...register('phoneNumber')}
               />
             </div>
             <FieldsError msg={errors.phoneNumber?.message} />
@@ -111,21 +107,13 @@ const Register = () => {
 
           <label htmlFor="password" className="form-label">
             <p className="input-label">Password</p>
-            <input
-              className="form-input"
-              type="password"
-              {...register("password")}
-            />
+            <input className="form-input" type="password" {...register('password')} />
             <FieldsError msg={errors.password?.message} />
           </label>
 
           <label htmlFor="repass" className="form-label">
             <p className="input-label">Password repeat</p>
-            <input
-              className="form-input"
-              type="password"
-              {...register("repeatedPassword")}
-            />
+            <input className="form-input" type="password" {...register('repeatedPassword')} />
             <FieldsError msg={errors.repeatedPassword?.message} />
           </label>
           <div className="btn-wrapper">
@@ -138,9 +126,7 @@ const Register = () => {
               {isLoading && <Spinner className="btn-spinner" />}
               Register
             </button>
-            {isLoading && (
-              <p className="btn-desc">Creating your account ☻...</p>
-            )}
+            {isLoading && <p className="btn-desc">Creating your account ☻...</p>}
           </div>
         </form>
       </div>

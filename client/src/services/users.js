@@ -5,6 +5,7 @@ const endpoints = {
   register: '/users/register',
   logout: '/users/logout',
   single: userId => `/users/${userId}`,
+  avatar: userId => `/users/${userId}/avatar`,
 };
 
 const login = async ({ email, password }) => api.post(endpoints.login, { email, password });
@@ -33,6 +34,10 @@ const editUser = async (userId, data) => {
   return api.patch(endpoints.single(userId), data);
 };
 
+const editUserAvatar = async (userId, data) => {
+  return api.patch(endpoints.avatar(userId), { avatar: data });
+};
+
 const getSingle = userId => {
   return api.get(endpoints.single(userId));
 };
@@ -41,4 +46,4 @@ const logout = async () => {
   return api.get(endpoints.logout);
 };
 
-export { login, registerUser, editUser, logout, getSingle };
+export { login, registerUser, editUser, logout, getSingle, editUserAvatar };

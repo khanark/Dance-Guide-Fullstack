@@ -1,20 +1,16 @@
-import "./Navigation.css";
+import './Navigation.css';
 
-import { AdvancedImage, lazyload, responsive } from "@cloudinary/react";
-import { useEffect, useRef, useState } from "react";
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
+import { useEffect, useRef, useState } from 'react';
 
-import { Link } from "react-router-dom";
-import defaultAvatar from "../../assets/images/blank-avatar-image.jpg";
-import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
-import { useUserContext } from "../../contexts/AuthContext";
+import { Link } from 'react-router-dom';
+import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
+import { useCloudinaryUserImage } from '../../hooks/useCloudinaryImage';
+import { useUserContext } from '../../contexts/AuthContext';
 
-const Navigation = ({
-  isLandingPage,
-  authPage,
-  onNavLinkClick,
-  navLinkActive,
-}) => {
+const Navigation = ({ isLandingPage, authPage }) => {
   const { user, clearUser, setNavigationRef } = useUserContext();
+  const { cloudinaryUserImage: userImage, setupCloudinaryImage } = useCloudinaryUserImage();
   const [dropdown, setDropdown] = useState(false);
 
   const navigationRef = useRef(null);
@@ -27,34 +23,23 @@ const Navigation = ({
     clearUser(); // clearing the user from local storage upon logout
   };
 
-  const userImage = useCloudinaryImage(user?.avatar);
+  useEffect(() => {
+    setupCloudinaryImage(user?.avatar);
+  }, [user?.avatar]);
 
   return (
-    <header
-      ref={navigationRef}
-      className={`nav-header ${!isLandingPage && "landing-bg"}`}
-    >
-      <nav
-        className={`header-nav container-primary ${
-          !isLandingPage && "landing-link"
-        }`}
-      >
+    <header ref={navigationRef} className={`nav-header ${!isLandingPage && 'landing-bg'}`}>
+      <nav className={`header-nav container-primary ${!isLandingPage && 'landing-link'}`}>
         <h4 className="logo">
           <Link to="/">DanceGuide</Link>
         </h4>
         {authPage && (
           <div className="auth-page">
             <p className="auth-question">
-              {authPage === "login"
-                ? "Don't have an account?"
-                : "Already have an account?"}
+              {authPage === 'login' ? "Don't have an account?" : 'Already have an account?'}
             </p>
-            <Link
-              className="nav-link"
-              s
-              to={authPage == "login" ? "/register" : "/login"}
-            >
-              {authPage === "login" ? "Sign Up" : "Sign In"}
+            <Link className="nav-link" s to={authPage === 'login' ? '/register' : '/login'}>
+              {authPage === 'login' ? 'Sign Up' : 'Sign In'}
             </Link>
           </div>
         )}
@@ -62,39 +47,18 @@ const Navigation = ({
         {!authPage && (
           <ul className="nav">
             <li>
-              <Link
-                id="nav-link--1"
-                to="/"
-                className={`nav-link ${
-                  navLinkActive == "nav-link--1" ? "nav-link--active" : ""
-                }`}
-                onClick={onNavLinkClick}
-              >
+              <Link id="nav-link--1" to="/" className="nav-link">
                 Home
               </Link>
             </li>
             <li>
-              <Link
-                id="nav-link--2"
-                to="/catalog"
-                className={`nav-link ${
-                  navLinkActive == "nav-link--2" ? "nav-link--active" : ""
-                }`}
-                onClick={onNavLinkClick}
-              >
+              <Link id="nav-link--2" to="/catalog" className="nav-link">
                 Catalog
               </Link>
             </li>
             {user && (
               <li>
-                <Link
-                  id="nav-link--3"
-                  to="/create"
-                  className={`nav-link ${
-                    navLinkActive == "nav-link--3" ? "nav-link--active" : ""
-                  }`}
-                  onClick={onNavLinkClick}
-                >
+                <Link id="nav-link--3" to="/create" className="nav-link">
                   Create School
                 </Link>
               </li>
@@ -108,10 +72,7 @@ const Navigation = ({
             )}
             {user && (
               <li className="dropdown-menu-wrapper">
-                <div
-                  className="user-btn"
-                  onClick={() => setDropdown((bool) => !bool)}
-                >
+                <div className="user-btn" onClick={() => setDropdown(bool => !bool)}>
                   {user?.avatar ? (
                     <AdvancedImage
                       cldImg={userImage}
@@ -119,29 +80,18 @@ const Navigation = ({
                       plugins={[lazyload(), responsive()]}
                     />
                   ) : (
-                    <img
-                      src={defaultAvatar}
-                      className="user-avatar--img"
-                      alt="user-avatar"
-                    />
+                    <img src={defaultAvatar} className="user-avatar--img" alt="user-avatar" />
                   )}
                 </div>
 
-                <div
-                  className={`user-dropdown--menu ${
-                    dropdown ? "active" : "inactive"
-                  }`}
-                >
+                <div className={`user-dropdown--menu ${dropdown ? 'active' : 'inactive'}`}>
                   <h4 className="user-dropdown--username">
                     {user?.firstName} {user?.lastName}
                   </h4>
                   <p className="user-dropdown--email">{user?.email}</p>
                   <ul className="user-dropdown--list">
                     <li className="link-wrapper">
-                      <Link
-                        to={`/user/profile/${user?._id}`}
-                        className="user-dropdown--link"
-                      >
+                      <Link to={`/user/profile/${user?._id}`} className="user-dropdown--link">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -161,11 +111,7 @@ const Navigation = ({
                       </Link>
                     </li>
                     <li className="link-wrapper">
-                      <Link
-                        to="/catalog"
-                        className="user-dropdown--link"
-                        onClick={onLogoutClick}
-                      >
+                      <Link to="/catalog" className="user-dropdown--link" onClick={onLogoutClick}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -190,12 +136,6 @@ const Navigation = ({
           </ul>
         )}
       </nav>
-      {/* <div className="reconstruction ">
-        <h3 className="subtitle">Website is under reconstruction!</h3>
-        <p className="desc">
-          Some of the features might be missing or not working as expected.
-        </p>
-      </div> */}
     </header>
   );
 };

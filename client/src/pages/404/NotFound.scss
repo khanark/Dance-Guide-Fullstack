@@ -8,9 +8,7 @@
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right,
-      #e9e4f0,
-      #d3cce3);
+  background: linear-gradient(to right, #e9e4f0, #d3cce3);
 
   .error {
     margin: 150px auto;
@@ -37,13 +35,13 @@
       }
 
       p {
-        color: #5555B2;
+        color: #5555b2;
         font-size: 25px;
 
         span {
           font-size: 50px;
           font-weight: 700;
-          color: #D825C3;
+          color: #d825c3;
         }
       }
     }
@@ -68,13 +66,13 @@
 
       .escape {
         font-weight: 600;
-        color: #711CB3;
+        color: #711cb3;
       }
 
       svg {
         width: 40px;
         height: auto;
-        color: #711CB3;
+        color: #711cb3;
       }
     }
   }

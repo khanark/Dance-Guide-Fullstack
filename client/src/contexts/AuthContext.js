@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useNavigate } from 'react-router-dom';
 
 export const UserContext = createContext();
 
@@ -10,7 +10,7 @@ const UserContextProvider = ({ children }) => {
   const [navigationRef, setNavigationRef] = useState(null); // This is so we can scroll to the top of the navigation bar
 
   // This state is being used if the user is new
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const navigate = useNavigate();
 
@@ -25,9 +25,7 @@ const UserContextProvider = ({ children }) => {
     setNavigationRef,
   };
 
-  return (
-    <UserContext.Provider value={context}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={context}>{children}</UserContext.Provider>;
 };
 
 export const useUserContext = () => {

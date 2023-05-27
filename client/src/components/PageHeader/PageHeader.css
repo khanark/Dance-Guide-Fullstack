@@ -10,7 +10,9 @@
 }
 
 .page-header .title-primary {
-  margin-bottom: 1.6rem;
+  letter-spacing: 0.75px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2.4rem;
 }
 
 .page-header .title-secondary {
@@ -34,7 +36,7 @@
 }
 
 .header-right-box:before {
-  content: "";
+  content: '';
   position: absolute;
   left: 10px;
   width: 100%;

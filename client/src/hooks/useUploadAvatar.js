@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useUploadAvatar = () => {
-  const [uploadedAvatar, setUploadedAvatar] = useState("");
+  const [uploadedAvatar, setUploadedAvatar] = useState('');
 
-  const preloadAvatar = (image) => {
+  const preloadAvatar = image => {
     const reader = new FileReader();
     reader.readAsDataURL(image);
     reader.onloadend = () => {

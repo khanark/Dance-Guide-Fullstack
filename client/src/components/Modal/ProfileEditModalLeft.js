@@ -21,7 +21,9 @@ const ProfileEditModalLeft = ({ email, phoneNumber, moreInfo, _id, setUser }) =>
   } = useForm({ values: { email, phoneNumber, moreInfo } });
 
   const onSubmit = async data => {
-    if (!isDirty) return;
+    if (!isDirty) {
+      return;
+    }
     setIsLoading(true);
     const updatedUser = await editUser(_id, data);
     setIsLoading(false);

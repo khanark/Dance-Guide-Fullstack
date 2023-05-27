@@ -1,17 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const modelLocalStorage = (value) => {
-  const {
-    _id,
-    avatar,
-    firstName,
-    lastName,
-    email,
-    moreInfo,
-    token,
-    isNewAcc,
-    phoneNumber,
-  } = value;
+const modelLocalStorage = value => {
+  const { _id, avatar, firstName, lastName, email, moreInfo, token, isNewAcc, phoneNumber } = value;
   return {
     _id,
     avatar,
@@ -25,18 +15,18 @@ const modelLocalStorage = (value) => {
   };
 };
 
-export const useLocalStorage = (initValue) => {
+export const useLocalStorage = initValue => {
   const [user, setUser] = useState(() => {
-    const storedData = localStorage.getItem("userData");
+    const storedData = localStorage.getItem('userData');
     return storedData ? JSON.parse(storedData) : initValue;
   });
-  const setLocalStorage = (value) => {
+  const setLocalStorage = value => {
     const data = modelLocalStorage(value);
-    localStorage.setItem("userData", JSON.stringify(data));
+    localStorage.setItem('userData', JSON.stringify(data));
     setUser(data);
   };
   const clearLocalStorage = () => {
-    localStorage.removeItem("userData");
+    localStorage.removeItem('userData');
     setUser(null);
   };
   return { user, setUser: setLocalStorage, clearUser: clearLocalStorage };

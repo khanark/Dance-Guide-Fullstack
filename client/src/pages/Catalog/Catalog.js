@@ -17,7 +17,7 @@ import { useUserContext } from '../../contexts/AuthContext';
 
 const Catalog = () => {
   const { schools, setSchools } = useSchoolContext();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
 
   const [filters, setFilters] = useState({
@@ -31,14 +31,18 @@ const Catalog = () => {
 
   useEffect(() => {
     setPageTitle('Catalog');
-    setIsLoading(true);
-    setSchools([]);
-    setTimeout(() => setShowComponent(true), 1200);
-    getAllSchools(filters)
-      .then(data => {
-        setSchools(data);
-      })
-      .finally(() => setIsLoading(false));
+    if (user?.isNewAcc) {
+      setTimeout(() => setShowComponent(true), 1200);
+    }
+    if (!schools.length || Object.values(filters).some(value => value !== '')) {
+      setIsLoading(true);
+      setSchools([]);
+      getAllSchools(filters)
+        .then(data => {
+          setSchools(data);
+        })
+        .finally(() => setIsLoading(false));
+    }
   }, [filters]);
 
   return (
