@@ -1,13 +1,13 @@
-.section-footer {
+.section-footer,
+.footer-secondary {
   background-color: var(--clr-grey--dark);
+}
+.section-footer {
   position: relative;
 }
 
 .footer {
   align-items: start !important;
-}
-
-.footer {
 }
 
 .footer .title-secondary {

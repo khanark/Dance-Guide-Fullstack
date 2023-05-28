@@ -1,21 +1,12 @@
 import './Card.css';
 
-import { AdvancedImage, lazyload, placeholder, responsive } from '@cloudinary/react';
-
+import { AdvancedImage } from '@cloudinary/react';
 import { Link } from 'react-router-dom';
 import { fill } from '@cloudinary/url-gen/actions/resize';
+import { matchLink } from '../../util/util';
 import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 
 const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
-  const matchLink = link => {
-    const regex = /https?:\/\/(.*?)(\/|$)/;
-    if (!link) {
-      return;
-    }
-    const result = regex.exec(link);
-    return result[1] || 'no external link';
-  };
-
   const url = useCloudinaryImage(image);
   url.resize(fill(300, 300));
 
@@ -40,12 +31,7 @@ const Card = ({ _id, name, image, settlement, likes, owner, link }) => {
           <p className="text-likes">{likes.count}</p>
         </div>
         <div className="card-img--wrapper">
-          <AdvancedImage
-            cldImg={url}
-            pl
-            ugins={[lazyload(), responsive(), placeholder({ mode: 'blur' })]}
-            className="item-img"
-          />
+          <AdvancedImage cldImg={url} className="item-img" />
         </div>
         <div className="item-info">
           <h4 className="card-title">{name}</h4>

@@ -54,83 +54,77 @@ const Register = () => {
   };
 
   return (
-    <Layout authPage="register">
-      <div className="form-wrapper section">
-        <form className="form">
-          <h3 className="title-secondary">Let's get started</h3>
-          <h5 className="form-desc">Experience more, sign up with us!</h5>
-          <div className="form-grid--wrapper">
-            <label htmlFor="firstName" className="form-label">
-              <p className="input-label">First name</p>
-              <input className="form-input" {...register('firstName')} />
-              <FieldsError msg={errors.firstName?.message} />
-            </label>
-            <label htmlFor="lastName" className="form-label">
-              <p className="input-label">Last name</p>
-              <input className="form-input" {...register('lastName')} />
-              <FieldsError msg={errors.lastName?.message} />
-            </label>
-          </div>
-          <label htmlFor="email" className="form-label">
-            <p className="input-label">Email</p>
-            <input className="form-input" {...register('email')} />
-            <FieldsError msg={errors.email?.message} />
+    <div className="form-wrapper section">
+      <form className="form">
+        <h3 className="title-secondary">Let's get started</h3>
+        <h5 className="form-desc">Experience more, sign up with us!</h5>
+        <div className="form-grid--wrapper">
+          <label htmlFor="firstName" className="form-label">
+            <p className="input-label">First name</p>
+            <input className="form-input" {...register('firstName')} />
+            <FieldsError msg={errors.firstName?.message} />
           </label>
-          <label htmlFor="city" className="form-label">
-            <p className="input-label">City</p>
-            <input className="form-input" placeholder="Plovdiv..." {...register('city')} />
-            <FieldsError msg={errors.city?.message} />
+          <label htmlFor="lastName" className="form-label">
+            <p className="input-label">Last name</p>
+            <input className="form-input" {...register('lastName')} />
+            <FieldsError msg={errors.lastName?.message} />
           </label>
-          <label htmlFor="expertise" className="form-label form-expertise">
-            <p className="input-label">Dance expertise</p>
+        </div>
+        <label htmlFor="email" className="form-label">
+          <p className="input-label">Email</p>
+          <input className="form-input" {...register('email')} />
+          <FieldsError msg={errors.email?.message} />
+        </label>
+        <label htmlFor="city" className="form-label">
+          <p className="input-label">City</p>
+          <input className="form-input" placeholder="Plovdiv..." {...register('city')} />
+          <FieldsError msg={errors.city?.message} />
+        </label>
+        <label htmlFor="expertise" className="form-label form-expertise">
+          <p className="input-label">Dance expertise</p>
+          <input className="form-input" placeholder="Dance Expert..." {...register('expertise')} />
+          <FieldsError msg={errors.expertise?.message} />
+        </label>
+
+        <label htmlFor="phoneNumber" className="form-label">
+          <p className="input-label">Phone number</p>
+          <div className="form-number--prepend">
+            <p className="phone-prefix">+359</p>
             <input
               className="form-input"
-              placeholder="Dance Expert..."
-              {...register('expertise')}
+              type="number"
+              placeholder="877558277"
+              {...register('phoneNumber')}
             />
-            <FieldsError msg={errors.expertise?.message} />
-          </label>
-
-          <label htmlFor="phoneNumber" className="form-label">
-            <p className="input-label">Phone number</p>
-            <div className="form-number--prepend">
-              <p className="phone-prefix">+359</p>
-              <input
-                className="form-input"
-                type="number"
-                placeholder="877558277"
-                {...register('phoneNumber')}
-              />
-            </div>
-            <FieldsError msg={errors.phoneNumber?.message} />
-          </label>
-
-          <label htmlFor="password" className="form-label">
-            <p className="input-label">Password</p>
-            <input className="form-input" type="password" {...register('password')} />
-            <FieldsError msg={errors.password?.message} />
-          </label>
-
-          <label htmlFor="repass" className="form-label">
-            <p className="input-label">Password repeat</p>
-            <input className="form-input" type="password" {...register('repeatedPassword')} />
-            <FieldsError msg={errors.repeatedPassword?.message} />
-          </label>
-          <div className="btn-wrapper">
-            <button
-              className="btn form-btn"
-              type="button"
-              disabled={isLoading}
-              onClick={handleSubmit(onSubmitRegister)}
-            >
-              {isLoading && <Spinner className="btn-spinner" />}
-              Register
-            </button>
-            {isLoading && <p className="btn-desc">Creating your account ☻...</p>}
           </div>
-        </form>
-      </div>
-    </Layout>
+          <FieldsError msg={errors.phoneNumber?.message} />
+        </label>
+
+        <label htmlFor="password" className="form-label">
+          <p className="input-label">Password</p>
+          <input className="form-input" type="password" {...register('password')} />
+          <FieldsError msg={errors.password?.message} />
+        </label>
+
+        <label htmlFor="repass" className="form-label">
+          <p className="input-label">Password repeat</p>
+          <input className="form-input" type="password" {...register('repeatedPassword')} />
+          <FieldsError msg={errors.repeatedPassword?.message} />
+        </label>
+        <div className="btn-wrapper">
+          <button
+            className="btn form-btn"
+            type="button"
+            disabled={isLoading}
+            onClick={handleSubmit(onSubmitRegister)}
+          >
+            {isLoading && <Spinner className="btn-spinner" />}
+            Register
+          </button>
+          {isLoading && <p className="btn-desc">Creating your account ☻...</p>}
+        </div>
+      </form>
+    </div>
   );
 };
 

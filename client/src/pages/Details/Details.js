@@ -1,120 +1,151 @@
-import './Details.scss';
+import './Details.css';
 
-import { useEffect, useReducer, useState } from 'react';
+import { danceTypeFormat, formatDate } from '../../util/util';
+import { useEffect, useState } from 'react';
 
-import Adress from './components/Adress';
-import Contacts from './components/Contacts';
-import CustomSpinner from '../../components/Spinner/Spinner';
+import { AdvancedImage } from '@cloudinary/react';
 import Feedback from './components/Feedback';
-import FeedbackButton from './components/FeedbackButton';
-import FeedbackPost from './components/FeedbackPost';
-import Heading from './components/Heading';
-import Layout from '../../components/Layout/Layout';
-import LikeButton from './components/LikeButton';
 import { Link } from 'react-router-dom';
-import UserButtons from './components/UserButtons';
-import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
+import { Spinner } from '@chakra-ui/react';
+import { matchLink } from '../../util/util';
 import schoolsFactory from '../../services/schools';
-import { singleSchoolActions } from '../../reducers/singleSchoolReducer';
-import singleSchoolReducer from '../../reducers/singleSchoolReducer';
+import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 import { useParams } from 'react-router-dom';
+import { useSingleSchoolReducer } from '../../hooks/useSchoolReducer';
 import { useUserContext } from '../../contexts/AuthContext';
 
-// import { Image, Placeholder } from "cloudinary-react";
-
 const Details = () => {
-  const [school, dispatch] = useReducer(singleSchoolReducer, {});
-
-  const [loading, setLoading] = useState(true);
-  const [onFeedbacksClick, setOnFeedbacksClick] = useState(false);
-
-  const { user } = useUserContext();
   const { schoolId } = useParams();
-  const { singleSchool, likeSchool, unLikeSchool } = schoolsFactory(user);
+  const [{ schoolDetails: school, isLiked }, schoolActions] = useSingleSchoolReducer();
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useUserContext();
+  const { singleSchool } = schoolsFactory(user);
 
   useEffect(() => {
-    singleSchool(schoolId).then(data => {
-      const schoolData = {
-        schoolDetails: data,
-        isLiked: data.likes.users.includes(user?._id),
-        isOwner: data.owner?._id == user?._id,
-      };
-      dispatch({
-        type: singleSchoolActions.SET_SINGLE_SCHOOL,
-        payload: schoolData,
-      });
-      setLoading(false);
-    });
+    singleSchool(schoolId)
+      .then(school => {
+        const isLiked = school?.likes?.users?.includes(user?._id);
+        schoolActions.setSingleSchool(school, isLiked);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
-  const { schoolDetails, isLiked, isOwner } = school;
-
-  const handleLikes = async () => {
-    if (school.isLiked) {
-      dispatch({ type: singleSchoolActions.SET_LIKED, payload: false });
-      await unLikeSchool(schoolId);
-    } else {
-      dispatch({ type: singleSchoolActions.SET_LIKED, payload: true });
-      await likeSchool(schoolId);
-    }
-  };
+  const schoolImage = useCloudinaryImage(school?.image);
 
   return (
-    <Layout>
-      <div className="details__wrapper">
-        <div className="details-page">
-          {loading && <CustomSpinner />}
-          {!loading && (
-            <>
-              <div className="details-page__image"></div>
-              <div className="details-page__info">
-                {school.isOwner && <UserButtons id={schoolId} />}
-                <div className="details-wrapper">
-                  <Heading {...schoolDetails} />
-                  <Adress {...schoolDetails} />
-                  <div className="horizontal__line"></div>
-                  <Contacts {...schoolDetails} />
-                </div>
-                <div className="action-buttons__wrapper">
-                  {!isOwner && user && <LikeButton handleLikes={handleLikes} isLiked={isLiked} />}
-                  <FeedbackButton
-                    setOnFeedbacksClick={setOnFeedbacksClick}
-                    feedbacksCount={schoolDetails.feedbacks.length}
-                  />
-                </div>
-              </div>
-              <div className="avatar__container">
-                <Link to={`/user/profile/${schoolDetails.owner?._id}`}>
-                  {!schoolDetails.owner?.avatar && (
-                    <img src={defaultAvatar} alt="default-owner-img" />
-                  )}
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-        {onFeedbacksClick && (
-          <div className="feedbacks-wrapper">
-            <h2 className="feedbacks-title">Отзиви</h2>
-            {!isOwner && user && <FeedbackPost dispatch={dispatch} schoolId={schoolDetails._id} />}
-            <div className="feedback-container">
-              {!schoolDetails.feedbacks?.length ? (
-                <p>Няма отзиви</p>
-              ) : (
-                schoolDetails.feedbacks?.map(feedback => (
-                  <Feedback
-                    key={feedback._id}
-                    {...feedback}
-                    schoolId={schoolDetails._id}
-                    dispatch={dispatch}
-                  />
-                ))
-              )}
+    <div className="details-page container-secondary">
+      <section className="school-details section  grid grid--cols-2" style={{ minHeight: '45rem' }}>
+        {isLoading ? (
+          <>
+            <Spinner className="loading" style={{}} />
+          </>
+        ) : (
+          <>
+            <div className={`school-image--wrapper ${!schoolImage && 'loadingImage'}`}>
+              <AdvancedImage cldImg={schoolImage} className="school-image" />
             </div>
-          </div>
+            <div className="school-details--wrapper">
+              <h3 className="school-name">
+                {school?.name}{' '}
+                {school?.feedbacks.length && (
+                  <Link to="#school-feedbacks">
+                    <span className="school-reviews">({school?.feedbacks.length} reviews)</span>
+                  </Link>
+                )}
+              </h3>
+              <h5 className="school-general-info">
+                Publicated on {formatDate(school?.createdAt)} from{' '}
+                <Link to={`/user/profile/${school?.owner?._id}`} className="school-owner--link">
+                  {school?.owner?.firstName} {school?.owner?.lastName}
+                </Link>
+              </h5>
+              <h5 className="school-location">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  class="school-location--icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                  />
+                </svg>
+                <span>
+                  {school?.settlement}, {school?.street}
+                </span>
+              </h5>
+              <p className="school-type text_small">{danceTypeFormat(school?.schoolType)}</p>
+              <section className="school-contacts">
+                <h5 className="school-subtitle">Contacts</h5>
+                <ul className="school-contact-list">
+                  <li>
+                    <Link>
+                      <span className="link-span">{school?.owner?.phoneNumber}</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link>
+                      <span className="link-span">{school?.owner?.email}</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link>
+                      <span className="link-span">{matchLink(school?.link)}</span>
+                    </Link>
+                  </li>
+                </ul>
+              </section>
+              <section className="school-about">
+                <h5 className="school-subtitle">About us</h5>
+                <p className="">{school?.description}</p>
+              </section>
+              <div className="btn--wrapper">
+                <button
+                  className={`btn btn-like ${isLiked && 'liked'}`}
+                  onClick={() => schoolActions.setLiked(!isLiked)}
+                >
+                  {isLiked && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      class="liked-icon"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  )}
+
+                  {isLiked ? 'Liked' : 'Like'}
+                </button>
+              </div>
+            </div>
+            <div id="school-feedbacks"></div>
+          </>
         )}
-      </div>
-    </Layout>
+      </section>
+      <section className="school-feedbacks section">
+        <ul className="feedback-list">
+          {school?.feedbacks?.map(feedback => (
+            <Feedback key={feedback._id} feedback={feedback} />
+          ))}
+        </ul>
+      </section>
+    </div>
   );
 };
 

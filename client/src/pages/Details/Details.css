@@ -1,0 +1,162 @@
+.details-page {
+  color: #555;
+}
+
+.details-page .grid {
+  align-items: start;
+}
+
+.details-page .grid.grid--cols-2 {
+  grid-template-columns: auto 1fr;
+  column-gap: 0.8rem;
+}
+
+.school-image--wrapper,
+.school-image {
+  border-radius: 0.4rem;
+}
+
+.school-image--wrapper {
+  border-radius: 0.4rem;
+  max-width: 30rem;
+  min-height: 45rem;
+  aspect-ratio: 1/1;
+  background-color: #ccc;
+  position: relative;
+}
+
+.loadingImage .school-image--wrapper::after {
+  z-index: 10;
+  border-radius: 0.4rem;
+  position: absolute;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: skeleton-loading 0.5s infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #ccc;
+  }
+  100% {
+    background-color: #ddd;
+  }
+}
+
+.school-details--wrapper .school-type {
+  margin-left: 0;
+}
+
+.school-details--wrapper section {
+  margin-bottom: 1.6rem;
+}
+
+.school-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.school-details--wrapper {
+  padding: 0 1.6rem;
+}
+
+.school-name {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.school-reviews {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: var(--clr-main--dark);
+}
+
+.school-general-info {
+  margin-bottom: 2.4rem;
+}
+
+.school-owner--link {
+  border-bottom: 1px solid #555;
+}
+
+.school-reviews:hover {
+  border-bottom: 1px solid var(--clr-main--dark-hover);
+}
+
+.school-location {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.school-type {
+  margin-top: 0.4rem;
+  margin-bottom: 2.4rem;
+  display: inline-block;
+  padding: 0.4rem 1.6rem;
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  border-radius: 0.4rem;
+}
+
+.school-subtitle {
+  font-weight: 600;
+  color: #333;
+}
+
+.link-span {
+  font-size: 16px;
+}
+
+.school-contact-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.btn--wrapper {
+  display: block;
+  margin-top: auto;
+}
+
+.liked {
+  background-color: #40c057;
+}
+
+.liked-icon,
+.school-location--icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.liked-icon {
+  color: #fff;
+}
+
+.school-location--icon {
+  color: #555;
+}
+
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.liked.btn-like:hover {
+  background-color: #51cf66;
+}

@@ -45,8 +45,10 @@ const Catalog = () => {
     }
   }, [filters]);
 
+  // remove the sceleton loading effect when the schools are loaded
+
   return (
-    <Layout>
+    <>
       {user?.isNewAcc && showComponent && <GreetModal />}
 
       <div className="catalog-page">
@@ -65,7 +67,7 @@ const Catalog = () => {
           </div>
         </main>
       </div>
-    </Layout>
+    </>
   );
 };
 

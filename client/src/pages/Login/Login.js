@@ -60,45 +60,43 @@ const Login = () => {
   };
 
   return (
-    <Layout authPage="login">
-      <div className="form-wrapper section">
-        <form className="form">
-          <h3 className="title-secondary">Welcome back</h3>
-          <h5 className="form-desc">Sign in to join our community!</h5>
-          <label htmlFor="email" className="form-label">
-            <p className="input-label">Email</p>
-            <input className="form-input" {...register('email')} />
-            <FieldsError msg={errors.email?.message} />
-          </label>
-          <label htmlFor="password" className="form-label">
-            <p className="input-label">Password</p>
-            <div className="password-wrapper">
-              <input
-                className="form-input"
-                type={eye ? 'text' : 'password'}
-                {...register('password')}
-              />
-              <button className="eye-btn" type="button" onClick={() => setEye(!eye)}>
-                <FieldsError msg={errors.password?.message} />
-                {eye ? <IoEye className="eye-icon" /> : <IoEyeOff className="eye-icon" />}
-              </button>
-            </div>
-          </label>
-          <div className="button-wrapper">
-            <button
-              className="btn form-btn"
-              type="button"
-              disabled={isLoading}
-              onClick={handleSubmit(onSubmitLogin)}
-            >
-              {isLoading && <Spinner className="btn-spinner" />}
-              Login
+    <div className="form-wrapper section">
+      <form className="form">
+        <h3 className="title-secondary">Welcome back</h3>
+        <h5 className="form-desc">Sign in to join our community!</h5>
+        <label htmlFor="email" className="form-label">
+          <p className="input-label">Email</p>
+          <input className="form-input" {...register('email')} />
+          <FieldsError msg={errors.email?.message} />
+        </label>
+        <label htmlFor="password" className="form-label">
+          <p className="input-label">Password</p>
+          <div className="password-wrapper">
+            <input
+              className="form-input"
+              type={eye ? 'text' : 'password'}
+              {...register('password')}
+            />
+            <button className="eye-btn" type="button" onClick={() => setEye(!eye)}>
+              <FieldsError msg={errors.password?.message} />
+              {eye ? <IoEye className="eye-icon" /> : <IoEyeOff className="eye-icon" />}
             </button>
-            {isLoading && <p className="btn-desc">Opening the door for you...</p>}
           </div>
-        </form>
-      </div>
-    </Layout>
+        </label>
+        <div className="button-wrapper">
+          <button
+            className="btn form-btn"
+            type="button"
+            disabled={isLoading}
+            onClick={handleSubmit(onSubmitLogin)}
+          >
+            {isLoading && <Spinner className="btn-spinner" />}
+            Login
+          </button>
+          {isLoading && <p className="btn-desc">Opening the door for you...</p>}
+        </div>
+      </form>
+    </div>
   );
 };
 
