@@ -1,0 +1,121 @@
+.details-page {
+  color: #888;
+}
+
+.details-page .grid {
+  align-items: start;
+}
+
+.details-page .grid.grid--cols-2 {
+  grid-template-columns: auto 1fr;
+  column-gap: 0.8rem;
+}
+
+.school-image--wrapper,
+.school-image {
+  border-radius: 0.4rem;
+}
+
+.school-image--wrapper {
+  border-radius: 0.4rem;
+  max-width: 30rem;
+  min-height: 45rem;
+  aspect-ratio: 1/1;
+  background-color: #ccc;
+  position: relative;
+}
+
+.loadingImage .school-image--wrapper::after {
+  z-index: 10;
+  border-radius: 0.4rem;
+  position: absolute;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: skeleton-loading 0.5s infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #ccc;
+  }
+  100% {
+    background-color: #ddd;
+  }
+}
+
+/* .school-details--wrapper p,
+.school-details--wrapper span {
+  margin-left: 1.6rem;
+} */
+
+.school-details--wrapper .school-type {
+  margin-left: 0;
+}
+
+.school-details--wrapper section {
+  margin-bottom: 1.6rem;
+}
+
+.school-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.school-details--wrapper {
+  padding: 0 1.6rem;
+}
+
+.school-name {
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.school-owner--link {
+  color: var(--clr-main--dark);
+  margin: 0;
+}
+
+.school-owner--link:hover {
+  border-bottom: 1px solid var(--clr-main--dark-hover);
+}
+
+.school-type {
+  margin-top: 1rem;
+  margin-bottom: 2.4rem;
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  background-color: #555;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  border-radius: 100px;
+}
+
+.school-subtitle {
+  font-weight: 600;
+  color: #555;
+}
+
+.link-span {
+  font-size: 16px;
+}
+
+.school-contact-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.btn--wrapper {
+  display: block;
+  margin-top: auto;
+}

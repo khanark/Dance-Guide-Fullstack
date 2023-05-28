@@ -1,17 +1,25 @@
 import './Navigation.css';
 
-import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { AdvancedImage } from '@cloudinary/react';
 import { Link } from 'react-router-dom';
 import defaultAvatar from '../../assets/images/blank-avatar-image.jpg';
 import { useCloudinaryUserImage } from '../../hooks/useCloudinaryImage';
+import { useLocation } from 'react-router-dom';
 import { useUserContext } from '../../contexts/AuthContext';
 
 const Navigation = ({ isLandingPage, authPage }) => {
   const { user, clearUser, setNavigationRef } = useUserContext();
   const { cloudinaryUserImage: userImage, setupCloudinaryImage } = useCloudinaryUserImage();
   const [dropdown, setDropdown] = useState(false);
+  const location = useLocation();
+
+  const authPageState = useMemo(() => {
+    return {
+      isLoginPage: location.pathname === '/login',
+    };
+  }, [location]);
 
   const navigationRef = useRef(null);
 
@@ -28,18 +36,25 @@ const Navigation = ({ isLandingPage, authPage }) => {
   }, [user?.avatar]);
 
   return (
-    <header ref={navigationRef} className={`nav-header ${!isLandingPage && 'landing-bg'}`}>
-      <nav className={`header-nav container-primary ${!isLandingPage && 'landing-link'}`}>
+    <header
+      ref={navigationRef}
+      className={`nav-header ${!isLandingPage ? 'landing-bg' : 'isLandingPage'}`}
+    >
+      <nav
+        className={`header-nav container-primary ${
+          !isLandingPage ? 'landing-link' : 'isLandingPage'
+        }`}
+      >
         <h4 className="logo">
           <Link to="/">DanceGuide</Link>
         </h4>
         {authPage && (
           <div className="auth-page">
             <p className="auth-question">
-              {authPage === 'login' ? "Don't have an account?" : 'Already have an account?'}
+              {authPageState.isLoginPage ? "Don't have an account?" : 'Already have an account?'}
             </p>
-            <Link className="nav-link" s to={authPage === 'login' ? '/register' : '/login'}>
-              {authPage === 'login' ? 'Sign Up' : 'Sign In'}
+            <Link className="nav-link" to={authPageState.isLoginPage ? '/register' : '/login'}>
+              {authPageState.isLoginPage ? 'Sign Up' : 'Sign In'}
             </Link>
           </div>
         )}
@@ -74,11 +89,7 @@ const Navigation = ({ isLandingPage, authPage }) => {
               <li className="dropdown-menu-wrapper">
                 <div className="user-btn" onClick={() => setDropdown(bool => !bool)}>
                   {user?.avatar ? (
-                    <AdvancedImage
-                      cldImg={userImage}
-                      className="user-avatar--img"
-                      plugins={[lazyload(), responsive()]}
-                    />
+                    <AdvancedImage cldImg={userImage} className="user-avatar--img" />
                   ) : (
                     <img src={defaultAvatar} className="user-avatar--img" alt="user-avatar" />
                   )}

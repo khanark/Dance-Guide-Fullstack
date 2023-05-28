@@ -1,3 +1,12 @@
-.layout-bg {
-  background-color: var(--clr-grey--dark);
+.isLandingPage .nav-link,
+.isLandingPage .logo {
+  color: #fff !important;
+}
+
+.isLandingPage .nav-header {
+  background-color: #333131;
+}
+
+.isLandingPage .nav-link:hover {
+  color: var(--clr-main--dark-hover) !important;
 }

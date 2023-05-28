@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
@@ -14,16 +14,18 @@ const UserContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const context = {
-    user,
-    setUser,
-    clearUser,
-    setEmail,
-    email,
-    navigate,
-    navigationRef,
-    setNavigationRef,
-  };
+  const context = useMemo(() => {
+    return {
+      user,
+      setUser,
+      clearUser,
+      setEmail,
+      email,
+      navigate,
+      navigationRef,
+      setNavigationRef,
+    };
+  }, [clearUser, email, navigate, navigationRef, setEmail, setUser, user]);
 
   return <UserContext.Provider value={context}>{children}</UserContext.Provider>;
 };
