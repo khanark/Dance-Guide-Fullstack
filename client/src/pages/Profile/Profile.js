@@ -59,7 +59,7 @@ const Profile = () => {
           </div>
           <div className="line-devider">
             <span className="line-devider--text devider-text--left">About Me</span>
-            <ProfileEditModalLeft {...user} setUser={setUser} />
+            {user && <ProfileEditModalLeft {...user} setUser={setUser} />}
           </div>
           <div className="user-info--wrapper">
             <p className="user-info--text additional-info">
@@ -107,7 +107,7 @@ const Profile = () => {
                     </svg>
                     <span className="user-hometown">{convertToPascalCase(user?.city)}</span>
                   </div>
-                  <ProfileEditModalRight {...user} setUser={setUser} />
+                  {user && <ProfileEditModalRight {...user} setUser={setUser} />}
                 </div>
                 <h5 className="subtitle user-ocupation">{convertToPascalCase(user?.expertise)}</h5>
               </div>
