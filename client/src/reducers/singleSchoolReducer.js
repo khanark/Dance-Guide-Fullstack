@@ -9,7 +9,7 @@ export const singleSchoolActions = {
 const singleSchoolReducer = (state, actions) => {
   switch (actions.type) {
     case 'SET_SINGLE_SCHOOL':
-      return { ...actions.payload };
+      return { ...state, schoolDetails: actions.payload.school, isLiked: actions.payload.isLiked };
     case 'SET_LIKED':
       return { ...state, isLiked: actions.payload };
     case 'ADD_FEEDBACK':

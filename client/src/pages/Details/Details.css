@@ -1,5 +1,5 @@
 .details-page {
-  color: #888;
+  color: #555;
 }
 
 .details-page .grid {
@@ -48,11 +48,6 @@
   }
 }
 
-/* .school-details--wrapper p,
-.school-details--wrapper span {
-  margin-left: 1.6rem;
-} */
-
 .school-details--wrapper .school-type {
   margin-left: 0;
 }
@@ -72,36 +67,54 @@
 }
 
 .school-name {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
   color: #333;
   font-weight: 700;
   margin-bottom: 0.2rem;
 }
 
-.school-owner--link {
+.school-reviews {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: normal;
   color: var(--clr-main--dark);
-  margin: 0;
 }
 
-.school-owner--link:hover {
+.school-general-info {
+  margin-bottom: 2.4rem;
+}
+
+.school-owner--link {
+  border-bottom: 1px solid #555;
+}
+
+.school-reviews:hover {
   border-bottom: 1px solid var(--clr-main--dark-hover);
 }
 
+.school-location {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .school-type {
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   margin-bottom: 2.4rem;
   display: inline-block;
-  padding: 0.2rem 1rem;
-  background-color: #555;
+  padding: 0.4rem 1.6rem;
+  background-color: #333;
   color: #fff;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 1.2px;
-  border-radius: 100px;
+  border-radius: 0.4rem;
 }
 
 .school-subtitle {
   font-weight: 600;
-  color: #555;
+  color: #333;
 }
 
 .link-span {
@@ -118,4 +131,32 @@
 .btn--wrapper {
   display: block;
   margin-top: auto;
+}
+
+.liked {
+  background-color: #40c057;
+}
+
+.liked-icon,
+.school-location--icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.liked-icon {
+  color: #fff;
+}
+
+.school-location--icon {
+  color: #555;
+}
+
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.liked.btn-like:hover {
+  background-color: #51cf66;
 }
