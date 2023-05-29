@@ -5,9 +5,8 @@ import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
 import { useEffect, useState } from 'react';
 
 import Card from '../../components/CardComponent/Card';
-import Layout from '../../components/Layout/Layout';
-import ProfileEditModalLeft from '../../components/Modal/ProfileEditModalLeft';
-import ProfileEditModalRight from '../../components/Modal/ProfileEditModalRight';
+import ProfileEditModalLeft from '../../components/Modal/ProfileModals/ProfileEditModalLeft';
+import ProfileEditModalRight from '../../components/Modal/ProfileModals/ProfileEditModalRight';
 import { Spinner } from '@chakra-ui/react';
 import UploadAvatarModal from '../../components/Modal/ModalAvatar/UploadAvatarModal';
 import { convertToPascalCase } from '../../util/util';

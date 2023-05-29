@@ -80,6 +80,7 @@
   font-size: 1.2rem;
   font-weight: normal;
   color: var(--clr-main--dark);
+  cursor: pointer;
 }
 
 .school-general-info {
@@ -159,4 +160,83 @@
 
 .liked.btn-like:hover {
   background-color: #51cf66;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+
+.feedback-header {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  margin-left: 0.8rem;
+}
+
+.feedback-owner-avatar {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+}
+
+.feedback-owner-avatar::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: -0.1rem;
+  left: -0.2rem;
+  border-radius: 50%;
+  background-color: var(--clr-main--dark);
+}
+
+.owner-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.owner-name {
+  font-weight: 700;
+  color: #333;
+}
+
+.feedback-body {
+  padding: 1.6rem;
+  border-radius: 0.4rem;
+  background-color: #eee;
+  position: relative;
+}
+
+.feedback-body::after {
+  background-color: red;
+  position: absolute;
+  content: '';
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+  background-color: #eee;
+  top: -0.4rem;
+  left: 1.68rem;
+}
+
+.feedback-text {
+  margin-bottom: 0;
+}
+
+.feedback-post {
+  justify-content: center;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.feedback-post > p {
+  margin-bottom: 0;
 }
