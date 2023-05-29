@@ -93,17 +93,13 @@ const Details = () => {
                 <h5 className="school-subtitle">Contacts</h5>
                 <ul className="school-contact-list">
                   <li>
-                    <Link>
-                      <span className="link-span">{school?.owner?.phoneNumber}</span>
-                    </Link>
+                    <span className="link-span">{school?.owner?.phoneNumber}</span>
                   </li>
                   <li>
-                    <Link>
-                      <span className="link-span">{school?.owner?.email}</span>
-                    </Link>
+                    <span className="link-span">{school?.owner?.email}</span>
                   </li>
                   <li>
-                    <Link>
+                    <Link to={school?.link} target="_blank">
                       <span className="link-span">{matchLink(school?.link)}</span>
                     </Link>
                   </li>
