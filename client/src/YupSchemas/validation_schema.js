@@ -64,6 +64,6 @@ export const createSchoolSchemaValidation = yup.object().shape({
   description: yup
     .string()
     .required('Required')
-    .min(10, 'Minimum of 10 characters')
+    .min(100, 'Minimum of 100 characters')
     .max(300, 'Maximum of 300 characters'),
 });
