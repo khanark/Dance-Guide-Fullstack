@@ -30,10 +30,10 @@ export const useSingleSchoolReducer = () => {
     },
     /**
      * Adds a feedback ID to the single school's feedback list.
-     * @param {string} feedbackId - The ID of the feedback to be added.
+     * @param {object} feedback - The feedback to be added.
      */
-    addFeedback: feedbackId => {
-      dispatch({ type: singleSchoolActions.ADD_FEEDBACK, payload: feedbackId });
+    addFeedback: feedback => {
+      dispatch({ type: singleSchoolActions.ADD_FEEDBACK, payload: feedback });
     },
     /**
      * Removes a feedback ID from the single school's feedback list.

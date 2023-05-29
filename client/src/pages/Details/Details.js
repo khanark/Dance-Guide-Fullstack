@@ -1,8 +1,9 @@
 import './Details.css';
 
 import { danceTypeFormat, formatDate } from '../../util/util';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import AddFeedbackModal from '../../components/Modal/FeedbackModals/AddFeedback';
 import { AdvancedImage } from '@cloudinary/react';
 import Feedback from './components/Feedback';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ const Details = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useUserContext();
   const { singleSchool } = schoolsFactory(user);
+  const feedbackListRef = useRef();
 
   useEffect(() => {
     singleSchool(schoolId)
@@ -48,9 +50,12 @@ const Details = () => {
               <h3 className="school-name">
                 {school?.name}{' '}
                 {school?.feedbacks.length && (
-                  <Link to="#school-feedbacks">
-                    <span className="school-reviews">({school?.feedbacks.length} reviews)</span>
-                  </Link>
+                  <span
+                    className="school-reviews"
+                    onClick={() => feedbackListRef.current.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    ({school?.feedbacks.length} reviews)
+                  </span>
                 )}
               </h3>
               <h5 className="school-general-info">
@@ -139,11 +144,15 @@ const Details = () => {
         )}
       </section>
       <section className="school-feedbacks section">
-        <ul className="feedback-list">
+        <ul className="feedback-list" ref={feedbackListRef}>
           {school?.feedbacks?.map(feedback => (
             <Feedback key={feedback._id} feedback={feedback} />
           ))}
         </ul>
+        <div className="feedback-post">
+          <p>Want to write a review?</p>
+          <AddFeedbackModal schoolId={schoolId} addFeedbackToState={schoolActions.addFeedback} />
+        </div>
       </section>
     </div>
   );

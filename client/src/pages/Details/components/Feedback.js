@@ -1,18 +1,24 @@
 import { AdvancedImage } from '@cloudinary/react';
+import { Link } from 'react-router-dom';
+import { useCloudinaryImage } from '../../../hooks/useCloudinaryImage';
 
 const Feedback = ({ feedback }) => {
+  const image = useCloudinaryImage(feedback?.owner?.avatar);
+
   return (
     <li className="feedback">
       <div className="feedback-header">
-        <div className="feedback-owner-avatar-">
-          <AdvancedImage cldImg={feedback?.owner?.avatar} />
-        </div>
-        <p>
+        <Link to={`/user/profile/${feedback?.owner?._id}`}>
+          <div className="feedback-owner-avatar">
+            <AdvancedImage cldImg={image} className="owner-avatar" />
+          </div>
+        </Link>
+        <span className="owner-name">
           {feedback?.owner?.firstName} {feedback?.owner?.lastName}
-        </p>
+        </span>
       </div>
       <div className="feedback-body">
-        <p className="feedback-text">{feedback?.text}</p>
+        <h5 className="feedback-text">{feedback?.text}</h5>
       </div>
     </li>
   );
