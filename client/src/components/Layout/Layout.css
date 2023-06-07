@@ -7,6 +7,16 @@
   background-color: #333131;
 }
 
+.isLandingPage .header-nav {
+  flex-wrap: wrap;
+}
+
 .isLandingPage .nav-link:hover {
   color: var(--clr-main--dark-hover) !important;
+}
+
+.isLandingPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
