@@ -1,8 +1,13 @@
 .header-nav {
-  height: 6.2rem;
+  min-height: 6.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.layout-bg .header-nav {
+  min-height: 6.2rem;
 }
 
 .nav-header {
@@ -167,7 +172,7 @@
 }
 
 .user-dropdown--menu::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 1.5rem;
   height: 1.5rem;
