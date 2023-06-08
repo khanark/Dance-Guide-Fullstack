@@ -56,4 +56,12 @@
   .page-header--image {
     display: none;
   }
+
+  .page-header .title-primary {
+    font-size: 36px;
+  }
+
+  .page-header .title-secondary {
+    font-size: 24px;
+  }
 }
