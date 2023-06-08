@@ -4,11 +4,14 @@
 }
 
 .isLandingPage .nav-header {
+  flex-direction: unset;
   background-color: #333131;
+  height: 6.2rem;
+  flex-wrap: wrap;
 }
 
 .isLandingPage .header-nav {
-  flex-wrap: wrap;
+  height: 6.2rem;
 }
 
 .isLandingPage .nav-link:hover {

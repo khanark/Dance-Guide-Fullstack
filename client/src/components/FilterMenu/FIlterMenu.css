@@ -58,10 +58,16 @@
     top: 0;
     width: 100%;
     border-radius: 0;
+    position: unset;
+  }
+
+  .filter-menu--label {
+    width: 100%;
   }
 
   .filter-menu form {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.8rem;
     align-items: center;
   }

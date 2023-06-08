@@ -240,3 +240,43 @@
 .feedback-post > p {
   margin-bottom: 0;
 }
+
+@media screen and (max-width: 890px) {
+  .details-page .grid.grid--cols-2 {
+    grid-template-columns: auto;
+    gap: 24px;
+  }
+
+  .school-image--wrapper {
+    margin: 0 auto;
+    max-height: 30rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .school-image--wrapper {
+    width: 70%;
+    min-height: auto;
+  }
+
+  .school-name {
+    font-size: 24px;
+  }
+
+  .school-reviews,
+  .school-location {
+    font-size: 16px;
+  }
+
+  .school-details--wrapper {
+    padding: 0;
+  }
+
+  .school-general-info {
+    font-size: 14px;
+  }
+
+  .btn--wrapper {
+    justify-content: center;
+  }
+}
