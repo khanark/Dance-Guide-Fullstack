@@ -271,7 +271,7 @@ div.profile-box--left .subtitle {
 
 @media screen and (max-width: 768px) {
   .profile-page .grid--cols-2 {
-    grid-template-columns: auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: 64px;
   }
 

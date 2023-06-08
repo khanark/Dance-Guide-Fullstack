@@ -51,11 +51,13 @@ router.patch('/:id/avatar', validateId, authorize, async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ message: `There has been an error uploading the image${error.message}` });
+      .json({
+        message: `There has been an error uploading the image${error.message}`,
+      });
   }
 });
 
-router.get('/:id', validateId, authorize, async (req, res) => {
+router.get('/:id', validateId, async (req, res) => {
   const user = await getSingleUser(req.params.id);
   if (!user) {
     return res.status(404).json({ message: 'User not found' });

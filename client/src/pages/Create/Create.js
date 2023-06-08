@@ -4,20 +4,22 @@ import '../../assets/styles/Form.css';
 import { useEffect, useState } from 'react';
 
 import FieldsError from '../../components/Forms/Errors/Fields/FieldsError';
-import Layout from '../../components/Layout/Layout';
 import { Spinner } from '@chakra-ui/react';
 import { createSchoolSchemaValidation } from '../../YupSchemas/validation_schema';
 import schoolsFactory from '../../services/schools';
 import { setPageTitle } from '../../util/util';
 import { useForm } from 'react-hook-form';
 import { useNotification } from '../../hooks/useNotification';
+import { useSchoolContext } from '../../contexts/SchoolContext';
 import { useUserContext } from '../../contexts/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Create = () => {
   const { user, navigate } = useUserContext();
+  // after creating the new school we need  to update the schools list
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { addNewSchool } = useSchoolContext();
 
   useEffect(() => {
     setPageTitle('Create School');
@@ -34,7 +36,7 @@ const Create = () => {
     resolver: yupResolver(createSchoolSchemaValidation),
   });
 
-  const handleAvatarChange = e => {
+  const handleAvatarChange = (e) => {
     const image = e.target.files[0];
     if (!image) {
       return;
@@ -46,15 +48,16 @@ const Create = () => {
     };
   };
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      await createSchool({
+      const createdSchool = await createSchool({
         ...data,
         ownerId: user._id,
         image: selectedImage || data.image,
         isImageFile: Boolean(selectedImage),
       });
+      addNewSchool(createdSchool);
       notificateSuccess({
         title: 'Successfully created',
         description: 'The school was successfully created!',
@@ -74,7 +77,9 @@ const Create = () => {
     <div className="form-wrapper section blurry-background">
       <form className="form">
         <h3 className="title-secondary">Create school</h3>
-        <p className="form-desc">Make the whole world know about your school!</p>
+        <p className="form-desc">
+          Make the whole world know about your school!
+        </p>
         <label htmlFor="schoolName" className="form-label">
           <p className="input-label">Name</p>
           <input className="form-input" {...register('name')} />
@@ -128,7 +133,10 @@ const Create = () => {
         </label>
         <label htmlFor="description" className="form-label">
           <p className="input-label">Description</p>
-          <textarea className="form-input" {...register('description')}></textarea>
+          <textarea
+            className="form-input"
+            {...register('description')}
+          ></textarea>
           <FieldsError msg={errors.description?.message} />
         </label>
         <button

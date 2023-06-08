@@ -17,7 +17,8 @@ import { useUserContext } from '../../contexts/AuthContext';
 
 const Details = () => {
   const { schoolId } = useParams();
-  const [{ schoolDetails: school, isLiked }, schoolActions] = useSingleSchoolReducer();
+  const [{ schoolDetails: school, isLiked }, schoolActions] =
+    useSingleSchoolReducer();
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useUserContext();
   const { singleSchool } = schoolsFactory(user);
@@ -25,7 +26,7 @@ const Details = () => {
 
   useEffect(() => {
     singleSchool(schoolId)
-      .then(school => {
+      .then((school) => {
         const isLiked = school?.likes?.users?.includes(user?._id);
         schoolActions.setSingleSchool(school, isLiked);
       })
@@ -36,14 +37,21 @@ const Details = () => {
 
   return (
     <div className="details-page container-secondary">
-      <section className="school-details section  grid grid--cols-2" style={{ minHeight: '45rem' }}>
+      <section
+        className="school-details section  grid grid--cols-2"
+        style={{ minHeight: '45rem' }}
+      >
         {isLoading ? (
           <>
             <Spinner className="loading" style={{}} />
           </>
         ) : (
           <>
-            <div className={`school-image--wrapper ${!schoolImage && 'loadingImage'}`}>
+            <div
+              className={`school-image--wrapper ${
+                !schoolImage && 'loadingImage'
+              }`}
+            >
               <AdvancedImage cldImg={schoolImage} className="school-image" />
             </div>
             <div className="school-details--wrapper">
@@ -52,7 +60,11 @@ const Details = () => {
                 {school?.feedbacks.length && (
                   <span
                     className="school-reviews"
-                    onClick={() => feedbackListRef.current.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                      feedbackListRef.current.scrollIntoView({
+                        behavior: 'smooth',
+                      })
+                    }
                   >
                     ({school?.feedbacks.length} reviews)
                   </span>
@@ -60,7 +72,10 @@ const Details = () => {
               </h3>
               <h5 className="school-general-info">
                 Publicated on {formatDate(school?.createdAt)} from{' '}
-                <Link to={`/user/profile/${school?.owner?._id}`} className="school-owner--link">
+                <Link
+                  to={`/user/profile/${school?.owner?._id}`}
+                  className="school-owner--link"
+                >
                   {school?.owner?.firstName} {school?.owner?.lastName}
                 </Link>
               </h5>
@@ -88,19 +103,25 @@ const Details = () => {
                   {school?.settlement}, {school?.street}
                 </span>
               </h5>
-              <p className="school-type text_small">{danceTypeFormat(school?.schoolType)}</p>
+              <p className="school-type text_small">
+                {danceTypeFormat(school?.schoolType)}
+              </p>
               <section className="school-contacts">
                 <h5 className="school-subtitle">Contacts</h5>
                 <ul className="school-contact-list">
                   <li>
-                    <span className="link-span">{school?.owner?.phoneNumber}</span>
+                    <span className="link-span">
+                      {school?.owner?.phoneNumber}
+                    </span>
                   </li>
                   <li>
                     <span className="link-span">{school?.owner?.email}</span>
                   </li>
                   <li>
                     <Link to={school?.link} target="_blank">
-                      <span className="link-span">{matchLink(school?.link)}</span>
+                      <span className="link-span">
+                        {matchLink(school?.link)}
+                      </span>
                     </Link>
                   </li>
                 </ul>
@@ -141,13 +162,16 @@ const Details = () => {
       </section>
       <section className="school-feedbacks section">
         <ul className="feedback-list" ref={feedbackListRef}>
-          {school?.feedbacks?.map(feedback => (
+          {school?.feedbacks?.map((feedback) => (
             <Feedback key={feedback._id} feedback={feedback} />
           ))}
         </ul>
         <div className="feedback-post">
           <p>Want to write a review?</p>
-          <AddFeedbackModal schoolId={schoolId} addFeedbackToState={schoolActions.addFeedback} />
+          <AddFeedbackModal
+            schoolId={schoolId}
+            addFeedbackToState={schoolActions.addFeedback}
+          />
         </div>
       </section>
     </div>

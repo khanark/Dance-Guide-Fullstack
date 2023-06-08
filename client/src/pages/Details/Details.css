@@ -7,7 +7,7 @@
 }
 
 .details-page .grid.grid--cols-2 {
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   column-gap: 0.8rem;
 }
 
@@ -243,7 +243,7 @@
 
 @media screen and (max-width: 890px) {
   .details-page .grid.grid--cols-2 {
-    grid-template-columns: auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
 

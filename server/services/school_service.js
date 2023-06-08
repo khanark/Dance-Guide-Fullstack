@@ -2,17 +2,27 @@ const DanceSchool = require('../models/DanceSchool');
 const User = require('../models/User');
 
 const getAllSchools = async (query, sortObj) => {
-  return DanceSchool.find(query).sort(sortObj).populate('owner', ['email', 'phoneNumber']).lean();
+  return DanceSchool.find(query)
+    .sort(sortObj)
+    .populate('owner', ['email', 'phoneNumber'])
+    .lean();
 };
 
-const getSingleSchool = async id => {
+const getSingleSchool = async (id) => {
   return DanceSchool.findById(id)
-    .populate('owner', ['email', 'firstName', 'lastName', 'phoneNumber', 'moreInfo', 'avatar'])
+    .populate('owner', [
+      'email',
+      'firstName',
+      'lastName',
+      'phoneNumber',
+      'moreInfo',
+      'avatar',
+    ])
     .populate('feedbacks.owner', ['firstName', 'lastName', 'avatar'])
     .lean();
 };
 
-const deleteSchool = async id => {
+const deleteSchool = async (id) => {
   const school = await DanceSchool.findById(id);
   await DanceSchool.findByIdAndRemove(id);
   return school;
@@ -48,7 +58,7 @@ const createSchool = async ({
   user.danceSchools.push(school);
   await user.save();
   await school.save();
-  return school;
+  return school.populate('owner', ['email', 'phoneNumber']);
 };
 
 const likeSchool = async (schoolId, { userId }) => {
