@@ -6,9 +6,9 @@ const FilterMenu = ({ filters, setFilters }) => {
   const [debouncedLocation, setDebouncedLocation] = useState('');
 
   useEffect(() => {
-    if (!debouncedLocation) {
-      return;
-    }
+    // if (!debouncedLocation) {
+    //   return;
+    // }
     const debouncedTimer = setTimeout(() => {
       setFilters(prevState => ({
         ...prevState,

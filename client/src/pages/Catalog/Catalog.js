@@ -1,51 +1,47 @@
-import './Catalog.css';
-import '../../App.css';
+import './Catalog.css'
+import '../../App.css'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import Card from '../../components/CardComponent/Card';
-import FilterMenu from '../../components/FilterMenu/FIlterMenu';
-import GreetModal from '../../components/Modal/Modal';
-import Layout from '../../components/Layout/Layout';
-import PageHeader from '../../components/PageHeader/PageHeader';
-import { Spinner } from '@chakra-ui/react';
-import catalogHeaderImage from '../../assets/images/page_headers/catalog-header.jpg';
-import schoolsFactory from '../../services/schools';
-import { setPageTitle } from '../../util/util';
-import { useSchoolContext } from '../../contexts/SchoolContext';
-import { useUserContext } from '../../contexts/AuthContext';
+import Card from '../../components/CardComponent/Card'
+import FilterMenu from '../../components/FilterMenu/FIlterMenu'
+import GreetModal from '../../components/Modal/Modal'
+import { Link } from 'react-router-dom'
+import PageHeader from '../../components/PageHeader/PageHeader'
+import { Spinner } from '@chakra-ui/react'
+import catalogHeaderImage from '../../assets/images/page_headers/catalog-header.jpg'
+import schoolsFactory from '../../services/schools'
+import { setPageTitle } from '../../util/util'
+import { useSchoolContext } from '../../contexts/SchoolContext'
+import { useUserContext } from '../../contexts/AuthContext'
 
 const Catalog = () => {
-  const { schools, setSchools } = useSchoolContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [showComponent, setShowComponent] = useState(false);
+  const { schools, setSchools } = useSchoolContext()
+  const [isLoading, setIsLoading] = useState(false)
+  const [showComponent, setShowComponent] = useState(false)
 
   const [filters, setFilters] = useState({
     location: '',
     style: '',
     order: '',
-  });
+  })
 
-  const { getAllSchools } = schoolsFactory();
-  const { user } = useUserContext();
+  const { getAllSchools } = schoolsFactory()
+  const { user } = useUserContext()
 
   useEffect(() => {
-    setPageTitle('Catalog');
+    setPageTitle('Catalog')
     if (user?.isNewAcc) {
-      setTimeout(() => setShowComponent(true), 1200);
+      setTimeout(() => setShowComponent(true), 1200)
     }
-    if (!schools.length || Object.values(filters).some(value => value !== '')) {
-      setIsLoading(true);
-      setSchools([]);
-      getAllSchools(filters)
-        .then(data => {
-          setSchools(data);
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [filters]);
-
-  // remove the sceleton loading effect when the schools are loaded
+    setIsLoading(true)
+    setSchools([])
+    getAllSchools(filters)
+      .then((data) => {
+        setSchools(data)
+      })
+      .finally(() => setIsLoading(false))
+  }, [filters])
 
   return (
     <>
@@ -58,9 +54,11 @@ const Catalog = () => {
         <main className="section-catalog section">
           <div className="catalog container-primary">
             <FilterMenu setFilters={setFilters} filters={filters} />
-            <div className={`catalog-list ${isLoading && 'list-schools-loading'}`}>
+            <div
+              className={`catalog-list ${isLoading && 'list-schools-loading'}`}
+            >
               {isLoading && <Spinner className="loading" />}
-              {schools.map(school => (
+              {schools.map((school) => (
                 <Card key={school._id} {...school} />
               ))}
             </div>
@@ -68,7 +66,7 @@ const Catalog = () => {
         </main>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Catalog;
+export default Catalog

@@ -241,6 +241,20 @@
   margin-bottom: 0;
 }
 
+.school-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.school-user__action {
+  display: flex;
+}
+
+.school-user__action .line-devider--text {
+  position: unset;
+  transform: translate(0);
+}
+
 @media screen and (max-width: 890px) {
   .details-page .grid.grid--cols-2 {
     grid-template-columns: minmax(0, 1fr);
