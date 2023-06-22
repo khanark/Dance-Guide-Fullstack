@@ -73,6 +73,7 @@ router.patch('/:id', validateId, authorize, async (req, res) => {
     }
     res.status(200).json(user);
   } catch (error) {
+    console.log(error)
     res.status(400).json({ message: 'Invalid data' });
   }
 });

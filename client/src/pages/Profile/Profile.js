@@ -83,7 +83,7 @@ const Profile = () => {
           </div>
           <div className="user-info--wrapper">
             <h5 className="subtitle">Phone</h5>
-            <p className="user-info--text">{currentUser?.phoneNumber}</p>
+            <p className="user-info--text">+359 {currentUser?.phoneNumber.match(/.{1,3}/g).join(" ")}</p>
           </div>
         </div>
         {loading ? (

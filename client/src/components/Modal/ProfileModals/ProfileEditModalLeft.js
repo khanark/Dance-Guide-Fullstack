@@ -6,7 +6,7 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import FieldsError from '../../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
 import { editUser } from '../../../services/users';
-import { registerSchemaValidation } from '../../../YupSchemas/validation_schema';
+import { editUserModalLeftSchema } from '../../../YupSchemas/validation_schema';
 import { useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ const ProfileEditModalLeft = ({
     formState: { isDirty, errors },
   } = useForm({
     values: { email, phoneNumber, moreInfo },
-    resolver: yupResolver(registerSchemaValidation),
+    resolver: yupResolver(editUserModalLeftSchema),
   });
 
   const onSubmit = async data => {
@@ -70,7 +70,7 @@ const ProfileEditModalLeft = ({
           <form
             className="form"
             style={{ width: '100%' }}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmitCapture={handleSubmit(onSubmit, err => console.log(err))}
           >
             <label htmlFor="email" className="form-label">
               <p className="input-label">Email</p>
@@ -83,11 +83,14 @@ const ProfileEditModalLeft = ({
             </label>
             <label htmlFor="phone" className="form-label">
               <p className="input-label">Phone</p>
+                <div className='number-wrapper' style={{display: "flex", gap: "10px", alignItems: "center"}}>
+              <span>+359</span>
               <input
                 type="text"
                 className="form-input"
                 {...register('phoneNumber')}
               />
+                </div>
               <FieldsError msg={errors.phoneNumber?.message} />
             </label>
             <label htmlFor="moreInfo" className="form-label">

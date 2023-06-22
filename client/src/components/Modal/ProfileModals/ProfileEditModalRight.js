@@ -3,7 +3,7 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import FieldsError from '../../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
 import { editUser } from '../../../services/users';
-import { registerSchemaValidation } from '../../../YupSchemas/validation_schema';
+import { editUserModalRightSchema } from '../../../YupSchemas/validation_schema';
 import { useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -25,12 +25,12 @@ const ProfileEditModalRight = ({
     handleSubmit,
     formState: { isDirty, errors },
   } = useForm({
-    resolver: yupResolver(registerSchemaValidation),
     defaultValues: { firstName, lastName, city, expertise },
+    resolver: yupResolver(editUserModalRightSchema),
   });
 
   const onSubmit = async data => {
-    console.log('Button is clicked');
+    // fix the data not being able to submit after clicking the button
     if (!isDirty) {
       return;
     }
@@ -69,7 +69,7 @@ const ProfileEditModalRight = ({
           <form
             className="form"
             style={{ width: '100%' }}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit, (err) => console.log(err))}
           >
             <div className="form-grid--wrapper">
               <label htmlFor="firstName" className="form-label">

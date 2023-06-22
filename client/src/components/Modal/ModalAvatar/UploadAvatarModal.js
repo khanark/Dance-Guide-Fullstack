@@ -4,9 +4,11 @@ import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
 import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
+import FieldsError from '../../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
 import defaultAvatar from '../../../assets/images/blank-avatar-image.jpg';
 import { editUserAvatar } from '../../../services/users';
+import { uploadUserAvatar } from '../../../YupSchemas/validation_schema';
 import { useCloudinaryImage } from '../../../hooks/useCloudinaryImage';
 import { useDisclosure } from '@chakra-ui/react';
 import { useUserContext } from '../../../contexts/AuthContext';
@@ -19,6 +21,7 @@ const UploadAvatarModal = ({ avatar, _id, setUser }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [base64Image, setBase62Image] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  // const [imageError, setImageError] = useState(null)
 
   const parseTo64BaseString = async file => {
     if (!file) {
@@ -31,7 +34,12 @@ const UploadAvatarModal = ({ avatar, _id, setUser }) => {
     };
   };
 
-  const onChangeImage = e => {
+  const onChangeImage = e => {   
+
+    // uploadUserAvatar.validate({ image: e.target.files[0] }).catch(err =>  {
+    //   setImageError(err.message)
+    // });
+    
     setSelectedImage(e.target.files[0]);
     parseTo64BaseString(e.target.files[0]);
   };
@@ -40,6 +48,7 @@ const UploadAvatarModal = ({ avatar, _id, setUser }) => {
     if (!selectedImage) {
       return;
     }
+  
     const imageToPreview = URL.createObjectURL(selectedImage);
     setPreviewImage(imageToPreview);
     return () => URL.revokeObjectURL(imageToPreview);
@@ -94,6 +103,7 @@ const UploadAvatarModal = ({ avatar, _id, setUser }) => {
               </label>
             </form>
           </div>
+            {/* <FieldsError msg={imageError}  style={{textAlign: "center"}}/> */}
           <div className="form-btns modal-btns">
             <button type="button" className="btn btn-modal btn-cancel" onClick={onClose}>
               Cancel
