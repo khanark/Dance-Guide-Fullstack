@@ -6,11 +6,19 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import FieldsError from '../../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
 import { editUser } from '../../../services/users';
+import { registerSchemaValidation } from '../../../YupSchemas/validation_schema';
 import { useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-const ProfileEditModalLeft = ({ email, phoneNumber, moreInfo, _id, setUser }) => {
+const ProfileEditModalLeft = ({
+  email,
+  phoneNumber,
+  moreInfo,
+  _id,
+  setUser,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +26,10 @@ const ProfileEditModalLeft = ({ email, phoneNumber, moreInfo, _id, setUser }) =>
     register,
     handleSubmit,
     formState: { isDirty, errors },
-  } = useForm({ values: { email, phoneNumber, moreInfo } });
+  } = useForm({
+    values: { email, phoneNumber, moreInfo },
+    resolver: yupResolver(registerSchemaValidation),
+  });
 
   const onSubmit = async data => {
     if (!isDirty) {
@@ -33,7 +44,11 @@ const ProfileEditModalLeft = ({ email, phoneNumber, moreInfo, _id, setUser }) =>
 
   return (
     <>
-      <button type="button" className="line-devider--text devider-text--right" onClick={onOpen}>
+      <button
+        type="button"
+        className="line-devider--text devider-text--right"
+        onClick={onOpen}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -52,29 +67,51 @@ const ProfileEditModalLeft = ({ email, phoneNumber, moreInfo, _id, setUser }) =>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <form className="form" style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="form"
+            style={{ width: '100%' }}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label htmlFor="email" className="form-label">
               <p className="input-label">Email</p>
-              <input type="text" className="form-input" {...register('email')} />
+              <input
+                type="text"
+                className="form-input"
+                {...register('email')}
+              />
               <FieldsError msg={errors.email?.message} />
             </label>
             <label htmlFor="phone" className="form-label">
               <p className="input-label">Phone</p>
-              <input type="text" className="form-input" {...register('phoneNumber')} />
+              <input
+                type="text"
+                className="form-input"
+                {...register('phoneNumber')}
+              />
               <FieldsError msg={errors.phoneNumber?.message} />
             </label>
             <label htmlFor="moreInfo" className="form-label">
               <p className="input-label">About me</p>
-              <textarea type="text" className="form-input" {...register('moreInfo')} />
+              <textarea
+                type="text"
+                className="form-input"
+                {...register('moreInfo')}
+              />
               <FieldsError msg={errors.moreInfo?.message} />
             </label>
             <div className="form-btns">
-              <button type="button" className="btn btn-modal btn-cancel" onClick={onClose}>
+              <button
+                type="button"
+                className="btn btn-modal btn-cancel"
+                onClick={onClose}
+              >
                 Cancel
               </button>
               <div className="btn-wrapper">
                 <button type="submit" className="btn btn-modal">
-                  {isLoading && <Spinner className="btn-spinner modal-spinner" />}
+                  {isLoading && (
+                    <Spinner className="btn-spinner modal-spinner" />
+                  )}
                   Save
                 </button>
                 {isLoading && <p className="btn-desc">Updating...</p>}
