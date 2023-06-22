@@ -3,11 +3,20 @@ import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import FieldsError from '../../Forms/Errors/Fields/FieldsError';
 import { Spinner } from '@chakra-ui/react';
 import { editUser } from '../../../services/users';
+import { editUserModalRightSchema } from '../../../YupSchemas/validation_schema';
 import { useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setUser }) => {
+const ProfileEditModalRight = ({
+  firstName,
+  lastName,
+  city,
+  expertise,
+  _id,
+  setUser,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,9 +24,13 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setU
     register,
     handleSubmit,
     formState: { isDirty, errors },
-  } = useForm({ defaultValues: { firstName, lastName, city, expertise } });
+  } = useForm({
+    defaultValues: { firstName, lastName, city, expertise },
+    resolver: yupResolver(editUserModalRightSchema),
+  });
 
   const onSubmit = async data => {
+    // fix the data not being able to submit after clicking the button
     if (!isDirty) {
       return;
     }
@@ -30,7 +43,11 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setU
 
   return (
     <>
-      <button type="button" className="line-devider--text devider-text--right" onClick={onOpen}>
+      <button
+        type="button"
+        className="line-devider--text devider-text--right"
+        onClick={onOpen}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -49,7 +66,11 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setU
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <form className="form" style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="form"
+            style={{ width: '100%' }}
+            onSubmit={handleSubmit(onSubmit, (err) => console.log(err))}
+          >
             <div className="form-grid--wrapper">
               <label htmlFor="firstName" className="form-label">
                 <p className="input-label">First name</p>
@@ -73,12 +94,18 @@ const ProfileEditModalRight = ({ firstName, lastName, city, expertise, _id, setU
               <FieldsError msg={errors.expertise?.message} />
             </label>
             <div className="form-btns">
-              <button type="button" className="btn btn-modal btn-cancel" onClick={onClose}>
+              <button
+                type="button"
+                className="btn btn-modal btn-cancel"
+                onClick={onClose}
+              >
                 Cancel
               </button>
               <div className="btn-wrapper">
                 <button type="submit" className="btn btn-modal">
-                  {isLoading && <Spinner className="btn-spinner modal-spinner" />}
+                  {isLoading && (
+                    <Spinner className="btn-spinner modal-spinner" />
+                  )}
                   Save
                 </button>
                 {isLoading && <p className="btn-desc">Updating...</p>}

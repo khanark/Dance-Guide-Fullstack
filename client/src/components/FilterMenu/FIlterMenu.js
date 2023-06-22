@@ -1,34 +1,34 @@
-import './FIlterMenu.css';
+import './FIlterMenu.css'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const FilterMenu = ({ filters, setFilters }) => {
-  const [debouncedLocation, setDebouncedLocation] = useState('');
+  const [debouncedLocation, setDebouncedLocation] = useState('')
 
   useEffect(() => {
-    if (!debouncedLocation) {
-      return;
-    }
+    // if (!debouncedLocation) {
+    //   return;
+    // }
     const debouncedTimer = setTimeout(() => {
-      setFilters(prevState => ({
+      setFilters((prevState) => ({
         ...prevState,
         location: debouncedLocation,
-      }));
-    }, 500);
+      }))
+    }, 500)
 
-    return () => clearTimeout(debouncedTimer);
-  }, [debouncedLocation]);
+    return () => clearTimeout(debouncedTimer)
+  }, [debouncedLocation])
 
-  const onChangeHandler = e => {
+  const onChangeHandler = (e) => {
     if (e.target.name === 'location') {
-      setDebouncedLocation(e.target.value);
+      setDebouncedLocation(e.target.value)
     } else {
-      setFilters(prevState => ({
+      setFilters((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value,
-      }));
+      }))
     }
-  };
+  }
 
   return (
     <div className="filter-menu">
@@ -40,7 +40,7 @@ const FilterMenu = ({ filters, setFilters }) => {
             <input
               type="text"
               name="location"
-              placeholder="Sofia..."
+              placeholder="Town..."
               className="input-field"
               value={debouncedLocation}
               onChange={onChangeHandler}
@@ -96,7 +96,7 @@ const FilterMenu = ({ filters, setFilters }) => {
         </label>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default FilterMenu;
+export default FilterMenu

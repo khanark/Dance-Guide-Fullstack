@@ -8,26 +8,28 @@ const SchoolContext = createContext();
 const SchoolContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(schoolReducer, []);
 
-  const setSchools = schools => {
+  const setSchools = (schools) => {
     dispatch({ type: SCHOOL_ACTIONS.GET_SCHOOLS, payload: schools });
   };
 
-  const sortByLikes = () => {
-    dispatch({ type: SCHOOL_ACTIONS.SORT_SCHOOLS_BY_LIKES });
+  const addNewSchool = (school) => {
+    dispatch({ type: SCHOOL_ACTIONS.ADD_SCHOOL, payload: school });
   };
 
-  const sortByLatest = () => {
-    dispatch({ type: SCHOOL_ACTIONS.SORT_SCHOOLS_BY_LATEST });
-  };
+  const updateSchool = (id, schoolData) => {
+    dispatch({type: SCHOOL_ACTIONS.UPDATE_SCHOOL, payload: {id, data: schoolData}})
+  }
 
   const context = {
     schools: state,
-    sortByLatest,
-    sortByLikes,
     setSchools,
+    addNewSchool,
+    updateSchool
   };
 
-  return <SchoolContext.Provider value={context}>{children}</SchoolContext.Provider>;
+  return (
+    <SchoolContext.Provider value={context}>{children}</SchoolContext.Provider>
+  );
 };
 
 export const useSchoolContext = () => {

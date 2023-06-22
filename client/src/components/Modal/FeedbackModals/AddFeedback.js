@@ -23,8 +23,10 @@ const AddFeedbackModal = ({ schoolId, addFeedbackToState }) => {
 
   const onSubmit = async data => {
     setIsLoading(true);
-    const school = await addFeedback(schoolId, { owner: user._id, text: data.text });
-    console.log(school);
+    const school = await addFeedback(schoolId, {
+      owner: user._id,
+      text: data.text,
+    });
     setIsLoading(false);
     reset();
     onClose();
@@ -39,18 +41,32 @@ const AddFeedbackModal = ({ schoolId, addFeedbackToState }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <form className="form" style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="form"
+            style={{ width: '100%' }}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label htmlFor="text" className="form-label">
-              <textarea type="text" className="form-input" {...register('text')} />
+              <textarea
+                type="text"
+                className="form-input"
+                {...register('text')}
+              />
               <FieldsError msg={errors.text?.message} />
             </label>
             <div className="form-btns">
-              <button type="button" className="btn btn-modal btn-cancel" onClick={onClose}>
+              <button
+                type="button"
+                className="btn btn-modal btn-cancel"
+                onClick={onClose}
+              >
                 Cancel
               </button>
               <div className="btn-wrapper">
                 <button type="submit" className="btn btn-modal">
-                  {isLoading && <Spinner className="btn-spinner modal-spinner" />}
+                  {isLoading && (
+                    <Spinner className="btn-spinner modal-spinner" />
+                  )}
                   Send
                 </button>
                 {isLoading && <p className="btn-desc">Sending...</p>}

@@ -15,25 +15,27 @@ import { getSingle } from '../../services/users';
 import { setPageTitle } from '../../util/util';
 import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
 import { useParams } from 'react-router-dom';
+import { useUserContext } from '../../contexts/AuthContext';
 
 const Profile = () => {
   const { userId } = useParams();
-  const [user, setUser] = useState();
+  const [currentUser, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  const { user } = useUserContext();
   const [activeButton, setActiveButton] = useState('user-btn--1');
 
   function onUserButtonClick(e) {
     setActiveButton(e.target.id);
   }
 
-  const isCurrentLoggedInUser = user?._id === userId;
-  const userImage = useCloudinaryImage(user?.avatar);
+  const isCurrentLoggedInUser = currentUser?._id === userId;
+  const userImage = useCloudinaryImage(currentUser?.avatar);
 
   useEffect(() => {
     setPageTitle('Profile');
     setLoading(true);
     getSingle(userId)
-      .then(user => {
+      .then((user) => {
         setUser(user);
       })
       .finally(() => setLoading(false));
@@ -44,34 +46,44 @@ const Profile = () => {
       <div className="profile container-secondary grid grid--cols-2">
         <div className="profile-box--left">
           <div className="profile-img--wrapper">
-            {user?.avatar ? (
+            {currentUser?.avatar ? (
               <AdvancedImage
                 cldImg={userImage}
                 className="user-profile--img"
                 plugins={[lazyload(), responsive()]}
               />
             ) : (
-              <img src={defaultAvatar} className="user-profile--img" alt="user-avatar" />
+              <img
+                src={defaultAvatar}
+                className="user-profile--img"
+                alt="user-avatar"
+              />
             )}
 
-            <UploadAvatarModal {...user} setUser={setUser} />
+            {user && user?._id === userId && (
+              <UploadAvatarModal {...currentUser} setUser={setUser} />
+            )}
           </div>
           <div className="line-devider">
-            <span className="line-devider--text devider-text--left">About Me</span>
-            {user && <ProfileEditModalLeft {...user} setUser={setUser} />}
+            <span className="line-devider--text devider-text--left">
+              About Me
+            </span>
+            {user?._id === userId && user && (
+              <ProfileEditModalLeft {...currentUser} setUser={setUser} />
+            )}
           </div>
           <div className="user-info--wrapper">
             <p className="user-info--text additional-info">
-              {user?.moreInfo || 'No additional information'}
+              {currentUser?.moreInfo || 'No additional information'}
             </p>
           </div>
           <div className="user-info--wrapper">
             <h5 className="subtitle">Email</h5>
-            <p className="user-info--text">{user?.email}</p>
+            <p className="user-info--text">{currentUser?.email}</p>
           </div>
           <div className="user-info--wrapper">
             <h5 className="subtitle">Phone</h5>
-            <p className="user-info--text">{user?.phoneNumber}</p>
+            <p className="user-info--text">+359 {currentUser?.phoneNumber.match(/.{1,3}/g).join(" ")}</p>
           </div>
         </div>
         {loading ? (
@@ -82,7 +94,10 @@ const Profile = () => {
               <div className="profile-box-header--wrapper">
                 <div className="profile-box-header--top">
                   <h4 className="title-secondary">
-                    {convertToPascalCase(user?.firstName, user?.lastName)}
+                    {convertToPascalCase(
+                      currentUser?.firstName,
+                      currentUser?.lastName
+                    )}
                   </h4>
                   <div className="user-hometown--wrapper">
                     <svg
@@ -104,11 +119,17 @@ const Profile = () => {
                         d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                       />
                     </svg>
-                    <span className="user-hometown">{convertToPascalCase(user?.city)}</span>
+                    <span className="user-hometown">
+                      {convertToPascalCase(currentUser?.city)}
+                    </span>
                   </div>
-                  {user && <ProfileEditModalRight {...user} setUser={setUser} />}
+                  {user?._id === userId && user && (
+                    <ProfileEditModalRight {...currentUser} setUser={setUser} />
+                  )}
                 </div>
-                <h5 className="subtitle user-ocupation">{convertToPascalCase(user?.expertise)}</h5>
+                <h5 className="subtitle user-ocupation">
+                  {convertToPascalCase(currentUser?.expertise)}
+                </h5>
               </div>
               <div className="user-btns--wrapper">
                 {!isCurrentLoggedInUser && (
@@ -153,14 +174,18 @@ const Profile = () => {
               <div className="user-options">
                 <button
                   id="user-btn--1"
-                  className={`subtitle ${activeButton === 'user-btn--1' ? 'active' : ''}`}
+                  className={`subtitle ${
+                    activeButton === 'user-btn--1' ? 'active' : ''
+                  }`}
                   onClick={onUserButtonClick}
                 >
                   Created
                 </button>
                 <button
                   id="user-btn--2"
-                  className={`subtitle ${activeButton === 'user-btn--2' ? 'active' : ''}`}
+                  className={`subtitle ${
+                    activeButton === 'user-btn--2' ? 'active' : ''
+                  }`}
                   onClick={onUserButtonClick}
                 >
                   Liked
@@ -168,7 +193,9 @@ const Profile = () => {
                 {!isCurrentLoggedInUser && (
                   <button
                     id="user-btn--3"
-                    className={`subtitle ${activeButton === 'user-btn--3' ? 'active' : ''}`}
+                    className={`subtitle ${
+                      activeButton === 'user-btn--3' ? 'active' : ''
+                    }`}
                     onClick={onUserButtonClick}
                   >
                     Send message to the user
@@ -179,16 +206,20 @@ const Profile = () => {
             <ul className="school-list grid grid--cols-2">
               {activeButton === 'user-btn--1' ? (
                 <>
-                  {user?.danceSchools.length > 0 ? (
-                    user?.danceSchools.map(school => <Card key={school._id} {...school} />)
+                  {currentUser?.danceSchools.length > 0 ? (
+                    currentUser?.danceSchools.map((school) => (
+                      <Card key={school._id} {...school} />
+                    ))
                   ) : (
                     <p className="subtitle">No schools created yet</p>
                   )}
                 </>
               ) : (
                 <>
-                  {user?.likedSchools.length > 0 ? (
-                    user?.likedSchools.map(school => <Card key={school._id} {...school} />)
+                  {currentUser?.likedSchools.length > 0 ? (
+                    currentUser?.likedSchools.map((school) => (
+                      <Card key={school._id} {...school} />
+                    ))
                   ) : (
                     <p className="subtitle">No schools liked yet</p>
                   )}

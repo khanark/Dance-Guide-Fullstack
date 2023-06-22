@@ -11,9 +11,11 @@ import { useUserContext } from '../../contexts/AuthContext';
 
 const Navigation = ({ isLandingPage, authPage }) => {
   const { user, clearUser, setNavigationRef } = useUserContext();
-  const { cloudinaryUserImage: userImage, setupCloudinaryImage } = useCloudinaryUserImage();
+  const { cloudinaryUserImage: userImage, setupCloudinaryImage } =
+    useCloudinaryUserImage();
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
+  const dropDownRef = useRef(null);
 
   const authPageState = useMemo(() => {
     return {
@@ -27,6 +29,31 @@ const Navigation = ({ isLandingPage, authPage }) => {
     setNavigationRef(navigationRef);
   }, []);
 
+  useEffect(() => {
+    const handleOutsideClick = event => {
+      if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+        setDropdown(false);
+      }
+    };
+
+    const handleClick = event => {
+      if (
+        navigationRef.current &&
+        !navigationRef.current.contains(event.target)
+      ) {
+        setDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   const onLogoutClick = () => {
     clearUser(); // clearing the user from local storage upon logout
   };
@@ -38,7 +65,9 @@ const Navigation = ({ isLandingPage, authPage }) => {
   return (
     <header
       ref={navigationRef}
-      className={`nav-header ${!isLandingPage ? 'landing-bg' : 'isLandingPage'}`}
+      className={`nav-header ${
+        !isLandingPage ? 'landing-bg' : 'isLandingPage'
+      }`}
     >
       <nav
         className={`header-nav container-primary ${
@@ -51,9 +80,14 @@ const Navigation = ({ isLandingPage, authPage }) => {
         {authPage && (
           <div className="auth-page">
             <p className="auth-question">
-              {authPageState.isLoginPage ? "Don't have an account?" : 'Already have an account?'}
+              {authPageState.isLoginPage
+                ? "Don't have an account?"
+                : 'Already have an account?'}
             </p>
-            <Link className="nav-link" to={authPageState.isLoginPage ? '/register' : '/login'}>
+            <Link
+              className="nav-link"
+              to={authPageState.isLoginPage ? '/register' : '/login'}
+            >
               {authPageState.isLoginPage ? 'Sign Up' : 'Sign In'}
             </Link>
           </div>
@@ -87,22 +121,41 @@ const Navigation = ({ isLandingPage, authPage }) => {
             )}
             {user && (
               <li className="dropdown-menu-wrapper">
-                <div className="user-btn" onClick={() => setDropdown(bool => !bool)}>
+                <div
+                  className="user-btn"
+                  onClick={() => setDropdown(bool => !bool)}
+                >
                   {user?.avatar ? (
-                    <AdvancedImage cldImg={userImage} className="user-avatar--img" />
+                    <AdvancedImage
+                      cldImg={userImage}
+                      className="user-avatar--img"
+                    />
                   ) : (
-                    <img src={defaultAvatar} className="user-avatar--img" alt="user-avatar" />
+                    <img
+                      src={defaultAvatar}
+                      className="user-avatar--img"
+                      alt="user-avatar"
+                    />
                   )}
                 </div>
 
-                <div className={`user-dropdown--menu ${dropdown ? 'active' : 'inactive'}`}>
+                <div
+                  ref={dropDownRef}
+                  className={`user-dropdown--menu ${
+                    dropdown ? 'active' : 'inactive'
+                  }`}
+                >
                   <h4 className="user-dropdown--username">
                     {user?.firstName} {user?.lastName}
                   </h4>
                   <p className="user-dropdown--email">{user?.email}</p>
                   <ul className="user-dropdown--list">
                     <li className="link-wrapper">
-                      <Link to={`/user/profile/${user?._id}`} className="user-dropdown--link">
+                      <Link
+                        to={`/user/profile/${user?._id}`}
+                        className="user-dropdown--link"
+                        onClick={() => setDropdown(false)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -122,7 +175,11 @@ const Navigation = ({ isLandingPage, authPage }) => {
                       </Link>
                     </li>
                     <li className="link-wrapper">
-                      <Link to="/catalog" className="user-dropdown--link" onClick={onLogoutClick}>
+                      <Link
+                        to="/catalog"
+                        className="user-dropdown--link"
+                        onClick={onLogoutClick}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
