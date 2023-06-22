@@ -1,14 +1,14 @@
 .header-nav {
-  min-height: 6.2rem;
+  /* min-height: 6.2rem; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.layout-bg .header-nav {
+/* .layout-bg .header-nav {
   min-height: 6.2rem;
-}
+} */
 
 .nav-header {
   border-bottom: 1px solid #555;
@@ -31,7 +31,7 @@
 }
 
 .header-nav.container-primary {
-  padding: 2rem;
+  padding: 0.8rem;
 }
 
 .landing-bg {

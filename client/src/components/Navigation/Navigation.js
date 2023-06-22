@@ -54,8 +54,6 @@ const Navigation = ({ isLandingPage, authPage }) => {
     };
   }, []);
 
-  console.log(dropdown);
-
   const onLogoutClick = () => {
     clearUser(); // clearing the user from local storage upon logout
   };

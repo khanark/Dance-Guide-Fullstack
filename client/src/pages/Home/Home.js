@@ -1,12 +1,14 @@
 import './Home.css';
 
-import Layout from '../../components/Layout/Layout';
 import { Link } from 'react-router-dom';
 import customerImages from '../../assets/images/customers/CustomerImages';
 import { setPageTitle } from '../../util/util';
 import { useEffect } from 'react';
+import { useUserContext } from '../../contexts/AuthContext';
 
 const Home = () => {
+  const { user } = useUserContext();
+
   useEffect(() => {
     setPageTitle('Home');
   }, []);
@@ -42,9 +44,11 @@ const Home = () => {
           <Link to="/catalog" className="btn btn--browse">
             Catalog
           </Link>
-          <Link to="/register" className="btn btn--signin">
-            Sign Up
-          </Link>
+          {!user && (
+            <Link to="/register" className="btn btn--signin">
+              Sign Up
+            </Link>
+          )}
         </div>
       </section>
     </div>

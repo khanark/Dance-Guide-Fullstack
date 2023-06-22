@@ -21,13 +21,12 @@ const AddFeedbackModal = ({ schoolId, addFeedbackToState }) => {
     formState: { isDirty, errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     setIsLoading(true);
     const school = await addFeedback(schoolId, {
       owner: user._id,
       text: data.text,
     });
-    console.log(school);
     setIsLoading(false);
     reset();
     onClose();

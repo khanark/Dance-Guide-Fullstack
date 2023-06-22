@@ -1,53 +1,52 @@
-import './Details.css'
+import './Details.css';
 
-import { danceTypeFormat, formatDate } from '../../util/util'
-import { useEffect, useRef, useState } from 'react'
+import { danceTypeFormat, formatDate } from '../../util/util';
+import { useEffect, useRef, useState } from 'react';
 
-import AddFeedbackModal from '../../components/Modal/FeedbackModals/AddFeedback'
-import { AdvancedImage } from '@cloudinary/react'
-import EditSchoolModal from '../../components/Modal/SchoolModals/EditSchoolModal'
-import Feedback from './components/Feedback'
-import { Link } from 'react-router-dom'
-import { Spinner } from '@chakra-ui/react'
-import { matchLink } from '../../util/util'
-import schoolsFactory from '../../services/schools'
-import { useCloudinaryImage } from '../../hooks/useCloudinaryImage'
-import { useParams } from 'react-router-dom'
-import { useSingleSchoolReducer } from '../../hooks/useSchoolReducer'
-import { useUserContext } from '../../contexts/AuthContext'
+import AddFeedbackModal from '../../components/Modal/FeedbackModals/AddFeedback';
+import { AdvancedImage } from '@cloudinary/react';
+import EditSchoolModal from '../../components/Modal/SchoolModals/EditSchoolModal';
+import Feedback from './components/Feedback';
+import { Link } from 'react-router-dom';
+import { Spinner } from '@chakra-ui/react';
+import { matchLink } from '../../util/util';
+import schoolsFactory from '../../services/schools';
+import { useCloudinaryImage } from '../../hooks/useCloudinaryImage';
+import { useParams } from 'react-router-dom';
+import { useSingleSchoolReducer } from '../../hooks/useSchoolReducer';
+import { useUserContext } from '../../contexts/AuthContext';
 
 const Details = () => {
-  const { schoolId } = useParams()
+  const { schoolId } = useParams();
   const [{ schoolDetails: school, isLiked }, schoolActions] =
-    useSingleSchoolReducer()
-  const [isLoading, setIsLoading] = useState(true)
-  const { user } = useUserContext()
-  const { singleSchool } = schoolsFactory(user)
-  const [isUserOwnSchool, setIsUserOwnschool] = useState(false)
-  const feedbackListRef = useRef()
+    useSingleSchoolReducer();
+  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useUserContext();
+  const { singleSchool } = schoolsFactory(user);
+  const [isUserOwnSchool, setIsUserOwnschool] = useState(false);
+  const feedbackListRef = useRef();
 
   useEffect(() => {
     singleSchool(schoolId)
-      .then((school) => {
-        const isLiked = school?.likes?.users?.includes(user?._id)
-        setIsUserOwnschool(school?.owner?._id === user?._id)
-        schoolActions.setSingleSchool(school, isLiked)
+      .then(school => {
+        const isLiked = school?.likes?.users?.includes(user?._id);
+        setIsUserOwnschool(school?.owner?._id === user?._id);
+        schoolActions.setSingleSchool(school, isLiked);
       })
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const onLikeSubmit = async () => {
-    schoolActions.setLiked(true)
-    await schoolsFactory(user).likeSchool(schoolId)
-  }
+    schoolActions.setLiked(true);
+    await schoolsFactory(user).likeSchool(schoolId);
+  };
 
   const onUnlikeSubmit = async () => {
-    schoolActions.setLiked(false)
-    await schoolsFactory(user).unLikeSchool(schoolId)
-  }
+    schoolActions.setLiked(false);
+    await schoolsFactory(user).unLikeSchool(schoolId);
+  };
 
-  const schoolImage = useCloudinaryImage(school?.image)
-  console.log(school)
+  const schoolImage = useCloudinaryImage(school?.image);
 
   return (
     <div className="details-page container-secondary">
@@ -157,9 +156,9 @@ const Details = () => {
                     className={`btn btn-like ${isLiked && 'liked'}`}
                     onClick={() => {
                       if (isLiked) {
-                        onUnlikeSubmit()
+                        onUnlikeSubmit();
                       } else {
-                        onLikeSubmit()
+                        onLikeSubmit();
                       }
                     }}
                   >
@@ -192,7 +191,7 @@ const Details = () => {
       {!isLoading && (
         <section className="school-feedbacks section">
           <ul className="feedback-list" ref={feedbackListRef}>
-            {school?.feedbacks?.map((feedback) => (
+            {school?.feedbacks?.map(feedback => (
               <Feedback key={feedback._id} feedback={feedback} />
             ))}
           </ul>
@@ -208,7 +207,7 @@ const Details = () => {
         </section>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Details
+export default Details;
