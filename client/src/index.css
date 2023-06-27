@@ -3,33 +3,33 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"); */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:wght:400;600;700&display=swap');
 
 html {
-  font-size: 87.5%;
+    font-size: 87.5%;
 } /*14px*/
 
 body {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  line-height: 1;
-  color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    color: #333;
 }
 
 p {
-  font-size: 16px;
-  color: #555;
+    font-size: 16px;
+    color: #555;
 }
 
 p {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 h1,
@@ -37,67 +37,67 @@ h2,
 h3,
 h4,
 h5 {
-  margin-bottom: 1.38rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  line-height: 1.3;
+    margin-bottom: 1.38rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1.3;
 }
 
 h1,
 h2 {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 h3,
 h4,
 h5 {
-  font-weight: 500;
-  margin-bottom: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
 }
 
 h1 {
-  font-size: 4.209rem;
+    font-size: 4.209rem;
 }
 
 h2 {
-  font-size: 3.157rem;
+    font-size: 3.157rem;
 }
 
 h3 {
-  font-size: 2.369rem;
+    font-size: 2.369rem;
 }
 
 h4 {
-  font-size: 1.777rem;
+    font-size: 1.777rem;
 }
 
 h5 {
-  font-size: 1.333rem;
+    font-size: 1.333rem;
 }
 
 small,
 .text_small {
-  font-size: 0.75rem;
+    font-size: 0.75rem;
 }
 
 :root {
-  --clr-main--dark: #f03e3e;
-  --clr-main--dark-hover: #f36565;
-  --clr-main--bg: #fff5f5;
-  --clr-grey--dark: #333131;
-  --clr-grey--dark--hover: #6d7379;
-  --clr-grey--light: #666262;
+    --clr-main--dark: #f03e3e;
+    --clr-main--dark-hover: #f36565;
+    --clr-main--bg: #fff5f5;
+    --clr-grey--dark: #333131;
+    --clr-grey--dark--hover: #6d7379;
+    --clr-grey--light: #666262;
 }
 
 html::-webkit-scrollbar {
-  width: 0.5vw;
+    width: 0.5vw;
 }
 
 html::-webkit-scrollbar-track {
-  background-color: #555;
+    background-color: #555;
 }
 
 html::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 100px;
+    background-color: #999;
+    border-radius: 100px;
 }

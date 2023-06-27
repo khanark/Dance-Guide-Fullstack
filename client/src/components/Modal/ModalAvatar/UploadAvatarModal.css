@@ -1,19 +1,18 @@
 .image-wrapper {
-	width: 20rem;
-	margin: 0 auto;
-	border-radius: 0.4rem;
-	overflow: hidden;
-	position: relative;
-	margin-bottom: 2.4rem;
+    width: 20rem;
+    margin: 0 auto;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2.4rem;
 }
 
 .modal-title {
-	color: #333;
-	margin-bottom: 0;
+    color: #333;
+    margin-bottom: 0;
 }
 
 .modal-btns {
-	padding-top: 1rem;
-	border-top: 2px solid #eee;
-
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
 }

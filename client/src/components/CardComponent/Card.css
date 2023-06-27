@@ -1,99 +1,99 @@
 .catalog-list--item {
-  position: relative;
-  background-color: inherit;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-  border-radius: 8px;
-  transition: all 0.2s;
-  cursor: pointer;
+    position: relative;
+    background-color: inherit;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
 }
 
 .catalog-list--item:hover {
-  transform: scale(1.01);
-  box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+    box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.1);
 }
 
 .item-info {
-  padding: 2.4rem;
+    padding: 2.4rem;
 }
 
 .card-img--wrapper {
-  aspect-ratio: 1/1;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
-  overflow: hidden;
-  background-color: #ccc;
+    aspect-ratio: 1/1;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    overflow: hidden;
+    background-color: #ccc;
 }
 
 .item-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 .card-title {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 .subtitle {
-  font-weight: 600;
-  margin-bottom: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
 }
 
 .item-contacts {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
 }
 
 .item-contacts-info {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: var(--clr-grey--dark);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--clr-grey--dark);
 }
 
 .contacts-icon,
 .likes-icon,
 .settlement-icon {
-  display: inline-block;
-  stroke: var(--clr-grey--light);
-  width: 20px;
-  height: 20px;
+    display: inline-block;
+    stroke: var(--clr-grey--light);
+    width: 20px;
+    height: 20px;
 }
 
 .settlement-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.6rem;
-  gap: 0.4rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.6rem;
+    gap: 0.4rem;
 }
 
 .likes-info {
-  position: absolute;
-  top: 2%;
-  left: -4%;
-  display: flex;
-  align-items: center;
-  padding: 0.2rem 0.4rem;
-  color: #fff;
-  background-color: var(--clr-main--dark);
-  z-index: 1;
-  gap: 0.4rem;
-  border-radius: 0.4rem;
+    position: absolute;
+    top: 2%;
+    left: -4%;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 0.4rem;
+    color: #fff;
+    background-color: var(--clr-main--dark);
+    z-index: 1;
+    gap: 0.4rem;
+    border-radius: 0.4rem;
 }
 
 .likes-icon {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  fill: #fff;
-  stroke: none;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    fill: #fff;
+    stroke: none;
 }
 
 .text-likes {
-  margin: 0;
-  color: #fff;
-  font-weight: 500;
+    margin: 0;
+    color: #fff;
+    font-weight: 500;
 }

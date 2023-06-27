@@ -1,63 +1,63 @@
 .modal {
-  /* display: block; */
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: var(--clr-grey--dark);
-  padding: 2rem;
+    /* display: block; */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--clr-grey--dark);
+    padding: 2rem;
 }
 
 .hide {
-  display: none;
+    display: none;
 }
 
 .modal-content {
-  background-color: var(--clr-grey--light);
-  max-width: 64rem;
-  margin: 4.4rem auto;
-  border-radius: 8px;
+    background-color: var(--clr-grey--light);
+    max-width: 64rem;
+    margin: 4.4rem auto;
+    border-radius: 8px;
 }
 
 .btn--secondary {
-  background: transparent !important;
-  color: inherit !important;
-  border: 1px solid var(--clr-grey--dark);
+    background: transparent !important;
+    color: inherit !important;
+    border: 1px solid var(--clr-grey--dark);
 }
 
 .btn-upload {
-  display: inline-block;
-  padding: 0.4rem 1.6rem;
-  background-color: #f8f9fa;
-  box-shadow: 0px 0px 2px #555;
-  cursor: pointer;
-  border-radius: 0.4rem;
-  transition: all 0.3s;
+    display: inline-block;
+    padding: 0.4rem 1.6rem;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 2px #555;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    transition: all 0.3s;
 }
 
 .btn-upload:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .btn-upload-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .photo-input {
-  position: absolute;
-  z-index: -1;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+    position: absolute;
+    z-index: -1;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }
 
 .photo-input::-webkit-file-upload-button {
-  visibility: hidden;
+    visibility: hidden;
 }

@@ -1,96 +1,96 @@
 .section-footer,
 .footer-secondary {
-  background-color: var(--clr-grey--dark);
+    background-color: var(--clr-grey--dark);
 }
 .section-footer {
-  position: relative;
+    position: relative;
 }
 
 .footer {
-  align-items: start !important;
+    align-items: start !important;
 }
 
 .footer .title-secondary {
-  color: #fff;
+    color: #fff;
 }
 
 .footer-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .footer-nav .nav-link,
 .contact-list .nav-link {
-  padding: 0;
+    padding: 0;
 }
 
 .footer-about--desc {
-  /* font-size: 1.4rem; */
-  color: #fff;
+    /* font-size: 1.4rem; */
+    color: #fff;
 }
 .contact-list {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
 }
 .contact-icon {
-  width: 1.8rem;
-  height: 1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 
 .footer-secondary {
-  border-top: 1px solid #555;
+    border-top: 1px solid #555;
 }
 
 .footer-secondary--desc {
-  margin-bottom: 0;
-  padding: 1.6rem;
-  color: #888;
-  text-align: center;
+    margin-bottom: 0;
+    padding: 1.6rem;
+    color: #888;
+    text-align: center;
 }
 
 .university-link {
-  color: var(--clr-main--dark);
-  border-bottom: 1px solid var(--clr-main--dark);
+    color: var(--clr-main--dark);
+    border-bottom: 1px solid var(--clr-main--dark);
 }
 
 .university-link:hover {
-  color: var(--clr-main--dark-hover);
-  border-bottom: 1px solid var(--clr-main--dark-hover);
+    color: var(--clr-main--dark-hover);
+    border-bottom: 1px solid var(--clr-main--dark-hover);
 }
 
 .scrool-top {
-  position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translate(5%, -50%);
-  background-color: #555;
-  padding: 0.4rem;
-  border-radius: 50%;
-  transition: all 0.3s;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translate(5%, -50%);
+    background-color: #555;
+    padding: 0.4rem;
+    border-radius: 50%;
+    transition: all 0.3s;
 }
 
 .scrool-top:hover {
-  background-color: #888;
+    background-color: #888;
 }
 
 .scrool-top--icon {
-  width: 1.6rem;
-  height: 1.6rem;
-  stroke: #fff;
+    width: 1.6rem;
+    height: 1.6rem;
+    stroke: #fff;
 }
 
 @media screen and (max-width: 768px) {
-  .footer.grid--cols-3 {
-    grid-template-columns: auto;
-    gap: 2.4rem;
-  }
+    .footer.grid--cols-3 {
+        grid-template-columns: auto;
+        gap: 2.4rem;
+    }
 
-  .scrool-top {
-    right: unset;
-    top: unset;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
+    .scrool-top {
+        right: unset;
+        top: unset;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
 }

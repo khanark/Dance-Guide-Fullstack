@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const DeleteSchoolModal = () => {
-  return (
-    <div>DeleteSchoolModal</div>
-  )
-}
+    return <div>DeleteSchoolModal</div>;
+};
 
-export default DeleteSchoolModal
+export default DeleteSchoolModal;

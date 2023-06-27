@@ -1,7 +1,7 @@
-import "./Spinner.css";
+import './Spinner.css';
 
 const CustomSpinner = () => {
-  return <div className="loader">Loading...</div>;
+    return <div className="loader">Loading...</div>;
 };
 
 export default CustomSpinner;

@@ -1,17 +1,17 @@
 .form-number--prepend {
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    text-align: center;
 }
 
 .form-expertise {
-  margin-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .phone-prefix {
-  padding: 0.8rem;
-  /* font-size: 1.4rem; */
-  margin: 0;
-  color: var(--clr-grey--dark);
+    padding: 0.8rem;
+    /* font-size: 1.4rem; */
+    margin: 0;
+    color: var(--clr-grey--dark);
 }

@@ -1,12 +1,12 @@
 .password-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .eye-icon {
-  width: 1.6rem;
-  height: 1.6rem;
-  position: absolute;
-  color: #ccc;
-  right: 1.5rem;
-  top: 18%;
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    color: #ccc;
+    right: 1.5rem;
+    top: 18%;
 }
