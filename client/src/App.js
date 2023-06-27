@@ -16,29 +16,40 @@ import SchoolEdit from './pages/SchoolEdit/SchoolEdit';
 import UserContextProvider from './contexts/AuthContext';
 
 function App() {
-  return (
-    <UserContextProvider>
-      <SchoolContextProvider>
-        <ChakraProvider>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/details/:schoolId" element={<Details />} />
-              <Route path="/user/profile/:userId" element={<Profile />} />
-              <Route element={<PrivateRoute redirectPath="/login" />}>
-                <Route path="/create" element={<Create />} />
-                <Route path="/school/edit/:schoolId" element={<SchoolEdit />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </ChakraProvider>
-      </SchoolContextProvider>
-    </UserContextProvider>
-  );
+    return (
+        <UserContextProvider>
+            <SchoolContextProvider>
+                <ChakraProvider>
+                    <Layout>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/catalog" element={<Catalog />} />
+                            <Route
+                                path="/details/:schoolId"
+                                element={<Details />}
+                            />
+                            <Route
+                                path="/user/profile/:userId"
+                                element={<Profile />}
+                            />
+                            <Route
+                                element={<PrivateRoute redirectPath="/login" />}
+                            >
+                                <Route path="/create" element={<Create />} />
+                                <Route
+                                    path="/school/edit/:schoolId"
+                                    element={<SchoolEdit />}
+                                />
+                            </Route>
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Layout>
+                </ChakraProvider>
+            </SchoolContextProvider>
+        </UserContextProvider>
+    );
 }
 
 export default App;

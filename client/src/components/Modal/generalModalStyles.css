@@ -1,38 +1,38 @@
 .btn-modal {
-  display: flex;
-  align-items: center;
-  padding: 0.4rem 1.6rem;
-  border-radius: 0.4rem;
-  margin-right: 0.4rem;
-  font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 1.6rem;
+    border-radius: 0.4rem;
+    margin-right: 0.4rem;
+    font-size: 1.2rem;
 }
 
 .btn-cancel {
-  background-color: #eee5;
-  color: #888;
+    background-color: #eee5;
+    color: #888;
 }
 
 .btn-cancel:hover {
-  background-color: #eee;
-  color: #333;
+    background-color: #eee;
+    color: #333;
 }
 
 .form-btns {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .btn-wrapper {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .modal-spinner {
-  width: 16px !important;
-  height: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
 }
 
 .modal-header {
-  margin-bottom: 2.4rem;
-  border-bottom: 2px solid #eee;
+    margin-bottom: 2.4rem;
+    border-bottom: 2px solid #eee;
 }

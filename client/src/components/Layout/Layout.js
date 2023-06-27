@@ -6,35 +6,36 @@ import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 
 const Layout = ({ children }) => {
-  const location = useLocation();
-  const pageState = useMemo(() => {
-    return {
-      isLandingPage: location.pathname === '/',
-      authPage:
-        location.pathname === '/login' || location.pathname === '/register',
-    };
-  }, [location]);
+    const location = useLocation();
+    const pageState = useMemo(() => {
+        return {
+            isLandingPage: location.pathname === '/',
+            authPage:
+                location.pathname === '/login' ||
+                location.pathname === '/register',
+        };
+    }, [location]);
 
-  return (
-    <div
-      className={`site-layout ${
-        !pageState.isLandingPage ? 'layout-bg' : 'isLandingPage'
-      }`}
-    >
-      <Navigation
-        isLandingPage={pageState.isLandingPage}
-        authPage={pageState.authPage}
-      />
-      <main
-        className={`${
-          pageState.isLandingPage && 'isLandingPage '
-        } main-container`}
-      >
-        {children}
-      </main>
-      {!pageState.isLandingPage && <Footer />}
-    </div>
-  );
+    return (
+        <div
+            className={`site-layout ${
+                !pageState.isLandingPage ? 'layout-bg' : 'isLandingPage'
+            }`}
+        >
+            <Navigation
+                isLandingPage={pageState.isLandingPage}
+                authPage={pageState.authPage}
+            />
+            <main
+                className={`${
+                    pageState.isLandingPage && 'isLandingPage '
+                } main-container`}
+            >
+                {children}
+            </main>
+            {!pageState.isLandingPage && <Footer />}
+        </div>
+    );
 };
 
 export default Layout;

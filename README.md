@@ -22,34 +22,34 @@ Validation is done with Mongoose.
 
 ## Technologies Used
 
-- MongoDB
+-   MongoDB
 
-- Express
+-   Express
 
-- React
+-   React
 
-- Node.js
+-   Node.js
 
-- Mongoose
+-   Mongoose
 
-- Chakra-UI
+-   Chakra-UI
 
-- Cloudinary (Media Hosting)
-  SDK on both Client and Server
+-   Cloudinary (Media Hosting)
+    SDK on both Client and Server
 
-- SCSS
+-   SCSS
 
-- HTML
+-   HTML
 
-- JavaScript
+-   JavaScript
 
 ## Getting Started
 
-- Fork and clone this repository.
+-   Fork and clone this repository.
 
-- Run npm install in the terminal. (both server and client folder)
+-   Run npm install in the terminal. (both server and client folder)
 
-- Run npm start in the terminal.
-  (npm run dev for local testing of the server)
+-   Run npm start in the terminal.
+    (npm run dev for local testing of the server)
 
 Disclaimer: This project is still in development.

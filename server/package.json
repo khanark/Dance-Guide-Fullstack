@@ -1,39 +1,39 @@
 {
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cloudinary": "^1.35.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.0",
-    "util": "^0.12.5",
-    "validator": "^13.9.0"
-  },
-  "name": "dance-guide-bg",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node server.js",
-    "dev": "cross-env NODE_ENV=development nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/khanark/dance-guide-bg.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/khanark/dance-guide-bg/issues"
-  },
-  "engines": {
-    "node": ">=14 <15"
-  },
-  "homepage": "https://github.com/khanark/dance-guide-bg#readme",
-  "description": "",
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "nodemon": "^2.0.20"
-  }
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "cloudinary": "^1.35.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^7.0.0",
+        "util": "^0.12.5",
+        "validator": "^13.9.0"
+    },
+    "name": "dance-guide-bg",
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=production node server.js",
+        "dev": "cross-env NODE_ENV=development nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/khanark/dance-guide-bg.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/khanark/dance-guide-bg/issues"
+    },
+    "engines": {
+        "node": ">=14 <15"
+    },
+    "homepage": "https://github.com/khanark/dance-guide-bg#readme",
+    "description": "",
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.20"
+    }
 }

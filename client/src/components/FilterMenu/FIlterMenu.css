@@ -1,80 +1,80 @@
 .filter-menu {
-  position: sticky;
-  top: 16rem;
-  z-index: 999;
-  width: 20rem;
-  padding: 2.4rem;
-  background-color: #fff;
-  /* box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.07); */
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
-  border-radius: 8px;
-  transition: all 0.3s;
+    position: sticky;
+    top: 16rem;
+    z-index: 999;
+    width: 20rem;
+    padding: 2.4rem;
+    background-color: #fff;
+    /* box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.07); */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    transition: all 0.3s;
 }
 
 .filter-menu--label {
-  display: block;
-  margin-bottom: 1.6rem;
+    display: block;
+    margin-bottom: 1.6rem;
 }
 
 .input-location-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .menu-title {
-  font-weight: 500;
-  margin-top: 0;
-  border-bottom: 2px solid #ccc;
+    font-weight: 500;
+    margin-top: 0;
+    border-bottom: 2px solid #ccc;
 }
 
 .input-title {
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: #333;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    color: #333;
 }
 .input-field {
-  width: 100%;
-  border-radius: 0.4rem;
-  padding: 0.4rem;
-  outline: none;
-  border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 0.4rem;
+    padding: 0.4rem;
+    outline: none;
+    border: 1px solid #ccc;
 }
 
 .location-icon {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  stroke: #ccc;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    stroke: #ccc;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
 }
 
 .btn-filter:hover {
-  background-color: var(--clr-grey--dark--hover);
+    background-color: var(--clr-grey--dark--hover);
 }
 
 @media screen and (max-width: 768px) {
-  .filter-menu {
-    top: 0;
-    width: 100%;
-    border-radius: 0;
-    position: unset;
-  }
+    .filter-menu {
+        top: 0;
+        width: 100%;
+        border-radius: 0;
+        position: unset;
+    }
 
-  .filter-menu--label {
-    width: 100%;
-    margin: 0;
-  }
+    .filter-menu--label {
+        width: 100%;
+        margin: 0;
+    }
 
-  .filter-menu form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    align-items: center;
-  }
+    .filter-menu form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        align-items: center;
+    }
 
-  .menu-title {
-    text-align: center;
-    font-size: 24px;
-  }
+    .menu-title {
+        text-align: center;
+        font-size: 24px;
+    }
 }

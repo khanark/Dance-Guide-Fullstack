@@ -1,296 +1,296 @@
 .details-page {
-  color: #555;
+    color: #555;
 }
 
 .details-page .grid {
-  align-items: start;
+    align-items: start;
 }
 
 .details-page .grid.grid--cols-2 {
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 0.8rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0.8rem;
 }
 
 .school-image--wrapper,
 .school-image {
-  border-radius: 0.4rem;
+    border-radius: 0.4rem;
 }
 
 .school-image--wrapper {
-  border-radius: 0.4rem;
-  max-width: 30rem;
-  min-height: 45rem;
-  aspect-ratio: 1/1;
-  background-color: #ccc;
-  position: relative;
+    border-radius: 0.4rem;
+    max-width: 30rem;
+    min-height: 45rem;
+    aspect-ratio: 1/1;
+    background-color: #ccc;
+    position: relative;
 }
 
 .loadingImage .school-image--wrapper::after {
-  z-index: 10;
-  border-radius: 0.4rem;
-  position: absolute;
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: skeleton-loading 0.5s infinite alternate;
+    z-index: 10;
+    border-radius: 0.4rem;
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: skeleton-loading 0.5s infinite alternate;
 }
 
 @keyframes skeleton-loading {
-  0% {
-    background-color: #ccc;
-  }
-  100% {
-    background-color: #ddd;
-  }
+    0% {
+        background-color: #ccc;
+    }
+    100% {
+        background-color: #ddd;
+    }
 }
 
 .school-details--wrapper .school-type {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .school-details--wrapper section {
-  margin-bottom: 1.6rem;
+    margin-bottom: 1.6rem;
 }
 
 .school-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .school-details--wrapper {
-  padding: 0 1.6rem;
+    padding: 0 1.6rem;
 }
 
 .school-name {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: #333;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
 }
 
 .school-reviews {
-  display: inline-block;
-  font-size: 1.2rem;
-  font-weight: normal;
-  color: var(--clr-main--dark);
-  cursor: pointer;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--clr-main--dark);
+    cursor: pointer;
 }
 
 .school-general-info {
-  margin-bottom: 2.4rem;
+    margin-bottom: 2.4rem;
 }
 
 .school-owner--link {
-  border-bottom: 1px solid #555;
+    border-bottom: 1px solid #555;
 }
 
 .school-reviews:hover {
-  border-bottom: 1px solid var(--clr-main--dark-hover);
+    border-bottom: 1px solid var(--clr-main--dark-hover);
 }
 
 .school-location {
-  display: flex;
-  gap: 0.4rem;
+    display: flex;
+    gap: 0.4rem;
 }
 
 .school-type {
-  margin-top: 0.4rem;
-  margin-bottom: 2.4rem;
-  display: inline-block;
-  padding: 0.4rem 1.6rem;
-  background-color: #333;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  border-radius: 0.4rem;
+    margin-top: 0.4rem;
+    margin-bottom: 2.4rem;
+    display: inline-block;
+    padding: 0.4rem 1.6rem;
+    background-color: #333;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    border-radius: 0.4rem;
 }
 
 .school-subtitle {
-  font-weight: 600;
-  color: #333;
+    font-weight: 600;
+    color: #333;
 }
 
 .link-span {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .school-contact-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
 }
 
 .btn--wrapper {
-  display: block;
-  margin-top: auto;
+    display: block;
+    margin-top: auto;
 }
 
 .liked {
-  background-color: #40c057;
+    background-color: #40c057;
 }
 
 .liked-icon,
 .school-location--icon {
-  width: 1.6rem;
-  height: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 .liked-icon {
-  color: #fff;
+    color: #fff;
 }
 
 .school-location--icon {
-  color: #555;
+    color: #555;
 }
 
 .btn-like {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .liked.btn-like:hover {
-  background-color: #51cf66;
+    background-color: #51cf66;
 }
 
 .feedback-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  margin-bottom: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-bottom: 3.2rem;
 }
 
 .feedback-header {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-  margin-bottom: 1.6rem;
-  margin-left: 0.8rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    margin-bottom: 1.6rem;
+    margin-left: 0.8rem;
 }
 
 .feedback-owner-avatar {
-  position: relative;
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 50%;
+    position: relative;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
 }
 
 .feedback-owner-avatar::after {
-  position: absolute;
-  z-index: -1;
-  content: '';
-  width: 100%;
-  height: 100%;
-  top: -0.1rem;
-  left: -0.2rem;
-  border-radius: 50%;
-  background-color: var(--clr-main--dark);
+    position: absolute;
+    z-index: -1;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: -0.1rem;
+    left: -0.2rem;
+    border-radius: 50%;
+    background-color: var(--clr-main--dark);
 }
 
 .owner-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .owner-name {
-  font-weight: 700;
-  color: #333;
+    font-weight: 700;
+    color: #333;
 }
 
 .feedback-body {
-  padding: 1.6rem;
-  border-radius: 0.4rem;
-  background-color: #eee;
-  position: relative;
+    padding: 1.6rem;
+    border-radius: 0.4rem;
+    background-color: #eee;
+    position: relative;
 }
 
 .feedback-body::after {
-  background-color: red;
-  position: absolute;
-  content: '';
-  width: 15px;
-  height: 15px;
-  transform: rotate(45deg);
-  background-color: #eee;
-  top: -0.4rem;
-  left: 1.68rem;
+    background-color: red;
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    background-color: #eee;
+    top: -0.4rem;
+    left: 1.68rem;
 }
 
 .feedback-text {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .feedback-post {
-  justify-content: center;
-  display: flex;
-  gap: 0.8rem;
+    justify-content: center;
+    display: flex;
+    gap: 0.8rem;
 }
 
 .feedback-post > p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .school-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .school-user__action {
-  display: flex;
+    display: flex;
 }
 
 .school-user__action .line-devider--text {
-  position: unset;
-  transform: translate(0);
+    position: unset;
+    transform: translate(0);
 }
 
 @media screen and (max-width: 890px) {
-  .details-page .grid.grid--cols-2 {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
+    .details-page .grid.grid--cols-2 {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
 
-  .school-image--wrapper {
-    margin: 0 auto;
-    max-height: 30rem;
-  }
+    .school-image--wrapper {
+        margin: 0 auto;
+        max-height: 30rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
-  .school-image--wrapper {
-    width: 70%;
-    min-height: auto;
-  }
+    .school-image--wrapper {
+        width: 70%;
+        min-height: auto;
+    }
 
-  .school-name {
-    font-size: 24px;
-  }
+    .school-name {
+        font-size: 24px;
+    }
 
-  .school-reviews,
-  .school-location {
-    font-size: 16px;
-  }
+    .school-reviews,
+    .school-location {
+        font-size: 16px;
+    }
 
-  .school-details--wrapper {
-    padding: 0;
-  }
+    .school-details--wrapper {
+        padding: 0;
+    }
 
-  .school-general-info {
-    font-size: 14px;
-  }
+    .school-general-info {
+        font-size: 14px;
+    }
 
-  .btn--wrapper {
-    justify-content: center;
-  }
+    .btn--wrapper {
+        justify-content: center;
+    }
 }
